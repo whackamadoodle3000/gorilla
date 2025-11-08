@@ -1,0 +1,124 @@
+[
+  {
+    "Name": "distance_calculator",
+    "entries": {
+      "delta1": "Use array format with multiple location name variations for origin/destination parameters per BFCL schema"
+    }
+  },
+  {
+    "Name": "generate_dna_sequence",
+    "entries": {
+      "delta1": "Use nested array format [[\"nucleotide\"]] for preferences parameter to match BFCL schema"
+    }
+  },
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "get_average_monthly_temperature",
+    "entries": {
+      "delta1": "Verify tool existence before calling - do not invent non-existent temperature functions"
+    }
+  },
+  {
+    "Name": "get_contact_information",
+    "entries": {
+      "delta1": "Use array format [\"value\"] for all parameters including name and id_no per BFCL schema"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Execute direct tool chains without intermediate verification steps when parameters are complete"
+    }
+  },
+  {
+    "Name": "holdings",
+    "entries": {
+      "delta1": "Use array format [\"value\"] for all parameters to maintain BFCL schema consistency across tools"
+    }
+  },
+  {
+    "Name": "imdb",
+    "entries": {
+      "delta1": "Use array format [\"value\"] for all parameters including actor_name, year, and category per BFCL schema",
+      "delta2": "Include category parameter with [\"\", \"all\"] values when using find_movies_by_actor function"
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Execute tool calls directly when all parameters are present in multi-institution requests without verification delays"
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "quarterly_earnings",
+    "entries": {
+      "delta1": "Use array format [\"value\"] for all parameters including company_name and cik per BFCL schema"
+    }
+  },
+  {
+    "Name": "t_test",
+    "entries": {
+      "delta1": "Execute separate tool calls for each parameter variation in multi-test requests",
+      "delta2": "Use array format [\"value\"] for all parameters including dataset_A, dataset_B, and alpha per BFCL schema"
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {}
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {}
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Maintain parameter persistence across turns - use established context values without re-requesting when tool parameters are complete"
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "twitter_api",
+    "entries": {
+      "delta1": "Post verbatim tool outputs directly without summarization when specified in instructions"
+    }
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

@@ -275,19 +275,41 @@ class BaseHandler:
                         current_step_inference_log.append(
                             {
                                 "role": "handler_log",
-                                "content": f"Empty response from the model. Proceed to next turn.",
+                                "content": "Empty response from the model. Proceed to next turn.",
                                 "model_response_decoded": decoded_model_responses,
                             }
                         )
                         break
 
                 except Exception as e:
+                    raw_response = model_responses
+                    no_tool_response = False
+                    if not raw_response:
+                        no_tool_response = True
+                    elif isinstance(raw_response, str):
+                        no_tool_response = True
+                    elif isinstance(raw_response, list) and not any(
+                        isinstance(item, dict) for item in raw_response
+                    ):
+                        no_tool_response = True
+
+                    if no_tool_response:
+                        current_step_inference_log.append(
+                            {
+                                "role": "handler_log",
+                                "content": "Model returned textual response without tool calls.",
+                                "model_response_raw": raw_response,
+                            }
+                        )
+                        break
+
                     print("Failed to decode the model response. Proceed to next turn.")
                     current_step_inference_log.append(
                         {
                             "role": "handler_log",
-                            "content": f"Error decoding the model response. Proceed to next turn.",
+                            "content": "Error decoding the model response. Proceed to next turn.",
                             "error": str(e),
+                            "model_response_raw": raw_response,
                         }
                     )
                     break

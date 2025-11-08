@@ -8,8 +8,21 @@ from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 import threading
 import queue
 from copy import deepcopy
+from pathlib import Path
 from typing import TYPE_CHECKING
 
+from bfcl_eval.ace.constants import (
+    ACE_PLAYBOOK_SYSTEM_MARKER,
+    DEFAULT_PLAYBOOK_PATH,
+    DEFAULT_SPLIT_PATH,
+)
+from bfcl_eval.ace.playbook import PlaybookManager
+from bfcl_eval.ace.split_manager import (
+    TEST_PARTITION,
+    TRAIN_PARTITION,
+    ensure_split_exists,
+    get_partition_ids,
+)
 from bfcl_eval.constants.eval_config import (
     PROJECT_ROOT,
     RESULT_PATH,
@@ -24,6 +37,13 @@ from tqdm import tqdm
 
 from bfcl_eval.model_handler.base_handler import BaseHandler
 from bfcl_eval.model_handler.local_inference.base_oss_handler import OSSHandler
+
+
+ACE_DATASET_SPLIT_CHOICES = {
+    "full": None,
+    "ace_train": TRAIN_PARTITION,
+    "ace_test": TEST_PARTITION,
+}
 
 
 def get_args():
@@ -49,6 +69,31 @@ def get_args():
         action="store_true",
         default=False,
         help="Skip vLLM/SGLang server setup and use existing endpoint specified by the LOCAL_SERVER_ENDPOINT and LOCAL_SERVER_PORT environment variables.",
+    )
+    parser.add_argument(
+        "--dataset-split",
+        type=str,
+        default="ace_test",
+        choices=list(ACE_DATASET_SPLIT_CHOICES.keys()),
+        help="Select which ACE dataset split partition to use. 'full' runs on the entire dataset.",
+    )
+    parser.add_argument(
+        "--split-path",
+        type=str,
+        default=None,
+        help="Path to the dataset split JSON relative to project root (defaults to ACE split path).",
+    )
+    parser.add_argument(
+        "--ace",
+        action="store_true",
+        default=False,
+        help="Enable ACE mode: prepend the playbook to prompts during generation.",
+    )
+    parser.add_argument(
+        "--ace-playbook-path",
+        type=str,
+        default=None,
+        help="Path to the ACE playbook JSON (defaults to bfcl_eval/data/ace/playbook.json).",
     )
     # Optional local model path
     parser.add_argument(
@@ -167,11 +212,49 @@ def collect_test_cases(args, model_name, all_test_categories, all_test_entries_i
     return sorted(test_cases_to_generate, key=sort_key)
 
 
-def multi_threaded_inference(handler, test_case, include_input_log, exclude_state_log):
+def _inject_playbook_system_message(test_case: dict, playbook_text: str):
+    if not playbook_text:
+        return
+    question_turns = test_case.get("question", [])
+    if not question_turns:
+        return
+    first_turn = question_turns[0]
+    if not isinstance(first_turn, list):
+        return
+    for message in first_turn:
+        if (
+            isinstance(message, dict)
+            and message.get("role") == "system"
+            and ACE_PLAYBOOK_SYSTEM_MARKER in message.get("content", "")
+        ):
+            return
+    insert_idx = 0
+    while insert_idx < len(first_turn) and first_turn[insert_idx].get("role") == "system":
+        insert_idx += 1
+    content = f"{ACE_PLAYBOOK_SYSTEM_MARKER}\n{playbook_text}"
+    first_turn.insert(
+        insert_idx,
+        {
+            "role": "system",
+            "content": content,
+        },
+    )
+
+
+def multi_threaded_inference(
+    handler,
+    test_case,
+    include_input_log,
+    exclude_state_log,
+    playbook_text=None,
+):
 
     assert type(test_case["function"]) is list
 
     try:
+        test_case = deepcopy(test_case)
+        if playbook_text:
+            _inject_playbook_system_message(test_case, playbook_text)
         result, metadata = handler.inference(
             test_case, include_input_log, exclude_state_log
         )
@@ -234,6 +317,11 @@ def generate_results(args, model_name, test_cases_total):
     writer_thread = threading.Thread(target=_writer, daemon=True)
     writer_thread.start()
 
+    playbook_text = None
+    if getattr(args, "ace", False):
+        playbook_manager = PlaybookManager(args.ace_playbook_path)
+        playbook_text = playbook_manager.to_prompt_string()
+
     try:
         if is_oss_model:
             handler.spin_up_local_server(
@@ -287,6 +375,7 @@ def generate_results(args, model_name, test_cases_total):
                     test_case,
                     args.include_input_log,
                     args.exclude_state_log,
+                    playbook_text,
                 )
                 in_flight[future] = test_case_id
 
@@ -320,6 +409,7 @@ def generate_results(args, model_name, test_cases_total):
                         test_case,
                         args.include_input_log,
                         args.exclude_state_log,
+                        playbook_text,
                     )
                     in_flight[future] = test_case_id
 
@@ -367,6 +457,29 @@ def main(args):
     else:
         tqdm.write(f"Running full test cases for categories: {all_test_categories}.")
 
+    dataset_partition = ACE_DATASET_SPLIT_CHOICES.get(args.dataset_split)
+    if args.split_path is not None:
+        split_path = Path(args.split_path)
+        if not split_path.is_absolute():
+            split_path = PROJECT_ROOT / split_path
+    else:
+        split_path = DEFAULT_SPLIT_PATH
+    args.split_path = split_path
+
+    if args.ace_playbook_path is not None:
+        playbook_path = Path(args.ace_playbook_path)
+        if not playbook_path.is_absolute():
+            playbook_path = PROJECT_ROOT / playbook_path
+    else:
+        playbook_path = DEFAULT_PLAYBOOK_PATH
+    args.ace_playbook_path = playbook_path
+
+    if dataset_partition:
+        ensure_split_exists(output_path=split_path)
+        allowed_ids = get_partition_ids(dataset_partition, path=split_path)
+    else:
+        allowed_ids = None
+
     if any(is_format_sensitivity(test_category) for test_category in all_test_categories):
         for model_name in args.model:
             if MODEL_CONFIG_MAPPING[model_name].is_fc_model:
@@ -387,6 +500,10 @@ def main(args):
             all_test_categories,
             deepcopy(all_test_entries_involved),
         )
+        if allowed_ids is not None:
+            test_cases_total = [
+                test_case for test_case in test_cases_total if test_case["id"] in allowed_ids
+            ]
 
         if len(test_cases_total) == 0:
             tqdm.write(

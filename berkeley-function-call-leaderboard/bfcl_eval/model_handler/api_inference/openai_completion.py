@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 import os
 import time
 from typing import Any
@@ -16,6 +17,17 @@ from bfcl_eval.model_handler.utils import (
     system_prompt_pre_processing_chat_model,
 )
 from openai import OpenAI, RateLimitError
+
+
+NOOP_TOOL_NAME = "ace_no_tool_call"
+NOOP_TOOL_SPEC = {
+    "type": "function",
+    "function": {
+        "name": NOOP_TOOL_NAME,
+        "description": "Use this when no tool call is required and the answer should be provided directly.",
+        "parameters": {"type": "object", "properties": {}},
+    },
+}
 
 
 class OpenAICompletionsHandler(BaseHandler):
@@ -90,6 +102,8 @@ class OpenAICompletionsHandler(BaseHandler):
 
         if len(tools) > 0:
             kwargs["tools"] = tools
+            kwargs["tool_choice"] = "required"
+            kwargs["response_format"] = {"type": "json_object"}
 
         return self.generate_with_backoff(**kwargs)
 
@@ -101,6 +115,9 @@ class OpenAICompletionsHandler(BaseHandler):
         functions: list = test_entry["function"]
 
         tools = convert_to_tool(functions, GORILLA_TO_OPENAPI, self.model_style)
+
+        if self.is_fc_model and len(functions) > 0:
+            tools.append(deepcopy(NOOP_TOOL_SPEC))
 
         inference_data["tools"] = tools
 
@@ -115,11 +132,40 @@ class OpenAICompletionsHandler(BaseHandler):
             tool_call_ids = [
                 func_call.id for func_call in api_response.choices[0].message.tool_calls
             ]
-        except:
-            model_responses = api_response.choices[0].message.content
+        except Exception:
+            raw_content = api_response.choices[0].message.content
+            model_responses = raw_content
             tool_call_ids = []
 
+            if isinstance(raw_content, str) and raw_content:
+                try:
+                    parsed_content = json.loads(raw_content)
+                except json.JSONDecodeError:
+                    parsed_content = None
+
+                if isinstance(parsed_content, dict):
+                    model_responses = [{k: v} for k, v in parsed_content.items()]
+                elif isinstance(parsed_content, list):
+                    model_responses = parsed_content
+
         model_responses_message_for_chat_history = api_response.choices[0].message
+
+        if isinstance(model_responses, list):
+            filtered_responses = []
+            filtered_tool_ids = []
+            for idx, item in enumerate(model_responses):
+                if isinstance(item, dict) and NOOP_TOOL_NAME in item:
+                    continue
+                filtered_responses.append(item)
+                if tool_call_ids:
+                    filtered_tool_ids.append(tool_call_ids[idx])
+            model_responses = filtered_responses
+            tool_call_ids = filtered_tool_ids
+
+        if isinstance(model_responses, list):
+            tool_items = [item for item in model_responses if isinstance(item, dict)]
+            if tool_items:
+                model_responses = tool_items
 
         return {
             "model_responses": model_responses,

@@ -1,12 +1,21 @@
 import csv
 from datetime import datetime
 import os
+from pathlib import Path
 from types import SimpleNamespace
 from typing import List, Optional
 
 import typer
 from importlib.metadata import version as _version
 from bfcl_eval._llm_response_generation import main as generation_main
+from bfcl_eval.ace.constants import (
+    DEFAULT_PLAYBOOK_PATH,
+    DEFAULT_SPLIT_PATH,
+    DEFAULT_SPLIT_SEED,
+    DEFAULT_TRAIN_RATIO,
+)
+from bfcl_eval.ace.pipeline import train_playbook
+from bfcl_eval.ace.playbook import PlaybookManager
 from bfcl_eval.constants.category_mapping import TEST_COLLECTION_MAPPING
 from bfcl_eval.constants.eval_config import (
     DOTENV_PATH,
@@ -26,6 +35,8 @@ class ExecutionOrderGroup(typer.core.TyperGroup):
             "models",
             "test-categories",
             "generate",
+            "ace-train-playbook",
+            "ace-reset-playbook",
             "results",
             "evaluate",
             "scores",
@@ -148,10 +159,36 @@ def generate(
         "--run-ids",
         help="If true, also run the test entry mentioned in the test_case_ids_to_generate.json file, in addition to the --test_category argument.",
     ),
+    dataset_split: str = typer.Option(
+        "ace_test",
+        "--dataset-split",
+        help="Dataset partition to evaluate on (ace_train, ace_test, or full).",
+    ),
+    split_path: Optional[str] = typer.Option(
+        None,
+        "--split-path",
+        help="Path to the dataset split JSON relative to project root (defaults to bfcl_eval/data/ace/dataset_split.json).",
+    ),
+    ace: bool = typer.Option(
+        False,
+        "--ace",
+        help="Enable ACE mode by prepending the playbook to each prompt.",
+    ),
+    ace_playbook_path: Optional[str] = typer.Option(
+        None,
+        "--ace-playbook-path",
+        help="Path to the ACE playbook JSON (defaults to bfcl_eval/data/ace/playbook.json).",
+    ),
 ):
     """
     Generate the LLM response for one or more models on a test-category (same as openfunctions_evaluation.py).
     """
+
+    dataset_split = (dataset_split or "ace_test").lower()
+    if dataset_split not in {"ace_train", "ace_test", "full"}:
+        raise typer.BadParameter(
+            "dataset-split must be one of: ace_train, ace_test, full."
+        )
 
     args = SimpleNamespace(
         model=model,
@@ -168,9 +205,145 @@ def generate(
         result_dir=result_dir,
         allow_overwrite=allow_overwrite,
         run_ids=run_ids,
+        dataset_split=dataset_split,
+        split_path=split_path,
+        ace=ace,
+        ace_playbook_path=ace_playbook_path,
     )
     load_dotenv(dotenv_path=DOTENV_PATH, verbose=True, override=True)  # Load the .env file
     generation_main(args)
+
+
+@cli.command("ace-train-playbook")
+def ace_train_playbook(
+    generator_model: str = typer.Option(
+        "DeepSeek-V3.2-Exp-FC",
+        "--generator-model",
+        help="Model used during the generator phase (should support tool calling).",
+    ),
+    reflector_model: str = typer.Option(
+        "deepseek-chat",
+        "--reflector-model",
+        help="Model used to produce reflections.",
+    ),
+    curator_model: str = typer.Option(
+        "deepseek-chat",
+        "--curator-model",
+        help="Model used to emit playbook operations.",
+    ),
+    generator_temperature: float = typer.Option(
+        0.001,
+        help="Temperature for the generator model.",
+    ),
+    completion_temperature: float = typer.Option(
+        0.0,
+        help="Temperature for the reflector and curator models.",
+    ),
+    playbook_path: Optional[str] = typer.Option(
+        None,
+        "--playbook-path",
+        help="Where to store the ACE playbook JSON (defaults to bfcl_eval/data/ace/playbook.json).",
+    ),
+    split_path: Optional[str] = typer.Option(
+        None,
+        "--split-path",
+        help="Path to the dataset split JSON (defaults to bfcl_eval/data/ace/dataset_split.json).",
+    ),
+    limit: Optional[int] = typer.Option(
+        None,
+        help="Optionally limit the number of training samples processed.",
+    ),
+    regenerate_split: bool = typer.Option(
+        False,
+        "--regenerate-split",
+        help="If set, the dataset split will be remade before training.",
+    ),
+    split_seed: int = typer.Option(
+        DEFAULT_SPLIT_SEED,
+        "--split-seed",
+        help="Random seed used when (re)generating the dataset split.",
+    ),
+    train_ratio: float = typer.Option(
+        DEFAULT_TRAIN_RATIO,
+        "--train-ratio",
+        help="Portion of data assigned to the training partition when remaking the split.",
+    ),
+    num_gpus: int = typer.Option(
+        1,
+        help="Number of GPUs for OSS models (ignored for API models).",
+    ),
+    backend: str = typer.Option(
+        "sglang",
+        help="Backend to use when spinning up OSS models.",
+    ),
+    gpu_memory_utilization: float = typer.Option(
+        0.9,
+        help="GPU memory utilization for OSS models.",
+    ),
+    skip_server_setup: bool = typer.Option(
+        False,
+        "--skip-server-setup",
+        help="Skip local server setup for already running OSS endpoints.",
+    ),
+    local_model_path: Optional[str] = typer.Option(
+        None,
+        "--local-model-path",
+        help="Custom path to local model weights for OSS models.",
+    ),
+):
+    """
+    Build or update the ACE playbook by running the Generator → Reflector → Curator pipeline.
+    """
+    resolved_playbook_path = (
+        Path(playbook_path) if playbook_path else DEFAULT_PLAYBOOK_PATH
+    )
+    if not resolved_playbook_path.is_absolute():
+        resolved_playbook_path = PROJECT_ROOT / resolved_playbook_path
+
+    resolved_split_path = Path(split_path) if split_path else DEFAULT_SPLIT_PATH
+    if not resolved_split_path.is_absolute():
+        resolved_split_path = PROJECT_ROOT / resolved_split_path
+
+    load_dotenv(dotenv_path=DOTENV_PATH, verbose=True, override=True)
+    train_playbook(
+        playbook_path=resolved_playbook_path,
+        split_path=resolved_split_path,
+        split_seed=split_seed,
+        train_ratio=train_ratio,
+        generator_model=generator_model,
+        reflector_model=reflector_model,
+        curator_model=curator_model,
+        generator_temperature=generator_temperature,
+        completion_temperature=completion_temperature,
+        limit=limit,
+        regenerate_split=regenerate_split,
+        num_gpus=num_gpus,
+        backend=backend,
+        gpu_memory_utilization=gpu_memory_utilization,
+        skip_server_setup=skip_server_setup,
+        local_model_path=local_model_path,
+    )
+
+
+@cli.command("ace-reset-playbook")
+def ace_reset_playbook(
+    playbook_path: Optional[str] = typer.Option(
+        None,
+        "--playbook-path",
+        help="Target playbook file to reset (defaults to bfcl_eval/data/ace/playbook.json).",
+    )
+) -> None:
+    """
+    Reset the ACE playbook to an empty state.
+    """
+    resolved_playbook_path = (
+        Path(playbook_path) if playbook_path else DEFAULT_PLAYBOOK_PATH
+    )
+    if not resolved_playbook_path.is_absolute():
+        resolved_playbook_path = PROJECT_ROOT / resolved_playbook_path
+
+    PlaybookManager(resolved_playbook_path, reset=True)
+    typer.echo(f"Reset playbook at {resolved_playbook_path}")
 
 
 @cli.command()

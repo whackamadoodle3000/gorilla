@@ -217,8 +217,19 @@ def convert_to_function_call(function_call_list):
     execution_list = []
     for function_call in function_call_list:
         for key, value in function_call.items():
-            if type(value) == str:
-                value = json.loads(value)
+            if isinstance(value, str):
+                parsed_value = None
+                try:
+                    parsed_value = json.loads(value)
+                except json.JSONDecodeError:
+                    try:
+                        parsed_value = ast.literal_eval(value)
+                    except Exception:
+                        parsed_value = None
+                if isinstance(parsed_value, dict):
+                    value = parsed_value
+                else:
+                    value = {"value": parsed_value if parsed_value is not None else value}
             execution_list.append(
                 f"{key}({','.join([f'{k}={repr(v)}' for k,v in value.items()])})"
             )
