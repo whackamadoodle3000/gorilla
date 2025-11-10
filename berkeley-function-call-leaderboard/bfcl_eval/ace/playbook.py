@@ -107,28 +107,78 @@ class PlaybookManager:
     def get_section_entries(self, section: str) -> Dict[str, str]:
         return dict(self._data.get(camel_to_snake(section), {}))
 
-    def to_prompt_string(self) -> str:
-        if all(len(entries) == 0 for entries in self._data.values()):
-            return f"{PLAYBOOK_PROMPT_HEADER}\nNo insights recorded yet."
+    def to_prompt_string(
+        self,
+        focus_sections: Optional[Iterable[str]] = None,
+        max_sections: Optional[int] = None,
+        max_entries_per_section: Optional[int] = None,
+        include_raw_json: bool = False,
+    ) -> str:
+        """
+        Render the playbook for prompting. Focus on the provided sections (if any)
+        and optionally truncate sections or entries to keep the output compact.
+        """
 
-        body_lines: List[str] = []
-        for section, entries in sorted(self._data.items()):
+        def _normalize(section_name: str) -> str:
+            return camel_to_snake(section_name)
+
+        focus_order: Optional[List[str]] = None
+        if focus_sections:
+            # Preserve caller order while normalizing and deduplicating
+            seen: set[str] = set()
+            focus_order = []
+            for section in focus_sections:
+                normalized = _normalize(section)
+                if normalized not in seen:
+                    focus_order.append(normalized)
+                    seen.add(normalized)
+
+        # Build ordered list of sections to render
+        ordered_sections: List[str] = []
+        if focus_order:
+            ordered_sections.extend(focus_order)
+
+        ordered_sections.extend(
+            section
+            for section in sorted(self._data.keys())
+            if section not in ordered_sections
+        )
+
+        rendered_sections: List[tuple[str, List[tuple[str, str]]]] = []
+        for section in ordered_sections:
+            entries = self._data.get(section, {})
             if not entries:
                 continue
-            body_lines.append(f"{section}:")
-            for entry_id, content in sorted(entries.items()):
-                body_lines.append(f"- {entry_id}: {content}")
-            body_lines.append("")  # blank line between sections
-        json_view = json.dumps(
-            [
-                {"Name": section, "entries": entries}
-                for section, entries in sorted(self._data.items())
-            ],
-            ensure_ascii=False,
-            indent=2,
-        )
-        joined = "\n".join(line for line in body_lines if line is not None)
-        return f"{PLAYBOOK_PROMPT_HEADER}\n\n{joined.strip()}\n\nRaw JSON:\n{json_view}"
+            section_entries = sorted(entries.items())
+            if max_entries_per_section is not None:
+                section_entries = section_entries[:max_entries_per_section]
+            rendered_sections.append((section, section_entries))
+            if max_sections is not None and len(rendered_sections) >= max_sections:
+                break
+
+        header = PLAYBOOK_PROMPT_HEADER.rstrip()
+        if not rendered_sections:
+            return f"{header}\nNo insights recorded yet."
+
+        body_lines: List[str] = [header, ""]
+        for section, entries in rendered_sections:
+            body_lines.append(section)
+            for entry_id, content in entries:
+                content_compact = " ".join(content.strip().split())
+                body_lines.append(f"- {entry_id}: {content_compact}")
+            body_lines.append("")
+
+        output = "\n".join(line for line in body_lines if line is not None).strip()
+
+        if include_raw_json:
+            subset = [
+                {"Name": section, "entries": dict(entries)}
+                for section, entries in rendered_sections
+            ]
+            json_view = json.dumps(subset, ensure_ascii=False, separators=(",", ":"))
+            output = f"{output}\n\nRaw JSON:{json_view}"
+
+        return output
 
     def _generate_entry_id(self, section: str) -> str:
         entries = self._data.setdefault(section, {})

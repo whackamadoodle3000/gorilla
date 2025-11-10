@@ -1,0 +1,616 @@
+[
+  {
+    "Name": "avg_closing_price",
+    "entries": {
+      "delta1": "Always include all required parameters like 'data_source' even when not explicitly mentioned"
+    }
+  },
+  {
+    "Name": "basic",
+    "entries": {
+      "delta1": "checkSizes: Use for environment variable validation when size requirements are specified in the query"
+    }
+  },
+  {
+    "Name": "buses_3_find_bus",
+    "entries": {
+      "delta1": "When essential parameters like origin/destination are missing, request clarification without implying tool usage"
+    }
+  },
+  {
+    "Name": "calculate_compound_interest",
+    "entries": {
+      "delta1": "Output parameters as direct object properties, not stringified JSON"
+    }
+  },
+  {
+    "Name": "calculate_emission_savings",
+    "entries": {
+      "delta1": "Accept general terms like 'renewable' when they match valid tool parameters without requiring subtype specification"
+    }
+  },
+  {
+    "Name": "calculate_paint_needed",
+    "entries": {
+      "delta1": "Execute tool immediately when all required parameters are explicitly provided in the query"
+    }
+  },
+  {
+    "Name": "calculate_velocity",
+    "entries": {
+      "delta1": "Always include all required parameters like 'unit' even when values seem obvious"
+    }
+  },
+  {
+    "Name": "calculus",
+    "entries": {
+      "delta1": "Accept multiple function formats (direct notation or lambda) as equivalent parameter variations"
+    }
+  },
+  {
+    "Name": "calendar_event_create",
+    "entries": {
+      "delta1": "Always include 'rrule' parameter even for single events, omit unsupported parameters like 'title'"
+    }
+  },
+  {
+    "Name": "concert",
+    "entries": {
+      "delta1": "Always format location as 'city, state' pairs (e.g., 'New York, NY') when available",
+      "delta2": "Maintain consistent array nesting for add_ons parameters across all bookings"
+    }
+  },
+  {
+    "Name": "concert_booking",
+    "entries": {
+      "delta1": "When artist, city, and ticket count are specified, proceed directly with booking without timing clarifications"
+    }
+  },
+  {
+    "Name": "connect_to_server",
+    "entries": {
+      "delta1": "Wait for explicit server connection requests with required parameters before tool invocation"
+    }
+  },
+  {
+    "Name": "contact",
+    "entries": {
+      "delta1": "Wait for explicit contact information requests before offering tool usage, not from general greetings"
+    }
+  },
+  {
+    "Name": "court_records",
+    "entries": {
+      "delta1": "Use structured parameter objects with array values, not stringified JSON, for all parameters"
+    }
+  },
+  {
+    "Name": "create_user_profile",
+    "entries": {
+      "delta1": "Only invoke when user explicitly requests profile creation or management",
+      "delta2": "Skip tool usage for general knowledge questions and conversational queries"
+    }
+  },
+  {
+    "Name": "distance_calculator",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects, not JSON strings - use direct properties like origin, destination, consider_terrain"
+    }
+  },
+  {
+    "Name": "email_format_validator",
+    "entries": {
+      "delta1": "Always use array format for parameters like 'domain' even with single elements"
+    }
+  },
+  {
+    "Name": "employee",
+    "entries": {
+      "delta1": "Maintain exact parameter structures including nested arrays when specified in tool requirements"
+    }
+  },
+  {
+    "Name": "entropy_change",
+    "entries": {
+      "delta1": "Accept provided substance parameters as valid unless function spec requires validation",
+      "delta2": "Execute calculations with given parameters without requesting unnecessary clarifications"
+    }
+  },
+  {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like event_type, city, date - never as JSON strings",
+      "delta2": "For incomplete queries missing city/location, request missing parameters directly without implying tool readiness"
+    }
+  },
+  {
+    "Name": "exhibition_info",
+    "entries": {
+      "delta1": "For temporal parameters like 'month', calculate dynamically from context rather than using static values",
+      "delta2": "Support flexible parameter values as shown in ground truth, allowing multiple valid formats"
+    }
+  },
+  {
+    "Name": "experiences_and_education",
+    "entries": {
+      "delta1": "Engage tools only when users specifically ask about experience or education details, not proactively"
+    }
+  },
+  {
+    "Name": "festival",
+    "entries": {
+      "delta1": "Include complete location details when city/state format is specified in ground truth"
+    }
+  },
+  {
+    "Name": "fetch_user_details",
+    "entries": {
+      "delta1": "Filter inappropriate requests before tool usage - refuse assistance when content is offensive"
+    }
+  },
+  {
+    "Name": "finance",
+    "entries": {
+      "delta1": "Assess query relevance before tool usage; decline calls when functions don't match available capabilities"
+    }
+  },
+  {
+    "Name": "find_card_in_deck",
+    "entries": {
+      "delta1": "Execute tool immediately when rank and suit are specified, allowing empty deck parameters to use default deck behavior"
+    }
+  },
+  {
+    "Name": "flights_4_search_oneway_flight",
+    "entries": {
+      "delta1": "Handle incomplete queries by directly requesting missing required parameters like origin/destination/dates"
+    }
+  },
+  {
+    "Name": "game_stats",
+    "entries": {
+      "delta1": "Execute immediately when all required parameters are explicitly provided, even with general game names"
+    }
+  },
+  {
+    "Name": "generate_architecture_plan",
+    "entries": {
+      "delta1": "Abstain from tool usage when queries are irrelevant to available tool capabilities"
+    }
+  },
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "When parameter names match required types exactly, use provided identifiers directly without requesting string representations"
+    }
+  },
+  {
+    "Name": "get_adriel_detail_experience_and_education",
+    "entries": {
+      "delta1": "Preserve full experience names including contextual prefixes like 'Internship at' rather than extracting only organization names"
+    }
+  },
+  {
+    "Name": "get_area_of_square",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like side_length - never as JSON strings"
+    }
+  },
+  {
+    "Name": "get_average_monthly_temperature",
+    "entries": {
+      "delta1": "Recognize subjective travel queries don't require factual temperature data",
+      "delta2": "Decline speculative reasoning when queries lack specific location parameters"
+    }
+  },
+  {
+    "Name": "get_city",
+    "entries": {
+      "delta1": "Use get_city to systematically collect missing destination parameters rather than conversational questioning"
+    }
+  },
+  {
+    "Name": "get_contact_information",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like name, id_no - never as JSON strings"
+    }
+  },
+  {
+    "Name": "get_current_weather",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like location and unit - never as JSON strings or stringified objects",
+      "delta2": "Always verify tool availability before committing to functionality - only use tools from available groups",
+      "delta3": "When requested functionality requires unavailable tools, decline clearly without implying tool usage"
+    }
+  },
+  {
+    "Name": "get_interviewer_list",
+    "entries": {
+      "delta1": "Always call get_interviewer_list first to validate interviewer existence before detailed review operations"
+    }
+  },
+  {
+    "Name": "get_news",
+    "entries": {
+      "delta1": "Maintain exact parameter array structures from ground truth, including empty string values when present"
+    }
+  },
+  {
+    "Name": "get_personality_traits",
+    "entries": {
+      "delta1": "Traits ordering variations are acceptable as long as all requested traits are included"
+    }
+  },
+  {
+    "Name": "get_sensor_readings_latest",
+    "entries": {
+      "delta1": "When no specific parameters provided, use perPage=10 with default values for other optional parameters"
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "buses_3_find_bus": "When service requests match available functionality, execute get_service_id with appropriate parameters rather than offering generic assistance"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "For vague or mismatched requests, clarify service type or redirect when outside functional scope"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "buses_3_find_bus": "Use 'rmdir' for directory removal and 'rm' for file removal - never mix operations",
+      "delta1": "Use sort directly on files rather than reconstructing content manually",
+      "delta2": "Change directory context before file operations when specified"
+    }
+  },
+  {
+    "Name": "grocery_delivery",
+    "entries": {
+      "delta1": "Execute grocery orders in parallel with transportation requests when both tool groups are specified"
+    }
+  },
+  {
+    "Name": "grocery_info",
+    "entries": {
+      "delta1": "Accept general store names like 'Walmart' without requiring specific locations when tool parameters don't demand geographic precision"
+    }
+  },
+  {
+    "Name": "help",
+    "entries": {
+      "delta1": "Only offer tool assistance when users explicitly request information, not for casual greetings or ambiguous inputs"
+    }
+  },
+  {
+    "Name": "hna_wqa",
+    "entries": {
+      "delta1": "Include multiple keyword variations for person searches and use max_results=10 for comprehensive coverage",
+      "delta2": "Support flexible parameter structures allowing empty values for optional fields as shown in ground truth"
+    }
+  },
+  {
+    "Name": "hotels_2_search_house",
+    "entries": {
+      "delta1": "For common location nicknames like 'Chi-town', infer reasonable defaults (Chicago, IL) rather than requesting clarification",
+      "delta2": "Execute search with logical location assumptions when parameters are reasonably inferable from context"
+    }
+  },
+  {
+    "Name": "hotels_4_search_hotel",
+    "entries": {
+      "delta1": "Execute search with available parameters when core requirements like location are present, rather than blocking on missing optional fields"
+    }
+  },
+  {
+    "Name": "imdb",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like actor_name, year - never as JSON strings"
+    }
+  },
+  {
+    "Name": "latest_exchange_rate",
+    "entries": {
+      "delta1": "Always include all required parameters like 'amount' explicitly, even when using default values"
+    }
+  },
+  {
+    "Name": "list_projects",
+    "entries": {
+      "delta1": "Use project listing tools only in response to direct project inquiries, not general assistance offers"
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Handle parallel requests by creating separate tool calls for each distinct financial institution"
+    }
+  },
+  {
+    "Name": "local_fauna",
+    "entries": {
+      "delta1": "Abstain from tool usage when queries don't match fauna-related functions"
+    }
+  },
+  {
+    "Name": "math",
+    "entries": {
+      "delta1": "Use exact tool names like 'math.factorial' with proper parameter structure as specified in BFCL"
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "math_roots",
+    "entries": {
+      "delta1": "Use exact BFCL tool names with dot notation: math.roots.quadratic, math.roots.cubic, math.roots.polynomial"
+    }
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta1": "For major cities like San Jose, use standard 'City, State' format without requesting clarification"
+    }
+  },
+  {
+    "Name": "movies_3_find_movies",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties - never as JSON strings"
+    }
+  },
+  {
+    "Name": "museum_info",
+    "entries": {
+      "delta1": "For parallel location queries, make separate calls for each distinct museum location"
+    }
+  },
+  {
+    "Name": "music",
+    "entries": {
+      "avg_closing_price": "Always include all required parameters like 'returnAllPossibleKeys' and 'assumeMajor' even when not explicitly mentioned"
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Pass parameters as direct object properties with arrays (artist, album, genre, year) - never as JSON strings per BFCL format",
+      "delta2": "Include all required parameters (artist, album, genre, year) with empty arrays when not specified per BFCL"
+    }
+  },
+  {
+    "Name": "nested_query_builder",
+    "entries": {
+      "delta1": "Use provided string identifiers for context parameters; don't request object representations"
+    }
+  },
+  {
+    "Name": "payment_1_request_payment",
+    "entries": {
+      "delta1": "Use exact BFCL parameter structure with array values: receiver: [\"value\"], amount: [value], private_visibility: [true/false]"
+    }
+  },
+  {
+    "Name": "player_statistic",
+    "entries": {
+      "delta1": "Use player_statistic tool when name and year are provided, letting the tool handle name resolution internally"
+    }
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "probabilities",
+    "entries": {
+      "delta1": "Always use array format for parameters like ['value'] instead of raw values or JSON strings"
+    }
+  },
+  {
+    "Name": "quarterly_earnings",
+    "entries": {
+      "delta1": "Pass parameters as structured objects with direct properties, never as JSON strings"
+    }
+  },
+  {
+    "Name": "recipe_calculator",
+    "entries": {
+      "delta1": "Recognize when requests fall outside tool scope and avoid inappropriate usage"
+    }
+  },
+  {
+    "Name": "religion_history",
+    "entries": {
+      "delta1": "When tracking religious history across multiple regions, make separate tool calls for each region with religion and time parameters"
+    }
+  },
+  {
+    "Name": "requests",
+    "entries": {
+      "buses_3_find_bus": "For irrelevant queries, immediately state inability to assist without providing any information or discussing capabilities"
+    }
+  },
+  {
+    "Name": "restaurant_search",
+    "entries": {
+      "delta1": "Use exact array format for location parameters like ['Boston', 'Boston, MA'] per BFCL spec"
+    }
+  },
+  {
+    "Name": "restaurants_2_find_restaurants",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties - never as JSON strings"
+    }
+  },
+  {
+    "Name": "restaurants_2_reserve_restaurant",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties - never as JSON strings"
+    }
+  },
+  {
+    "Name": "review_of_interviewer",
+    "entries": {
+      "delta1": "Only proceed with review after confirming interviewer availability via get_interviewer_list"
+    }
+  },
+  {
+    "Name": "ride_hailing",
+    "entries": {
+      "delta1": "Process all sequential ride requests in multi-step scenarios, not just the first transportation need",
+      "delta2": "Handle multiple ride requests with different source/destination pairs as separate tool calls"
+    }
+  },
+  {
+    "Name": "rotate_vertices",
+    "entries": {
+      "delta1": "Pass vertices and pivot as number arrays, angle as number - not string representations"
+    }
+  },
+  {
+    "Name": "score_function_builders",
+    "entries": {
+      "delta1": "Accept 'now' as valid origin for time-based decay functions in Elasticsearch",
+      "delta2": "Use provided parameters as-is without additional validation for decay functions"
+    }
+  },
+  {
+    "Name": "sculpture",
+    "entries": {
+      "delta1": "Assess query relevance before responding - decline if no appropriate tools exist",
+      "delta2": "Avoid generating unsolicited content when tools don't match query subject matter"
+    }
+  },
+  {
+    "Name": "services_1_book_appointment",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties - never as JSON strings"
+    }
+  },
+  {
+    "Name": "services_1_find_provider",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties like city, is_unisex - never as JSON strings"
+    }
+  },
+  {
+    "Name": "t_test",
+    "entries": {
+      "delta1": "For multi-part requests with varying parameters like alpha levels, make separate calls for each distinct combination"
+    }
+  },
+  {
+    "Name": "temperature",
+    "entries": {
+      "delta1": "Always include all required parameters like 'units' and 'time' even when values are empty/null"
+    }
+  },
+  {
+    "Name": "text_to_speech",
+    "entries": {
+      "delta1": "Include all ground truth parameters like 'format' and 'speed' with default values when present."
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {}
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "Use get_stock_info directly when symbol is known; skip symbol lookup to avoid redundant operations",
+      "delta2": "Check watchlist status before adding stocks to avoid redundant operations",
+      "delta3": "Execute trading operations directly without credential requests - use available tools with structured parameters"
+    }
+  },
+  {
+    "Name": "trains_1_find_trains",
+    "entries": {
+      "delta1": "For common inter-city routes like Philadelphia-NYC, infer reasonable destination defaults rather than requesting clarification"
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Execute tools directly when all required parameters are available from conversation context, avoiding unnecessary validation",
+      "delta2": "Extract booking_id from conversation history when available rather than requesting clarification",
+      "delta3": "Leverage known airport codes from previous tool outputs instead of redundant nearest airport lookups",
+      "delta4": "Infer customer support messages from context when specific clarification requests are made"
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "truncate_translog_action",
+    "entries": {
+      "delta1": "Construct terminalInterface from user's terminal description without requesting explicit object"
+    }
+  },
+  {
+    "Name": "twitter_api",
+    "entries": {
+      "delta1": "Pass tweet parameters as structured objects - never request credentials or use JSON strings",
+      "delta2": "Never request user credentials - directly call API functions with structured parameters"
+    }
+  },
+  {
+    "Name": "uber",
+    "entries": {
+      "delta1": "Filter out irrelevant requests when user needs don't match available tool functions"
+    }
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Pass tool parameters as structured objects with direct properties - never as JSON strings",
+      "delta2": "Execute engine start sequence strictly: lock doors → press brake → start engine - no duplicates or out-of-order calls",
+      "delta3": "Pass tool parameters as direct structured objects - never serialize to JSON strings"
+    }
+  },
+  {
+    "Name": "version_api",
+    "entries": {
+      "delta1": "Always use exact tool identifiers with proper namespace formatting (e.g., 'version_api.VersionApi.get_version')"
+    }
+  },
+  {
+    "Name": "view_service_provider_profile",
+    "entries": {
+      "delta1": "Only use when provider identification is clear; abstain for unrelated requests like promotions"
+    }
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

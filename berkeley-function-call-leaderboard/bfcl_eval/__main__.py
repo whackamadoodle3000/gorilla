@@ -253,6 +253,11 @@ def ace_train_playbook(
         None,
         help="Optionally limit the number of training samples processed.",
     ),
+    start_offset: int = typer.Option(
+        0,
+        "--start-offset",
+        help="Skip this many shuffled training samples before beginning (resume support).",
+    ),
     regenerate_split: bool = typer.Option(
         False,
         "--regenerate-split",
@@ -316,6 +321,7 @@ def ace_train_playbook(
         generator_temperature=generator_temperature,
         completion_temperature=completion_temperature,
         limit=limit,
+        start_offset=start_offset,
         regenerate_split=regenerate_split,
         num_gpus=num_gpus,
         backend=backend,

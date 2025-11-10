@@ -191,6 +191,7 @@ def train_playbook(
     generator_temperature: float = 0.001,
     completion_temperature: float = 0.0,
     limit: Optional[int] = None,
+    start_offset: int = 0,
     regenerate_split: bool = False,
     num_gpus: int = 1,
     backend: str = "sglang",
@@ -210,6 +211,15 @@ def train_playbook(
     train_ids = sorted(get_partition_ids(TRAIN_PARTITION, path=split_path))
     rng = random.Random(split_seed)
     rng.shuffle(train_ids)
+
+    if start_offset:
+        if start_offset >= len(train_ids):
+            tqdm.write(
+                f"[Info] Start offset {start_offset} is beyond dataset size ({len(train_ids)}); nothing to process."
+            )
+            return
+        train_ids = train_ids[start_offset:]
+
     if limit:
         train_ids = train_ids[:limit]
 
@@ -241,6 +251,15 @@ def train_playbook(
             if not ground_truth:
                 continue
 
+            conversation_text = format_conversation(entry.get("question", []))
+            serialized_ground_truth = serialize_json(ground_truth.get("ground_truth", {}))
+            if len(conversation_text) > 5000 or len(serialized_ground_truth) > 5000:
+                tqdm.write(
+                    f"[Info] Skipping {entry_id}: conversation length {len(conversation_text)}, "
+                    f"ground truth length {len(serialized_ground_truth)} exceeds 5000 character limit."
+                )
+                continue
+
             tool_groups = determine_tool_groups(entry)
 
             generator_result = multi_threaded_inference(
@@ -251,7 +270,17 @@ def train_playbook(
                 playbook_text=None,
             )
 
-            playbook_text = playbook.to_prompt_string()
+            focus_sections = list(dict.fromkeys(tool_groups))
+            fallback_sections = [
+                section
+                for section in ("default_function", "general_guidelines", "global_policy")
+                if section in playbook.sections() and section not in focus_sections
+            ]
+            focus_sections.extend(fallback_sections)
+            playbook_text = playbook.to_prompt_string(
+                focus_sections=focus_sections or None,
+                max_sections=len(focus_sections) if focus_sections else None,
+            )
             reflection_messages = _build_reflector_messages(
                 playbook_text,
                 entry,
@@ -259,7 +288,14 @@ def train_playbook(
                 ground_truth,
                 tool_groups,
             )
-            reflection_raw = reflector_client.complete(reflection_messages, temperature=completion_temperature)
+            try:
+                reflection_raw = reflector_client.complete(
+                    reflection_messages, temperature=completion_temperature
+                )
+            except Exception as exc:
+                tqdm.write(f"[Warning] Reflector call failed for {entry_id}: {exc}")
+                continue
+
             reflection_raw_clean = _extract_json_block(reflection_raw)
             try:
                 reflection_json = json.loads(reflection_raw_clean)
@@ -275,7 +311,14 @@ def train_playbook(
                 ground_truth,
                 tool_groups,
             )
-            curator_raw = curator_client.complete(curator_messages, temperature=completion_temperature)
+            try:
+                curator_raw = curator_client.complete(
+                    curator_messages, temperature=completion_temperature
+                )
+            except Exception as exc:
+                tqdm.write(f"[Warning] Curator call failed for {entry_id}: {exc}")
+                continue
+
             curator_raw_clean = _extract_json_block(curator_raw)
             try:
                 curator_json = json.loads(curator_raw_clean)
