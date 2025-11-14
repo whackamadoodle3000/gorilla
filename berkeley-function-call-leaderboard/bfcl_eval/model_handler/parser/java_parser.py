@@ -1,7 +1,16 @@
 from tree_sitter import Language, Parser
 import tree_sitter_java
 
-JAVA_LANGUAGE = Language(tree_sitter_java.language(), "java")
+
+def _load_language(lang_module, lang_name: str):
+    language_ptr = lang_module.language()
+    try:
+        return Language(language_ptr, lang_name)
+    except TypeError:
+        return Language(language_ptr)
+
+
+JAVA_LANGUAGE = _load_language(tree_sitter_java, "java")
 
 parser = Parser()
 parser.set_language(JAVA_LANGUAGE)

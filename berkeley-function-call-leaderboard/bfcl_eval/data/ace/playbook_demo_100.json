@@ -1,0 +1,325 @@
+[
+  {
+    "Name": "avg_closing_price",
+    "entries": {
+      "delta1": "Pass parameters as direct key-value pairs, not JSON strings"
+    }
+  },
+  {
+    "Name": "calculate_cagr",
+    "entries": {
+      "delta1": "delta1: Pass parameters as direct key-value pairs, not JSON-encoded strings"
+    }
+  },
+  {
+    "Name": "calculate_velocity",
+    "entries": {
+      "delta1": "Include all required parameters: distance, duration, and unit specifications"
+    }
+  },
+  {
+    "Name": "concert_booking",
+    "entries": {
+      "delta1": "Execute booking when artist, city, and ticket count are specified - 'next concert' phrasing is sufficient"
+    }
+  },
+  {
+    "Name": "distance_calculator",
+    "entries": {
+      "delta1": "Use exact tool names: 'distance_calculator.calculate' not 'distance_calculator_calculate'"
+    }
+  },
+  {
+    "Name": "ecology_data",
+    "entries": {
+      "delta1": "Execute all requested time frame variations for location data"
+    }
+  },
+  {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Execute with available parameters when location is ambiguous - avoid text clarification loops"
+    }
+  },
+  {
+    "Name": "exhibition_info",
+    "entries": {
+      "delta1": "Include all valid parameter variations from ground truth"
+    }
+  },
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "Use named variables directly as parameters when they match required inputs"
+    }
+  },
+  {
+    "Name": "get_adriel_detail_experience_and_education",
+    "entries": {
+      "delta1": "Use for specific experience/education queries - not general listing"
+    }
+  },
+  {
+    "Name": "get_adriel_experiences_and_education",
+    "entries": {
+      "delta1": "Use for general overview - not specific detail lookups"
+    }
+  },
+  {
+    "Name": "get_average_monthly_temperature",
+    "entries": {
+      "delta1": "Use temperature data tools for climate-dependent queries instead of speculative text"
+    }
+  },
+  {
+    "Name": "get_contact_information",
+    "entries": {
+      "delta1": "Include all required parameters - name and id_no are mandatory fields"
+    }
+  },
+  {
+    "Name": "get_current_weather",
+    "entries": {
+      "delta1": "Only use provided tools; don't assume specialized functions exist"
+    }
+  },
+  {
+    "Name": "get_news",
+    "entries": {
+      "delta1": "Match exact parameter structures: arrays when specified in examples"
+    }
+  },
+  {
+    "Name": "get_sensor_readings_latest",
+    "entries": {
+      "delta1": "Include all parameters with default values, not just user-specified ones",
+      "delta2": "Pass parameters as direct key-value pairs, not JSON strings"
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Use get_service_id for service queries instead of explaining limitations",
+      "delta2": "Provide service_id and unit parameters when querying laundry services"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "Only invoke when user explicitly requests service search or booking"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "When targets are explicitly named, avoid redundant pwd/ls/find discovery",
+      "delta2": "Use rm for files, rmdir for directories - don't confuse deletion semantics"
+    }
+  },
+  {
+    "Name": "grocery_delivery",
+    "entries": {
+      "delta1": "Process all tool calls in multi-step requests - don't stop after first completion"
+    }
+  },
+  {
+    "Name": "grocery_info",
+    "entries": {
+      "delta1": "Use exact function names with dot notation: grocery_info.nutritional_info",
+      "delta2": "Maintain nested array structures for store, food, and information parameters"
+    }
+  },
+  {
+    "Name": "hna_wqa",
+    "entries": {
+      "delta1": "Use exact tool name 'HNA_WQA.search' with all keyword variations from ground truth",
+      "delta2": "Include result_format parameter and proper max_results value in searches"
+    }
+  },
+  {
+    "Name": "hotels_2_search_house",
+    "entries": {
+      "delta1": "Proceed with unambiguous colloquial locations like 'Chi-town' → Chicago, IL"
+    }
+  },
+  {
+    "Name": "imdb",
+    "entries": {
+      "delta1": "Use exact tool names: 'imdb.find_movies_by_actor' not 'imdb_find_movies_by_actor'",
+      "delta2": "Include all required parameters - category is mandatory for find_movies_by_actor"
+    }
+  },
+  {
+    "Name": "latest_exchange_rate",
+    "entries": {
+      "delta1": "Include amount parameter even for unit conversions, defaulting to 1.0 if unspecified"
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Handle parallel requests: execute separate tool calls for each financial institution when multiple are specified."
+    }
+  },
+  {
+    "Name": "market_performance",
+    "entries": {
+      "delta1": "Execute tool calls when all parameters are reasonably inferable from query context"
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "math_roots",
+    "entries": {
+      "delta1": "Use exact tool names: math.roots.quadratic, math.roots.cubic, math.roots.polynomial"
+    }
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta1": "Execute with inferred location when context provides reasonable certainty"
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Include all parameters (artist, album, genre, year) - use empty strings for unspecified fields"
+    }
+  },
+  {
+    "Name": "nested_query_builder",
+    "entries": {
+      "delta1": "Accept string identifiers as valid parameters - BFCL uses names, not actual Java objects"
+    }
+  },
+  {
+    "Name": "player_statistic",
+    "entries": {
+      "delta1": "Use multiple name variations when ambiguous rather than seeking clarification first"
+    }
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "python_send_mail",
+    "entries": {
+      "delta1": "Only use when explicitly requested; don't assume email functionality is needed"
+    }
+  },
+  {
+    "Name": "quarterly_earnings",
+    "entries": {
+      "delta1": "Include quarter and year parameters for timeframe-specific earnings requests"
+    }
+  },
+  {
+    "Name": "religion_history",
+    "entries": {
+      "delta1": "Execute tools directly when all required parameters are explicitly provided"
+    }
+  },
+  {
+    "Name": "requests",
+    "entries": {
+      "delta1": "Execute available tools for data processing; never default to conversational clarification"
+    }
+  },
+  {
+    "Name": "restaurant",
+    "entries": {
+      "delta1": "Process all sequential restaurant searches in multi-part queries",
+      "delta2": "Handle parallel cuisine searches as separate tool calls"
+    }
+  },
+  {
+    "Name": "ride_hailing",
+    "entries": {
+      "delta1": "Execute all sequential ride requests when multiple destinations are specified"
+    }
+  },
+  {
+    "Name": "services_1_find_provider",
+    "entries": {
+      "delta1": "Format city parameter as array: ['city_name'] not string"
+    }
+  },
+  {
+    "Name": "t_test",
+    "entries": {
+      "delta1": "Make separate calls for each parameter variation when multiple values are specified."
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {
+      "delta1": "Execute verify_traveler_information when all parameters are provided - avoid unnecessary clarification"
+    }
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "Use symbols directly from context when clearly identified",
+      "delta2": "Execute only explicitly requested operations; avoid unnecessary login or status checks",
+      "delta3": "Complete all requested tool calls in the same turn"
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Execute insurance purchase when type, cost, and payment are specified - avoid redundant clarification",
+      "delta2": "Avoid redundant get_flight_cost and get_nearest_airport calls when parameters are known",
+      "delta3": "Only call get_booking_history when explicitly requested, not for invoice retrieval",
+      "delta4": "Execute verify_traveler_information when all required fields are provided in context",
+      "delta5": "Contact customer support when requested, using generic message if specifics not provided"
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "twitter_api",
+    "entries": {
+      "delta1": "Avoid redundant calls including login status checks when not explicitly requested"
+    }
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Execute requested actions directly. Keep explanations separate from tool execution logic."
+    }
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

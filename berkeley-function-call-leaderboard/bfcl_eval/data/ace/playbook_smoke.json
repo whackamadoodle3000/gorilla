@@ -1,0 +1,184 @@
+[
+  {
+    "Name": "buses_3_buy_bus_ticket",
+    "entries": {
+      "delta1": "Detect irrelevance patterns and respond without clarification for capability mismatches."
+    }
+  },
+  {
+    "Name": "buses_3_find_bus",
+    "entries": {
+      "delta1": "Recognize irrelevance when bus search parameters are missing or mismatched."
+    }
+  },
+  {
+    "Name": "email_format_validator",
+    "entries": {
+      "delta1": "Use array parameters for email/domain fields, not stringified JSON objects."
+    }
+  },
+  {
+    "Name": "events_3_buy_event_tickets",
+    "entries": {
+      "delta1": "Detect irrelevance patterns and respond without tool engagement when queries mismatch capabilities."
+    }
+  },
+  {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Recognize irrelevance when queries don't match tool capabilities without clarification loops."
+    }
+  },
+  {
+    "Name": "flights_4_search_oneway_flight",
+    "entries": {
+      "delta1": "Identify irrelevant queries that don't match flight search parameters without clarification."
+    }
+  },
+  {
+    "Name": "flights_4_search_roundtrip_flights",
+    "entries": {
+      "delta1": "Recognize when user queries fall outside flight booking capabilities without engagement."
+    }
+  },
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "Pass Java object references directly, not string representations, to avoid AST decoding failures."
+    }
+  },
+  {
+    "Name": "get_aws_pricing",
+    "entries": {
+      "delta1": "Map natural language CPU specs directly: 'one CPU' → 'single', avoid clarification loops."
+    }
+  },
+  {
+    "Name": "get_class_info",
+    "entries": {
+      "delta1": "Use for direct class structure inspection when compilation errors mention missing methods."
+    }
+  },
+  {
+    "Name": "get_relevant_classes",
+    "entries": {
+      "delta1": "Prefer get_class_info for direct class inspection over search when resolving compilation errors."
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Include all parameter options from ground truth, even empty values."
+    }
+  },
+  {
+    "Name": "get_signature",
+    "entries": {
+      "delta1": "Call after get_class_info to verify specific method signatures for compilation issues."
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Ensure tool_calls are followed by proper tool messages with matching tool_call_ids."
+    }
+  },
+  {
+    "Name": "grocery_delivery",
+    "entries": {
+      "delta1": "Use exact function name 'grocery_delivery.order' without variations.",
+      "delta2": "Provide location addresses exactly as specified without additional descriptive text."
+    }
+  },
+  {
+    "Name": "hotels_4_reserve_hotel",
+    "entries": {
+      "delta1": "Identify queries irrelevant to hotel booking without initiating tool engagement."
+    }
+  },
+  {
+    "Name": "hotels_4_search_hotel",
+    "entries": {
+      "delta1": "Detect irrelevance patterns and avoid clarification loops for mismatched queries."
+    }
+  },
+  {
+    "Name": "imdb",
+    "entries": {
+      "delta1": "Include all ground truth parameters, even optional ones like 'category'."
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "quarterly_earnings",
+    "entries": {
+      "delta1": "Pass parameters as direct object properties, not JSON strings."
+    }
+  },
+  {
+    "Name": "ride_hailing",
+    "entries": {
+      "delta1": "Use exact function name 'ride_hailing.get_rides' without variations."
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {}
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {}
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "In multi-turn flows, maintain context and execute expected tool calls without clarification loops."
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Execute all prerequisite state preparation steps before engine operations (lock doors, press brake).",
+      "delta2": "Follow multi-step sequences exactly as specified in ground truth for state-dependent operations."
+    }
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

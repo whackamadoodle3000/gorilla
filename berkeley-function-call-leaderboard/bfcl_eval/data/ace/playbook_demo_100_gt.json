@@ -1,0 +1,148 @@
+[
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "Apply generic type attachment tools directly to constructor instructions without requesting object representations.",
+      "delta2": "Use available MethodNode and ConstructorInsn contexts to process generic types rather than asking for string representations."
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Invoke service lookup for explicitly requested service types like housekeeping with ironing capabilities."
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Always generate a response for every conversation turn, even if just acknowledging the request or indicating inability to proceed."
+    }
+  },
+  {
+    "Name": "grocery_delivery",
+    "entries": {
+      "delta1": "Use exact function names like 'grocery_delivery.order' without inventing variants.",
+      "delta2": "Provide location parameters exactly as specified, without additional descriptive text."
+    }
+  },
+  {
+    "Name": "hna_wqa",
+    "entries": {
+      "delta1": "delta1: Use max_results='' or max_results=10 only; other values like 5 are invalid."
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Execute all explicitly requested eligibility checks in parallel, even when banks/amounts differ."
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "math_roots",
+    "entries": {
+      "delta1": "polynomial: Format coefficients as nested float arrays [[a,b,c...]] with explicit degree parameter, not flat integer arrays."
+    }
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta1": "Attempt tool usage with available location parameters rather than preemptively requesting clarification."
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Execute lookup immediately when sufficient information exists, avoiding conversational clarification loops."
+    }
+  },
+  {
+    "Name": "music_3_play_media",
+    "entries": {
+      "delta1": "Invoke play functions directly when track/album is specified, without requesting additional user input."
+    }
+  },
+  {
+    "Name": "player_statistic",
+    "entries": {
+      "delta1": "Use player lookup tools for athlete queries, not conversational clarification.",
+      "delta2": "Handle name ambiguity through tool parameters, not dialogue requests."
+    }
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "ride_hailing",
+    "entries": {
+      "delta1": "In parallel calls, maintain precise function naming and parameter formatting across all tool groups."
+    }
+  },
+  {
+    "Name": "t_test",
+    "entries": {
+      "delta1": "Execute each explicitly requested statistical test in parallel, even when parameters like alpha differ."
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {}
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "In multi-turn flows, maintain tool usage consistency when user requests logically require tool interactions."
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Execute clearly specified travel purchases without seeking additional parameter clarification in multi-turn flows.",
+      "delta2": "Always provide at least one response per user turn in multi-turn flows, using available tools or requesting clarification when uncertain."
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Verify all doors are locked before engine start attempts to prevent state mismatches.",
+      "delta2": "Maintain accurate state tracking across all vehicle control operations in multi-turn scenarios.",
+      "delta3": "Handle state dependencies strictly between door operations and engine control functions."
+    }
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

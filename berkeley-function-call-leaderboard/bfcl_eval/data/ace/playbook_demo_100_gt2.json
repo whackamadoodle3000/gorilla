@@ -1,0 +1,209 @@
+[
+  {
+    "Name": "ecology_data",
+    "entries": {
+      "delta1": "Handle multiple data requests (e.g., different time periods) as parallel calls, not sequentially"
+    }
+  },
+  {
+    "Name": "generate_dna_sequence",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple parameter sets are provided simultaneously",
+      "delta2": "Generate all requested sequences in parallel, not sequentially"
+    }
+  },
+  {
+    "Name": "generic",
+    "entries": {}
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "Use Java object instances directly with tools, not string representations",
+      "delta2": "Proceed with tool calls when MethodNode and ConstructorInsn instances are available"
+    }
+  },
+  {
+    "Name": "get_adriel_detail_experience_and_education",
+    "entries": {
+      "delta1": "Use this specific function for detailed internship queries, not the general experiences function"
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Execute tool calls even when uncertain about data availability",
+      "delta2": "Avoid conversational fallbacks when tools can discover or retrieve the needed information"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "Reject irrelevant user requests entirely without attempting tool calls"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Process each conversation turn sequentially; never skip responses even if later turns address the same request"
+    }
+  },
+  {
+    "Name": "grocery_delivery",
+    "entries": {
+      "delta1": "Use exact function names without modification: 'grocery_delivery.order' not 'grocery_delivery_order'",
+      "delta2": "Provide parameter values exactly as specified, without adding descriptive text or modifications"
+    }
+  },
+  {
+    "Name": "hna_wqa",
+    "entries": {
+      "delta1": "Use only enumerated parameter values exactly as specified; never assume flexible defaults"
+    }
+  },
+  {
+    "Name": "hotels_2_book_house",
+    "entries": {
+      "delta1": "Execute tool calls with inferred parameters rather than blocking for clarification"
+    }
+  },
+  {
+    "Name": "hotels_2_search_house",
+    "entries": {
+      "delta1": "Proceed with location inference when reasonable; let tools handle parameter validation"
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple financial institutions are specified in one request"
+    }
+  },
+  {
+    "Name": "market_performance",
+    "entries": {
+      "delta1": "Execute parallel calls for multiple indices when clearly specified, without seeking clarification"
+    }
+  },
+  {
+    "Name": "math_api",
+    "entries": {}
+  },
+  {
+    "Name": "math_roots",
+    "entries": {
+      "delta1": "Provide polynomial coefficients as nested float arrays: [[a0, a1, ..., an]] not flat arrays"
+    }
+  },
+  {
+    "Name": "memory_kv",
+    "entries": {}
+  },
+  {
+    "Name": "memory_rec_sum",
+    "entries": {}
+  },
+  {
+    "Name": "memory_vector",
+    "entries": {}
+  },
+  {
+    "Name": "message_api",
+    "entries": {}
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta1": "Proceed with tool usage when location context is reasonably clear, avoiding unnecessary clarification loops"
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Use lookup tools to discover content when users specify artists/albums rather than asking for clarification"
+    }
+  },
+  {
+    "Name": "nested_query_builder",
+    "entries": {
+      "delta1": "Use string parameters directly in tool calls - tools handle necessary conversions",
+      "delta2": "Avoid requesting object representations when benchmark provides string parameters"
+    }
+  },
+  {
+    "Name": "player_statistic",
+    "entries": {
+      "delta1": "Proceed with tool usage when player context is reasonably clear, avoiding unnecessary clarification loops",
+      "delta2": "Handle player ambiguity within tool execution rather than preemptively questioning"
+    }
+  },
+  {
+    "Name": "posting_api",
+    "entries": {}
+  },
+  {
+    "Name": "religion_history",
+    "entries": {
+      "delta1": "Execute parallel calls with original parameter scope intact, avoid subdividing ranges unless explicitly requested"
+    }
+  },
+  {
+    "Name": "restaurant",
+    "entries": {
+      "delta1": "Execute parallel calls for multiple restaurant searches with different parameters simultaneously",
+      "delta2": "Process all distinct cuisine/location combinations in parallel when multiple are requested"
+    }
+  },
+  {
+    "Name": "t_test",
+    "entries": {
+      "delta1": "Execute parallel calls for all parameter variations, not just a subset",
+      "delta2": "Handle multiple significance levels simultaneously when specified in parallel"
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {}
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "Execute tool calls for explicit user requests without assuming prerequisite authentication steps not required by function signatures",
+      "delta2": "Verify and fulfill watchlist operations when explicitly requested, regardless of conversational context",
+      "delta3": "Use available trading functions directly when parameters are provided, handle authentication separately if needed"
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "In multi-turn flows, execute tool calls when all required parameters are available from context, avoiding unnecessary clarification loops",
+      "delta2": "When user specifies comprehensive coverage and cost, proceed directly with purchase_travel_insurance using available card_id and booking details",
+      "delta3": "Execute verify_traveler_details immediately when name, DOB, and passport details are fully provided, without requesting redundant confirmation of available information"
+    }
+  },
+  {
+    "Name": "travel_booking",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control",
+    "entries": {}
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Verify vehicle state consistency after each control operation to prevent state drift",
+      "delta2": "Ensure door lock status matches requirements before engine start operations"
+    }
+  },
+  {
+    "Name": "view_service_provider_profile",
+    "entries": {
+      "delta1": "Do not parse or execute calls when user intent mismatches available functions"
+    }
+  },
+  {
+    "Name": "web_search",
+    "entries": {}
+  }
+]

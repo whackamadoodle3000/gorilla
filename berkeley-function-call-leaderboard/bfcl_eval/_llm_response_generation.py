@@ -9,7 +9,7 @@ import threading
 import queue
 from copy import deepcopy
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from bfcl_eval.ace.constants import (
     ACE_PLAYBOOK_SYSTEM_MARKER,
@@ -17,6 +17,7 @@ from bfcl_eval.ace.constants import (
     DEFAULT_SPLIT_PATH,
 )
 from bfcl_eval.ace.playbook import PlaybookManager
+from bfcl_eval.ace.utils import determine_tool_groups
 from bfcl_eval.ace.split_manager import (
     TEST_PARTITION,
     TRAIN_PARTITION,
@@ -317,10 +318,26 @@ def generate_results(args, model_name, test_cases_total):
     writer_thread = threading.Thread(target=_writer, daemon=True)
     writer_thread.start()
 
-    playbook_text = None
+    playbook_manager = None
+
+    def render_playbook_text(test_case: dict) -> Optional[str]:
+        if playbook_manager is None:
+            return None
+        tool_groups = determine_tool_groups(test_case)
+        focus_sections = list(dict.fromkeys(tool_groups))
+        fallback_sections = [
+            section
+            for section in ("default_function", "general_guidelines", "global_policy")
+            if section in playbook_manager.sections() and section not in focus_sections
+        ]
+        focus_sections.extend(fallback_sections)
+        return playbook_manager.to_prompt_string(
+            focus_sections=focus_sections or None,
+            max_sections=len(focus_sections) if focus_sections else None,
+        )
+
     if getattr(args, "ace", False):
         playbook_manager = PlaybookManager(args.ace_playbook_path)
-        playbook_text = playbook_manager.to_prompt_string()
 
     try:
         if is_oss_model:
@@ -375,7 +392,7 @@ def generate_results(args, model_name, test_cases_total):
                     test_case,
                     args.include_input_log,
                     args.exclude_state_log,
-                    playbook_text,
+                    render_playbook_text(test_case),
                 )
                 in_flight[future] = test_case_id
 
@@ -409,7 +426,7 @@ def generate_results(args, model_name, test_cases_total):
                         test_case,
                         args.include_input_log,
                         args.exclude_state_log,
-                        playbook_text,
+                        render_playbook_text(test_case),
                     )
                     in_flight[future] = test_case_id
 
