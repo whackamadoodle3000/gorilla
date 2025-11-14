@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from .constants import DEFAULT_PLAYBOOK_PATH, PLAYBOOK_PROMPT_HEADER
-from .utils import camel_to_snake, list_tool_groups
+from .utils import camel_to_snake
 
 
 @dataclass
@@ -34,7 +34,7 @@ class PlaybookManager:
             self.save()
 
     def _initialize_empty(self) -> None:
-        self._data = {group: {} for group in list_tool_groups()}
+        self._data = {}
 
     def _load(self) -> None:
         with open(self.path, "r", encoding="utf-8") as f:
@@ -57,9 +57,6 @@ class PlaybookManager:
             entries = section.get("entries", {})
             data[camel_to_snake(name)] = dict(entries)
 
-        # Ensure all known tool groups are represented
-        for group in list_tool_groups():
-            data.setdefault(group, {})
         self._data = data
 
     def save(self) -> None:
