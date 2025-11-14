@@ -1,7 +1,10 @@
 import argparse
 import statistics
 from collections import defaultdict
+from typing import Optional
 
+from bfcl_eval.ace.metrics import EvaluationMetricsCollector
+from bfcl_eval.ace.utils import count_available_tools, determine_tool_groups
 from bfcl_eval.constants.enums import Language, ReturnFormat
 from bfcl_eval.constants.eval_config import *
 from bfcl_eval.constants.model_config import MODEL_CONFIG_MAPPING
@@ -400,6 +403,7 @@ def format_sensitivity_runner(
     model_name,
     test_category,
     score_dir,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
 ):
     assert (
         len(model_result) == len(prompt) == len(possible_answer)
@@ -448,6 +452,15 @@ def format_sensitivity_runner(
             return_format=return_format,
             has_tool_call_tag=has_tool_call_tag,
         )
+
+        if metrics_collector:
+            metrics_collector.record_entry(
+                entry_id=index,
+                test_category=test_category,
+                tool_groups=determine_tool_groups(prompt_entry),
+                valid=entry_result.get("valid"),
+                tool_count=count_available_tools(prompt_entry),
+            )
 
         # Update stats for this configuration
         config_stats[format_sensitivity_config]["total"] += 1
@@ -506,6 +519,7 @@ def agentic_runner(
     model_name,
     test_category,
     score_dir,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
 ):
     assert (
         len(model_result) == len(prompt) == len(possible_answer)
@@ -529,6 +543,15 @@ def agentic_runner(
             test_category,
         )
 
+        if metrics_collector:
+            metrics_collector.record_entry(
+                entry_id=index,
+                test_category=test_category,
+                tool_groups=determine_tool_groups(test_entry),
+                valid=entry_result.get("valid"),
+                tool_count=count_available_tools(test_entry),
+            )
+
         if entry_result["valid"]:
             correct_count += 1
         else:
@@ -548,6 +571,7 @@ def multi_turn_runner(
     model_name,
     test_category,
     score_dir,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
 ):
     assert (
         len(model_result) == len(prompt) == len(possible_answer)
@@ -571,6 +595,15 @@ def multi_turn_runner(
             test_category,
         )
 
+        if metrics_collector:
+            metrics_collector.record_entry(
+                entry_id=index,
+                test_category=test_category,
+                tool_groups=determine_tool_groups(test_entry),
+                valid=entry_result.get("valid"),
+                tool_count=count_available_tools(test_entry),
+            )
+
         if entry_result["valid"]:
             correct_count += 1
         else:
@@ -583,7 +616,13 @@ def multi_turn_runner(
 
 
 def relevance_file_runner(
-    handler: BaseHandler, model_result, prompt, model_name, test_category, score_dir
+    handler: BaseHandler,
+    model_result,
+    prompt,
+    model_name,
+    test_category,
+    score_dir,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
 ):
     # This function serves for both relevance and irrelevance tests, which share the exact opposite logic.
     # If `test_category` is "irrelevance", the model is expected to output no function call.
@@ -599,6 +638,15 @@ def relevance_file_runner(
         entry_result = _evaluate_single_relevance_entry(
             handler, index, model_result_item, prompt_entry, model_name, test_category
         )
+
+        if metrics_collector:
+            metrics_collector.record_entry(
+                entry_id=index,
+                test_category=test_category,
+                tool_groups=determine_tool_groups(prompt_entry),
+                valid=entry_result.get("valid"),
+                tool_count=count_available_tools(prompt_entry),
+            )
 
         if entry_result["valid"]:
             correct_count += 1
@@ -618,6 +666,7 @@ def ast_file_runner(
     test_category,
     model_name,
     score_dir,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
 ):
     assert (
         len(model_result) == len(prompt) == len(possible_answer)
@@ -654,6 +703,15 @@ def ast_file_runner(
             has_tool_call_tag=False,
         )
 
+        if metrics_collector:
+            metrics_collector.record_entry(
+                entry_id=index,
+                test_category=test_category,
+                tool_groups=determine_tool_groups(prompt_entry),
+                valid=entry_result.get("valid"),
+                tool_count=count_available_tools(prompt_entry),
+            )
+
         if entry_result["valid"]:
             correct_count += 1
         else:
@@ -673,6 +731,7 @@ def evaluate_task(
     model_name,
     handler,
     leaderboard_table,
+    metrics_collector: Optional[EvaluationMetricsCollector] = None,
     allow_missing: bool = False,
 ):
     print(f"🔍 Running test: {test_category}")
@@ -690,7 +749,13 @@ def evaluate_task(
         )
 
         accuracy, total_count = relevance_file_runner(
-            handler, model_result, prompt, model_name, test_category, score_dir
+            handler,
+            model_result,
+            prompt,
+            model_name,
+            test_category,
+            score_dir,
+            metrics_collector=metrics_collector,
         )
 
     else:
@@ -714,6 +779,7 @@ def evaluate_task(
                 model_name,
                 test_category,
                 score_dir,
+                metrics_collector=metrics_collector,
             )
 
         elif is_multi_turn(test_category):
@@ -725,6 +791,7 @@ def evaluate_task(
                 model_name,
                 test_category,
                 score_dir,
+                metrics_collector=metrics_collector,
             )
 
         elif is_agentic(test_category):
@@ -736,6 +803,7 @@ def evaluate_task(
                 model_name,
                 test_category,
                 score_dir,
+                metrics_collector=metrics_collector,
             )
         # Single turn test
         else:
@@ -747,6 +815,7 @@ def evaluate_task(
                 test_category,
                 model_name,
                 score_dir,
+                metrics_collector=metrics_collector,
             )
 
     record_result(leaderboard_table, model_name, test_category, accuracy, total_count)
@@ -783,6 +852,9 @@ def runner(
 
         print(f"🦍 Model: {model_name}")
 
+        metrics_collector = EvaluationMetricsCollector(model_name_escaped)
+        evaluated_categories: set[str] = set()
+
         # Find and process all result JSON files recursively in the subdirectory
         for model_result_json in subdir.rglob(RESULT_FILE_PATTERN):
             test_category = extract_test_category(model_result_json)
@@ -810,7 +882,28 @@ def runner(
                 model_name,
                 handler,
                 leaderboard_table,
+                metrics_collector=metrics_collector,
                 allow_missing=allow_missing,
+            )
+            evaluated_categories.add(test_category)
+
+        saved_paths = metrics_collector.finalize(
+            score_dir=score_dir,
+            metadata={
+                "model_name": model_name_escaped,
+                "evaluated_categories": sorted(evaluated_categories),
+                "score_dir": str(score_dir),
+            },
+        )
+        if saved_paths.get("data_path"):
+            print(f"📊 Saved ACE evaluation metrics to {saved_paths['data_path']}")
+        if saved_paths.get("subcategory_plot_path"):
+            print(
+                f"📈 Saved subcategory accuracy plot to {saved_paths['subcategory_plot_path']}"
+            )
+        if saved_paths.get("tool_count_plot_path"):
+            print(
+                f"📉 Saved tool-count distribution plot to {saved_paths['tool_count_plot_path']}"
             )
 
     # This function reads all the score files from local folder and updates the

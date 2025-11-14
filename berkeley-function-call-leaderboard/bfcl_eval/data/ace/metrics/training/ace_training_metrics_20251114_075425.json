@@ -1,0 +1,407 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook_demo20.json",
+    "split_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 20,
+    "start_offset": 0,
+    "planned_sample_count": 20,
+    "samples_recorded": 20
+  },
+  "summary": {
+    "total_samples": 20,
+    "counts": {
+      "ADD": 0,
+      "MODIFY": 3,
+      "REMOVE": 0,
+      "NO_OP": 17
+    },
+    "ratios": {
+      "ADD": 0.0,
+      "MODIFY": 0.15,
+      "REMOVE": 0.0,
+      "NO_OP": 0.85
+    },
+    "pass_counters": {
+      "passed": 6,
+      "failed": 3,
+      "unknown": 11
+    },
+    "pass_ratio": 0.3
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 20,
+      "size": 20,
+      "counts": {
+        "ADD": 0,
+        "MODIFY": 3,
+        "REMOVE": 0,
+        "NO_OP": 17
+      },
+      "ratios": {
+        "ADD": 0.0,
+        "MODIFY": 0.15,
+        "REMOVE": 0.0,
+        "NO_OP": 0.85
+      },
+      "pass_counters": {
+        "passed": 6,
+        "failed": 3,
+        "unknown": 11
+      },
+      "pass_ratio": 0.3
+    }
+  ],
+  "per_section": {
+    "loan_eligibility_check": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "travel_api": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "t_test": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "parallel_123",
+      "tool_groups": [
+        "generate_dna_sequence"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_397",
+      "tool_groups": [
+        "distance_calculator"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_118",
+      "tool_groups": [
+        "flight",
+        "imdb",
+        "lawsuits_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "memory_vector_88-student-8",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "format_sensitivity_3283:ret_fmt=json&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_409-140-5",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "format_sensitivity_2350:ret_fmt=json&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_simple_186-111-0",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "memory_vector_132-notetaker-2",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "format_sensitivity_3612:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=markdown&style=classic:live_multiple_489-147-4",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "irrelevance_101",
+      "tool_groups": [
+        "get_average_monthly_temperature"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3110:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_277-128-0",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "format_sensitivity_704:ret_fmt=python&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:simple_python_380",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "parallel_20",
+      "tool_groups": [
+        "loan_eligibility_check"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "loan_eligibility_check",
+          "normalized_section": "loan_eligibility_check"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_1322:ret_fmt=concise_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:multiple_46",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "format_sensitivity_4082:ret_fmt=python&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_multiple_709-164-25",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "live_multiple_187-82-0",
+      "tool_groups": [
+        "holdings",
+        "quarterly_earnings"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_155",
+      "tool_groups": [
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_8",
+      "tool_groups": [
+        "gorilla_file_system",
+        "twitter_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "skipped_length",
+      "evaluation_passed": null,
+      "notes": "[Info] Skipping multi_turn_long_context_8: conversation length 1028, ground truth length 7184 exceeds 5000 character limit."
+    },
+    {
+      "entry_id": "format_sensitivity_450:ret_fmt=json&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:simple_python_244",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "live_multiple_229-103-0",
+      "tool_groups": [
+        "get_area_of_square",
+        "get_contact_information",
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_165",
+      "tool_groups": [
+        "t_test"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "t_test",
+          "normalized_section": "t_test"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    }
+  ]
+}

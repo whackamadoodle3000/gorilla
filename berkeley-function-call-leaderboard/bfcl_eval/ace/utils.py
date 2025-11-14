@@ -49,6 +49,27 @@ def determine_tool_groups(entry: Mapping) -> list[str]:
     return sorted(groups)
 
 
+def count_available_tools(entry: Mapping) -> int:
+    """
+    Estimate the number of tools available for a given dataset entry.
+    """
+    if not entry:
+        return 0
+
+    if "function" in entry and isinstance(entry["function"], list):
+        return len(entry["function"])
+
+    if "tools" in entry:
+        tools = entry["tools"]
+        if isinstance(tools, dict):
+            return len(tools)
+        if isinstance(tools, list):
+            return len(tools)
+
+    groups = determine_tool_groups(entry)
+    return len(groups)
+
+
 def serialize_json(data: object) -> str:
     return json.dumps(data, ensure_ascii=False, indent=2)
 

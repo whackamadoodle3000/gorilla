@@ -14,6 +14,7 @@ from bfcl_eval._llm_response_generation import (
     build_handler,
     multi_threaded_inference,
 )
+from bfcl_eval.ace.metrics import PlaybookTrainingMetricsCollector
 from bfcl_eval.ace.playbook import PlaybookManager
 from bfcl_eval.ace.split_manager import (
     TRAIN_PARTITION,
@@ -647,13 +648,34 @@ def train_playbook(
     if limit:
         train_ids = train_ids[:limit]
 
+    planned_sample_count = len(train_ids)
     playbook = PlaybookManager(playbook_path, reset=False)
     dataset_cache = DatasetCache.build()
 
     handler = build_handler(generator_model, generator_temperature)
 
-    reflector_client = ChatCompletionClient(model=reflector_model, temperature=completion_temperature)
-    curator_client = ChatCompletionClient(model=curator_model, temperature=completion_temperature)
+    reflector_client = ChatCompletionClient(
+        model=reflector_model, temperature=completion_temperature
+    )
+    curator_client = ChatCompletionClient(
+        model=curator_model, temperature=completion_temperature
+    )
+
+    metrics_collector = PlaybookTrainingMetricsCollector()
+    run_metadata = {
+        "playbook_path": str(playbook_path),
+        "split_path": str(split_path),
+        "split_seed": split_seed,
+        "train_ratio": train_ratio,
+        "generator_model": generator_model,
+        "reflector_model": reflector_model,
+        "curator_model": curator_model,
+        "generator_temperature": generator_temperature,
+        "completion_temperature": completion_temperature,
+        "limit": limit,
+        "start_offset": start_offset,
+        "planned_sample_count": planned_sample_count,
+    }
 
     is_oss_model = isinstance(handler, OSSHandler)
     try:
@@ -670,21 +692,47 @@ def train_playbook(
         for entry_id in progress:
             entry = dataset_cache.get_prompt(entry_id)
             if not entry:
-                continue
-            ground_truth = dataset_cache.get_ground_truth(entry_id)
-            if not ground_truth:
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=[],
+                    applied_operations=[],
+                    outcome="missing_entry",
+                    evaluation_passed=None,
+                    notes="Prompt entry unavailable",
+                )
                 continue
 
-            conversation_text = format_conversation(entry.get("question", []))
-            serialized_ground_truth = serialize_json(ground_truth.get("ground_truth", {}))
-            if len(conversation_text) > 5000 or len(serialized_ground_truth) > 5000:
-                tqdm.write(
-                    f"[Info] Skipping {entry_id}: conversation length {len(conversation_text)}, "
-                    f"ground truth length {len(serialized_ground_truth)} exceeds 5000 character limit."
+            ground_truth = dataset_cache.get_ground_truth(entry_id)
+            if not ground_truth:
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=[],
+                    applied_operations=[],
+                    outcome="missing_ground_truth",
+                    evaluation_passed=None,
+                    notes="Ground truth unavailable",
                 )
                 continue
 
             tool_groups = determine_tool_groups(entry)
+
+            conversation_text = format_conversation(entry.get("question", []))
+            serialized_ground_truth = serialize_json(ground_truth.get("ground_truth", {}))
+            if len(conversation_text) > 5000 or len(serialized_ground_truth) > 5000:
+                msg = (
+                    f"[Info] Skipping {entry_id}: conversation length {len(conversation_text)}, "
+                    f"ground truth length {len(serialized_ground_truth)} exceeds 5000 character limit."
+                )
+                tqdm.write(msg)
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=tool_groups,
+                    applied_operations=[],
+                    outcome="skipped_length",
+                    evaluation_passed=None,
+                    notes=msg,
+                )
+                continue
 
             generator_result = multi_threaded_inference(
                 handler=handler,
@@ -705,7 +753,9 @@ def train_playbook(
                 focus_sections=focus_sections or None,
                 max_sections=len(focus_sections) if focus_sections else None,
             )
-            evaluation = _evaluate_generator_result(handler, entry, generator_result, ground_truth)
+            evaluation = _evaluate_generator_result(
+                handler, entry, generator_result, ground_truth
+            )
             evaluation_summary = _format_evaluation_summary(evaluation)
             evaluation_summary = _append_tool_call_diff(
                 evaluation_summary,
@@ -713,7 +763,12 @@ def train_playbook(
                 ground_truth,
             )
             evaluation_details_json = _serialize_evaluation_payload(evaluation)
-            evaluation_valid = evaluation.get("valid") if evaluation.get("status") == "evaluated" else None
+            evaluation_valid = (
+                evaluation.get("valid")
+                if evaluation.get("status") == "evaluated"
+                else None
+            )
+
             reflection_messages = _build_reflector_messages(
                 playbook_text,
                 entry,
@@ -729,14 +784,32 @@ def train_playbook(
                     reflection_messages, temperature=completion_temperature
                 )
             except Exception as exc:
-                tqdm.write(f"[Warning] Reflector call failed for {entry_id}: {exc}")
+                msg = f"[Warning] Reflector call failed for {entry_id}: {exc}"
+                tqdm.write(msg)
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=tool_groups,
+                    applied_operations=[],
+                    outcome="reflector_error",
+                    evaluation_passed=evaluation_valid,
+                    notes=msg,
+                )
                 continue
 
             reflection_raw_clean = _extract_json_block(reflection_raw)
             try:
                 reflection_json = json.loads(reflection_raw_clean)
             except json.JSONDecodeError as exc:
-                tqdm.write(f"[Warning] Failed to parse reflector output for {entry_id}: {exc}")
+                msg = f"[Warning] Failed to parse reflector output for {entry_id}: {exc}"
+                tqdm.write(msg)
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=tool_groups,
+                    applied_operations=[],
+                    outcome="reflector_parse_error",
+                    evaluation_passed=evaluation_valid,
+                    notes=msg,
+                )
                 continue
 
             curator_messages = _build_curator_messages(
@@ -755,103 +828,188 @@ def train_playbook(
                     curator_messages, temperature=completion_temperature
                 )
             except Exception as exc:
-                tqdm.write(f"[Warning] Curator call failed for {entry_id}: {exc}")
+                msg = f"[Warning] Curator call failed for {entry_id}: {exc}"
+                tqdm.write(msg)
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=tool_groups,
+                    applied_operations=[],
+                    outcome="curator_error",
+                    evaluation_passed=evaluation_valid,
+                    notes=msg,
+                )
                 continue
 
             curator_raw_clean = _extract_json_block(curator_raw)
             try:
                 curator_json = json.loads(curator_raw_clean)
             except json.JSONDecodeError as exc:
-                tqdm.write(f"[Warning] Failed to parse curator output for {entry_id}: {exc}")
+                msg = f"[Warning] Failed to parse curator output for {entry_id}: {exc}"
+                tqdm.write(msg)
+                metrics_collector.record_sample(
+                    entry_id=entry_id,
+                    tool_groups=tool_groups,
+                    applied_operations=[],
+                    outcome="curator_parse_error",
+                    evaluation_passed=evaluation_valid,
+                    notes=msg,
+                )
                 continue
 
             operations = curator_json.get("operations", [])
             applied_any = False
+            applied_operations: List[dict] = []
+            notes_messages: List[str] = []
+
             for operation in operations:
                 op_type = operation.get("type", "").upper()
                 section = operation.get("section")
                 if not section:
-                    tqdm.write(
+                    warning = (
                         f"[Warning] Skipping curator operation for {entry_id}: missing 'section' field. "
                         f"Operation type: {op_type}, Available tool groups: {', '.join(tool_groups) if tool_groups else 'none'}"
                     )
+                    tqdm.write(warning)
+                    notes_messages.append(warning)
                     continue
-                
-                # Validate that the section matches one of the tool groups for this task
+
                 normalized_section = camel_to_snake(section)
                 if normalized_section not in tool_groups:
-                    tqdm.write(
+                    warning = (
                         f"[Warning] Skipping curator operation for {entry_id}: section '{section}' "
                         f"(normalized: '{normalized_section}') is not one of the tool groups for this task. "
                         f"Tool groups for this task: {', '.join(tool_groups) if tool_groups else 'none'}"
                     )
+                    tqdm.write(warning)
+                    notes_messages.append(warning)
                     continue
-                
+
                 existing_entries = playbook.get_section_entries(section)
                 try:
                     if op_type == "ADD":
                         content = operation.get("content", "")
                         if not content or not content.strip():
-                            tqdm.write(
+                            warning = (
                                 f"[Warning] Skipping ADD operation for {entry_id} in section '{section}': "
                                 f"content is missing or empty"
                             )
+                            tqdm.write(warning)
+                            notes_messages.append(warning)
                             continue
                         playbook.add_entry(section, content)
                         applied_any = True
+                        applied_operations.append(
+                            {
+                                "type": "ADD",
+                                "section": section,
+                                "normalized_section": normalized_section,
+                            }
+                        )
                     elif op_type == "MODIFY":
                         operation_entry_id = operation.get("ID")
                         content = operation.get("content", "")
                         if not operation_entry_id:
-                            tqdm.write(
+                            warning = (
                                 f"[Warning] Skipping MODIFY operation for {entry_id} in section '{section}': "
                                 f"missing 'ID' field"
                             )
+                            tqdm.write(warning)
+                            notes_messages.append(warning)
                             continue
                         if not content or not content.strip():
-                            tqdm.write(
+                            warning = (
                                 f"[Warning] Skipping MODIFY operation for {entry_id} in section '{section}': "
                                 f"content is missing or empty"
                             )
+                            tqdm.write(warning)
+                            notes_messages.append(warning)
                             continue
                         if operation_entry_id in existing_entries:
                             playbook.modify_entry(section, operation_entry_id, content)
+                            applied_operations.append(
+                                {
+                                    "type": "MODIFY",
+                                    "section": section,
+                                    "normalized_section": normalized_section,
+                                }
+                            )
                         else:
-                            # Fallback: treat as add when entry does not yet exist
-                            tqdm.write(
+                            info_msg = (
                                 f"[Info] MODIFY operation for {entry_id}: entry '{operation_entry_id}' not found in section '{section}'. "
                                 f"Treating as ADD instead."
                             )
-                            playbook.add_entry(section, content, entry_id=operation_entry_id)
+                            tqdm.write(info_msg)
+                            notes_messages.append(info_msg)
+                            playbook.add_entry(
+                                section, content, entry_id=operation_entry_id
+                            )
+                            applied_operations.append(
+                                {
+                                    "type": "ADD",
+                                    "section": section,
+                                    "normalized_section": normalized_section,
+                                }
+                            )
                         applied_any = True
                     elif op_type == "REMOVE":
                         operation_entry_id = operation.get("ID")
                         if not operation_entry_id:
-                            tqdm.write(
+                            warning = (
                                 f"[Warning] Skipping REMOVE operation for {entry_id} in section '{section}': "
                                 f"missing 'ID' field"
                             )
+                            tqdm.write(warning)
+                            notes_messages.append(warning)
                             continue
                         if operation_entry_id in existing_entries:
                             playbook.remove_entry(section, operation_entry_id)
                             applied_any = True
+                            applied_operations.append(
+                                {
+                                    "type": "REMOVE",
+                                    "section": section,
+                                    "normalized_section": normalized_section,
+                                }
+                            )
                         else:
-                            tqdm.write(
+                            warning = (
                                 f"[Warning] Skipping REMOVE operation for {entry_id}: entry '{operation_entry_id}' "
                                 f"not found in section '{section}'"
                             )
+                            tqdm.write(warning)
+                            notes_messages.append(warning)
                     else:
-                        tqdm.write(
+                        warning = (
                             f"[Warning] Skipping unknown operation type '{op_type}' for {entry_id} in section '{section}'"
                         )
+                        tqdm.write(warning)
+                        notes_messages.append(warning)
                 except KeyError as exc:
-                    tqdm.write(f"[Warning] Skipping invalid curator op for {entry_id}: {exc}")
-                # Refresh cached view after each operation to stay in sync
+                    warning = f"[Warning] Skipping invalid curator op for {entry_id}: {exc}"
+                    tqdm.write(warning)
+                    notes_messages.append(warning)
                 if applied_any:
                     existing_entries = playbook.get_section_entries(section)
+
+            outcome = "applied" if applied_any else "no_update"
+            notes_messages.append(f"evaluation_status={evaluation.get('status')}")
+            metrics_collector.record_sample(
+                entry_id=entry_id,
+                tool_groups=tool_groups,
+                applied_operations=applied_operations,
+                outcome=outcome,
+                evaluation_passed=evaluation_valid,
+                notes=" | ".join(notes_messages) if notes_messages else None,
+            )
             if applied_any:
                 playbook.save()
     finally:
+        run_metadata["samples_recorded"] = len(metrics_collector.sample_records)
+        saved_paths = metrics_collector.save(metadata=run_metadata)
+        if saved_paths.get("data_path"):
+            tqdm.write(f"[Metrics] Training metrics saved to {saved_paths['data_path']}")
+        if saved_paths.get("plot_path"):
+            tqdm.write(f"[Metrics] Training plot saved to {saved_paths['plot_path']}")
         if is_oss_model:
             handler.shutdown_local_server()
 
