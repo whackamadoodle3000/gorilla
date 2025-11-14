@@ -51,7 +51,12 @@ from .constants import (
     DEFAULT_TRAIN_RATIO,
 )
 from .llm import ChatCompletionClient
-from .utils import determine_tool_groups, format_conversation, serialize_json
+from .utils import (
+    camel_to_snake,
+    determine_tool_groups,
+    format_conversation,
+    serialize_json,
+)
 
 
 def _extract_json_block(text: str) -> str:
@@ -764,31 +769,81 @@ def train_playbook(
             applied_any = False
             for operation in operations:
                 op_type = operation.get("type", "").upper()
-                section = operation.get("section") or (tool_groups[0] if tool_groups else None)
+                section = operation.get("section")
                 if not section:
+                    tqdm.write(
+                        f"[Warning] Skipping curator operation for {entry_id}: missing 'section' field. "
+                        f"Operation type: {op_type}, Available tool groups: {', '.join(tool_groups) if tool_groups else 'none'}"
+                    )
                     continue
+                
+                # Validate that the section matches one of the tool groups for this task
+                normalized_section = camel_to_snake(section)
+                if normalized_section not in tool_groups:
+                    tqdm.write(
+                        f"[Warning] Skipping curator operation for {entry_id}: section '{section}' "
+                        f"(normalized: '{normalized_section}') is not one of the tool groups for this task. "
+                        f"Tool groups for this task: {', '.join(tool_groups) if tool_groups else 'none'}"
+                    )
+                    continue
+                
                 existing_entries = playbook.get_section_entries(section)
                 try:
                     if op_type == "ADD":
                         content = operation.get("content", "")
+                        if not content or not content.strip():
+                            tqdm.write(
+                                f"[Warning] Skipping ADD operation for {entry_id} in section '{section}': "
+                                f"content is missing or empty"
+                            )
+                            continue
                         playbook.add_entry(section, content)
                         applied_any = True
                     elif op_type == "MODIFY":
-                        entry_id = operation.get("ID")
+                        operation_entry_id = operation.get("ID")
                         content = operation.get("content", "")
-                        if entry_id:
-                            if entry_id in existing_entries:
-                                playbook.modify_entry(section, entry_id, content)
-                            else:
-                                # Fallback: treat as add when entry does not yet exist
-                                playbook.add_entry(section, content, entry_id=entry_id)
-                            applied_any = True
+                        if not operation_entry_id:
+                            tqdm.write(
+                                f"[Warning] Skipping MODIFY operation for {entry_id} in section '{section}': "
+                                f"missing 'ID' field"
+                            )
+                            continue
+                        if not content or not content.strip():
+                            tqdm.write(
+                                f"[Warning] Skipping MODIFY operation for {entry_id} in section '{section}': "
+                                f"content is missing or empty"
+                            )
+                            continue
+                        if operation_entry_id in existing_entries:
+                            playbook.modify_entry(section, operation_entry_id, content)
+                        else:
+                            # Fallback: treat as add when entry does not yet exist
+                            tqdm.write(
+                                f"[Info] MODIFY operation for {entry_id}: entry '{operation_entry_id}' not found in section '{section}'. "
+                                f"Treating as ADD instead."
+                            )
+                            playbook.add_entry(section, content, entry_id=operation_entry_id)
+                        applied_any = True
                     elif op_type == "REMOVE":
-                        entry_id = operation.get("ID")
-                        if entry_id:
-                            if entry_id in existing_entries:
-                                playbook.remove_entry(section, entry_id)
-                                applied_any = True
+                        operation_entry_id = operation.get("ID")
+                        if not operation_entry_id:
+                            tqdm.write(
+                                f"[Warning] Skipping REMOVE operation for {entry_id} in section '{section}': "
+                                f"missing 'ID' field"
+                            )
+                            continue
+                        if operation_entry_id in existing_entries:
+                            playbook.remove_entry(section, operation_entry_id)
+                            applied_any = True
+                        else:
+                            tqdm.write(
+                                f"[Warning] Skipping REMOVE operation for {entry_id}: entry '{operation_entry_id}' "
+                                f"not found in section '{section}'"
+                            )
+                    else:
+                        tqdm.write(
+                            f"[Warning] Skipping unknown operation type '{op_type}' for {entry_id} in section '{section}'"
+                        )
                 except KeyError as exc:
                     tqdm.write(f"[Warning] Skipping invalid curator op for {entry_id}: {exc}")
                 # Refresh cached view after each operation to stay in sync
