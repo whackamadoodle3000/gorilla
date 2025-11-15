@@ -1,0 +1,63 @@
+{
+  "test_case_id": "multiple_101",
+  "turn_idx": 0,
+  "step_idx": 0,
+  "playbook_text": "ACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nmath\n- delta1: Always produce syntactically valid tool calls - avoid explanatory text or code representations\n- delta2: Make direct function calls with proper parameters rather than text disguised as tool markup\n- delta3: Make discrete tool calls - never wrap multiple calls in list/string syntax",
+  "inference_input": {
+    "message": "[{'role': 'system', 'content': '[ACE_PLAYBOOK]\\nACE Playbook Insights\\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\\n\\nmath\\n- delta1: Always produce syntactically valid tool calls - avoid explanatory text or code representations\\n- delta2: Make direct function calls with proper parameters rather than text disguised as tool markup\\n- delta3: Make discrete tool calls - never wrap multiple calls in list/string syntax'}, {'role': 'user', 'content': 'Find the greatest common divisor (GCD) of 12 and 18'}]",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "math_gcd",
+          "description": "Calculate the greatest common divisor of two integers. Note that the provided function is in Python 3 syntax.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "num1": {
+                "type": "integer",
+                "description": "First number."
+              },
+              "num2": {
+                "type": "integer",
+                "description": "Second number."
+              }
+            },
+            "required": [
+              "num1",
+              "num2"
+            ]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_top_cases",
+          "description": "Retrieve a list of the most influential or landmark cases in a specific field of law. Note that the provided function is in Python 3 syntax.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "field_of_law": {
+                "type": "string",
+                "description": "The specific field of law e.g., constitutional law, criminal law, etc."
+              },
+              "top_number": {
+                "type": "integer",
+                "description": "The number of top cases to retrieve."
+              },
+              "country": {
+                "type": "string",
+                "description": "The country where the law cases should be retrieved from. Default is US."
+              }
+            },
+            "required": [
+              "field_of_law",
+              "top_number"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

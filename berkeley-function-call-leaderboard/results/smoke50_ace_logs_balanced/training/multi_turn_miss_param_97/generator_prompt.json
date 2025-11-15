@@ -1,0 +1,1983 @@
+{
+  "entry_id": "multi_turn_miss_param_97",
+  "tool_groups": [
+    "message_api",
+    "vehicle_control_api"
+  ],
+  "test_case": {
+    "id": "multi_turn_miss_param_97",
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I've heard a friend of mine in Rivermist recently visited Stonebrook, and she mentioned the journey felt quite extensive. I'm curious, do you happen to have an idea about the actual distance between the two places?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Covering the distance from Rivermist to Stonebrook sure seems like a long trip. I'm a bit worried if my vehicle can endure the journey with the current fuel level. I'm not entirely sure how far my car can travel on the remaining fuel. What do you think?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Thanks a lot! Before I embark on this journey, it makes sense to ensure I won't be left stranded due to an empty tank. Just add to the tank fully."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Great! My tank are full now."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "With my tank now full, let's embark on this journey. I'd appreciate it if you could start the car for me."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "By the way, as I travel, there are some updates I need to communicate to my friend Michael. Would you be able to send message 'I am on my way.'?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Lastly, while I'm on the road, I want to make sure I have informed everyone that should be aware. Could you display what messages I've send thus far?"
+        }
+      ]
+    ],
+    "initial_config": {
+      "VehicleControlAPI": {
+        "fuelLevel": 5.0,
+        "batteryVoltage": 12.6,
+        "engineState": "stopped",
+        "doorStatus": {
+          "driver": "unlocked",
+          "passenger": "unlocked",
+          "rear_left": "unlocked",
+          "rear_right": "unlocked"
+        },
+        "acTemperature": 25.0,
+        "fanSpeed": 50,
+        "acMode": "auto",
+        "humidityLevel": 50.0,
+        "headLightStatus": "off",
+        "parkingBrakeStatus": "released",
+        "parkingBrakeForce": 0.0,
+        "slopeAngle": 0.0,
+        "distanceToNextVehicle": 50.0,
+        "cruiseStatus": "inactive",
+        "destination": "Stonebrook",
+        "frontLeftTirePressure": 32.0,
+        "frontRightTirePressure": 32.0,
+        "rearLeftTirePressure": 30.0,
+        "rearRightTirePressure": 30.0
+      },
+      "MessageAPI": {
+        "user_count": 4,
+        "user_map": {
+          "Michael": "BD732D1888B94DAA",
+          "Sarah": "USR002",
+          "David": "USR003",
+          "Emma": "USR004"
+        },
+        "inbox": [
+          {
+            "USR002": "Safe travels!"
+          }
+        ],
+        "message_count": 1,
+        "current_user": "USR003"
+      }
+    },
+    "path": [
+      "VehicleControlAPI.get_zipcode_based_on_city",
+      "VehicleControlAPI.estimate_distance",
+      "VehicleControlAPI.estimate_drive_feasibility_by_mileage",
+      "VehicleControlAPI.fillFuelTank",
+      "VehicleControlAPI.startEngine",
+      "MessageAPI.send_message",
+      "MessageAPI.view_messages_received"
+    ],
+    "involved_classes": [
+      "MessageAPI",
+      "VehicleControlAPI"
+    ],
+    "function": [
+      {
+        "name": "add_contact",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Add a contact to the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "user_name": {
+              "type": "string",
+              "description": "User name of contact to be added."
+            }
+          },
+          "required": [
+            "user_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "added_status": {
+              "type": "boolean",
+              "description": "True if the contact was added successfully, False otherwise."
+            },
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the added contact."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the addition attempt."
+            }
+          }
+        }
+      },
+      {
+        "name": "delete_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Delete the latest message sent to a receiver. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            }
+          },
+          "required": [
+            "receiver_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "deleted_status": {
+              "type": "boolean",
+              "description": "True if the message was deleted successfully, False otherwise."
+            },
+            "receiver_id": {
+              "type": "string",
+              "description": "ID of the receiver of the deleted message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the deletion attempt."
+            }
+          }
+        }
+      },
+      {
+        "name": "get_message_stats",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get statistics about messages for the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stats": {
+              "type": "dict",
+              "description": "Dictionary containing message statistics.",
+              "properties": {
+                "received_count": {
+                  "type": "integer",
+                  "description": "Number of messages received by the current user."
+                },
+                "total_contacts": {
+                  "type": "integer",
+                  "description": "Total number of contacts the user has interacted with."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "get_user_id",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get user ID from user name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "User name of the user. "
+            }
+          },
+          "required": [
+            "user"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user"
+            }
+          }
+        }
+      },
+      {
+        "name": "list_users",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: List all users in the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_list": {
+              "type": "array",
+              "description": "List of all users in the workspace.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "message_get_login_status",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      },
+      {
+        "name": "message_login",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Log in a user with the given user ID to messeage application. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user to log in. "
+            }
+          },
+          "required": [
+            "user_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the login attempt."
+            }
+          }
+        }
+      },
+      {
+        "name": "search_messages",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Search for messages containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "The keyword to search for in messages."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "List of dictionaries containing matching messages.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "receiver_id": {
+                    "type": "string",
+                    "description": "User ID of the receiver of the message."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "The message containing the keyword."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "send_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Send a message to a user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message to be sent."
+            }
+          },
+          "required": [
+            "receiver_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sent_status": {
+              "type": "boolean",
+              "description": "True if the message was sent successfully, False otherwise."
+            },
+            "message_id": {
+              "type": "integer",
+              "description": "ID of the sent message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the send attempt."
+            }
+          }
+        }
+      },
+      {
+        "name": "view_messages_sent",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: View all historical messages sent by the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "dict",
+              "description": "Dictionary of messages grouped by receiver An example of the messages dictionary is {\"USR001\":[\"Hello\"],\"USR002\":[\"World\"]}."
+            }
+          }
+        }
+      },
+      {
+        "name": "activateParkingBrake",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode to set. [Enum]: [\"engage\", \"release\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "parkingBrakeStatus": {
+              "type": "string",
+              "description": "The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+            },
+            "_parkingBrakeForce": {
+              "type": "float",
+              "description": "The force applied to the brake in Newtons."
+            },
+            "_slopeAngle": {
+              "type": "float",
+              "description": "The slope angle in degrees."
+            }
+          }
+        }
+      },
+      {
+        "name": "adjustClimateControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "temperature": {
+              "type": "float",
+              "description": "The temperature to set in degree. Default to be celsius."
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]",
+              "default": "celsius"
+            },
+            "fanSpeed": {
+              "type": "integer",
+              "description": "The fan speed to set from 0 to 100. Default is 50.",
+              "default": 50
+            },
+            "mode": {
+              "type": "string",
+              "description": "The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]",
+              "default": "auto"
+            }
+          },
+          "required": [
+            "temperature"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentTemperature": {
+              "type": "float",
+              "description": "The current temperature set in degree Celsius."
+            },
+            "climateMode": {
+              "type": "string",
+              "description": "The current climate mode set."
+            },
+            "humidityLevel": {
+              "type": "float",
+              "description": "The humidity level in percentage."
+            }
+          }
+        }
+      },
+      {
+        "name": "check_tire_pressure",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tirePressure": {
+              "type": "dict",
+              "description": "The tire pressure of the vehicle.",
+              "properties": {
+                "frontLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front left tire in psi."
+                },
+                "frontRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front right tire in psi."
+                },
+                "rearLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear left tire in psi."
+                },
+                "rearRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear right tire in psi."
+                },
+                "healthy_tire_pressure": {
+                  "type": "boolean",
+                  "description": "True if the tire pressure is healthy, False otherwise."
+                },
+                "car_info": {
+                  "type": "dict",
+                  "description": "The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "displayCarStatus",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "option": {
+              "type": "string",
+              "description": "The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]"
+            }
+          },
+          "required": [
+            "option"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "dict",
+              "description": "The status of the vehicle based on the option.",
+              "properties": {
+                "fuelLevel": {
+                  "type": "float",
+                  "description": "[Optional] The fuel level of the vehicle in gallons."
+                },
+                "batteryVoltage": {
+                  "type": "float",
+                  "description": "[Optional] The battery voltage of the vehicle in volts."
+                },
+                "doorStatus": {
+                  "type": "dict",
+                  "description": "[Optional] The status of the doors.",
+                  "properties": {
+                    "driver": {
+                      "type": "string",
+                      "description": "The status of the driver door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "passenger": {
+                      "type": "string",
+                      "description": "The status of the passenger door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_left": {
+                      "type": "string",
+                      "description": "The status of the rear left door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_right": {
+                      "type": "string",
+                      "description": "The status of the rear right door. [Enum]: [\"locked\", \"unlocked\"]"
+                    }
+                  }
+                },
+                "currentACTemperature": {
+                  "type": "float",
+                  "description": "[Optional] The current temperature set in degree Celsius."
+                },
+                "fanSpeed": {
+                  "type": "integer",
+                  "description": "[Optional] The fan speed set from 0 to 100."
+                },
+                "climateMode": {
+                  "type": "string",
+                  "description": "[Optional] The climate mode set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]"
+                },
+                "humidityLevel": {
+                  "type": "float",
+                  "description": "[Optional] The humidity level in percentage."
+                },
+                "headlightStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the headlights. [Enum]: [\"on\", \"off\"]"
+                },
+                "parkingBrakeStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+                },
+                "parkingBrakeForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake in Newtons."
+                },
+                "slopeAngle": {
+                  "type": "float",
+                  "description": "[Optional] The slope angle in degrees."
+                },
+                "brakePedalStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+                },
+                "brakePedalForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake pedal in Newtons."
+                },
+                "engineState": {
+                  "type": "string",
+                  "description": "[Optional] The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+                },
+                "metadata": {
+                  "type": "string",
+                  "description": "[Optional] The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "display_log",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of messages to display."
+            }
+          },
+          "required": [
+            "messages"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "log": {
+              "type": "array",
+              "description": "The list of messages displayed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "estimate_distance",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "cityA": {
+              "type": "string",
+              "description": "The zipcode of the first city."
+            },
+            "cityB": {
+              "type": "string",
+              "description": "The zipcode of the second city."
+            }
+          },
+          "required": [
+            "cityA",
+            "cityB"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance between the two cities in km."
+            },
+            "intermediaryCities": {
+              "type": "array",
+              "description": "[Optional] The list of intermediary cities between the two cities.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "estimate_drive_feasibility_by_mileage",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance to travel in miles."
+            }
+          },
+          "required": [
+            "distance"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "canDrive": {
+              "type": "boolean",
+              "description": "True if the vehicle can drive the distance, False otherwise."
+            }
+          }
+        }
+      },
+      {
+        "name": "fillFuelTank",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "fuelAmount": {
+              "type": "float",
+              "description": "The amount of fuel to fill in gallons; this is the additional fuel to add to the tank."
+            }
+          },
+          "required": [
+            "fuelAmount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            }
+          }
+        }
+      },
+      {
+        "name": "find_nearest_tire_shop",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "shopLocation": {
+              "type": "string",
+              "description": "The location of the nearest tire shop."
+            }
+          }
+        }
+      },
+      {
+        "name": "gallon_to_liter",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon to convert."
+            }
+          },
+          "required": [
+            "gallon"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter converted."
+            }
+          }
+        }
+      },
+      {
+        "name": "get_current_speed",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            }
+          }
+        }
+      },
+      {
+        "name": "get_outside_temperature_from_google",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      },
+      {
+        "name": "get_outside_temperature_from_weather_com",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      },
+      {
+        "name": "get_zipcode_based_on_city",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "The name of the city."
+            }
+          },
+          "required": [
+            "city"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "The zipcode of the city."
+            }
+          }
+        }
+      },
+      {
+        "name": "liter_to_gallon",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter to convert."
+            }
+          },
+          "required": [
+            "liter"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon converted."
+            }
+          }
+        }
+      },
+      {
+        "name": "lockDoors",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "unlock": {
+              "type": "boolean",
+              "description": "True if the doors are to be unlocked, False otherwise."
+            },
+            "door": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]"
+            }
+          },
+          "required": [
+            "unlock",
+            "door"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "lockStatus": {
+              "type": "string",
+              "description": "The status of the lock. [Enum]: [\"locked\", \"unlocked\"]"
+            },
+            "remainingUnlockedDoors": {
+              "type": "integer",
+              "description": "The number of remaining unlocked doors."
+            }
+          }
+        }
+      },
+      {
+        "name": "pressBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "pedalPosition": {
+              "type": "float",
+              "description": "Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed)."
+            }
+          },
+          "required": [
+            "pedalPosition"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      },
+      {
+        "name": "releaseBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      },
+      {
+        "name": "setCruiseControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "speed": {
+              "type": "float",
+              "description": "The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5."
+            },
+            "activate": {
+              "type": "boolean",
+              "description": "True to activate the cruise control, False to deactivate."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          },
+          "required": [
+            "speed",
+            "activate",
+            "distanceToNextVehicle"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cruiseStatus": {
+              "type": "string",
+              "description": "The status of the cruise control. [Enum]: [\"active\", \"inactive\"]"
+            },
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          }
+        }
+      },
+      {
+        "name": "setHeadlights",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "headlightStatus": {
+              "type": "string",
+              "description": "The status of the headlights. [Enum]: [\"on\", \"off\"]"
+            }
+          }
+        }
+      },
+      {
+        "name": "set_navigation",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "destination": {
+              "type": "string",
+              "description": "The destination to navigate in the format of street, city, state."
+            }
+          },
+          "required": [
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status of the navigation."
+            }
+          }
+        }
+      },
+      {
+        "name": "startEngine",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "ignitionMode": {
+              "type": "string",
+              "description": "The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]"
+            }
+          },
+          "required": [
+            "ignitionMode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "engineState": {
+              "type": "string",
+              "description": "The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+            },
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            },
+            "batteryVoltage": {
+              "type": "float",
+              "description": "The battery voltage of the vehicle in volts."
+            }
+          }
+        }
+      }
+    ]
+  },
+  "inference_log": [
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 5.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 4,
+          "doorStatus": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "I've heard a friend of mine in Rivermist recently visited Stonebrook, and she mentioned the journey felt quite extensive. I'm curious, do you happen to have an idea about the actual distance between the two places?"
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "get_zipcode_based_on_city": "{\"city\": \"Rivermist\"}"
+            },
+            {
+              "get_zipcode_based_on_city": "{\"city\": \"Stonebrook\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "get_zipcode_based_on_city(city='Rivermist')",
+            "get_zipcode_based_on_city(city='Stonebrook')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"zipcode\": \"83214\"}"
+        },
+        {
+          "role": "tool",
+          "content": "{\"zipcode\": \"74532\"}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "estimate_distance": "{\"cityA\": \"83214\", \"cityB\": \"74532\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "estimate_distance(cityA='83214',cityB='74532')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"distance\": 750.0}"
+        }
+      ],
+      "step_2": [
+        {
+          "role": "assistant",
+          "content": "The distance between Rivermist and Stonebrook is approximately **750 miles**. That's indeed quite an extensive journey! Your friend was right - that's a substantial distance that would definitely feel like a long trip."
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "The distance between Rivermist and Stonebrook is approximately **750 miles**. That's indeed quite an extensive journey! Your friend was right - that's a substantial distance that would definitely feel like a long trip."
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 5.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 4,
+          "doorStatus": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "Covering the distance from Rivermist to Stonebrook sure seems like a long trip. I'm a bit worried if my vehicle can endure the journey with the current fuel level. I'm not entirely sure how far my car can travel on the remaining fuel. What do you think?"
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "displayCarStatus": "{\"option\": \"fuel\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "displayCarStatus(option='fuel')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"fuelLevel\": 5.0}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "estimate_drive_feasibility_by_mileage": "{\"distance\": 750.0}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "estimate_drive_feasibility_by_mileage(distance=750.0)"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"canDrive\": false}"
+        }
+      ],
+      "step_2": [
+        {
+          "role": "assistant",
+          "content": "Based on the analysis, your vehicle **cannot** make the 750-mile trip with the current fuel level of 5 gallons. The system indicates that your current fuel is insufficient for this distance.\n\nTo help you plan better, you'll need to refuel before attempting this journey. The fuel tank can hold up to 50 gallons, so you have plenty of capacity to add fuel for this trip. I'd recommend filling up your tank before heading out on such a long drive to ensure you can complete the journey safely without running out of fuel."
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Based on the analysis, your vehicle **cannot** make the 750-mile trip with the current fuel level of 5 gallons. The system indicates that your current fuel is insufficient for this distance.\n\nTo help you plan better, you'll need to refuel before attempting this journey. The fuel tank can hold up to 50 gallons, so you have plenty of capacity to add fuel for this trip. I'd recommend filling up your tank before heading out on such a long drive to ensure you can complete the journey safely without running out of fuel."
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 5.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 4,
+          "doorStatus": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "Thanks a lot! Before I embark on this journey, it makes sense to ensure I won't be left stranded due to an empty tank. Just add to the tank fully."
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "fillFuelTank": "{\"fuelAmount\": 45.0}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "fillFuelTank(fuelAmount=45.0)"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"fuelLevel\": 50.0}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": "Perfect! Your fuel tank is now completely full at 50 gallons. With a full tank, you should have plenty of fuel to comfortably make the 750-mile journey from Rivermist to Stonebrook without worrying about running out of gas.\n\nSafe travels on your trip!"
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Perfect! Your fuel tank is now completely full at 50 gallons. With a full tank, you should have plenty of fuel to comfortably make the 750-mile journey from Rivermist to Stonebrook without worrying about running out of gas.\n\nSafe travels on your trip!"
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 50.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 4,
+          "doorStatus": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "Great! My tank are full now."
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": "Excellent! With a full tank of 50 gallons, you're all set for your 750-mile journey from Rivermist to Stonebrook. \n\nBefore you head out, you might want to consider:\n- Checking your tire pressure\n- Making sure all doors are properly locked\n- Setting up your navigation to Stonebrook\n- Adjusting climate control for comfort\n\nIs there anything else you'd like me to help you prepare for your trip?"
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Excellent! With a full tank of 50 gallons, you're all set for your 750-mile journey from Rivermist to Stonebrook. \n\nBefore you head out, you might want to consider:\n- Checking your tire pressure\n- Making sure all doors are properly locked\n- Setting up your navigation to Stonebrook\n- Adjusting climate control for comfort\n\nIs there anything else you'd like me to help you prepare for your trip?"
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 50.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 4,
+          "doorStatus": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "With my tank now full, let's embark on this journey. I'd appreciate it if you could start the car for me."
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "startEngine": "{\"ignitionMode\": \"START\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "startEngine(ignitionMode='START')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"error\": \"All doors must be locked before starting the engine. Here are the unlocked doors: driver, passenger, rear_left, rear_right\"}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "lockDoors": "{\"unlock\": false, \"door\": [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "lockDoors(unlock=False,door=['driver', 'passenger', 'rear_left', 'rear_right'])"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"lockStatus\": \"locked\", \"remainingUnlockedDoors\": 0}"
+        }
+      ],
+      "step_2": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "startEngine": "{\"ignitionMode\": \"START\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "startEngine(ignitionMode='START')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"error\": \"Brake pedal needs to be pressed when starting the engine.\"}"
+        }
+      ],
+      "step_3": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "pressBrakePedal": "{\"pedalPosition\": 1.0}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "pressBrakePedal(pedalPosition=1.0)"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"brakePedalStatus\": \"pressed\", \"brakePedalForce\": 1000.0}"
+        }
+      ],
+      "step_4": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "startEngine": "{\"ignitionMode\": \"START\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "startEngine(ignitionMode='START')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"engineState\": \"running\", \"fuelLevel\": 50.0, \"batteryVoltage\": 12.6}"
+        }
+      ],
+      "step_5": [
+        {
+          "role": "assistant",
+          "content": "Perfect! Your car is now started and ready to go. The engine is running, you have a full tank of fuel (50 gallons), and the battery is at optimal voltage (12.6V). You're all set to begin your journey to Stonebrook!\n\nSafe travels!"
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Perfect! Your car is now started and ready to go. The engine is running, you have a full tank of fuel (50 gallons), and the battery is at optimal voltage (12.6V). You're all set to begin your journey to Stonebrook!\n\nSafe travels!"
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            }
+          ],
+          "message_count": 1,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 50.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "running",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "pressed",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "By the way, as I travel, there are some updates I need to communicate to my friend Michael. Would you be able to send message 'I am on my way.'?"
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "list_users": "{}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "list_users()"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"user_list\": [\"Michael\", \"Sarah\", \"David\", \"Emma\"]}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "get_user_id": "{\"user\": \"Michael\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "get_user_id(user='Michael')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"user_id\": \"BD732D1888B94DAA\"}"
+        }
+      ],
+      "step_2": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "send_message": "{\"receiver_id\": \"BD732D1888B94DAA\", \"message\": \"I am on my way.\"}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "send_message(receiver_id='BD732D1888B94DAA',message='I am on my way.')"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"sent_status\": true, \"message_id\": {\"new_id\": 67410}, \"message\": \"Message sent to 'BD732D1888B94DAA' successfully.\"}"
+        }
+      ],
+      "step_3": [
+        {
+          "role": "assistant",
+          "content": "Perfect! Your message \"I am on my way.\" has been successfully sent to Michael. He should receive your update shortly. Safe travels on your journey to Stonebrook!"
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Perfect! Your message \"I am on my way.\" has been successfully sent to Michael. He should receive your update shortly. Safe travels on your journey to Stonebrook!"
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [
+            67410
+          ],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            },
+            {
+              "BD732D1888B94DAA": "I am on my way."
+            }
+          ],
+          "message_count": 2,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 50.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "running",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "pressed",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ],
+    {
+      "begin_of_turn_query": [
+        {
+          "role": "user",
+          "content": "Lastly, while I'm on the road, I want to make sure I have informed everyone that should be aware. Could you display what messages I've send thus far?"
+        }
+      ],
+      "step_0": [
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "view_messages_sent": "{}"
+            }
+          ]
+        },
+        {
+          "role": "handler_log",
+          "content": "Successfully decoded model response.",
+          "model_response_decoded": [
+            "view_messages_sent()"
+          ]
+        },
+        {
+          "role": "tool",
+          "content": "{\"messages\": {\"USR002\": [\"Safe travels!\"], \"BD732D1888B94DAA\": [\"I am on my way.\"]}}"
+        }
+      ],
+      "step_1": [
+        {
+          "role": "assistant",
+          "content": "Here are all the messages you've sent so far:\n\n- **To Michael (BD732D1888B94DAA)**: \"I am on my way.\"\n- **To USR002**: \"Safe travels!\"\n\nIt looks like you've informed Michael about your journey and sent a \"Safe travels!\" message to another contact (USR002). If you need to send additional messages to anyone else who should be aware of your trip, just let me know!"
+        },
+        {
+          "role": "handler_log",
+          "content": "Model returned textual response without tool calls.",
+          "model_response_raw": "Here are all the messages you've sent so far:\n\n- **To Michael (BD732D1888B94DAA)**: \"I am on my way.\"\n- **To USR002**: \"Safe travels!\"\n\nIt looks like you've informed Michael about your journey and sent a \"Safe travels!\" message to another contact (USR002). If you need to send additional messages to anyone else who should be aware of your trip, just let me know!"
+        }
+      ]
+    },
+    [
+      {
+        "role": "state_info",
+        "class_name": "MessageAPI",
+        "content": {
+          "generated_ids": [
+            67410
+          ],
+          "user_count": 4,
+          "user_map": {
+            "Michael": "BD732D1888B94DAA",
+            "Sarah": "USR002",
+            "David": "USR003",
+            "Emma": "USR004"
+          },
+          "inbox": [
+            {
+              "USR002": "Safe travels!"
+            },
+            {
+              "BD732D1888B94DAA": "I am on my way."
+            }
+          ],
+          "message_count": 2,
+          "current_user": "USR003"
+        }
+      },
+      {
+        "role": "state_info",
+        "class_name": "VehicleControlAPI",
+        "content": {
+          "fuelLevel": 50.0,
+          "batteryVoltage": 12.6,
+          "engine_state": "running",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 25.0,
+          "fanSpeed": 50,
+          "acMode": "auto",
+          "humidityLevel": 50.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "pressed",
+          "distanceToNextVehicle": 50.0,
+          "cruiseStatus": "inactive",
+          "destination": "Stonebrook",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": false
+        }
+      }
+    ]
+  ],
+  "inference_inputs": []
+}

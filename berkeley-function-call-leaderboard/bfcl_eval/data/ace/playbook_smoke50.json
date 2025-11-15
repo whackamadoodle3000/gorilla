@@ -1,0 +1,267 @@
+[
+  {
+    "Name": "add_service_config",
+    "entries": {
+      "delta1": "Emit clean tool calls without XML wrapper tags when tool_call_tag=True"
+    }
+  },
+  {
+    "Name": "application_settings_api",
+    "entries": {
+      "delta1": "Use exact syntax expected by BFCL evaluator - avoid custom formatting"
+    }
+  },
+  {
+    "Name": "calculate_present_value",
+    "entries": {
+      "delta1": "Use parallel calls for batch calculations with identical payment/rate but varying time periods"
+    }
+  },
+  {
+    "Name": "change_food",
+    "entries": {
+      "delta1": "Always use JSON format for tool calls, never XML or other syntax variants."
+    }
+  },
+  {
+    "Name": "concert",
+    "entries": {
+      "delta1": "For parallel location queries, make separate TOOLCALL tags for each function invocation",
+      "delta2": "Ensure each TOOLCALL contains exactly one function with proper XML structure"
+    }
+  },
+  {
+    "Name": "configure_shader_material",
+    "entries": {
+      "delta1": "Call configureShaderMaterial directly - tools handle parameter validation internally",
+      "delta2": "Don't preemptively request parameter details - attempt tool execution first"
+    }
+  },
+  {
+    "Name": "efsnio_file",
+    "entries": {
+      "delta1": "Execute EFSNIOFile.setContents directly when all parameters are specified, avoiding clarification requests."
+    }
+  },
+  {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Use BFCL's structured tool-call format, not literal XML tags or string representations",
+      "delta2": "Make separate calls for different event types, not combined XML",
+      "delta3": "Output tool calls as structured objects, not XML string literals"
+    }
+  },
+  {
+    "Name": "find_latest_court_case",
+    "entries": {
+      "delta1": "Output tool calls as structured objects, not string representations",
+      "delta2": "Avoid wrapping function calls in brackets or quotes"
+    }
+  },
+  {
+    "Name": "find_restaurant",
+    "entries": {
+      "delta1": "Use find_restaurant with provided location info; don't assume vagueness without tool limits."
+    }
+  },
+  {
+    "Name": "geometry_rectangle",
+    "entries": {
+      "delta1": "Output pure JSON without markdown wrappers in format tests"
+    }
+  },
+  {
+    "Name": "get_area_of_square",
+    "entries": {
+      "delta1": "Use direct function call syntax without wrapper tags or list structures"
+    }
+  },
+  {
+    "Name": "get_current_weather",
+    "entries": {
+      "delta1": "Make separate tool calls with proper parameter formatting, not combined lists"
+    }
+  },
+  {
+    "Name": "get_news_report",
+    "entries": {
+      "delta1": "Always include 'category' parameter when specified in ground truth, even if optional in schema",
+      "delta2": "Verify location values match exactly what's supported; don't assume flexibility",
+      "delta3": "For parallel calls, ensure each call uses identical valid parameters unless explicitly varied"
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Use Python function syntax, not XML wrapping, for all tool calls"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "Ensure tool call XML syntax is valid and parseable by the AST decoder"
+    }
+  },
+  {
+    "Name": "grocery_info",
+    "entries": {
+      "delta1": "Execute nutritional_info calls immediately when users specify components like protein, calories, carbs"
+    }
+  },
+  {
+    "Name": "hotel_booking",
+    "entries": {
+      "delta1": "Use direct function calls without ANY XML tags - hotel_booking.check_availability(params) syntax only",
+      "delta2": "Never use <functions>, <function>, or <TOOLCALL> XML tags - they break AST parsing completely"
+    }
+  },
+  {
+    "Name": "league_stats",
+    "entries": {
+      "delta1": "Distinguish between tool call data structures and text output"
+    }
+  },
+  {
+    "Name": "math",
+    "entries": {
+      "delta1": "Always produce syntactically valid tool calls - avoid explanatory text or code representations",
+      "delta2": "Make direct function calls with proper parameters rather than text disguised as tool markup",
+      "delta3": "Make discrete tool calls - never wrap multiple calls in list/string syntax"
+    }
+  },
+  {
+    "Name": "message_api",
+    "entries": {
+      "delta1": "When messaging about travel bookings, ensure message content reflects exact API state, not cached details."
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Execute function calls directly, never return as string representations or wrapped in tags",
+      "delta2": "BFCL requires actual function objects, not stringified versions or malformed syntax"
+    }
+  },
+  {
+    "Name": "music_3_play_media",
+    "entries": {
+      "delta1": "Execute function calls directly, avoid malformed syntax with incomplete tags",
+      "delta2": "Use proper parameter structure, not string representations of function calls"
+    }
+  },
+  {
+    "Name": "paint_color_mixture",
+    "entries": {
+      "delta1": "Emit direct function call objects, not XML-wrapped calls, for format-sensitive scenarios",
+      "delta2": "Match expected output format precisely - avoid unexpected markup like XML tags"
+    }
+  },
+  {
+    "Name": "payment_1_make_payment",
+    "entries": {
+      "delta1": "Execute tool calls directly without JSON code block formatting"
+    }
+  },
+  {
+    "Name": "payment_1_request_payment",
+    "entries": {
+      "delta1": "Execute tool calls directly without JSON code block formatting"
+    }
+  },
+  {
+    "Name": "play_song",
+    "entries": {
+      "delta1": "Always invoke play_song when requested, regardless of perceived real-world functionality status",
+      "delta2": "Never substitute tool calls with text explanations about tool unavailability"
+    }
+  },
+  {
+    "Name": "player_stats",
+    "entries": {
+      "delta1": "Output structured tool calls, not XML string literals"
+    }
+  },
+  {
+    "Name": "requests",
+    "entries": {
+      "delta1": "Acknowledge tool irrelevance clearly when requests don't match available capabilities",
+      "delta2": "Suggest alternative approaches when tools can't fulfill specific user requests"
+    }
+  },
+  {
+    "Name": "restaurants_2_find_restaurants",
+    "entries": {
+      "delta1": "Execute tool calls directly without JSON code block formatting"
+    }
+  },
+  {
+    "Name": "restaurants_2_reserve_restaurant",
+    "entries": {
+      "delta1": "Execute tool calls directly without JSON code block formatting"
+    }
+  },
+  {
+    "Name": "science_facts",
+    "entries": {
+      "delta1": "Execute tool calls as structured objects, not string representations like '[function(...)]'.",
+      "delta2": "In experimental formats, ensure tool calls follow proper syntax for AST decoding."
+    }
+  },
+  {
+    "Name": "services_4_book_appointment",
+    "entries": {
+      "delta1": "Emit XML tool calls directly without string encapsulation"
+    }
+  },
+  {
+    "Name": "services_4_find_provider",
+    "entries": {
+      "delta1": "Emit XML tool calls directly without string encapsulation"
+    }
+  },
+  {
+    "Name": "sports_ranking",
+    "entries": {
+      "delta1": "When queries mismatch tool capabilities (e.g., MVP awards vs team rankings), abstain and explain limitations."
+    }
+  },
+  {
+    "Name": "team_stats",
+    "entries": {
+      "delta1": "Execute sequential calls as required, don't omit steps"
+    }
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "When users ask about company stock performance, use get_symbol_by_name first to resolve symbols, then get_stock_info.",
+      "delta2": "When company names are provided for watchlist operations, use get_symbol_by_name first to resolve symbols before proceeding."
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "After each travel API call, verify internal state matches API response exactly, not just making correct calls.",
+      "delta2": "Track all state variables (credit cards, bookings, tokens) precisely as returned by API responses."
+    }
+  },
+  {
+    "Name": "update_user_info",
+    "entries": {
+      "delta1": "Emit direct function calls without XML wrapping tags, even when function docs use XML format."
+    }
+  },
+  {
+    "Name": "view_service_provider_profile",
+    "entries": {
+      "delta1": "Maintain proper XML structure in tool calls to avoid AST decoding failures"
+    }
+  },
+  {
+    "Name": "web_search_api",
+    "entries": {
+      "delta1": "Verify final answers match BFCL standardized formats, not just factual accuracy",
+      "delta2": "Cross-check research findings against expected answer variations before finalizing"
+    }
+  }
+]

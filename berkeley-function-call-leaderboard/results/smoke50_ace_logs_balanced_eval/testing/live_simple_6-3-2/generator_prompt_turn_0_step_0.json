@@ -1,0 +1,39 @@
+{
+  "test_case_id": "live_simple_6-3-2",
+  "turn_idx": 0,
+  "step_idx": 0,
+  "playbook_text": "ACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nget_current_weather\n- delta1: Make separate tool calls with proper parameter formatting, not combined lists",
+  "inference_input": {
+    "message": "[{'role': 'system', 'content': '[ACE_PLAYBOOK]\\nACE Playbook Insights\\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\\n\\nget_current_weather\\n- delta1: Make separate tool calls with proper parameter formatting, not combined lists'}, {'role': 'user', 'content': 'Can you tell me the weather in fahrenheit so that I decide if I need to wear a jacket today? San Francisco'}]",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_current_weather",
+          "description": "Retrieves the current weather conditions for a specified city and state. If using state, then use short form like CA. Note that the provided function is in Python 3 syntax.",
+          "parameters": {
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The location for which to get the weather, in the format of 'City, State (abbr)', such as 'San Francisco, CA' if State for the city exists. 'City, Country' if State for the city doesn't exist."
+              },
+              "unit": {
+                "type": "string",
+                "description": "The unit of temperature for the weather report.",
+                "enum": [
+                  "celsius",
+                  "fahrenheit"
+                ],
+                "default": "fahrenheit"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

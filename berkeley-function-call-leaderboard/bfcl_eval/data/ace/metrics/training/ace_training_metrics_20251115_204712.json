@@ -1,0 +1,1490 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook_smoke50.json",
+    "split_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split_sampled_50x50_balanced.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 50,
+    "start_offset": 0,
+    "planned_sample_count": 50,
+    "samples_recorded": 50
+  },
+  "summary": {
+    "total_samples": 50,
+    "counts": {
+      "ADD": 33,
+      "MODIFY": 5,
+      "REMOVE": 0,
+      "NO_OP": 15
+    },
+    "ratios": {
+      "ADD": 0.66,
+      "MODIFY": 0.1,
+      "REMOVE": 0.0,
+      "NO_OP": 0.3
+    },
+    "pass_counters": {
+      "passed": 16,
+      "failed": 33,
+      "unknown": 1
+    },
+    "pass_ratio": 0.32
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 50,
+      "size": 50,
+      "counts": {
+        "ADD": 33,
+        "MODIFY": 5,
+        "REMOVE": 0,
+        "NO_OP": 15
+      },
+      "ratios": {
+        "ADD": 0.66,
+        "MODIFY": 0.1,
+        "REMOVE": 0.0,
+        "NO_OP": 0.3
+      },
+      "pass_counters": {
+        "passed": 16,
+        "failed": 33,
+        "unknown": 1
+      },
+      "pass_ratio": 0.32
+    }
+  ],
+  "per_section": {
+    "concert": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "math": {
+      "ADD": 3,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "calculate_present_value": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "events_3_find_events": {
+      "ADD": 3,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "payment_1_make_payment": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "payment_1_request_payment": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "restaurants_2_find_restaurants": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "restaurants_2_reserve_restaurant": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_news_report": {
+      "ADD": 3,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "grocery_info": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "music_3_lookup_music": {
+      "ADD": 2,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "update_user_info": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "find_restaurant": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "add_service_config": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "application_settings_api": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "configure_shader_material": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "requests": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "trading_bot": {
+      "ADD": 2,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "hotel_booking": {
+      "ADD": 2,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "paint_color_mixture": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "efsnio_file": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "science_facts": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "play_song": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "change_food": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_area_of_square": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_current_weather": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "services_4_find_provider": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "services_4_book_appointment": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "player_stats": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "team_stats": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "league_stats": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "find_latest_court_case": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "web_search_api": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_service_id": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "travel_api": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "message_api": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "sports_ranking": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "geometry_rectangle": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_service_providers": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "view_service_provider_profile": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "music_3_play_media": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "format_sensitivity_870:ret_fmt=verbose_xml&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:parallel_44",
+      "tool_groups": [
+        "concert"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "concert",
+          "normalized_section": "concert"
+        },
+        {
+          "type": "ADD",
+          "section": "concert",
+          "normalized_section": "concert"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "web_search_base_33",
+      "tool_groups": [
+        "web_search_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_954:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:parallel_77",
+      "tool_groups": [
+        "math"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "math",
+          "normalized_section": "math"
+        },
+        {
+          "type": "ADD",
+          "section": "math",
+          "normalized_section": "math"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_23",
+      "tool_groups": [
+        "financial_ratio"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_97",
+      "tool_groups": [
+        "message_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_14",
+      "tool_groups": [
+        "calculate_present_value"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "calculate_present_value",
+          "normalized_section": "calculate_present_value"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_1029-257-0",
+      "tool_groups": [
+        "health_api",
+        "infrastructure_resources_api",
+        "releases_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_5170:ret_fmt=concise_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_parallel_multiple_19-16-1",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        },
+        {
+          "type": "ADD",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4404:ret_fmt=json&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_893-185-3",
+      "tool_groups": [
+        "payment_1_make_payment",
+        "payment_1_request_payment",
+        "restaurants_2_find_restaurants",
+        "restaurants_2_reserve_restaurant"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "payment_1_make_payment",
+          "normalized_section": "payment_1_make_payment"
+        },
+        {
+          "type": "ADD",
+          "section": "payment_1_request_payment",
+          "normalized_section": "payment_1_request_payment"
+        },
+        {
+          "type": "ADD",
+          "section": "restaurants_2_find_restaurants",
+          "normalized_section": "restaurants_2_find_restaurants"
+        },
+        {
+          "type": "ADD",
+          "section": "restaurants_2_reserve_restaurant",
+          "normalized_section": "restaurants_2_reserve_restaurant"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_parallel_multiple_4-3-0",
+      "tool_groups": [
+        "get_current_weather",
+        "get_news_report"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_news_report",
+          "normalized_section": "get_news_report"
+        },
+        {
+          "type": "ADD",
+          "section": "get_news_report",
+          "normalized_section": "get_news_report"
+        },
+        {
+          "type": "ADD",
+          "section": "get_news_report",
+          "normalized_section": "get_news_report"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_105-62-0",
+      "tool_groups": [
+        "classify"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_374",
+      "tool_groups": [
+        "grocery_info"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "grocery_info",
+          "normalized_section": "grocery_info"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3762:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_multiple_585-157-6",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_991-222-0",
+      "tool_groups": [
+        "website_configuration_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3930:ret_fmt=python&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_647-161-15",
+      "tool_groups": [
+        "alarm_1_add_alarm",
+        "alarm_1_get_alarms",
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        },
+        {
+          "type": "ADD",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_94:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:simple_python_94",
+      "tool_groups": [
+        "update_user_info"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "update_user_info",
+          "normalized_section": "update_user_info"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_364",
+      "tool_groups": [
+        "find_restaurant"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "find_restaurant",
+          "normalized_section": "find_restaurant"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_111",
+      "tool_groups": [
+        "calculate_genotype_frequency",
+        "find_flute",
+        "math"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4603:ret_fmt=python&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_996-227-0",
+      "tool_groups": [
+        "add_service_config",
+        "application_settings_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "add_service_config",
+          "normalized_section": "add_service_config"
+        },
+        {
+          "type": "ADD",
+          "section": "application_settings_api",
+          "normalized_section": "application_settings_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_javascript_19",
+      "tool_groups": [
+        "configure_shader_material"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "configure_shader_material",
+          "normalized_section": "configure_shader_material"
+        },
+        {
+          "type": "ADD",
+          "section": "configure_shader_material",
+          "normalized_section": "configure_shader_material"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_8-0-8",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "requests",
+          "normalized_section": "requests"
+        },
+        {
+          "type": "ADD",
+          "section": "requests",
+          "normalized_section": "requests"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_960:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=markdown&style=classic:parallel_77",
+      "tool_groups": [
+        "math"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "math",
+          "normalized_section": "math"
+        },
+        {
+          "type": "MODIFY",
+          "section": "math",
+          "normalized_section": "math"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "web_search_no_snippet_35",
+      "tool_groups": [
+        "web_search_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_145",
+      "tool_groups": [
+        "message_api",
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        },
+        {
+          "type": "ADD",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_722:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:simple_python_380",
+      "tool_groups": [
+        "hotel_booking"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "hotel_booking",
+          "normalized_section": "hotel_booking"
+        },
+        {
+          "type": "ADD",
+          "section": "hotel_booking",
+          "normalized_section": "hotel_booking"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_852:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:parallel_36",
+      "tool_groups": [
+        "paint_color_mixture"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "paint_color_mixture",
+          "normalized_section": "paint_color_mixture"
+        },
+        {
+          "type": "ADD",
+          "section": "paint_color_mixture",
+          "normalized_section": "paint_color_mixture"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_8",
+      "tool_groups": [
+        "efsnio_file"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "efsnio_file",
+          "normalized_section": "efsnio_file"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_905:ret_fmt=concise_xml&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:parallel_56",
+      "tool_groups": [
+        "hotel_booking"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "hotel_booking",
+          "normalized_section": "hotel_booking"
+        },
+        {
+          "type": "MODIFY",
+          "section": "hotel_booking",
+          "normalized_section": "hotel_booking"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_1637:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:parallel_multiple_40",
+      "tool_groups": [
+        "science_facts"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "science_facts",
+          "normalized_section": "science_facts"
+        },
+        {
+          "type": "ADD",
+          "section": "science_facts",
+          "normalized_section": "science_facts"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_94-55-0",
+      "tool_groups": [
+        "play_song"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "play_song",
+          "normalized_section": "play_song"
+        },
+        {
+          "type": "ADD",
+          "section": "play_song",
+          "normalized_section": "play_song"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2017:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_simple_20-4-0",
+      "tool_groups": [
+        "change_food"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "change_food",
+          "normalized_section": "change_food"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_139",
+      "tool_groups": [
+        "trading_bot",
+        "twitter_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_5122:ret_fmt=python&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_parallel_multiple_16-14-0",
+      "tool_groups": [
+        "get_area_of_square",
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_area_of_square",
+          "normalized_section": "get_area_of_square"
+        },
+        {
+          "type": "ADD",
+          "section": "get_current_weather",
+          "normalized_section": "get_current_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3422:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_446-144-6",
+      "tool_groups": [
+        "payment_1_make_payment",
+        "payment_1_request_payment",
+        "restaurants_2_find_restaurants",
+        "restaurants_2_reserve_restaurant",
+        "services_4_book_appointment",
+        "services_4_find_provider"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "services_4_find_provider",
+          "normalized_section": "services_4_find_provider"
+        },
+        {
+          "type": "ADD",
+          "section": "services_4_book_appointment",
+          "normalized_section": "services_4_book_appointment"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_1790:ret_fmt=concise_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:parallel_multiple_119",
+      "tool_groups": [
+        "league_stats",
+        "player_stats",
+        "team_stats"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "player_stats",
+          "normalized_section": "player_stats"
+        },
+        {
+          "type": "ADD",
+          "section": "team_stats",
+          "normalized_section": "team_stats"
+        },
+        {
+          "type": "ADD",
+          "section": "league_stats",
+          "normalized_section": "league_stats"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_337:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:simple_python_179",
+      "tool_groups": [
+        "find_latest_court_case"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "find_latest_court_case",
+          "normalized_section": "find_latest_court_case"
+        },
+        {
+          "type": "ADD",
+          "section": "find_latest_court_case",
+          "normalized_section": "find_latest_court_case"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_377-81-38",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "web_search_base_22",
+      "tool_groups": [
+        "web_search_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "web_search_api",
+          "normalized_section": "web_search_api"
+        },
+        {
+          "type": "ADD",
+          "section": "web_search_api",
+          "normalized_section": "web_search_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2327:ret_fmt=verbose_xml&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_simple_181-106-0",
+      "tool_groups": [
+        "get_service_id"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_service_id",
+          "normalized_section": "get_service_id"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_5161:ret_fmt=verbose_xml&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_parallel_multiple_19-16-1",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        },
+        {
+          "type": "ADD",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_172",
+      "tool_groups": [
+        "message_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_309-76-7",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_187",
+      "tool_groups": [
+        "sports_ranking"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "sports_ranking",
+          "normalized_section": "sports_ranking"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_1231:ret_fmt=json&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:multiple_31",
+      "tool_groups": [
+        "geometry_circle",
+        "geometry_rectangle",
+        "geometry_square"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "geometry_rectangle",
+          "normalized_section": "geometry_rectangle"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_193",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4486:ret_fmt=verbose_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:live_multiple_934-191-22",
+      "tool_groups": [
+        "get_service_providers",
+        "view_service_provider_profile"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_service_providers",
+          "normalized_section": "get_service_providers"
+        },
+        {
+          "type": "ADD",
+          "section": "view_service_provider_profile",
+          "normalized_section": "view_service_provider_profile"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_relevance_10-10-0",
+      "tool_groups": [],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "missing_ground_truth",
+      "evaluation_passed": null,
+      "notes": "Ground truth unavailable"
+    },
+    {
+      "entry_id": "parallel_multiple_145",
+      "tool_groups": [
+        "calculate_fitness",
+        "chess",
+        "lawyer",
+        "walmart"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3174:ret_fmt=python&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:live_multiple_337-133-1",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        },
+        {
+          "type": "MODIFY",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        },
+        {
+          "type": "ADD",
+          "section": "music_3_play_media",
+          "normalized_section": "music_3_play_media"
+        },
+        {
+          "type": "ADD",
+          "section": "music_3_play_media",
+          "normalized_section": "music_3_play_media"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_97",
+      "tool_groups": [
+        "message_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    }
+  ]
+}

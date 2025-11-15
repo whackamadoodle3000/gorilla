@@ -1,0 +1,35 @@
+{
+  "test_case_id": "live_simple_199-116-7",
+  "turn_idx": 0,
+  "step_idx": 0,
+  "playbook_text": "ACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\nNo insights recorded yet.",
+  "inference_input": {
+    "message": "[{'role': 'system', 'content': '[ACE_PLAYBOOK]\\nACE Playbook Insights\\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\\nNo insights recorded yet.'}, {'role': 'user', 'content': 'Could you tell me the weather forecast for Marshall, MN on March 5th 2023?'}]",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "Weather_1_GetWeather",
+          "description": "Retrieves the weather forecast for a specified city on a particular date. Note that the provided function is in Python 3 syntax.",
+          "parameters": {
+            "type": "object",
+            "required": [
+              "city"
+            ],
+            "properties": {
+              "city": {
+                "type": "string",
+                "description": "The name of the city for which weather information is requested."
+              },
+              "date": {
+                "type": "string",
+                "description": "The date for which weather information is requested, in the format of 'YYYY-MM-DD'. If not provided, the current date is used.",
+                "default": "2019-03-01"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

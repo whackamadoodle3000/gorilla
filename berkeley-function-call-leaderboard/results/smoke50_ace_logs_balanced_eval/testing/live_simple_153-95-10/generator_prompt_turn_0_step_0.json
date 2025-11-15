@@ -1,0 +1,39 @@
+{
+  "test_case_id": "live_simple_153-95-10",
+  "turn_idx": 0,
+  "step_idx": 0,
+  "playbook_text": "ACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\nNo insights recorded yet.",
+  "inference_input": {
+    "message": "[{'role': 'system', 'content': '[ACE_PLAYBOOK]\\nACE Playbook Insights\\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\\nNo insights recorded yet.'}, {'role': 'user', 'content': 'remove shortcut of putty from desktop, using the instruction del \"%userprofile%\\\\Desktop\\\\putty.lnk\"'}]",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "cmd_controller_execute",
+          "description": "Executes a system-level command using os.system() on Windows operating systems. It can execute single or multiple commands chained with '&&'. Note that the provided function is in Python 3 syntax.",
+          "parameters": {
+            "type": "object",
+            "required": [
+              "command"
+            ],
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "The system command to be executed. To execute multiple commands, separate them with '&&'. For example, 'dir && echo done'."
+              },
+              "unit": {
+                "type": "string",
+                "description": "The unit of measurement for the command execution time, such as 'seconds' or 'milliseconds'",
+                "enum": [
+                  "seconds",
+                  "milliseconds"
+                ],
+                "default": "N/A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
