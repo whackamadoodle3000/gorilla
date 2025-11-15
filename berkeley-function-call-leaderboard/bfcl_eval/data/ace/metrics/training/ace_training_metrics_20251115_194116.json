@@ -1,0 +1,916 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook_smoke50.json",
+    "split_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split_sampled_50x50.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 50,
+    "start_offset": 0,
+    "planned_sample_count": 50,
+    "samples_recorded": 27
+  },
+  "summary": {
+    "total_samples": 27,
+    "counts": {
+      "ADD": 19,
+      "MODIFY": 4,
+      "REMOVE": 0,
+      "NO_OP": 4
+    },
+    "ratios": {
+      "ADD": 0.7037037037037037,
+      "MODIFY": 0.14814814814814814,
+      "REMOVE": 0.0,
+      "NO_OP": 0.14814814814814814
+    },
+    "pass_counters": {
+      "passed": 4,
+      "failed": 23,
+      "unknown": 0
+    },
+    "pass_ratio": 0.14814814814814814
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 27,
+      "size": 27,
+      "counts": {
+        "ADD": 19,
+        "MODIFY": 4,
+        "REMOVE": 0,
+        "NO_OP": 4
+      },
+      "ratios": {
+        "ADD": 0.7037037037037037,
+        "MODIFY": 0.14814814814814814,
+        "REMOVE": 0.0,
+        "NO_OP": 0.14814814814814814
+      },
+      "pass_counters": {
+        "passed": 4,
+        "failed": 23,
+        "unknown": 0
+      },
+      "pass_ratio": 0.14814814814814814
+    }
+  ],
+  "per_section": {
+    "movies_1_find_movies": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "events_3_find_events": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "math": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_instrument_info": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "find_movie_showing": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "weather_1_get_weather": {
+      "ADD": 2,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "movies_3_find_movies": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "uber": {
+      "ADD": 1,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "buses_3_find_bus": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "buses_3_buy_bus_ticket": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "hotels_4_search_hotel": {
+      "ADD": 1,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "hotels_4_reserve_hotel": {
+      "ADD": 1,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "publication_year": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "sports": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "change_food": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "homes_2_find_home_by_area": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "services_1_book_appointment": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "services_1_find_provider": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "calculate_future_value": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "media_3_find_movies": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "media_3_play_movie": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "music_3_lookup_music": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "music_3_play_media": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "travel_1_find_attractions": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_current_weather": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "add_mtnards_server": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "add_postgres_server": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "dartfx_help": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "update_user_info": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "format_sensitivity_3347:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_431-141-20",
+      "tool_groups": [
+        "movies_1_buy_movie_tickets",
+        "movies_1_find_movies",
+        "movies_1_get_times_for_movie"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "movies_1_find_movies",
+          "normalized_section": "movies_1_find_movies"
+        },
+        {
+          "type": "ADD",
+          "section": "movies_1_find_movies",
+          "normalized_section": "movies_1_find_movies"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_144-13-10",
+      "tool_groups": [
+        "control_appliance",
+        "cookbook",
+        "hna_news",
+        "open_weather_map"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3738:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:live_multiple_569-155-9",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        },
+        {
+          "type": "ADD",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_940:ret_fmt=python&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:parallel_77",
+      "tool_groups": [
+        "math"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "math",
+          "normalized_section": "math"
+        },
+        {
+          "type": "ADD",
+          "section": "math",
+          "normalized_section": "math"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_514:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:simple_python_281",
+      "tool_groups": [
+        "get_instrument_info"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_instrument_info",
+          "normalized_section": "get_instrument_info"
+        },
+        {
+          "type": "ADD",
+          "section": "get_instrument_info",
+          "normalized_section": "get_instrument_info"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_784:ret_fmt=python&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:parallel_9",
+      "tool_groups": [
+        "find_movie_showing"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "find_movie_showing",
+          "normalized_section": "find_movie_showing"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "[Warning] Skipping curator operation for format_sensitivity_784:ret_fmt=python&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:parallel_9: section 'events_3_find_events' (normalized: 'events_3_find_events') is not one of the tool groups for this task. Tool groups for this task: find_movie_showing | evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4193:ret_fmt=json&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_799-175-5",
+      "tool_groups": [
+        "homes_2_find_home_by_area",
+        "homes_2_schedule_visit",
+        "rental_cars_3_get_cars_available",
+        "rental_cars_3_reserve_car",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2521:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:live_simple_221-117-13",
+      "tool_groups": [
+        "movies_3_find_movies"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "movies_3_find_movies",
+          "normalized_section": "movies_3_find_movies"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2105:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:live_simple_27-7-0",
+      "tool_groups": [
+        "uber"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "uber",
+          "normalized_section": "uber"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4367:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:live_multiple_855-180-3",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "hotels_4_reserve_hotel",
+        "hotels_4_search_hotel"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "buses_3_find_bus",
+          "normalized_section": "buses_3_find_bus"
+        },
+        {
+          "type": "ADD",
+          "section": "buses_3_buy_bus_ticket",
+          "normalized_section": "buses_3_buy_bus_ticket"
+        },
+        {
+          "type": "ADD",
+          "section": "hotels_4_search_hotel",
+          "normalized_section": "hotels_4_search_hotel"
+        },
+        {
+          "type": "ADD",
+          "section": "hotels_4_reserve_hotel",
+          "normalized_section": "hotels_4_reserve_hotel"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_457:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:simple_python_244",
+      "tool_groups": [
+        "publication_year"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "publication_year",
+          "normalized_section": "publication_year"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_188",
+      "tool_groups": [
+        "sports"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "sports",
+          "normalized_section": "sports"
+        },
+        {
+          "type": "ADD",
+          "section": "sports",
+          "normalized_section": "sports"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2016:ret_fmt=verbose_xml&tool_call_tag=True&func_doc_fmt=json&prompt_fmt=plaintext&style=classic:live_simple_20-4-0",
+      "tool_groups": [
+        "change_food"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "change_food",
+          "normalized_section": "change_food"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4244:ret_fmt=json&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_multiple_808-175-14",
+      "tool_groups": [
+        "homes_2_find_home_by_area",
+        "homes_2_schedule_visit",
+        "rental_cars_3_get_cars_available",
+        "rental_cars_3_reserve_car",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2061:ret_fmt=json&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_simple_26-6-0",
+      "tool_groups": [
+        "uber"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "uber",
+          "normalized_section": "uber"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3618:ret_fmt=python&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_544-152-6",
+      "tool_groups": [
+        "alarm_1_add_alarm",
+        "alarm_1_get_alarms",
+        "homes_2_find_home_by_area",
+        "homes_2_schedule_visit"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "homes_2_find_home_by_area",
+          "normalized_section": "homes_2_find_home_by_area"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_183",
+      "tool_groups": [
+        "find_top_sports_celebrity"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_5199:ret_fmt=python&tool_call_tag=False&func_doc_fmt=json&prompt_fmt=plaintext&style=experimental:live_parallel_multiple_21-18-0",
+      "tool_groups": [
+        "services_1_book_appointment",
+        "services_1_find_provider",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "services_1_book_appointment",
+          "normalized_section": "services_1_book_appointment"
+        },
+        {
+          "type": "ADD",
+          "section": "services_1_find_provider",
+          "normalized_section": "services_1_find_provider"
+        },
+        {
+          "type": "ADD",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_230:ret_fmt=concise_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:simple_python_155",
+      "tool_groups": [
+        "calculate_future_value"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "calculate_future_value",
+          "normalized_section": "calculate_future_value"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_148",
+      "tool_groups": [
+        "color_complimentary"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4176:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_759-169-14",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "music_3_lookup_music",
+        "music_3_play_media",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "media_3_find_movies",
+          "normalized_section": "media_3_find_movies"
+        },
+        {
+          "type": "ADD",
+          "section": "media_3_play_movie",
+          "normalized_section": "media_3_play_movie"
+        },
+        {
+          "type": "ADD",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        },
+        {
+          "type": "ADD",
+          "section": "music_3_play_media",
+          "normalized_section": "music_3_play_media"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_1_find_attractions",
+          "normalized_section": "travel_1_find_attractions"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3814:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_multiple_606-158-12",
+      "tool_groups": [
+        "hotels_4_reserve_hotel",
+        "hotels_4_search_hotel"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "hotels_4_reserve_hotel",
+          "normalized_section": "hotels_4_reserve_hotel"
+        },
+        {
+          "type": "MODIFY",
+          "section": "hotels_4_search_hotel",
+          "normalized_section": "hotels_4_search_hotel"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_217-34-6",
+      "tool_groups": [
+        "product_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_4851:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:live_parallel_5-2-0",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_current_weather",
+          "normalized_section": "get_current_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_2841:ret_fmt=json&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_81-36-2",
+      "tool_groups": [
+        "add_mtnards_server",
+        "add_postgres_server",
+        "dartfx_help",
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "add_mtnards_server",
+          "normalized_section": "add_mtnards_server"
+        },
+        {
+          "type": "ADD",
+          "section": "add_postgres_server",
+          "normalized_section": "add_postgres_server"
+        },
+        {
+          "type": "ADD",
+          "section": "dartfx_help",
+          "normalized_section": "dartfx_help"
+        },
+        {
+          "type": "ADD",
+          "section": "get_current_weather",
+          "normalized_section": "get_current_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_3139:ret_fmt=concise_xml&tool_call_tag=True&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:live_multiple_305-131-4",
+      "tool_groups": [
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "hotels_4_reserve_hotel",
+        "hotels_4_search_hotel",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "hotels_4_reserve_hotel",
+          "normalized_section": "hotels_4_reserve_hotel"
+        },
+        {
+          "type": "MODIFY",
+          "section": "hotels_4_search_hotel",
+          "normalized_section": "hotels_4_search_hotel"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_94:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:simple_python_94",
+      "tool_groups": [
+        "update_user_info"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "update_user_info",
+          "normalized_section": "update_user_info"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "[Info] MODIFY operation for format_sensitivity_94:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:simple_python_94: entry 'delta1' not found in section 'update_user_info'. Treating as ADD instead. | evaluation_status=evaluated"
+    }
+  ]
+}

@@ -208,17 +208,6 @@ def collect_test_cases(args, model_name, all_test_categories, all_test_entries_i
         if test_case["id"] not in existing_ids
     ]
 
-    # Skip format sensitivity test cases for FC models
-    if (
-        any(is_format_sensitivity(test_category) for test_category in all_test_categories)
-        and MODEL_CONFIG_MAPPING[model_name].is_fc_model
-    ):
-        test_cases_to_generate = [
-            test_case
-            for test_case in test_cases_to_generate
-            if not is_format_sensitivity(test_case["id"])
-        ]
-
     test_cases_to_generate = clean_up_memory_prereq_entries(test_cases_to_generate)
     # TODO: Should we move these to the load_dataset_entry function?
     test_cases_to_generate = populate_initial_settings_for_memory_test_cases(
@@ -422,8 +411,11 @@ def multi_threaded_inference(
     playbook_text=None,
     prompt_log_dir=None,
 ):
+    test_category = extract_test_category_from_id(test_case["id"])
+    force_prompting = is_format_sensitivity(test_category)
 
-    assert type(test_case["function"]) is list
+    if not force_prompting:
+        assert isinstance(test_case["function"], list)
 
     try:
         test_case = deepcopy(test_case)
@@ -433,10 +425,15 @@ def multi_threaded_inference(
         # Enable input logging if we need to save prompts for testing
         should_log_prompts = prompt_log_dir is not None and playbook_text is not None
         inference_include_input_log = include_input_log or should_log_prompts
-        
-        result, metadata = handler.inference(
-            test_case, inference_include_input_log, exclude_state_log
-        )
+
+        if force_prompting:
+            result, metadata = handler.inference_single_turn_prompting(
+                test_case, inference_include_input_log
+            )
+        else:
+            result, metadata = handler.inference(
+                test_case, inference_include_input_log, exclude_state_log
+            )
 
         # Save generator prompts for testing phase if ACE is enabled
         if should_log_prompts and "inference_log" in metadata:
@@ -750,8 +747,7 @@ def main(args):
         for model_name in args.model:
             if MODEL_CONFIG_MAPPING[model_name].is_fc_model:
                 tqdm.write(
-                    "⚠️ Warning: Format sensitivity test cases are only supported for prompting (non-FC) models. "
-                    f"Since {model_name} is a FC model based on its config, the format sensitivity test cases will be skipped."
+                    f"ℹ️ Detected format sensitivity cases; {model_name} will run them in prompting mode even though it is configured as an FC model."
                 )
 
     if args.result_dir is not None:

@@ -119,27 +119,17 @@ class PlaybookManager:
         def _normalize(section_name: str) -> str:
             return camel_to_snake(section_name)
 
-        focus_order: Optional[List[str]] = None
+        ordered_sections: List[str]
         if focus_sections:
-            # Preserve caller order while normalizing and deduplicating
             seen: set[str] = set()
-            focus_order = []
+            ordered_sections = []
             for section in focus_sections:
                 normalized = _normalize(section)
                 if normalized not in seen:
-                    focus_order.append(normalized)
+                    ordered_sections.append(normalized)
                     seen.add(normalized)
-
-        # Build ordered list of sections to render
-        ordered_sections: List[str] = []
-        if focus_order:
-            ordered_sections.extend(focus_order)
-
-        ordered_sections.extend(
-            section
-            for section in sorted(self._data.keys())
-            if section not in ordered_sections
-        )
+        else:
+            ordered_sections = sorted(self._data.keys())
 
         rendered_sections: List[tuple[str, List[tuple[str, str]]]] = []
         for section in ordered_sections:
