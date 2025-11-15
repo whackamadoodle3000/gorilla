@@ -70,6 +70,7 @@ class BaseHandler:
         test_entry: dict,
         include_input_log: bool,
         exclude_state_log: bool,
+        prompt_log_dir=None,
     ):
         # This method is used to retrive model response for each model.
 
@@ -78,7 +79,7 @@ class BaseHandler:
         if "FC" in self.registry_name or self.is_fc_model:
             if contain_multi_turn_interaction(test_entry["id"]):
                 return self.inference_multi_turn_FC(
-                    test_entry, include_input_log, exclude_state_log
+                    test_entry, include_input_log, exclude_state_log, prompt_log_dir
                 )
             else:
                 return self.inference_single_turn_FC(test_entry, include_input_log)
@@ -86,7 +87,7 @@ class BaseHandler:
         else:
             if contain_multi_turn_interaction(test_entry["id"]):
                 return self.inference_multi_turn_prompting(
-                    test_entry, include_input_log, exclude_state_log
+                    test_entry, include_input_log, exclude_state_log, prompt_log_dir
                 )
             else:
                 return self.inference_single_turn_prompting(test_entry, include_input_log)
@@ -97,6 +98,7 @@ class BaseHandler:
         test_entry: dict,
         include_input_log: bool,
         exclude_state_log: bool,
+        prompt_log_dir=None,
     ) -> tuple[list[list], dict]:
         initial_config: dict = test_entry.get("initial_config", {})
         involved_classes: list = test_entry["involved_classes"]
@@ -216,6 +218,12 @@ class BaseHandler:
                 current_step_inference_log: list[dict] = []
                 # Add to the current_turn_inference_log at beginning of each step so that we don't need to bother dealing with the break statements
                 current_turn_inference_log[f"step_{count}"] = current_step_inference_log
+
+                if prompt_log_dir is not None:
+                    inference_data["prompt_log_dir"] = prompt_log_dir
+                    inference_data["test_case_id"] = test_entry_id
+                    inference_data["turn_idx"] = turn_idx
+                    inference_data["step_idx"] = count
 
                 api_response, query_latency = self._query_FC(inference_data)
 
@@ -418,6 +426,7 @@ class BaseHandler:
         test_entry: dict,
         include_input_log: bool,
         exclude_state_log: bool,
+        prompt_log_dir=None,
     ) -> tuple[list[list], dict]:
         initial_config: dict = test_entry.get("initial_config", {})
         involved_classes: list = test_entry["involved_classes"]
@@ -530,6 +539,12 @@ class BaseHandler:
                 current_step_inference_log: list[dict] = []
                 # Add to the current_turn_inference_log at beginning of each step so that we don't need to bother dealing with the break statements
                 current_turn_inference_log[f"step_{count}"] = current_step_inference_log
+
+                if prompt_log_dir is not None:
+                    inference_data["prompt_log_dir"] = prompt_log_dir
+                    inference_data["test_case_id"] = test_entry_id
+                    inference_data["turn_idx"] = turn_idx
+                    inference_data["step_idx"] = count
 
                 api_response, query_latency = self._query_prompting(inference_data)
 
