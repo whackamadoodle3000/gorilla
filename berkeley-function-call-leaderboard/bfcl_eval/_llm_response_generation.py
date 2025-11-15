@@ -323,17 +323,10 @@ def generate_results(args, model_name, test_cases_total):
     def render_playbook_text(test_case: dict) -> Optional[str]:
         if playbook_manager is None:
             return None
-        tool_groups = determine_tool_groups(test_case)
-        focus_sections = list(dict.fromkeys(tool_groups))
-        fallback_sections = [
-            section
-            for section in ("default_function", "general_guidelines", "global_policy")
-            if section in playbook_manager.sections() and section not in focus_sections
-        ]
-        focus_sections.extend(fallback_sections)
+        tool_groups = list(dict.fromkeys(determine_tool_groups(test_case)))
         return playbook_manager.to_prompt_string(
-            focus_sections=focus_sections or None,
-            max_sections=len(focus_sections) if focus_sections else None,
+            focus_sections=tool_groups or None,
+            max_sections=len(tool_groups) if tool_groups else None,
         )
 
     if getattr(args, "ace", False):

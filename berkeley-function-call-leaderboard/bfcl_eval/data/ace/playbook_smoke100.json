@@ -1,5 +1,31 @@
 [
   {
+    "Name": "add_mtnards_server",
+    "entries": {
+      "delta1": "Execute directly with provided hostname and API key; avoid optional clarification when required parameters exist"
+    }
+  },
+  {
+    "Name": "analyse_repo_contents",
+    "entries": {
+      "delta1": "Execute after clone_repo when both are specified in workflow sequence"
+    }
+  },
+  {
+    "Name": "biological",
+    "entries": {
+      "delta1": "Use dot notation (biological.calc_energy) not underscores for tool calls",
+      "delta2": "Execute calc_energy before calc_biomass when both specified sequentially"
+    }
+  },
+  {
+    "Name": "biology",
+    "entries": {
+      "delta1": "Use dot notation for function calls (biology.get_cell_info), not underscores",
+      "delta2": "Execute all required tool calls for multi-part queries; don't omit comparisons"
+    }
+  },
+  {
     "Name": "board_game",
     "entries": {
       "delta1": "Execute chess.get_top_players with available parameters; tools handle defaults without clarification"
@@ -12,10 +38,52 @@
     }
   },
   {
+    "Name": "calculate_discounted_cash_flow",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple similar requests appear in same conversation"
+    }
+  },
+  {
+    "Name": "calculate_future_value",
+    "entries": {
+      "delta1": "Execute immediately with provided parameters; use default values for optional parameters like compounding frequency"
+    }
+  },
+  {
+    "Name": "change_food",
+    "entries": {
+      "delta1": "Execute immediately with available parameters; avoid seeking unnecessary specification when user clearly provides dish names"
+    }
+  },
+  {
+    "Name": "clone_repo",
+    "entries": {
+      "delta1": "When part of multi-step workflow, proceed to subsequent operations after cloning completes"
+    }
+  },
+  {
+    "Name": "cmd_controller",
+    "entries": {
+      "delta1": "For irrelevant queries outside tool domain, abstain from tool usage entirely"
+    }
+  },
+  {
     "Name": "concert",
     "entries": {
       "delta1": "Execute find_nearby with available parameters; don't block on temporal ambiguity",
       "delta2": "Handle date limitations through tool response, not preemptive clarification"
+    }
+  },
+  {
+    "Name": "create_a_docker_file",
+    "entries": {
+      "delta1": "Execute after repository analysis when part of deployment pipeline"
+    }
+  },
+  {
+    "Name": "create_kubernetes_yaml_file",
+    "entries": {
+      "delta1": "Execute after Dockerfile creation when both are specified"
     }
   },
   {
@@ -25,9 +93,86 @@
     }
   },
   {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Execute immediately with available parameters; tools handle category filtering without sub-type clarification"
+    }
+  },
+  {
     "Name": "find_movie_showing",
     "entries": {
       "delta1": "Execute find_movie_showing with available parameters; tools handle missing date defaults"
+    }
+  },
+  {
+    "Name": "get_artwork_price",
+    "entries": {
+      "delta1": "Execute directly with available dimensions; tools handle 2D measurements without requiring all three dimensions"
+    }
+  },
+  {
+    "Name": "get_current_weather",
+    "entries": {
+      "delta1": "For parallel calls, strictly use only allowed parameter values per tool spec",
+      "delta2": "Unit parameter only accepts: empty string or 'fahrenheit' (case insensitive)",
+      "delta3": "Location parameter must match exactly from allowed values list"
+    }
+  },
+  {
+    "Name": "get_interviewer_list",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple distinct skill requirements are specified in a single query"
+    }
+  },
+  {
+    "Name": "get_news_report",
+    "entries": {
+      "delta1": "Maintain strict parameter-location pairing in parallel calls; avoid mixing values across requests"
+    }
+  },
+  {
+    "Name": "get_sculpture_details",
+    "entries": {
+      "delta1": "Execute with provided parameters; avoid clarification when required fields are present"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "Execute directly with provided parameters; avoid unnecessary clarifications when all required fields exist"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Use sort for alphabetical ordering without echo overwrites; preserve original file content unless explicitly required",
+      "delta2": "Avoid redundant file operations like multiple cat calls after transformations; use tools for display purposes only",
+      "delta3": "In multi-turn sequences, continue file operations from previous context even with empty user input"
+    }
+  },
+  {
+    "Name": "homes_2_find_home_by_area",
+    "entries": {
+      "delta1": "Execute with minimum bedroom count when 'at least X' specified; avoid clarification for range requirements"
+    }
+  },
+  {
+    "Name": "hotels_4_reserve_hotel",
+    "entries": {
+      "delta1": "Execute reserve with available parameters; tools handle missing location through defaults"
+    }
+  },
+  {
+    "Name": "hotels_4_search_hotel",
+    "entries": {
+      "delta1": "Execute search with available location; tools handle missing date parameters through defaults",
+      "delta2": "Verify location parameter matches exact format requirements (e.g., 'Sydney, AU' not 'Sydney, Australia')"
+    }
+  },
+  {
+    "Name": "ingredient_replace",
+    "entries": {
+      "delta1": "Execute ingredient_replace for explicit substitution requests alongside other meal searches in parallel scenarios"
     }
   },
   {
@@ -43,6 +188,12 @@
     }
   },
   {
+    "Name": "linear_regression_fit",
+    "entries": {
+      "delta1": "Execute when specified alongside data_loading in parallel workflows"
+    }
+  },
+  {
     "Name": "list_events",
     "entries": {
       "delta1": "Reject irrelevant input entirely rather than attempting partial parsing"
@@ -55,6 +206,12 @@
     }
   },
   {
+    "Name": "math_api",
+    "entries": {
+      "delta1": "Maintain mathematical workflow continuity across turns; don't seek clarification on empty inputs"
+    }
+  },
+  {
     "Name": "media_3_find_movies",
     "entries": {
       "delta1": "Execute find_movies with available parameters; tools handle missing genre defaults"
@@ -63,14 +220,47 @@
   {
     "Name": "memory_api_kv",
     "entries": {
-      "delta1": "When system prompts specify exact response formats, output only the structured format without explanatory text",
+      "delta1": "When system prompts specify exact response formats, output ONLY the structured format without any explanatory text before or after",
       "delta2": "For 'I do not know' responses, use only the exact {'answer': 'I do not know', 'context': 'I do not know'} format"
+    }
+  },
+  {
+    "Name": "memory_api_rec_sum",
+    "entries": {
+      "delta1": "Always initiate memory retrieval calls when asked about past events or patterns",
+      "delta2": "Never return empty responses; use tools to gather information then provide final answer",
+      "delta3": "Execute memory searches even when uncertain about available data"
+    }
+  },
+  {
+    "Name": "memory_api_vector",
+    "entries": {
+      "delta1": "When memory searches return no results, provide clean answer without JSON formatting",
+      "delta2": "Use both archival and core memory retrieval when searching for unknown information"
     }
   },
   {
     "Name": "movies_1_find_movies",
     "entries": {
       "delta1": "Execute with available location parameters; tools handle geographic resolution internally"
+    }
+  },
+  {
+    "Name": "movies_3_find_movies",
+    "entries": {
+      "delta1": "Execute directly with provided director parameter; avoid seeking genre clarification when director alone satisfies function requirements"
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Execute lookup_music with available parameters; verify tool availability before refusing requests"
+    }
+  },
+  {
+    "Name": "physical",
+    "entries": {
+      "delta1": "Call calc_work after biological calculations when energy parameter available"
     }
   },
   {
@@ -82,9 +272,27 @@
     }
   },
   {
+    "Name": "push_git_changes_to_github",
+    "entries": {
+      "delta1": "Execute as final step after all file creation operations complete"
+    }
+  },
+  {
+    "Name": "record",
+    "entries": {
+      "delta1": "Execute record tools directly for classifications; avoid conversational explanations about the classification process"
+    }
+  },
+  {
     "Name": "reschedule",
     "entries": {
       "delta1": "Fail to decode when input lacks coherent scheduling intent"
+    }
+  },
+  {
+    "Name": "review_of_interviewer",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple distinct skill requirements are specified in a single query"
     }
   },
   {
@@ -94,9 +302,75 @@
     }
   },
   {
+    "Name": "services_1_book_appointment",
+    "entries": {
+      "delta1": "Execute in parallel with find_provider when user requests both finding and booking in same turn"
+    }
+  },
+  {
+    "Name": "services_1_find_provider",
+    "entries": {
+      "delta1": "Execute in parallel with book_appointment when user requests both finding and booking in same turn"
+    }
+  },
+  {
+    "Name": "sports",
+    "entries": {
+      "delta1": "Reject sports queries when only add_mtnards_server tools are available",
+      "delta2": "Validate query relevance against current tool groups before execution"
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {
+      "delta1": "Track ticket counter state precisely across create/get/resolve operations",
+      "delta2": "Maintain consistent queue state when performing multi-turn ticket sequences"
+    }
+  },
+  {
+    "Name": "trains_1_get_train_tickets",
+    "entries": {
+      "delta1": "Execute with available parameters when most are clear; tools handle temporal defaults without clarification"
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Execute book_flight when user confirms readiness and references existing traveler particulars",
+      "delta2": "Avoid redundant parameter requests when context provides all required booking details"
+    }
+  },
+  {
+    "Name": "uber",
+    "entries": {
+      "delta1": "Use uber.ride when requested; don't assume functional limitations or provide manual instructions",
+      "delta2": "Use uber.eat.order for food requests; don't pre-clarify when parameters are clear"
+    }
+  },
+  {
     "Name": "update_user_info",
     "entries": {
       "delta1": "Execute directly when all required parameters are provided, without conversational clarification"
+    }
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Call estimate_drive_feasibility_by_mileage after obtaining trip distance before proceeding with vehicle prep",
+      "delta2": "Avoid redundant tool calls like multiple engine starts or brake pedal presses in sequence",
+      "delta3": "Execute only necessary vehicle prep steps without over-engineering the startup sequence"
+    }
+  },
+  {
+    "Name": "weather_1_get_weather",
+    "entries": {
+      "delta1": "Execute with user-provided parameters; avoid preemptive assumptions about tool limitations"
+    }
+  },
+  {
+    "Name": "web_search_api",
+    "entries": {
+      "delta1": "After reasonable search attempts yield no results, provide final response acknowledging limitations rather than persisting in search loops"
     }
   }
 ]
