@@ -1,5 +1,4 @@
 import json
-from copy import deepcopy
 import os
 import time
 from typing import Any
@@ -17,17 +16,6 @@ from bfcl_eval.model_handler.utils import (
     system_prompt_pre_processing_chat_model,
 )
 from openai import OpenAI, RateLimitError
-
-
-NOOP_TOOL_NAME = "ace_no_tool_call"
-NOOP_TOOL_SPEC = {
-    "type": "function",
-    "function": {
-        "name": NOOP_TOOL_NAME,
-        "description": "Use this when no tool call is required and the answer should be provided directly.",
-        "parameters": {"type": "object", "properties": {}},
-    },
-}
 
 
 class OpenAICompletionsHandler(BaseHandler):
@@ -116,9 +104,6 @@ class OpenAICompletionsHandler(BaseHandler):
 
         tools = convert_to_tool(functions, GORILLA_TO_OPENAPI, self.model_style)
 
-        if self.is_fc_model and len(functions) > 0:
-            tools.append(deepcopy(NOOP_TOOL_SPEC))
-
         inference_data["tools"] = tools
 
         return inference_data
@@ -154,8 +139,6 @@ class OpenAICompletionsHandler(BaseHandler):
             filtered_responses = []
             filtered_tool_ids = []
             for idx, item in enumerate(model_responses):
-                if isinstance(item, dict) and NOOP_TOOL_NAME in item:
-                    continue
                 filtered_responses.append(item)
                 if tool_call_ids:
                     filtered_tool_ids.append(tool_call_ids[idx])

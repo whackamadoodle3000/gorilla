@@ -7,6 +7,7 @@ import tempfile
 import traceback
 from copy import deepcopy
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set
 
@@ -48,6 +49,52 @@ from bfcl_eval.utils import (
     populate_initial_settings_for_memory_test_cases,
     populate_initial_settings_for_web_search_test_cases,
 )
+
+def _make_json_serializable(obj):
+    """Recursively convert sets and other non-serializable types to JSON-serializable types."""
+    if isinstance(obj, set):
+        return sorted(list(obj))  # Convert set to sorted list for reproducibility
+    elif isinstance(obj, dict):
+        return {k: _make_json_serializable(v) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        return [_make_json_serializable(item) for item in obj]
+    elif isinstance(obj, datetime):
+        return obj.isoformat()
+    elif hasattr(obj, "__class__"):
+        # Handle Directory objects (have name, parent, contents)
+        if hasattr(obj, "name") and hasattr(obj, "contents") and hasattr(obj, "parent"):
+            return {
+                "name": obj.name,
+                "parent": obj.parent.name if obj.parent else None,
+                "contents": _make_json_serializable(obj.contents),
+            }
+        # Handle File objects (have name, content)
+        elif hasattr(obj, "name") and hasattr(obj, "content") and not hasattr(obj, "contents"):
+            file_dict = {
+                "name": obj.name,
+                "content": obj.content,
+            }
+            # Include _last_modified if present
+            if hasattr(obj, "_last_modified"):
+                file_dict["_last_modified"] = _make_json_serializable(obj._last_modified)
+            return file_dict
+        # For other objects, try to convert to dict using vars(), or fallback to string
+        else:
+            try:
+                # Try to serialize directly first
+                json.dumps(obj, ensure_ascii=False)
+                return obj
+            except (TypeError, ValueError):
+                # If it fails, try to convert using vars() or __dict__
+                try:
+                    if hasattr(obj, "__dict__"):
+                        return _make_json_serializable(vars(obj))
+                    else:
+                        return str(obj)
+                except Exception:
+                    return str(obj)
+    else:
+        return obj
 
 from .constants import (
     DEFAULT_PLAYBOOK_PATH,
@@ -668,6 +715,7 @@ def train_playbook(
     gpu_memory_utilization: float = 0.9,
     skip_server_setup: bool = False,
     local_model_path: Optional[str] = None,
+    prompt_log_dir: Optional[Path] = None,
 ) -> None:
     """
     Run the ACE training pipeline: Generator -> Reflector -> Curator.
@@ -781,6 +829,13 @@ def train_playbook(
                     notes=msg,
                 )
                 continue
+            # Save generator prompts if logging is enabled
+            generator_prompt_log_path = None
+            if prompt_log_dir:
+                generator_prompt_log_path = (
+                    prompt_log_dir / "training" / entry_id
+                )
+                generator_prompt_log_path.mkdir(parents=True, exist_ok=True)
 
             prepared_entry = _prepare_entry_for_training(entry, temp_model_result_dir)
 
@@ -790,7 +845,34 @@ def train_playbook(
                 include_input_log=False,
                 exclude_state_log=False,
                 playbook_text=None,
+                prompt_log_dir=generator_prompt_log_path,
             )
+
+            # Save generator prompt from metadata if available
+            if generator_prompt_log_path and "inference_log" in generator_result:
+                generator_prompt_file = generator_prompt_log_path / "generator_prompt.json"
+                prompt_data = {
+                    "entry_id": entry_id,
+                    "tool_groups": tool_groups,
+                    "test_case": entry,
+                    "inference_log": generator_result.get("inference_log", []),
+                }
+                # Extract inference_input logs if available
+                inference_inputs = []
+                if isinstance(prompt_data["inference_log"], list):
+                    for log_entry in prompt_data["inference_log"]:
+                        if isinstance(log_entry, dict):
+                            for step_key, step_log in log_entry.items():
+                                if isinstance(step_log, list):
+                                    for log_item in step_log:
+                                        if isinstance(log_item, dict) and log_item.get("role") == "inference_input":
+                                            inference_inputs.append({
+                                                "step": step_key,
+                                                "input": log_item.get("content", ""),
+                                            })
+                prompt_data["inference_inputs"] = inference_inputs
+                with open(generator_prompt_file, "w", encoding="utf-8") as f:
+                    json.dump(_make_json_serializable(prompt_data), f, indent=2, ensure_ascii=False)
 
             focus_sections = list(dict.fromkeys(tool_groups))
             fallback_sections = [
@@ -829,6 +911,21 @@ def train_playbook(
                 evaluation_details_json,
                 evaluation_valid,
             )
+
+            # Save reflector prompts if logging is enabled
+            if prompt_log_dir:
+                reflector_prompt_file = (
+                    prompt_log_dir / "training" / entry_id / "reflector_prompt.json"
+                )
+                reflector_prompt_data = {
+                    "entry_id": entry_id,
+                    "tool_groups": tool_groups,
+                    "playbook_text": playbook_text,
+                    "messages": reflection_messages,
+                }
+                with open(reflector_prompt_file, "w", encoding="utf-8") as f:
+                    json.dump(_make_json_serializable(reflector_prompt_data), f, indent=2, ensure_ascii=False)
+
             try:
                 reflection_raw = reflector_client.complete(
                     reflection_messages, temperature=completion_temperature
@@ -873,6 +970,22 @@ def train_playbook(
                 evaluation_details_json,
                 evaluation_valid,
             )
+
+            # Save curator prompts if logging is enabled
+            if prompt_log_dir:
+                curator_prompt_file = (
+                    prompt_log_dir / "training" / entry_id / "curator_prompt.json"
+                )
+                curator_prompt_data = {
+                    "entry_id": entry_id,
+                    "tool_groups": tool_groups,
+                    "playbook_text": playbook_text,
+                    "reflection": reflection_json,
+                    "messages": curator_messages,
+                }
+                with open(curator_prompt_file, "w", encoding="utf-8") as f:
+                    json.dump(_make_json_serializable(curator_prompt_data), f, indent=2, ensure_ascii=False)
+
             try:
                 curator_raw = curator_client.complete(
                     curator_messages, temperature=completion_temperature

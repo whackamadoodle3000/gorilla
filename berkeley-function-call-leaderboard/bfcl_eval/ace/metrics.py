@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence
 
+from bfcl_eval.ace.utils import camel_to_snake
 from bfcl_eval.constants.eval_config import PROJECT_ROOT
 from bfcl_eval.utils import (
     get_general_grouping,
@@ -388,6 +389,113 @@ class EvaluationMetricsCollector:
             "tool_count_plot_path": str(tool_count_plot_path)
             if tool_count_plot_path
             else None,
+        }
+
+
+@dataclass
+class DynamicQueryMetricsCollector:
+    """
+    Tracks which playbook sections are selected by dynamic query at test time.
+    """
+
+    records: List[dict] = field(default_factory=list)
+    section_selection_counts: Dict[str, Dict[str, int]] = field(
+        default_factory=lambda: defaultdict(lambda: {"selected": 0, "available": 0})
+    )
+
+    def record_query(
+        self,
+        *,
+        test_case_id: str,
+        available_sections: Sequence[str],
+        selected_sections: Sequence[str],
+        tool_groups: Sequence[str],
+    ) -> None:
+        """
+        Record a dynamic query's section selection.
+        """
+        # Normalize section names for consistency
+        normalized_available = [camel_to_snake(section) for section in available_sections]
+        normalized_selected = [camel_to_snake(section) for section in selected_sections]
+        normalized_selected_set = set(normalized_selected)
+
+        # Track per-section selection rates
+        for normalized_section in normalized_available:
+            self.section_selection_counts[normalized_section]["available"] += 1
+            if normalized_section in normalized_selected_set:
+                self.section_selection_counts[normalized_section]["selected"] += 1
+
+        # Store raw record
+        available_count = len(available_sections)
+        selected_count = len(selected_sections)
+        selection_ratio = selected_count / available_count if available_count > 0 else 0.0
+
+        self.records.append(
+            {
+                "test_case_id": test_case_id,
+                "tool_groups": list(tool_groups),
+                "available_sections": list(available_sections),
+                "selected_sections": list(selected_sections),
+                "available_count": available_count,
+                "selected_count": selected_count,
+                "selection_ratio": selection_ratio,
+            }
+        )
+
+    def finalize(self, *, output_dir: Path, metadata: Optional[dict] = None) -> dict:
+        """
+        Compute and save dynamic query metrics.
+        Returns a dict with paths for convenience.
+        """
+        if not self.records:
+            return {}
+
+        output_dir = _ensure_dir(output_dir)
+        timestamp = _now_stamp()
+
+        # Calculate per-section selection rates
+        section_rates = {}
+        for section, counts in self.section_selection_counts.items():
+            available = counts["available"]
+            selected = counts["selected"]
+            rate = selected / available if available > 0 else 0.0
+            section_rates[section] = {
+                "selection_rate": rate,
+                "selected_count": selected,
+                "available_count": available,
+            }
+
+        # Sort by section name for consistency
+        section_rates = dict(sorted(section_rates.items()))
+
+        # Calculate overall statistics
+        if self.records:
+            avg_selection_ratio = (
+                sum(r["selection_ratio"] for r in self.records) / len(self.records)
+            )
+        else:
+            avg_selection_ratio = 0.0
+
+        # Extract model name from metadata if available
+        model_name = (metadata or {}).get("model_name", "unknown")
+        file_name = f"{model_name.replace('/', '_')}_dynamic_query_metrics_{timestamp}.json"
+
+        payload = {
+            "metadata": metadata or {},
+            "summary": {
+                "total_queries": len(self.records),
+                "average_selection_ratio": avg_selection_ratio,
+            },
+            "per_section_rates": section_rates,
+            "records": self.records,
+        }
+
+        data_path = output_dir / file_name
+        with data_path.open("w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        return {
+            "data_path": str(data_path),
         }
 
 
