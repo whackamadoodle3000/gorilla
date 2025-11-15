@@ -25,6 +25,25 @@ from tenacity import (
     wait_random_exponential,
 )
 
+try:  # pragma: no cover - optional dependency differences
+    from openai import APIConnectionError, APITimeoutError, ServiceUnavailableError
+except ImportError:  # pragma: no cover
+    APIConnectionError = None
+    APITimeoutError = None
+    ServiceUnavailableError = None
+
+_NETWORK_RETRY_EXCEPTIONS = tuple(
+    cls
+    for cls in (
+        APIConnectionError,
+        APITimeoutError,
+        ServiceUnavailableError,
+        ConnectionError,
+        TimeoutError,
+    )
+    if isinstance(cls, type)
+)
+
 if TYPE_CHECKING:
     from bfcl_eval.eval_checker.multi_turn_eval.func_source_code.memory_api_metaclass import (
         MemoryAPI,
@@ -560,8 +579,9 @@ def decoded_output_to_execution_list(decoded_output: list[dict]) -> list[str]:
 def retry_with_backoff(
     error_type: Optional[Union[Type[Exception], List[Type[Exception]]]] = None,
     error_message_pattern: Optional[str] = None,
-    min_wait: int = 6,
+    min_wait: int = 20,
     max_wait: int = 120,
+    include_network_errors: bool = True,
     **kwargs,
 ) -> Callable:
     """
@@ -577,8 +597,9 @@ def retry_with_backoff(
             A regex pattern to match against the exception message to retry on.
             This is useful when the user wants to retry based on the exception message,
             especially if the exception raised is too broad.
-        min_wait (int, optional): Minimum wait time in seconds for the backoff.
+        min_wait (int, optional): Minimum wait time in seconds for the backoff. Defaults to 20s to allow transient outages to recover.
         max_wait (int, optional): Maximum wait time in seconds for the backoff.
+        include_network_errors (bool, optional): When True, retries also cover a standard set of transient network/time-out exceptions.
         **kwargs: Additional keyword arguments for the `tenacity.retry` decorator, such as `stop`, `reraise`, etc.
 
     Returns:
@@ -596,6 +617,9 @@ def retry_with_backoff(
                 conditions.append(retry_if_exception_type(error_type))
         if error_message_pattern is not None:
             conditions.append(retry_if_exception_message(match=error_message_pattern))
+
+        if include_network_errors and _NETWORK_RETRY_EXCEPTIONS:
+            conditions.append(retry_if_exception_type(_NETWORK_RETRY_EXCEPTIONS))
 
         if not conditions:
             raise ValueError("Either error_type or retry_condition must be provided.")

@@ -875,12 +875,6 @@ def train_playbook(
                     json.dump(_make_json_serializable(prompt_data), f, indent=2, ensure_ascii=False)
 
             focus_sections = list(dict.fromkeys(tool_groups))
-            fallback_sections = [
-                section
-                for section in ("default_function", "general_guidelines", "global_policy")
-                if section in playbook.sections() and section not in focus_sections
-            ]
-            focus_sections.extend(fallback_sections)
             playbook_text = playbook.to_prompt_string(
                 focus_sections=focus_sections or None,
                 max_sections=len(focus_sections) if focus_sections else None,

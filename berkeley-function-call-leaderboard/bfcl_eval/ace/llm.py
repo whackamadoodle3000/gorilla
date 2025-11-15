@@ -7,6 +7,34 @@ from typing import List, Mapping, Sequence
 
 from openai import OpenAI, RateLimitError
 
+try:  # pragma: no cover - optional imports vary with SDK version
+    from openai import APIConnectionError, APITimeoutError, APIError, ServiceUnavailableError
+except ImportError:  # pragma: no cover - fallback if symbols unavailable
+    APIConnectionError = None
+    APITimeoutError = None
+    APIError = None
+    ServiceUnavailableError = None
+_TRANSIENT_STATUS_CODES = {408, 429, 500, 502, 503, 504}
+_TRANSIENT_ERRORS = tuple(
+    cls
+    for cls in (
+        APIConnectionError,
+        APITimeoutError,
+        ServiceUnavailableError,
+        ConnectionError,  # Built-in
+        TimeoutError,
+    )
+    if isinstance(cls, type)
+)
+
+
+def _is_transient_api_error(exc: Exception) -> bool:
+    if APIError is not None and isinstance(exc, APIError):
+        status = getattr(exc, "status", None)
+        return status is None or status in _TRANSIENT_STATUS_CODES
+    return False
+
+
 
 DEFAULT_API_KEY_ENV = "DEEPSEEK_API_KEY"
 DEFAULT_BASE_URL = "https://api.deepseek.com"
@@ -61,10 +89,31 @@ class ChatCompletionClient:
                     temperature=temp,
                 )
                 return response.choices[0].message.content.strip()
-            except RateLimitError:
+            except Exception as exc:
+                should_retry = False
+                wait_time = delay
+
+                if isinstance(exc, RateLimitError):
+                    should_retry = True
+                elif _TRANSIENT_ERRORS and isinstance(exc, _TRANSIENT_ERRORS):
+                    should_retry = True
+                    wait_time = max(wait_time, 20.0)
+                elif _is_transient_api_error(exc):
+                    should_retry = True
+                    wait_time = max(wait_time, 20.0)
+
+                if not should_retry:
+                    raise
+
                 attempt += 1
                 if attempt >= max_retries:
                     raise
-                time.sleep(delay)
-                delay *= 2
+
+                wait_time = max(wait_time, 2.0)
+                print(
+                    f"[Warning] ChatCompletion retry ({attempt}/{max_retries}) after error: {exc}. "
+                    f"Sleeping {min(wait_time, 60.0):.1f}s before retry."
+                )
+                time.sleep(min(wait_time, 60.0))
+                delay = min(wait_time * 2, 60.0)
 
