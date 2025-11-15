@@ -51,11 +51,12 @@ class OSSHandler(BaseHandler, EnforceOverrides):
         test_entry: dict,
         include_input_log: bool,
         exclude_state_log: bool,
+        prompt_log_dir=None,
     ):
         # TODO: Let oss model support FC methods as well, depends on their model type
         if contain_multi_turn_interaction(test_entry["id"]):
             return self.inference_multi_turn_prompting(
-                test_entry, include_input_log, exclude_state_log
+                test_entry, include_input_log, exclude_state_log, prompt_log_dir
             )
         else:
             return self.inference_single_turn_prompting(test_entry, include_input_log)

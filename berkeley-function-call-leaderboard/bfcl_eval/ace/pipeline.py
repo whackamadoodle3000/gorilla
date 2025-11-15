@@ -830,32 +830,8 @@ def train_playbook(
                 playbook_text=None,
                 prompt_log_dir=generator_prompt_log_path,
             )
-
-            # Save generator prompt from metadata if available
-            if generator_prompt_log_path and "inference_log" in generator_result:
-                generator_prompt_file = generator_prompt_log_path / "generator_prompt.json"
-                prompt_data = {
-                    "entry_id": entry_id,
-                    "tool_groups": tool_groups,
-                    "test_case": entry,
-                    "inference_log": generator_result.get("inference_log", []),
-                }
-                # Extract inference_input logs if available
-                inference_inputs = []
-                if isinstance(prompt_data["inference_log"], list):
-                    for log_entry in prompt_data["inference_log"]:
-                        if isinstance(log_entry, dict):
-                            for step_key, step_log in log_entry.items():
-                                if isinstance(step_log, list):
-                                    for log_item in step_log:
-                                        if isinstance(log_item, dict) and log_item.get("role") == "inference_input":
-                                            inference_inputs.append({
-                                                "step": step_key,
-                                                "input": log_item.get("content", ""),
-                                            })
-                prompt_data["inference_inputs"] = inference_inputs
-                with open(generator_prompt_file, "w", encoding="utf-8") as f:
-                    json.dump(_make_json_serializable(prompt_data), f, indent=2, ensure_ascii=False)
+            # Generator prompts are now saved directly in the handler (deepseek.py)
+            # No need to extract from inference_log anymore
 
             focus_sections = list(dict.fromkeys(tool_groups))
             playbook_text = playbook.to_prompt_string(
@@ -894,14 +870,13 @@ def train_playbook(
                 reflector_prompt_file = (
                     prompt_log_dir / "training" / entry_id / "reflector_prompt.json"
                 )
+                reflector_prompt_file.parent.mkdir(parents=True, exist_ok=True)
+                # Save exact format that API receives
                 reflector_prompt_data = {
-                    "entry_id": entry_id,
-                    "tool_groups": tool_groups,
-                    "playbook_text": playbook_text,
                     "messages": reflection_messages,
                 }
                 with open(reflector_prompt_file, "w", encoding="utf-8") as f:
-                    json.dump(_make_json_serializable(reflector_prompt_data), f, indent=2, ensure_ascii=False)
+                    json.dump(reflector_prompt_data, f, indent=2, ensure_ascii=False)
 
             try:
                 reflection_raw = reflector_client.complete(
@@ -953,15 +928,13 @@ def train_playbook(
                 curator_prompt_file = (
                     prompt_log_dir / "training" / entry_id / "curator_prompt.json"
                 )
+                curator_prompt_file.parent.mkdir(parents=True, exist_ok=True)
+                # Save exact format that API receives
                 curator_prompt_data = {
-                    "entry_id": entry_id,
-                    "tool_groups": tool_groups,
-                    "playbook_text": playbook_text,
-                    "reflection": reflection_json,
                     "messages": curator_messages,
                 }
                 with open(curator_prompt_file, "w", encoding="utf-8") as f:
-                    json.dump(_make_json_serializable(curator_prompt_data), f, indent=2, ensure_ascii=False)
+                    json.dump(curator_prompt_data, f, indent=2, ensure_ascii=False)
 
             try:
                 curator_raw = curator_client.complete(

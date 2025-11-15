@@ -432,44 +432,11 @@ def multi_threaded_inference(
             )
         else:
             result, metadata = handler.inference(
-                test_case, inference_include_input_log, exclude_state_log
+                test_case,
+                inference_include_input_log,
+                exclude_state_log,
+                prompt_log_dir=prompt_log_dir,
             )
-
-        # Save generator prompts for testing phase if ACE is enabled
-        if should_log_prompts and "inference_log" in metadata:
-            test_case_id = test_case["id"]
-            prompt_log_path = prompt_log_dir / "testing" / test_case_id
-            prompt_log_path.mkdir(parents=True, exist_ok=True)
-
-            # Extract and save prompts from inference_log
-            inference_log = metadata.get("inference_log", [])
-            if isinstance(inference_log, list):
-                for turn_idx, turn_log in enumerate(inference_log):
-                    if isinstance(turn_log, dict):
-                        # Extract step logs (skip "begin_of_turn_query" and other non-step keys)
-                        for step_key, step_log in turn_log.items():
-                            if step_key.startswith("step_") and isinstance(step_log, list):
-                                # Extract step index
-                                step_idx = 0
-                                try:
-                                    step_idx = int(step_key.split("_")[1])
-                                except (ValueError, IndexError):
-                                    pass
-
-                                # Look for inference_input entries in this step
-                                for log_item in step_log:
-                                    if isinstance(log_item, dict) and log_item.get("role") == "inference_input":
-                                        prompt_file = prompt_log_path / f"generator_prompt_turn_{turn_idx}_step_{step_idx}.json"
-                                        prompt_data = {
-                                            "test_case_id": test_case_id,
-                                            "turn_idx": turn_idx,
-                                            "step_idx": step_idx,
-                                            "playbook_text": playbook_text,
-                                            "inference_input": log_item.get("content", ""),
-                                        }
-                                        with open(prompt_file, "w", encoding="utf-8") as f:
-                                            json.dump(prompt_data, f, indent=2, ensure_ascii=False)
-                                        break  # Only save the first inference_input per step
 
     except Exception as e:
         # This is usually the case when the model getting stuck on one particular test case.
