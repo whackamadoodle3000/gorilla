@@ -1,0 +1,102 @@
+[
+  {
+    "Name": "board_game",
+    "entries": {
+      "delta1": "Execute chess.get_top_players with available parameters; tools handle defaults without clarification"
+    }
+  },
+  {
+    "Name": "book_hotel",
+    "entries": {
+      "delta1": "Execute in parallel when multiple independent requests appear in same message"
+    }
+  },
+  {
+    "Name": "concert",
+    "entries": {
+      "delta1": "Execute find_nearby with available parameters; don't block on temporal ambiguity",
+      "delta2": "Handle date limitations through tool response, not preemptive clarification"
+    }
+  },
+  {
+    "Name": "detail_experience_and_education",
+    "entries": {
+      "delta1": "Include optional parameters when user context clearly specifies them, not just when required"
+    }
+  },
+  {
+    "Name": "find_movie_showing",
+    "entries": {
+      "delta1": "Execute find_movie_showing with available parameters; tools handle missing date defaults"
+    }
+  },
+  {
+    "Name": "latest_exchange_rate",
+    "entries": {
+      "delta1": "Execute in parallel when multiple independent requests appear in same message"
+    }
+  },
+  {
+    "Name": "light_travel_time",
+    "entries": {
+      "delta1": "Execute in parallel when multiple independent requests appear in same message"
+    }
+  },
+  {
+    "Name": "list_events",
+    "entries": {
+      "delta1": "Reject irrelevant input entirely rather than attempting partial parsing"
+    }
+  },
+  {
+    "Name": "math",
+    "entries": {
+      "delta1": "Use exact function names as specified (e.g., math.hcf not math_hcf)"
+    }
+  },
+  {
+    "Name": "media_3_find_movies",
+    "entries": {
+      "delta1": "Execute find_movies with available parameters; tools handle missing genre defaults"
+    }
+  },
+  {
+    "Name": "memory_api_kv",
+    "entries": {
+      "delta1": "When system prompts specify exact response formats, output only the structured format without explanatory text",
+      "delta2": "For 'I do not know' responses, use only the exact {'answer': 'I do not know', 'context': 'I do not know'} format"
+    }
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta1": "Execute with available location parameters; tools handle geographic resolution internally"
+    }
+  },
+  {
+    "Name": "publication_year",
+    "entries": {
+      "delta1": "Always invoke tools for factual lookups rather than using internal knowledge",
+      "delta2": "Execute tool calls immediately when search parameters are available",
+      "delta3": "Avoid conversational responses when tools can provide the answer"
+    }
+  },
+  {
+    "Name": "reschedule",
+    "entries": {
+      "delta1": "Fail to decode when input lacks coherent scheduling intent"
+    }
+  },
+  {
+    "Name": "safeway",
+    "entries": {
+      "delta1": "Execute in parallel when multiple independent requests appear in same message"
+    }
+  },
+  {
+    "Name": "update_user_info",
+    "entries": {
+      "delta1": "Execute directly when all required parameters are provided, without conversational clarification"
+    }
+  }
+]

@@ -68,13 +68,25 @@ def _ensure_group_coverage(
     for group, ids in group_to_entries.items():
         if not ids:
             continue
-        ids = ids.copy()
+        ids = list(dict.fromkeys(ids))
         rng.shuffle(ids)
-        # assign at least one example per partition (dup if only one)
-        train_candidate = ids[0]
-        coverage[TRAIN_PARTITION].add(train_candidate)
-        test_candidate = ids[1] if len(ids) > 1 else ids[0]
-        coverage[TEST_PARTITION].add(test_candidate)
+
+        available_for_train = [
+            candidate
+            for candidate in ids
+            if candidate not in coverage[TRAIN_PARTITION] and candidate not in coverage[TEST_PARTITION]
+        ]
+        if available_for_train:
+            coverage[TRAIN_PARTITION].add(available_for_train[0])
+
+        available_for_test = [
+            candidate
+            for candidate in ids
+            if candidate not in coverage[TRAIN_PARTITION]
+            and candidate not in coverage[TEST_PARTITION]
+        ]
+        if available_for_test:
+            coverage[TEST_PARTITION].add(available_for_test[0])
     return coverage
 
 
@@ -92,13 +104,7 @@ def _assign_remaining(
     for entry_id in unique_ids:
         in_train = entry_id in coverage[TRAIN_PARTITION]
         in_test = entry_id in coverage[TEST_PARTITION]
-        if in_train and in_test:
-            continue
-        if in_train:
-            coverage[TEST_PARTITION].add(entry_id)
-            continue
-        if in_test:
-            coverage[TRAIN_PARTITION].add(entry_id)
+        if in_train or in_test:
             continue
         if len(coverage[TRAIN_PARTITION]) < target_train_size:
             coverage[TRAIN_PARTITION].add(entry_id)
@@ -107,7 +113,10 @@ def _assign_remaining(
 
     # Guard against empty test partition due to rounding
     if not coverage[TEST_PARTITION]:
-        coverage[TEST_PARTITION].add(unique_ids[-1])
+        last_id = unique_ids[-1]
+        if last_id in coverage[TRAIN_PARTITION]:
+            coverage[TRAIN_PARTITION].remove(last_id)
+        coverage[TEST_PARTITION].add(last_id)
 
 
 def _build_split_structure(

@@ -1,15 +1,3291 @@
 [
   {
+    "Name": "_book_meeting_room",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries lack specific parameters or clear meeting room booking intent",
+      "delta2": "Detect generic queries without booking intent and abstain from tool calls"
+    }
+  },
+  {
+    "Name": "_get_all_user_list",
+    "entries": {
+      "delta1": "Abstain from tool calls for generic queries like 'query' without specific user lookup context"
+    }
+  },
+  {
+    "Name": "_get_meeting_room_schedule",
+    "entries": {
+      "delta1": "Withhold tool calls when user requests are too vague to determine schedule parameters",
+      "delta2": "Recognize standalone 'query' as insufficient for schedule lookup and abstain"
+    }
+  },
+  {
+    "Name": "_query_meeting_room_list",
+    "entries": {
+      "delta1": "Withhold tool execution for vague requests like standalone 'query' without room parameters"
+    }
+  },
+  {
+    "Name": "acl_api",
+    "entries": {
+      "delta1": "Withhold tool calls when ACL mapping requests lack required parameters like principal ID, resource ID, or permissions",
+      "delta2": "Execute AclApi.add_mapping immediately when all required parameters (principal ID, resource ID, permissions) are explicitly provided",
+      "delta3": "Avoid conversational confirmation loops when parameters are complete; proceed directly to tool execution"
+    }
+  },
+  {
+    "Name": "add_mtnards_server",
+    "entries": {
+      "delta1": "Execute tool immediately when hostname and API key parameters are present, using available parameters without blocking on optional nickname",
+      "delta2": "Prioritize tool execution over conversational clarification when all required parameters are clearly provided",
+      "delta3": "Preserve exact URL format including protocol scheme when users provide full host addresses"
+    }
+  },
+  {
+    "Name": "add_postgres_server",
+    "entries": {
+      "delta1": "Execute tool immediately when all required parameters are provided, treating user-specified values as valid without format validation"
+    }
+  },
+  {
+    "Name": "alarm_1_add_alarm",
+    "entries": {
+      "delta1": "Execute immediately when time parameter provided, use default name if not specified"
+    }
+  },
+  {
+    "Name": "alarm_1_get_alarms",
+    "entries": {
+      "delta1": "Execute immediately when user provides user_id parameter, don't seek additional preferences"
+    }
+  },
+  {
+    "Name": "algebra",
+    "entries": {
+      "delta1": "Use exact function names with dot notation: algebra.quadratic_roots",
+      "delta2": "For parallel requests, make separate tool calls for each equation with distinct parameters"
+    }
+  },
+  {
+    "Name": "alimony_calculator",
+    "entries": {
+      "delta1": "Execute calculations immediately when all required parameters are explicitly provided in the query",
+      "delta2": "Avoid seeking confirmation for clearly specified duration values in parallel calculation requests",
+      "delta3": "Execute separate calculations for each distinct parameter set in parallel requests"
+    }
+  },
+  {
+    "Name": "altibase_grantee",
+    "entries": {
+      "delta1": "Proceed with available parameters in Java DB contexts; don't block on session validation"
+    }
+  },
+  {
+    "Name": "analyse_repo_contents",
+    "entries": {
+      "delta1": "Execute analysis after repository cloning when part of multi-step deployment workflow"
+    }
+  },
+  {
+    "Name": "analysis_api",
+    "entries": {
+      "delta1": "Attempt tool calls with available parameters, letting APIs handle format validation and error responses"
+    }
+  },
+  {
+    "Name": "analyze_dna_sequence",
+    "entries": {
+      "delta1": "Execute all requested parallel analyses simultaneously, never selectively processing subsets or omitting requested operations"
+    }
+  },
+  {
+    "Name": "analyze_image_with_question",
+    "entries": {
+      "delta1": "Execute pipeline initialization when model name and analysis question are provided, even if file path is unspecified"
+    }
+  },
+  {
+    "Name": "angle_to_x_axis",
+    "entries": {
+      "delta1": "Execute identical angle calculations for all specified point pairs in parallel requests"
+    }
+  },
+  {
+    "Name": "api_name",
+    "entries": {
+      "delta1": "Execute get_weather_forecast immediately when location and date parameters are clearly specified, avoiding conversational clarification loops"
+    }
+  },
+  {
+    "Name": "api_token_api",
+    "entries": {
+      "delta1": "Execute token retrieval tools immediately when users provide specific parameters - trust available functions over assumptions"
+    }
+  },
+  {
+    "Name": "are_declaration_flags_identical",
+    "entries": {
+      "delta1": "Execute tool directly with provided parameters in BFCL evaluations without requesting additional user input"
+    }
+  },
+  {
+    "Name": "ask_for_ssid",
+    "entries": {
+      "delta1": "Abstain from tool calls when user complaints are generic WiFi issues without specific network identification needs"
+    }
+  },
+  {
+    "Name": "assign_own_defaults",
+    "entries": {
+      "delta1": "Call function with provided property key, default value, and object value - no additional inputs needed"
+    }
+  },
+  {
+    "Name": "audit_log_api",
+    "entries": {
+      "delta1": "Execute tool calls with available parameters rather than pre-validating inputs through text responses",
+      "delta2": "Use offset=0 as default when page_size is specified but offset not provided"
+    }
+  },
+  {
+    "Name": "audit_records_api",
+    "entries": {
+      "delta1": "Abstain from tool calls when user requests fall outside audit record functionality"
+    }
+  },
+  {
+    "Name": "average_batting_score",
+    "entries": {
+      "delta1": "Execute tool call immediately when cricketer name and match count are provided, without seeking optional format clarifications"
+    }
+  },
+  {
+    "Name": "average_temperature",
+    "entries": {
+      "delta1": "Execute tool immediately when city, days, and unit parameters are clearly specified in query",
+      "delta2": "Avoid artificial ambiguity - don't seek clarification for parameters already provided"
+    }
+  },
+  {
+    "Name": "aws",
+    "entries": {
+      "delta1": "Execute tool calls immediately when user provides all required parameters, avoiding unnecessary clarification loops"
+    }
+  },
+  {
+    "Name": "badge_api",
+    "entries": {
+      "delta1": "Execute tool calls directly when parameters match expected types, avoiding unnecessary validation requests",
+      "delta2": "Trust provided project names and versions unless formatting issues are explicitly indicated in the query"
+    }
+  },
+  {
+    "Name": "bank",
+    "entries": {
+      "delta1": "Execute independent banking functions in parallel when user requests multiple operations simultaneously",
+      "delta2": "Recognize compound banking requests as parallel candidates when functions don't depend on each other"
+    }
+  },
+  {
+    "Name": "bank_account",
+    "entries": {
+      "delta1": "Execute all requested banking operations in parallel when multiple functions are specified",
+      "delta2": "Use exact function names: bank_account.transfer not bank_account_transfer",
+      "delta3": "Include bank_account.calculate_interest when interest calculation is requested"
+    }
+  },
+  {
+    "Name": "banking_service",
+    "entries": {
+      "delta1": "Execute parallel calls when user requests multiple operations simultaneously"
+    }
+  },
+  {
+    "Name": "base_markup_serializer",
+    "entries": {
+      "delta1": "Use BaseMarkupSerializer.surrogates for XML surrogate pair handling with high/low/inContent params"
+    }
+  },
+  {
+    "Name": "base_policy_data_provider",
+    "entries": {
+      "delta1": "Execute registry policy functions with obvious parameter mappings from query context without seeking clarification",
+      "delta2": "Use standard string representations like 'HKEY_LOCAL_MACHINE' directly when referenced in user queries"
+    }
+  },
+  {
+    "Name": "biological",
+    "entries": {
+      "delta1": "Execute all biological calculations in parallel when multiple are requested simultaneously",
+      "delta2": "Use exact function names (biological.calc_energy) not underscores (biological_calc_energy)"
+    }
+  },
+  {
+    "Name": "board_game_geek",
+    "entries": {
+      "delta1": "Execute recommend tool when core parameters like player count and game type are provided",
+      "delta2": "Avoid conversational clarification when tools can handle missing optional parameters"
+    }
+  },
+  {
+    "Name": "book_flight",
+    "entries": {
+      "delta1": "Proceed with booking when all required parameters are present, avoiding unrequested validation",
+      "delta2": "Call book_flight immediately when departure city and date are specified, without seeking validation of time format or flight type"
+    }
+  },
+  {
+    "Name": "book_hotel",
+    "entries": {
+      "delta1": "Execute book_hotel with available parameters; never seek clarification about specific hotel locations when chain and city are provided"
+    }
+  },
+  {
+    "Name": "book_room",
+    "entries": {
+      "delta1": "Execute book_room immediately when hotel and duration are specified, using default handling for room_type without seeking clarification"
+    }
+  },
+  {
+    "Name": "booleans",
+    "entries": {
+      "delta1": "Use Booleans.parseBooleanLenient for lenient string-to-boolean conversion with fallback defaults"
+    }
+  },
+  {
+    "Name": "building",
+    "entries": {
+      "delta1": "Execute all independent building operations concurrently with other tool groups when no dependencies exist"
+    }
+  },
+  {
+    "Name": "buses_3_find_bus",
+    "entries": {
+      "delta1": "Execute find_bus immediately when departure, arrival, date, and passenger count are specified, avoiding city format clarifications",
+      "delta2": "Execute find_bus immediately when departure, arrival, date, and passenger count are specified, even for international destinations"
+    }
+  },
+  {
+    "Name": "calc_area_triangle",
+    "entries": {
+      "delta1": "Execute parallel calls for all triangles when calculating total area from multiple specifications"
+    }
+  },
+  {
+    "Name": "calc_binomial_prob",
+    "entries": {
+      "delta1": "Process all distinct parameter combinations in multi-part parallel scenarios"
+    }
+  },
+  {
+    "Name": "calc_compound_interest",
+    "entries": {
+      "delta1": "Proceed with annual compounding as default when frequency parameter is missing",
+      "delta2": "Execute tool calls when principal, rate, and time are provided even if frequency is unspecified",
+      "delta3": "Execute parallel calls when multiple investment scenarios with distinct parameters are specified"
+    }
+  },
+  {
+    "Name": "calc_simple_interest",
+    "entries": {
+      "delta1": "Handle parallel execution with other financial calculations when multiple scenarios are presented"
+    }
+  },
+  {
+    "Name": "calculate_area",
+    "entries": {
+      "delta1": "Make parallel calls for all geometric shapes when calculating total area",
+      "delta2": "Process all dimension sets simultaneously in multi-shape scenarios"
+    }
+  },
+  {
+    "Name": "calculate_bond_price",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries involve unrelated financial instruments like gold prices"
+    }
+  },
+  {
+    "Name": "calculate_cagr",
+    "entries": {
+      "delta1": "Process ALL investment scenarios mentioned in parallel queries simultaneously - never skip any"
+    }
+  },
+  {
+    "Name": "calculate_compounded_interest",
+    "entries": {
+      "delta1": "Call tool with available parameters - let tool handle defaults/validation",
+      "delta2": "Avoid pre-validating parameter completeness before tool invocation"
+    }
+  },
+  {
+    "Name": "calculate_density",
+    "entries": {
+      "delta1": "Execute calculations immediately when population and area parameters are explicitly provided"
+    }
+  },
+  {
+    "Name": "calculate_derivative",
+    "entries": {
+      "delta1": "Execute derivative calculations in parallel with integration when both are requested independently"
+    }
+  },
+  {
+    "Name": "calculate_displacement",
+    "entries": {
+      "delta1": "Execute ALL independent sub-problems in parallel when query contains multiple calculations"
+    }
+  },
+  {
+    "Name": "calculate_distance",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple distinct celestial body pairs are requested in the same query"
+    }
+  },
+  {
+    "Name": "calculate_dynamic_pricing",
+    "entries": {
+      "delta1": "Execute tool immediately when all required parameters are explicitly provided in user query",
+      "delta2": "Avoid seeking confirmation about implementation details the function handles internally"
+    }
+  },
+  {
+    "Name": "calculate_electric_field_strength",
+    "entries": {
+      "delta1": "Execute all requested parallel calculations simultaneously, not sequentially",
+      "delta2": "Process multiple distance/medium combinations from same charge as parallel calls",
+      "delta3": "Execute immediately with available parameters, using defaults for optional fields without requesting missing optional inputs"
+    }
+  },
+  {
+    "Name": "calculate_emission_savings",
+    "entries": {
+      "delta1": "Run emission calculations directly when location and duration parameters are provided without seeking unnecessary clarifications"
+    }
+  },
+  {
+    "Name": "calculate_entropy_change",
+    "entries": {
+      "delta1": "Handle all scenarios in multi-part questions with parallel calls",
+      "delta2": "Process both isothermal and non-isothermal cases when explicitly requested"
+    }
+  },
+  {
+    "Name": "calculate_final_speed",
+    "entries": {
+      "delta1": "Execute tool with implied parameters from context (e.g., initial_velocity=0 for 'dropped' objects)",
+      "delta2": "Avoid conversational text responses when tool execution is clearly indicated"
+    }
+  },
+  {
+    "Name": "calculate_final_velocity",
+    "entries": {
+      "delta1": "For parallel scenarios, call function for all relevant entities simultaneously, not sequentially"
+    }
+  },
+  {
+    "Name": "calculate_fitness",
+    "entries": {
+      "delta1": "Execute all requested parallel tool calls when user specifies multiple independent tasks"
+    }
+  },
+  {
+    "Name": "calculate_heat",
+    "entries": {
+      "delta1": "Abstain from tool calls when query falls outside available tool groups in current context"
+    }
+  },
+  {
+    "Name": "calculate_integral",
+    "entries": {
+      "delta1": "Execute integration calculations in parallel with derivatives when both are requested independently"
+    }
+  },
+  {
+    "Name": "calculate_internal_rate_of_return",
+    "entries": {
+      "delta1": "Abstain when user requests external rate of return or other non-IRR metrics"
+    }
+  },
+  {
+    "Name": "calculate_magnetic_field",
+    "entries": {
+      "delta1": "Execute parallel with other tools when user explicitly joins requests with conjunctions like 'And'"
+    }
+  },
+  {
+    "Name": "calculate_mutual_fund_balance",
+    "entries": {
+      "delta1": "Execute in parallel with other tool groups when query contains independent sub-tasks"
+    }
+  },
+  {
+    "Name": "calculate_paint_needed",
+    "entries": {
+      "delta1": "Execute tool calls immediately when all required parameters are available in user query",
+      "delta2": "Prioritize structured function invocation over conversational responses",
+      "delta3": "Avoid conversational text when tool parameters are fully specified",
+      "delta4": "Execute parallel with other tools when query contains multiple independent sub-problems"
+    }
+  },
+  {
+    "Name": "calculate_probability",
+    "entries": {
+      "delta1": "Verify 'round_to' parameter accepts only '' or 2, not arbitrary numeric values"
+    }
+  },
+  {
+    "Name": "calculate_resistance",
+    "entries": {
+      "delta1": "Make separate tool calls for each material when users specify multiple resistivity options"
+    }
+  },
+  {
+    "Name": "calculate_resonant_frequency",
+    "entries": {
+      "delta1": "Execute parallel calls for independent calculation requests with distinct parameters",
+      "delta2": "Process all calculation requests in parallel scenarios, not sequentially or partially"
+    }
+  },
+  {
+    "Name": "calculate_return_on_investment",
+    "entries": {
+      "delta1": "Process all distinct investment scenarios in parallel when user requests multiple calculations"
+    }
+  },
+  {
+    "Name": "calculate_shortest_distance",
+    "entries": {
+      "delta1": "When user explicitly requests 'shortest' distance, proceed directly with calculation using provided locations",
+      "delta2": "Avoid asking for route preference when 'shortest' is specified in the user request"
+    }
+  },
+  {
+    "Name": "calculate_speed",
+    "entries": {
+      "delta1": "Process all distinct calculation scenarios in parallel when user specifies multiple cases",
+      "delta2": "Make separate tool calls for each unique parameter set in multi-scenario requests"
+    }
+  },
+  {
+    "Name": "calculate_stock_return",
+    "entries": {
+      "delta1": "Execute tool directly when all investment parameters are provided in query",
+      "delta2": "Avoid conversational clarifications when parameters are complete"
+    }
+  },
+  {
+    "Name": "calculate_tax",
+    "entries": {
+      "delta1": "Use calculate_tax with available parameters rather than requesting additional information preemptively"
+    }
+  },
+  {
+    "Name": "calculate_voltage_difference",
+    "entries": {
+      "delta1": "Execute parallel with other tools when user explicitly joins requests with conjunctions like 'And'"
+    }
+  },
+  {
+    "Name": "calculate_water_needs",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries address plant nutrients rather than water requirements"
+    }
+  },
+  {
+    "Name": "calculate_winning_percentage",
+    "entries": {
+      "delta1": "Make reasonable parameter inferences when user provides season years rather than defaulting to clarification loops",
+      "delta2": "Execute tool with mapped parameters (e.g., 2018 → 2017-18) when season format ambiguity exists, avoiding clarification loops"
+    }
+  },
+  {
+    "Name": "calculus",
+    "entries": {
+      "delta1": "Use exact tool names (e.g., calculus.derivative) as specified in BFCL benchmark"
+    }
+  },
+  {
+    "Name": "call_uber",
+    "entries": {
+      "delta1": "Abstain from tool calls in irrelevance scenarios where user queries fall outside valid tool usage scope"
+    }
+  },
+  {
+    "Name": "capacitance_calculator",
+    "entries": {
+      "delta1": "Use exact function names from tool groups (e.g., capacitance_calculator.calculate)"
+    }
+  },
+  {
+    "Name": "cha_fod",
+    "entries": {
+      "delta1": "Map specific food items to available categories (BURGER, PIZZA, etc.) rather than rejecting requests",
+      "delta2": "Invoke ChaFod when user mentions food items matching available categories, even if specific"
+    }
+  },
+  {
+    "Name": "change_food",
+    "entries": {
+      "delta1": "Execute change_food when dish name and modification are specified, even if generic",
+      "delta2": "Execute directly with provided dish names; avoid clarification loops even for generic items like 'chicken dish'"
+    }
+  },
+  {
+    "Name": "chart_data_accessor_factory",
+    "entries": {
+      "delta1": "Use provided parameter names directly when explicitly stated in queries",
+      "delta2": "Never request concrete instances or implementation details when parameter names are provided"
+    }
+  },
+  {
+    "Name": "chart_series_generator",
+    "entries": {
+      "delta1": "Execute ChartSeriesGenerator with provided parameter names when users explicitly specify JavaScript variables as values",
+      "delta2": "Execute ChartSeriesGenerator with JavaScript variable names as direct parameter inputs, not as placeholders requiring substitution"
+    }
+  },
+  {
+    "Name": "chat_with_friend",
+    "entries": {
+      "delta1": "Invoke chat_with_friend when user initiates conversation, don't assume function unavailability"
+    }
+  },
+  {
+    "Name": "check_inner_fields",
+    "entries": {
+      "delta1": "Call checkInnerFields immediately for Java validation without requesting object parameters"
+    }
+  },
+  {
+    "Name": "check_order_status",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries involve product specifications or sizing discrepancies"
+    }
+  },
+  {
+    "Name": "chess",
+    "entries": {
+      "delta1": "Execute rating calls in parallel with other domain tools when clearly requested",
+      "delta2": "Proceed with play calls when moves are explicitly stated, without seeking additional confirmation"
+    }
+  },
+  {
+    "Name": "chess_club_details",
+    "entries": {
+      "delta1": "Proceed with club lookups when city locations are explicitly provided in user query",
+      "delta2": "Avoid requesting redundant location confirmations when parameters are already clear"
+    }
+  },
+  {
+    "Name": "class_file_finder",
+    "entries": {
+      "delta1": "Use ClassFileFinder.findClassFile immediately with provided class name and classpath directories, without requesting system-specific parameters."
+    }
+  },
+  {
+    "Name": "classfloadhk005",
+    "entries": {
+      "delta1": "Execute tool calls immediately when user provides all required parameters, avoiding unnecessary parameter representation clarification"
+    }
+  },
+  {
+    "Name": "cmd_controller",
+    "entries": {
+      "delta1": "When passing Windows paths in command parameters, use quadruple backslashes (\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\) for proper JSON escaping",
+      "delta2": "For irrelevance tests, fail to decode entirely - successful parsing of any tool call constitutes failure",
+      "delta3": "Use exact tool names from BFCL (cmd_controller.execute) - though underscore variations may sometimes pass, they're not guaranteed"
+    }
+  },
+  {
+    "Name": "composite_runtime_field",
+    "entries": {
+      "delta1": "Execute tool calls even when anticipating failures - let system enforce constraints"
+    }
+  },
+  {
+    "Name": "compound_interest",
+    "entries": {
+      "delta1": "Call tool immediately when all parameters are explicitly provided in query",
+      "delta2": "Verify all parameters before requesting clarification; avoid redundant questioning"
+    }
+  },
+  {
+    "Name": "concert",
+    "entries": {
+      "delta1": "Execute search with available parameters when location, date, and genre are specified",
+      "delta2": "Handle vague terms like 'cheap' through result filtering rather than blocking search execution"
+    }
+  },
+  {
+    "Name": "concert_booking",
+    "entries": {
+      "delta1": "Use concert_booking.book_ticket function name exactly - avoid concert_booking_book_ticket variations"
+    }
+  },
+  {
+    "Name": "concert_finder",
+    "entries": {
+      "delta1": "Make parallel calls for each genre-location combination when multiple genres and locations are specified"
+    }
+  },
+  {
+    "Name": "concert_ticket",
+    "entries": {
+      "delta1": "Execute tool calls when all required parameters are explicitly provided, avoiding unnecessary validation"
+    }
+  },
+  {
+    "Name": "config_storage",
+    "entries": {
+      "delta1": "Execute tool calls with provided parameters as-is when all required inputs are explicitly specified"
+    }
+  },
+  {
+    "Name": "configure_shader_material",
+    "entries": {
+      "delta1": "Execute configureShaderMaterial when user explicitly names materialProps, textureList, and meshObject parameters",
+      "delta2": "Avoid parameter clarification requests when all required parameters are clearly specified in user query"
+    }
+  },
+  {
+    "Name": "connect_to_server",
+    "entries": {
+      "delta1": "Execute immediately when users provide server nickname parameters, using exact values without conversational delays"
+    }
+  },
+  {
+    "Name": "control_appliance",
+    "entries": {
+      "delta1": "Execute tool for explicit appliance control requests; don't assume formatting limitations"
+    }
+  },
+  {
+    "Name": "cookbook",
+    "entries": {
+      "delta1": "Only use 'Italian' or empty string for cuisine; max_results must be '' or 10"
+    }
+  },
+  {
+    "Name": "cookie_header_test",
+    "entries": {
+      "delta1": "Use Java dot notation for method calls: CookieHeaderTest.create not CookieHeaderTest_create"
+    }
+  },
+  {
+    "Name": "cooking_conversion",
+    "entries": {
+      "delta1": "Use exact tool names like 'cooking_conversion.convert' not variations like 'cooking_conversion_convert'",
+      "delta2": "Use exact tool name 'cooking_conversion.convert' not underscore variations"
+    }
+  },
+  {
+    "Name": "coroutine_manager",
+    "entries": {
+      "delta1": "Execute coroutine switching tools immediately with provided arguments in Java XML contexts",
+      "delta2": "Avoid seeking clarification about Java object representation formats"
+    }
+  },
+  {
+    "Name": "court_case",
+    "entries": {
+      "delta1": "Execute court_case.search with provided parameters even if data appears placeholder-like",
+      "delta2": "Avoid input validation unless explicitly required by tool specifications"
+    }
+  },
+  {
+    "Name": "court_info",
+    "entries": {
+      "delta1": "Handle multiple independent case status queries in parallel calls when users request status for distinct cases"
+    }
+  },
+  {
+    "Name": "create_a_docker_file",
+    "entries": {
+      "delta1": "Generate Dockerfile as sequential step after repository analysis in CI/CD pipelines"
+    }
+  },
+  {
+    "Name": "create_histogram",
+    "entries": {
+      "delta1": "Handle histogram creation concurrently with other tools when user specifies multiple parallel service needs",
+      "delta2": "Execute histogram creation directly when user provides data and bin specification, interpreting ambiguous parameters reasonably"
+    }
+  },
+  {
+    "Name": "create_kubernetes_yaml_file",
+    "entries": {
+      "delta1": "Create Kubernetes manifests following Dockerfile generation in deployment workflows"
+    }
+  },
+  {
+    "Name": "create_website_alert_config",
+    "entries": {
+      "delta1": "Withhold tool calls when user input lacks specific alert configuration requirements"
+    }
+  },
+  {
+    "Name": "currency_conversion",
+    "entries": {
+      "delta1": "Process concurrently with other tool groups when multiple operations are requested"
+    }
+  },
+  {
+    "Name": "custom_dashboards_api",
+    "entries": {
+      "delta1": "Call get_shareable_api_tokens immediately when user provides ID - avoid refusal patterns for available functions"
+    }
+  },
+  {
+    "Name": "dartfx_help",
+    "entries": {
+      "delta1": "Execute immediately when users request help information with specific topic parameters, don't assume tool unavailability"
+    }
+  },
+  {
+    "Name": "data_loading",
+    "entries": {
+      "delta1": "Execute parallel with regression fit when both dataset path and model parameters are provided - both calls are mandatory"
+    }
+  },
+  {
+    "Name": "database",
+    "entries": {
+      "delta1": "Execute database operations when column removal intent is clear, don't request exact column names unnecessarily"
+    }
+  },
+  {
+    "Name": "db2_view_base_dep_cache",
+    "entries": {
+      "delta1": "Use prepareObjectsStatement with provided JDBC session; don't invent missing parameter requirements"
+    }
+  },
+  {
+    "Name": "derivative",
+    "entries": {
+      "delta1": "Execute derivative calls in parallel when multiple mathematical operations are requested"
+    }
+  },
+  {
+    "Name": "detail_experience_and_education",
+    "entries": {
+      "delta1": "Include optional 'experience_or_education_name' parameter when users explicitly specify educational institutions in their queries"
+    }
+  },
+  {
+    "Name": "detect_beats_and_filter",
+    "entries": {
+      "delta1": "Abstain from tool calls when user explicitly rejects beat detection functionality",
+      "delta2": "Execute tool calls with available scenario parameters; do not request additional inputs",
+      "delta3": "Always invoke tools first in test scenarios; avoid conversational responses"
+    }
+  },
+  {
+    "Name": "draw_circle",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries lack visual/drawing intent or are mathematically focused"
+    }
+  },
+  {
+    "Name": "dv_range_query",
+    "entries": {
+      "delta1": "Use numeric types directly for range parameters (from/to), not string-wrapped values",
+      "delta2": "Ensure FLOAT query types use actual float values, not string representations"
+    }
+  },
+  {
+    "Name": "ecology",
+    "entries": {
+      "delta1": "For queries requesting same data across multiple parameters, make parallel tool calls simultaneously",
+      "delta2": "Use exact function names with dots (ecology.get_turtle_population), not underscores"
+    }
+  },
+  {
+    "Name": "ecology_data",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation: ecology_data.precipitation_stats",
+      "delta2": "For parallel queries, make multiple simultaneous calls with different parameters"
+    }
+  },
+  {
+    "Name": "efsnio_file",
+    "entries": {
+      "delta1": "Execute EFSNIOFile.setContents when all required parameters are clearly referenced in context, avoiding unnecessary clarification requests"
+    }
+  },
+  {
+    "Name": "employee",
+    "entries": {
+      "delta1": "For parallel requests, execute identical operations multiple times with different parameter values",
+      "delta2": "Use exact function names from BFCL specifications, not variations like underscores"
+    }
+  },
+  {
+    "Name": "english_llm",
+    "entries": {
+      "delta1": "Use exact query text provided by user without modification or creative expansion"
+    }
+  },
+  {
+    "Name": "environmental_data",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation: environmental_data.air_quality_index"
+    }
+  },
+  {
+    "Name": "estimate_derivative",
+    "entries": {
+      "delta1": "Execute simultaneously with other tools when parallel mathematical queries are present, ignoring sequential phrasing"
+    }
+  },
+  {
+    "Name": "estimate_population",
+    "entries": {
+      "delta1": "Execute tool calls immediately when user intent matches function purpose, avoiding unnecessary clarification loops",
+      "delta2": "Assume tools handle parameter defaults or species logic internally unless specification indicates otherwise"
+    }
+  },
+  {
+    "Name": "euclidean_distance",
+    "entries": {
+      "delta1": "Calculate distances for all point pairs when multiple sets are provided in parallel"
+    }
+  },
+  {
+    "Name": "event_finder",
+    "entries": {
+      "delta1": "Proceed with event_finder.find_upcoming when timeframe parameters are reasonably inferable from context",
+      "delta2": "Use 'upcoming month' context to infer 30-day timeframe rather than seeking clarification",
+      "delta3": "Execute parallel calls for all independent domain tasks in single query, not just some"
+    }
+  },
+  {
+    "Name": "events_3_buy_event_tickets",
+    "entries": {
+      "delta1": "Prioritize tool execution over dialogue when user intent and required parameters are clear"
+    }
+  },
+  {
+    "Name": "events_3_find_events",
+    "entries": {
+      "delta1": "Execute tool calls immediately when location is specified, even with vague entertainment requests; never request event type clarification",
+      "delta2": "Convert natural language dates automatically without clarification; never request year confirmation or date formatting details",
+      "delta3": "Consolidate searches for multiple related event types into single tool calls when location and date match"
+    }
+  },
+  {
+    "Name": "events_api",
+    "entries": {
+      "delta1": "Avoid tool execution for generic queries without clear event retrieval intent"
+    }
+  },
+  {
+    "Name": "exhibition_info",
+    "entries": {
+      "delta1": "Execute in parallel with restaurant_info when user requests both museum and dining information"
+    }
+  },
+  {
+    "Name": "f_mri",
+    "entries": {
+      "delta1": "Execute fMRI.analyze immediately when all required parameters are explicitly provided in query",
+      "delta2": "Avoid conversational clarification loops when tool parameters are clearly specified"
+    }
+  },
+  {
+    "Name": "fetch_law_case_details",
+    "entries": {
+      "delta1": "Execute function immediately with provided parameters when ground truth validates the call, avoiding clarification loops"
+    }
+  },
+  {
+    "Name": "filter_books_by_author",
+    "entries": {
+      "delta1": "Call filterBooksByAuthor directly with provided author and library parameters without requesting additional data",
+      "delta2": "Avoid over-engineering data requirements in simple JavaScript scenarios"
+    }
+  },
+  {
+    "Name": "filter_list",
+    "entries": {
+      "delta1": "Execute all parallel operations when multiple independent requests are present"
+    }
+  },
+  {
+    "Name": "final_velocity",
+    "entries": {
+      "delta1": "Process parameter sets in parallel for multiple scenarios, but handle single scenarios with individual calls",
+      "delta2": "Make separate tool calls for each unique racing round with corresponding parameters"
+    }
+  },
+  {
+    "Name": "finance",
+    "entries": {
+      "delta1": "Execute financial tools immediately when complete parameters are provided, avoiding conversational clarifications",
+      "delta2": "Execute all requested tools in parallel when user bundles multiple distinct financial scenarios or service requests",
+      "delta3": "Use exact BFCL tool naming format (finance.tool_name) to match checker expectations"
+    }
+  },
+  {
+    "Name": "finance_calculator",
+    "entries": {
+      "delta1": "Call npv with provided cash flows array, assuming first element is period 0 by convention",
+      "delta2": "Avoid requesting timing clarification when cash flow array and discount rate are fully specified"
+    }
+  },
+  {
+    "Name": "financial",
+    "entries": {
+      "delta1": "For investment comparison queries, call both compound_interest and simple_interest tools in parallel",
+      "delta2": "Process all relevant financial calculations simultaneously when multiple options are requested"
+    }
+  },
+  {
+    "Name": "find_beer",
+    "entries": {
+      "delta1": "Execute tool immediately when core parameters are present; avoid seeking clarification on optional attributes"
+    }
+  },
+  {
+    "Name": "find_card_in_deck",
+    "entries": {
+      "delta1": "Execute parallel calls when user requests multiple independent actions simultaneously",
+      "delta2": "Execute tool with standard defaults when user clearly requests card search without deck specification"
+    }
+  },
+  {
+    "Name": "find_concert",
+    "entries": {
+      "delta1": "Proceed with tool call when city, genre, and max_price are provided, even for ambiguous city names",
+      "delta2": "Allow tools to handle location ambiguity internally rather than preemptively seeking clarification"
+    }
+  },
+  {
+    "Name": "find_exhibition",
+    "entries": {
+      "delta1": "Execute tool when location and exhibition type are clear; use 'upcoming month' for timeframe if unspecified rather than blocking execution"
+    }
+  },
+  {
+    "Name": "find_latest_court_case",
+    "entries": {
+      "delta1": "Execute directly for well-known company pairs without requesting entity clarification",
+      "delta2": "Avoid over-parameterizing queries when tool handles common case searches automatically"
+    }
+  },
+  {
+    "Name": "find_recipe",
+    "entries": {
+      "delta1": "Execute find_recipe directly for clear recipe requests without clarification loops",
+      "delta2": "Infer reasonable parameters from user constraints (vegan, prep time)"
+    }
+  },
+  {
+    "Name": "find_recipes",
+    "entries": {
+      "delta1": "Execute find_recipes when user provides clear recipe criteria like dietary restrictions and meal type",
+      "delta2": "Avoid seeking clarification for optional parameters when core requirements are specified"
+    }
+  },
+  {
+    "Name": "fire_bird_utils",
+    "entries": {
+      "delta1": "Proceed with tool calls using available parameters; never invent missing parameter requirements"
+    }
+  },
+  {
+    "Name": "five_factor_model",
+    "entries": {
+      "delta1": "Execute parallel analyses when multiple personality frameworks are requested concurrently",
+      "delta2": "Use dot notation (five_factor_model.analyse) not underscores for function calls"
+    }
+  },
+  {
+    "Name": "flat_node_gen_factory",
+    "entries": {
+      "delta1": "Execute generateIntrospectionInfo when classElement and inlined parameters are clearly specified in user request"
+    }
+  },
+  {
+    "Name": "flight",
+    "entries": {
+      "delta1": "Execute flight.status.check immediately when airline, flight identifier, and passenger name are available, avoiding conversational clarification",
+      "delta2": "Avoid requesting additional passenger information when flight status parameters including passenger name are already provided",
+      "delta3": "delta3: Execute flight.book immediately when departure_date, origin, and destination are provided, using default time if needed"
+    }
+  },
+  {
+    "Name": "flight_book",
+    "entries": {
+      "delta1": "Execute flight_book immediately when all required parameters are present in user request",
+      "delta2": "In parallel booking scenarios, execute tools simultaneously when parameters are complete"
+    }
+  },
+  {
+    "Name": "flights_4_search_oneway_flight",
+    "entries": {
+      "delta1": "Execute search immediately with available parameters; avoid preemptive clarification for optional fields like airline preference"
+    }
+  },
+  {
+    "Name": "flights_4_search_roundtrip_flights",
+    "entries": {
+      "delta1": "Proceed with search using user-provided dates rather than pre-emptively validating temporal logic"
+    }
+  },
+  {
+    "Name": "flip_image_action",
+    "entries": {
+      "delta1": "Perform flip operation directly when orientation parameter is clearly stated, without requiring image identification"
+    }
+  },
+  {
+    "Name": "fmp",
+    "entries": {
+      "delta1": "Use exact parameter values from user input, even when they conflict with common conventions"
+    }
+  },
+  {
+    "Name": "for_each_type",
+    "entries": {
+      "delta1": "Execute forEachType immediately when explicitly requested, without seeking structural clarification"
+    }
+  },
+  {
+    "Name": "forest_growth_forecast",
+    "entries": {
+      "delta1": "Execute parallel calls when multiple distinct forecasts are requested simultaneously",
+      "delta2": "Maintain all required forecast calls even when other tools are active"
+    }
+  },
+  {
+    "Name": "future_value",
+    "entries": {
+      "delta1": "Process simultaneous calculation requests alongside other financial tools when parameters are clear"
+    }
+  },
+  {
+    "Name": "game_of_life",
+    "entries": {
+      "delta1": "Execute play calls immediately when parameters are clearly specified, avoiding unnecessary clarification requests"
+    }
+  },
+  {
+    "Name": "game_result",
+    "entries": {
+      "delta1": "Call get_winner directly for sports queries with team names, avoiding unnecessary clarification about team ambiguity"
+    }
+  },
+  {
+    "Name": "game_stats",
+    "entries": {
+      "delta1": "Proceed with tool calls when user provides all required parameters, even if ambiguous",
+      "delta2": "Execute tool calls immediately when all required parameters are provided, avoiding clarification for game name ambiguity"
+    }
+  },
+  {
+    "Name": "gamespot",
+    "entries": {
+      "delta1": "Execute gamespot.getAverageUserScore with available game title, don't preemptively require platform specification"
+    }
+  },
+  {
+    "Name": "generate_human_image",
+    "entries": {
+      "delta1": "Use for all human image generation requests instead of general image tools"
+    }
+  },
+  {
+    "Name": "generate_image",
+    "entries": {
+      "delta1": "Avoid when human-specific generation is available and requested"
+    }
+  },
+  {
+    "Name": "generate_image_tool",
+    "entries": {
+      "delta1": "Abstain from tool calls when user requests are irrelevant to image generation capabilities"
+    }
+  },
+  {
+    "Name": "generate_law_contract",
+    "entries": {
+      "delta1": "Call tool directly with available parameters rather than preemptively requesting missing details",
+      "delta2": "Trust tool's ability to handle incomplete information using built-in defaults"
+    }
+  },
+  {
+    "Name": "generate_notification_handler",
+    "entries": {
+      "delta1": "Execute tool calls with provided string parameters without requesting object specifications",
+      "delta2": "Avoid conversational clarification when ground truth shows valid usage with simple values"
+    }
+  },
+  {
+    "Name": "generate_sound_wave",
+    "entries": {
+      "delta1": "Execute all generation calls in parallel when multiple sound specifications are provided",
+      "delta2": "Complete all specified sound generations before proceeding to playback phase"
+    }
+  },
+  {
+    "Name": "generic_types_visitor",
+    "entries": {
+      "delta1": "Proceed with GenericTypesVisitor.attachGenericTypesInfo when method and instruction references are clearly provided in query",
+      "delta2": "Avoid requesting string representations when function accepts object references directly"
+    }
+  },
+  {
+    "Name": "genetics",
+    "entries": {
+      "delta1": "Use exact function names with dots: genetics.calculate_similarity",
+      "delta2": "Include all explicitly requested output formats in parameters"
+    }
+  },
+  {
+    "Name": "geometry",
+    "entries": {
+      "delta1": "Execute in parallel with other tool groups when query contains independent sub-tasks"
+    }
+  },
+  {
+    "Name": "geometry_presentation",
+    "entries": {
+      "delta1": "Use exact tool names as defined in function signatures (e.g., GeometryPresentation.createPresentation)"
+    }
+  },
+  {
+    "Name": "get_act_details",
+    "entries": {
+      "delta1": "Call get_act_details directly when user provides act name, letting tool handle validation"
+    }
+  },
+  {
+    "Name": "get_active_data_entries",
+    "entries": {
+      "delta1": "Execute tool calls directly in programming contexts rather than requesting additional data inputs"
+    }
+  },
+  {
+    "Name": "get_adriel_education",
+    "entries": {
+      "delta1": "Withhold tool execution for ambiguous queries without clear education lookup requirements"
+    }
+  },
+  {
+    "Name": "get_adriel_experiences",
+    "entries": {
+      "delta1": "Avoid tool usage when user input lacks sufficient detail for meaningful experience retrieval"
+    }
+  },
+  {
+    "Name": "get_adriel_list_projects",
+    "entries": {
+      "delta1": "Abstain from querying when user requests are too vague to determine project parameters"
+    }
+  },
+  {
+    "Name": "get_adriel_profile",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries lack specific parameters or clear profile retrieval intent"
+    }
+  },
+  {
+    "Name": "get_adriel_projects",
+    "entries": {
+      "delta1": "Attempt tool calls with available parameters rather than preemptively requesting additional inputs"
+    }
+  },
+  {
+    "Name": "get_air_quality_index",
+    "entries": {
+      "delta1": "Invoke tool with available parameters when location and time are provided, trusting tool's default date handling"
+    }
+  },
+  {
+    "Name": "get_available_time_tracking_implementations",
+    "entries": {
+      "delta1": "Withhold tool execution for queries unrelated to time tracking implementations"
+    }
+  },
+  {
+    "Name": "get_aws_pricing",
+    "entries": {
+      "delta1": "Execute pricing lookups with provided parameters rather than blocking on perceived ambiguities",
+      "delta2": "Assume standard interpretations for common specs like 'one CPU' and let API handle variations"
+    }
+  },
+  {
+    "Name": "get_boiling_melting_points",
+    "entries": {
+      "delta1": "Prioritize tool execution over clarification when function can handle query parameters directly"
+    }
+  },
+  {
+    "Name": "get_case_info",
+    "entries": {
+      "delta1": "Use available parameters as specified in tool definition; don't invent additional required fields"
+    }
+  },
+  {
+    "Name": "get_city",
+    "entries": {
+      "delta1": "Withhold tool calls when user queries lack specific location parameters"
+    }
+  },
+  {
+    "Name": "get_clothes",
+    "entries": {
+      "delta1": "Avoid tool execution without clear destination or weather context"
+    }
+  },
+  {
+    "Name": "get_contact_information",
+    "entries": {
+      "delta1": "Execute tool calls matching user intent rather than preemptively filtering based on assumed tool limitations"
+    }
+  },
+  {
+    "Name": "get_current_weather",
+    "entries": {
+      "delta1": "Verify parameter values match exact expected formats, not just semantic equivalents (e.g., 'fahrenheit' not 'celsius')",
+      "delta2": "Execute tool calls with available location parameters rather than assuming ambiguity or requesting clarification",
+      "delta3": "delta3: Abstain from tool calls in irrelevance scenarios where queries don't match tool capabilities",
+      "delta4": "Only query locations explicitly specified in ground truth, don't assume additional locations"
+    }
+  },
+  {
+    "Name": "get_custom_event_specifications",
+    "entries": {
+      "delta1": "Withhold tool calls for ambiguous queries unrelated to event specifications"
+    }
+  },
+  {
+    "Name": "get_detail_adriel_project",
+    "entries": {
+      "delta1": "Withhold tool calls when user queries lack specific project identification details"
+    }
+  },
+  {
+    "Name": "get_detail_adriel_projects",
+    "entries": {
+      "delta1": "Attempt tool calls with available parameters rather than preemptively requesting additional inputs",
+      "delta2": "Let functions handle missing parameter validation internally instead of assuming requirements"
+    }
+  },
+  {
+    "Name": "get_directions",
+    "entries": {
+      "delta1": "Use available location parameters like city names rather than requiring exact addresses",
+      "delta2": "Invoke tool with provided specificity; don't block calls waiting for perfect data"
+    }
+  },
+  {
+    "Name": "get_directory_to_watch_from_failed_lookup_location_directory",
+    "entries": {
+      "delta1": "When a full path is provided, use it directly in tool calls without requesting directory component clarification."
+    }
+  },
+  {
+    "Name": "get_earliest_reference",
+    "entries": {
+      "delta1": "Execute tool calls when users ask about earliest historical references with name/source parameters"
+    }
+  },
+  {
+    "Name": "get_event_specification_infos",
+    "entries": {
+      "delta1": "Avoid tool execution when user requests lack clear event specification intent"
+    }
+  },
+  {
+    "Name": "get_event_specification_infos_by_ids",
+    "entries": {
+      "delta1": "Abstain from tool usage for vague queries without specific event IDs or context"
+    }
+  },
+  {
+    "Name": "get_headway",
+    "entries": {
+      "delta1": "Abstain from tool calls for queries irrelevant to headway calculations"
+    }
+  },
+  {
+    "Name": "get_highest_scoring_player",
+    "entries": {
+      "delta1": "Execute tool call directly when user provides all required parameters (game, season)",
+      "delta2": "Avoid seeking clarification when parameters are explicitly specified in query"
+    }
+  },
+  {
+    "Name": "get_income_statement",
+    "entries": {
+      "delta1": "Abstain from tool calls when user provides general API info without specific data requests"
+    }
+  },
+  {
+    "Name": "get_instrument_info",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries about musical instruments or other irrelevant topics appear"
+    }
+  },
+  {
+    "Name": "get_interviewer_list",
+    "entries": {
+      "delta1": "Execute tool immediately when available, don't preemptively request optional parameters",
+      "delta2": "Call function with available parameters first, then request missing info if needed"
+    }
+  },
+  {
+    "Name": "get_items",
+    "entries": {
+      "delta1": "Use exact item names from predefined lists without adding descriptive modifiers"
+    }
+  },
+  {
+    "Name": "get_lawsuit_details",
+    "entries": {
+      "delta1": "Proceed with tool call when case number is provided, avoid unnecessary parameter clarification"
+    }
+  },
+  {
+    "Name": "get_monitoring_state",
+    "entries": {
+      "delta1": "Execute immediately when API key is provided; don't require optional environment parameters for basic monitoring queries"
+    }
+  },
+  {
+    "Name": "get_museum_artists",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries involve performing arts or other domains outside museum artists"
+    }
+  },
+  {
+    "Name": "get_museum_hours",
+    "entries": {
+      "delta1": "Use get_museum_hours directly when day parameter is provided, avoiding unnecessary clarification loops",
+      "delta2": "Assume tools handle location resolution internally unless explicitly required by function signature"
+    }
+  },
+  {
+    "Name": "get_nba_player_stats",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries focus on championships or team achievements rather than individual statistics"
+    }
+  },
+  {
+    "Name": "get_next_key_values",
+    "entries": {
+      "delta1": "Call getNextKeyValues directly when dataAnalysisContext is available; don't request additional user input"
+    }
+  },
+  {
+    "Name": "get_plants_for_slope",
+    "entries": {
+      "delta1": "Proceed with tool call when user provides slope context like 'hill slope' without clarification"
+    }
+  },
+  {
+    "Name": "get_protein_sequence",
+    "entries": {
+      "delta1": "Execute parallel calls for all explicit gene-species combinations in the query",
+      "delta2": "Process cross-product combinations when multiple genes and species are specified"
+    }
+  },
+  {
+    "Name": "get_scientist_for_discovery",
+    "entries": {
+      "delta1": "Handle parallel discovery queries concurrently with other tool groups"
+    }
+  },
+  {
+    "Name": "get_selected_time_tracking_implementation",
+    "entries": {
+      "delta1": "Avoid tool usage when user requests lack time tracking relevance"
+    }
+  },
+  {
+    "Name": "get_sensor_readings_history",
+    "entries": {
+      "delta1": "Use perPage=10 exclusively; API rejects other values despite user preferences"
+    }
+  },
+  {
+    "Name": "get_sensor_readings_history_by_interval",
+    "entries": {
+      "delta1": "Execute with reasonable time inferences when core parameters are present; avoid unnecessary clarification requests"
+    }
+  },
+  {
+    "Name": "get_sensor_readings_latest",
+    "entries": {
+      "delta1": "Execute with available context; prioritize tool usage over clarification when core requirements are met",
+      "delta2": "Include 'metrics' parameter when users specify particular sensor types like temperature",
+      "delta3": "delta3: Never request perPage parameter; this tool doesn't support it unlike history variants"
+    }
+  },
+  {
+    "Name": "get_service_id",
+    "entries": {
+      "delta1": "Never abstain when queries contain specific service types matching available options; use get_service_id for service-matching queries"
+    }
+  },
+  {
+    "Name": "get_service_providers",
+    "entries": {
+      "delta1": "Execute tool immediately when user provides all required search parameters, ignoring system implementation details like ID mappings",
+      "delta2": "Use available job count parameters directly rather than interpreting ambiguity in user phrasing",
+      "delta3": "Include optional parameters when users explicitly provide relevant information, even if marked optional in schema",
+      "delta4": "Use only parameter values validated by BFCL checker, rejecting real-world interpretations of user phrasing",
+      "delta5": "Execute immediately with available required parameters, never ask for clarification when sufficient data exists per BFCL schema",
+      "delta6": "delta6: Call get_service_providers first when given professional IDs, don't skip to profile viewing"
+    }
+  },
+  {
+    "Name": "get_shortest_driving_distance",
+    "entries": {
+      "delta1": "Execute tool directly when cities are specified, using default units without clarification requests"
+    }
+  },
+  {
+    "Name": "get_snow_report",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries lack specific resort parameters"
+    }
+  },
+  {
+    "Name": "get_song_lyrics",
+    "entries": {
+      "delta1": "Process song lyric requests in parallel only when user explicitly requests multiple songs simultaneously"
+    }
+  },
+  {
+    "Name": "get_stock_info",
+    "entries": {
+      "delta1": "Execute stock lookup directly when user specifies company name, avoiding unnecessary market clarification"
+    }
+  },
+  {
+    "Name": "get_stock_price",
+    "entries": {
+      "delta1": "Execute parallel stock price calls only when user explicitly queries multiple companies simultaneously",
+      "delta2": "Execute stock price calls directly when date parameters are reasonably interpretable, avoiding unnecessary clarification loops"
+    }
+  },
+  {
+    "Name": "get_stock_prices",
+    "entries": {
+      "delta1": "Execute with most common duration when users provide mixed parameters, don't block on clarification",
+      "delta2": "For batch requests, apply single duration to all companies rather than requiring uniform input"
+    }
+  },
+  {
+    "Name": "get_team_ranking",
+    "entries": {
+      "delta1": "Execute calls with provided parameters regardless of factual accuracy concerns",
+      "delta2": "Prioritize tool execution over conversational clarification about parameter validity"
+    }
+  },
+  {
+    "Name": "get_temperature",
+    "entries": {
+      "delta1": "Abstain from tool calls when location parameters are unspecified"
+    }
+  },
+  {
+    "Name": "get_theater_movie_releases",
+    "entries": {
+      "delta1": "Execute immediately with common timeframe parameters like 'next week' - do not seek clarification on standard expressions",
+      "delta2": "Treat 'next week' and similar common expressions as immediately executable parameters without clarification"
+    }
+  },
+  {
+    "Name": "get_time_headway",
+    "entries": {
+      "delta1": "Withhold tool usage when queries lack relevance to time headway functions"
+    }
+  },
+  {
+    "Name": "get_time_to_collision",
+    "entries": {
+      "delta1": "Avoid tool execution for queries outside collision analysis scope"
+    }
+  },
+  {
+    "Name": "get_url_content",
+    "entries": {
+      "delta1": "Withhold tool execution when user requests fall outside content extraction use cases"
+    }
+  },
+  {
+    "Name": "gorilla_file_system",
+    "entries": {
+      "delta1": "Execute only required file operations without extra navigation or conversational text - avoid exploration (cd, find, ls, pwd) unless explicitly specified",
+      "delta2": "Never add explanatory text or conversational wrapping - return raw tool outputs directly in all contexts, including multi-turn sequences with mixed tool groups",
+      "delta3": "Avoid creating redundant directories when existing ones suffice - use specified paths directly",
+      "delta4": "Execute required directory navigation (cd) when specified in the task sequence - missing navigation creates state mismatches",
+      "delta5": "Execute all turns in multi-turn sequences sequentially - missing turns or empty responses cause validation failure, ensure all ground truth operations are completed",
+      "delta6": "Ensure tool_calls are properly followed by corresponding tool messages to avoid API protocol violations and empty responses",
+      "delta7": "Avoid redundant file operations like echo+diff+echo sequences - execute minimal required operations without modifying unspecified content",
+      "delta8": "In multi-turn sequences with missing parameters, execute only confirmed operations - avoid assumptions about unspecified directories",
+      "delta9": "Complete all specified multi-turn operations - partial execution fails validation",
+      "delta10": "In multi-turn sequences, avoid ALL navigation calls, conversational text, exploratory file checks, duplicate operations, AND content analysis tools - execute only specified operations without verification steps",
+      "delta11": "In multi-turn sequences, execute all required operations sequentially using correct tools - avoid substituting operations or adding navigation, ensuring all turns are completed",
+      "delta12": "Avoid redundant file content analysis - execute only specified operations without adding interpretation",
+      "delta13": "Avoid file content analysis unless explicitly requested - execute search operations like grep when specified",
+      "delta14": "Execute file operations directly on target files without creating temporary files or intermediate steps",
+      "delta15": "Avoid overcomplicating simple operations - use direct tool calls without unnecessary file manipulation sequences or verification steps",
+      "delta16": "Execute only explicitly requested file operations - avoid adding analysis tools like sort when not specified",
+      "delta17": "In multi-turn operations, work directly with specified file paths without requiring directory verification or existence checks first",
+      "delta18": "Avoid duplicate file operations in multi-turn sequences - execute each required operation exactly once without redundant calls or navigation cycles",
+      "delta19": "Maintain file system state alignment by executing only ground truth operations - avoid extra calls like ls, find, pwd, or duplicate operations that create state divergence",
+      "delta20": "In multi-turn operations, suppress ALL conversational text, explanatory summaries, AND avoid adding verification operations like pwd - return only tool outputs",
+      "delta21": "Avoid adding analysis operations like cat, wc, or content interpretation when not explicitly specified in the task sequence",
+      "delta22": "Execute file move operations directly with mv - avoid content transfer sequences with cp+echo or temporary files",
+      "delta23": "In multi-turn operations, use exact tool specified for each operation - do not substitute tools based on perceived functionality",
+      "delta24": "When file creation is specified, use touch directly without requiring content specification first",
+      "delta25": "Avoid adding echo commands for file content analysis - use appropriate file reading tools when content inspection is needed",
+      "delta26": "Execute only the exact sequence of operations specified - avoid adding extra grep, sort, or analysis calls not in the task",
+      "delta27": "In multi-turn sequences, execute all specified operations without substituting tool listings or conversational queries for required tool calls",
+      "delta28": "Avoid exploratory file checks (ls, find, pwd) before executing specified operations - work directly with target files without verification cycles",
+      "delta29": "In multi-turn sequences, execute all specified operations sequentially without adding duplicate tool calls, redundant navigation, or missing turns",
+      "delta30": "Ensure tool_calls are always followed by corresponding tool messages to maintain API protocol compliance",
+      "delta31": "Avoid using echo for file content analysis or temporary file creation - execute only specified file operations directly",
+      "delta32": "In multi-turn sequences, execute only ground truth operations without adding exploratory calls like find, wc, sort, diff, or du",
+      "delta33": "When directory creation is specified, execute mkdir directly without checking if parent directories exist first",
+      "delta34": "Execute file copy operations with cp directly on specified paths without verifying source directory existence"
+    }
+  },
+  {
+    "Name": "grocery_store",
+    "entries": {
+      "delta1": "Use city names like Berkeley as valid location parameters without requesting street-level details",
+      "delta2": "Execute find_best with available location and criteria rather than seeking unnecessary precision"
+    }
+  },
+  {
+    "Name": "group_dynamics",
+    "entries": {
+      "delta1": "Use exact tool name 'group_dynamics.pattern' not underscore variations"
+    }
+  },
+  {
+    "Name": "guitar_price",
+    "entries": {
+      "delta1": "Execute guitar_price.find with available parameters when guitar type, condition, and location are specified",
+      "delta2": "Avoid clarification loops when sufficient parameters exist for tool execution"
+    }
+  },
+  {
+    "Name": "hbase_adapter",
+    "entries": {
+      "delta1": "Execute HBase configuration updates using named parameters from the request without requiring actual object values"
+    }
+  },
+  {
+    "Name": "health_api",
+    "entries": {
+      "delta1": "Abstain from tool calls when user requests are irrelevant to API health checking"
+    }
+  },
+  {
+    "Name": "historical_contrib",
+    "entries": {
+      "delta1": "Execute get_contrib immediately when query provides historical figure and date, never seek category clarifications"
+    }
+  },
+  {
+    "Name": "hna_news",
+    "entries": {
+      "delta1": "Use only '' or 'General' for category parameter; other values like 'Sports' are invalid",
+      "delta2": "Use HNA_NEWS.search for date-specific queries, not HNA_WQA_search"
+    }
+  },
+  {
+    "Name": "hna_wqa",
+    "entries": {
+      "delta1": "Avoid using for news queries with date parameters; use HNA_NEWS instead"
+    }
+  },
+  {
+    "Name": "homes_2_find_home_by_area",
+    "entries": {
+      "delta1": "Execute search immediately when mandatory parameters (area, bedrooms) are available; never delay for any parameter clarification including state abbreviations",
+      "delta2": "Never seek clarification on optional parameters before executing initial search; proceed with mandatory parameters only"
+    }
+  },
+  {
+    "Name": "homes_2_schedule_visit",
+    "entries": {
+      "delta1": "Execute scheduling immediately when property and date are provided, without pre-validating date completeness or format"
+    }
+  },
+  {
+    "Name": "hotel_book",
+    "entries": {
+      "delta1": "Call hotel_book when duration is specified, don't require additional confirmation",
+      "delta2": "Recognize 'X nights' format as valid duration specification for immediate execution"
+    }
+  },
+  {
+    "Name": "hotel_booking",
+    "entries": {
+      "delta1": "Execute hotel_booking.book immediately when core parameters exist; don't delay for optional fields like room type"
+    }
+  },
+  {
+    "Name": "hotel_bookings",
+    "entries": {
+      "delta1": "Abstain from tool calls only when essential parameters are missing, not for location specificity within valid cities"
+    }
+  },
+  {
+    "Name": "hotel_room_pricing",
+    "entries": {
+      "delta1": "Attempt tool calls with available parameters rather than preemptive clarification",
+      "delta2": "Let tool validation handle missing parameters, not model-side filtering"
+    }
+  },
+  {
+    "Name": "hotels_2_book_house",
+    "entries": {
+      "delta1": "Execute booking when user explicitly states booking intent with complete parameters, even if search tools are available",
+      "delta2": "Prioritize booking over search when user uses clear booking language like 'book', 'reserve', or 'make reservation'"
+    }
+  },
+  {
+    "Name": "hotels_2_search_house",
+    "entries": {
+      "delta1": "Execute search immediately when location and search intent are clear - tools handle missing date parameters with defaults automatically",
+      "delta2": "Execute search with available parameters rather than seeking perfect input formatting - tools handle common variations"
+    }
+  },
+  {
+    "Name": "hotels_4_reserve_hotel",
+    "entries": {
+      "delta1": "Execute reservation immediately with available parameters - tools handle missing location details appropriately"
+    }
+  },
+  {
+    "Name": "hotels_4_search_hotel",
+    "entries": {
+      "delta1": "Execute search immediately when location, star rating, and smoking preference are available",
+      "delta2": "Execute search immediately with explicit location parameters - tools handle common city variations automatically without disambiguation or neighborhood specificity",
+      "delta3": "Exclude booking parameters like check_in_date and stay duration - search executes with location, star rating, and smoking preference only"
+    }
+  },
+  {
+    "Name": "house_price_forecast",
+    "entries": {
+      "delta1": "Execute tool call when location is specified, using reasonable defaults for time parameters"
+    }
+  },
+  {
+    "Name": "http2_test_exchange_impl",
+    "entries": {
+      "delta1": "Execute sendResponseHeaders directly when status code and content length are specified, without requesting HTTP method details for non-HEAD requests"
+    }
+  },
+  {
+    "Name": "hypothesis_testing",
+    "entries": {
+      "delta1": "Execute statistical tests with provided example data arrays unless explicitly marked as placeholders",
+      "delta2": "Treat structured numerical arrays as valid inputs for hypothesis testing functions"
+    }
+  },
+  {
+    "Name": "identify_bird",
+    "entries": {
+      "delta1": "Process all items in parallel requests completely - don't stop prematurely",
+      "delta2": "Use available parameters immediately - don't request unnecessary specificity"
+    }
+  },
+  {
+    "Name": "identify_species",
+    "entries": {
+      "delta1": "Abstain when queries mention generic genetic sequences without species identification intent"
+    }
+  },
+  {
+    "Name": "imdb",
+    "entries": {
+      "delta1": "Execute search functions directly when actor name and year parameters are clearly provided",
+      "delta2": "Avoid inventing tool limitations or requesting clarification for valid search combinations"
+    }
+  },
+  {
+    "Name": "ingredient_replace",
+    "entries": {
+      "delta1": "Execute ingredient_replace when explicit substitution requests appear in parallel scenarios"
+    }
+  },
+  {
+    "Name": "initialize_question_answering_pipeline",
+    "entries": {
+      "delta1": "Proceed with pipeline setup when vision analysis parameters are specified in the query"
+    }
+  },
+  {
+    "Name": "insn_decoder",
+    "entries": {
+      "delta1": "Execute InsnDecoder tools immediately when parameters are provided, avoiding conversational clarification loops",
+      "delta2": "Trust provided instructionData parameters as valid inputs for decoder operations"
+    }
+  },
+  {
+    "Name": "instrument_price",
+    "entries": {
+      "delta1": "Execute get with available brand, model, and finish parameters rather than seeking unnecessary precision"
+    }
+  },
+  {
+    "Name": "instrumentable_processor",
+    "entries": {
+      "delta1": "When converter parameters are specified, immediately call InstrumentableProcessor.createCallConverter rather than seeking clarification"
+    }
+  },
+  {
+    "Name": "integral",
+    "entries": {
+      "delta1": "Execute integral calls in parallel when multiple mathematical operations are requested"
+    }
+  },
+  {
+    "Name": "integrate",
+    "entries": {
+      "delta1": "Execute all parallel integration tasks fully, not just the first mentioned function",
+      "delta2": "Verify all distinct functions and ranges in parallel requests receive complete method coverage"
+    }
+  },
+  {
+    "Name": "intro",
+    "entries": {
+      "delta1": "Use exact Java method names with proper dot notation (e.g., Intro.step)",
+      "delta2": "Pass numeric parameters as actual integers, not string representations"
+    }
+  },
+  {
+    "Name": "inventory_management",
+    "entries": {
+      "delta1": "Use exact parameter values as defined by system; avoid translating predefined values",
+      "delta2": "Attempt inventory checks even when exact requested data isn't guaranteed; provide partial information"
+    }
+  },
+  {
+    "Name": "investment",
+    "entries": {
+      "delta1": "Execute parallel predictProfit calls for independent investment calculations in the same turn",
+      "delta2": "Handle multiple independent fund predictions concurrently, not sequentially across turns"
+    }
+  },
+  {
+    "Name": "invokemethod007",
+    "entries": {
+      "delta1": "Use invokemethod007_runIt for Java method invocation with string arguments"
+    }
+  },
+  {
+    "Name": "jdk_xml_features",
+    "entries": {
+      "delta1": "Use exact tool names as defined in function signatures, not Java-style method names"
+    }
+  },
+  {
+    "Name": "kinematics",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation (e.g., kinematics.calculate_displacement) for consistency"
+    }
+  },
+  {
+    "Name": "law_crimes",
+    "entries": {
+      "delta1": "Execute search with provided location parameters without assuming city-level specificity is required",
+      "delta2": "Avoid substituting tool calls with clarification requests when parameters meet function requirements"
+    }
+  },
+  {
+    "Name": "lawsuit",
+    "entries": {
+      "delta1": "Use lawsuit.fetch_details and lawsuit.judge for parallel company lookups, not underscore naming",
+      "delta2": "Execute both fetch_details and judge in parallel when multiple companies are specified",
+      "delta3": "Execute lawsuit.check_case immediately for case lookups without seeking unnecessary verification parameters"
+    }
+  },
+  {
+    "Name": "lawsuit_details",
+    "entries": {
+      "delta1": "Execute lawsuit_details.find immediately when user query provides company, year, and case_type parameters without seeking scope clarifications",
+      "delta2": "Execute lawsuit_details.find in parallel when case parameters appear alongside other tool requests"
+    }
+  },
+  {
+    "Name": "lawsuit_info",
+    "entries": {
+      "delta1": "Execute lawsuit_info when case_number is explicitly provided in user query"
+    }
+  },
+  {
+    "Name": "lawsuit_search",
+    "entries": {
+      "delta1": "Execute parallel calls when user specifies multiple independent domain tasks, including cross-tool group requests"
+    }
+  },
+  {
+    "Name": "lawsuits_search",
+    "entries": {
+      "delta1": "Execute search immediately when company, location, and year are specified; do not seek case type clarification as it's optional"
+    }
+  },
+  {
+    "Name": "lawyer",
+    "entries": {
+      "delta1": "Execute search calls in parallel when user requests multiple independent tasks",
+      "delta2": "Execute tool calls directly when parameters are clearly specified; avoid blocking for unnecessary clarifications"
+    }
+  },
+  {
+    "Name": "lawyer_finder",
+    "entries": {
+      "delta1": "Execute tool with available parameters rather than requesting clarification first",
+      "delta2": "Use broad location like 'New York' when specific neighborhood unavailable"
+    }
+  },
+  {
+    "Name": "library",
+    "entries": {
+      "delta1": "Execute search_books with available parameters when genre and library system are specified, avoiding unnecessary location clarification"
+    }
+  },
+  {
+    "Name": "library_export",
+    "entries": {
+      "delta1": "Use LibraryExport_createDelegate for delegate creation with factory and delegate parameters"
+    }
+  },
+  {
+    "Name": "linear_regression",
+    "entries": {
+      "delta1": "Execute linear_regression.get_r_squared directly when dataset path and variable names are provided",
+      "delta2": "Execute linear regression directly when dataset and variables are provided - avoid seeking dataset clarification"
+    }
+  },
+  {
+    "Name": "linear_regression_fit",
+    "entries": {
+      "delta1": "Run parallel with data loading when all regression parameters are explicitly available - both calls are mandatory"
+    }
+  },
+  {
+    "Name": "list_events",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries lack specific event identifiers or clear temporal parameters"
+    }
+  },
+  {
+    "Name": "list_servers",
+    "entries": {
+      "delta1": "Use exact parameter values from user requests, don't generalize 'openai' to 'all' when tool constraints specify limited options"
+    }
+  },
+  {
+    "Name": "loan_eligibility_check",
+    "entries": {
+      "delta1": "Execute parallel tool calls when user requests multiple eligibility checks for different institutions/parameters"
+    }
+  },
+  {
+    "Name": "log_food",
+    "entries": {
+      "delta1": "Use reasonable estimates for common foods when specific measurements aren't provided",
+      "delta2": "Avoid excessive precision-seeking that prevents basic logging functionality"
+    }
+  },
+  {
+    "Name": "mac_dmg_bundler",
+    "entries": {
+      "delta1": "Execute DMG bundler tools when mandatory parameters exist, using defaults for optional fields"
+    }
+  },
+  {
+    "Name": "map_routing",
+    "entries": {
+      "delta1": "Proceed with city-level routing when specific addresses aren't provided but cities are specified",
+      "delta2": "Note potential precision limitations rather than refusing to route without exact addresses",
+      "delta3": "Use exact tool names with dot notation: map_routing.function_name"
+    }
+  },
+  {
+    "Name": "maps",
+    "entries": {
+      "_book_meeting_room": "Use available landmark locations for route planning when user addresses are unspecified",
+      "delta1": "Execute maps.shortest_path immediately for cross-city routes using known landmarks when addresses are unspecified",
+      "delta2": "Call maps.route_times after shortest_path to estimate travel durations between locations"
+    }
+  },
+  {
+    "Name": "math",
+    "entries": {
+      "delta1": "Use exact tool names like 'math.factorial' - underscores and case variations are invalid",
+      "delta2": "Execute ALL parallel functions simultaneously - partial execution fails validation",
+      "delta3": "Verify all required parallel functions are called - count must match specification exactly",
+      "delta4": "Verify tool name format exactly: 'math.function_name' not variations like 'math_function'",
+      "delta5": "Count parallel functions carefully - must match specification exactly"
+    }
+  },
+  {
+    "Name": "math_gcd",
+    "entries": {
+      "delta1": "Execute simultaneously with other tools when parallel mathematical queries are present, ignoring sequential phrasing"
+    }
+  },
+  {
+    "Name": "math_toolkit",
+    "entries": {
+      "delta1": "Execute all requested mathematical operations in parallel when multiple distinct calculations are specified",
+      "delta2": "Process compound queries completely - don't stop after the first mathematical operation"
+    }
+  },
+  {
+    "Name": "maybe_add_js_synthetic_rest_parameter",
+    "entries": {
+      "delta1": "Call tool immediately when funcDeclaration and funcParameters are in context, never request redundant information"
+    }
+  },
+  {
+    "Name": "mbti",
+    "entries": {
+      "delta1": "Call MBTI.analyse when requested alongside other personality assessments",
+      "delta2": "Handle parallel execution with five_factor_model for combined analysis requests"
+    }
+  },
+  {
+    "Name": "media_3_find_movies",
+    "entries": {
+      "delta1": "Execute search directly with user-provided terms like 'comic movies' or director names, avoiding genre clarification requests",
+      "delta2": "Execute search with available parameters; avoid explaining tool limitations in conversation",
+      "delta3": "Execute search immediately for ambiguous terms like 'fight movies' - map to closest genre match without clarification"
+    }
+  },
+  {
+    "Name": "medical_records",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries lack medical context or proper authorization"
+    }
+  },
+  {
+    "Name": "message_api",
+    "entries": {
+      "delta1": "When users request actions with valid parameters, proceed directly rather than requiring exhaustive detail",
+      "delta2": "Execute message_login directly when user provides valid credentials, avoiding unnecessary status checks",
+      "delta3": "Maintain exact message state tracking - avoid verbose explanations and incorrect parameter usage that corrupts API state",
+      "delta4": "Execute message operations with minimal conversational overhead to prevent state mismatches and corruption across turns",
+      "delta5": "Execute message_login immediately when credentials are provided in conversation context",
+      "delta6": "Execute available tools directly rather than explaining functional limitations",
+      "delta7": "Execute message_login immediately when user credentials are referenced in conversation context",
+      "delta8": "Execute only explicitly requested message operations without delivery confirmations or conversational summaries",
+      "delta9": "Avoid using view_messages_sent or other verification tools unless explicitly specified - never call them for conversational summaries",
+      "delta10": "In multi-turn sequences, execute all specified message operations without tool listings, user confirmations, or conversational exploration",
+      "delta11": "Execute message operations silently without conversational summaries, temperature reporting, or delivery confirmations",
+      "delta12": "Execute message operations immediately when user context is clear - avoid requesting user selection confirmations",
+      "delta13": "Execute message_login immediately when user context exists - never omit required authentication for message operations",
+      "delta14": "Use exact API parameters for message operations - never substitute receiver_id for message_id in delete_message"
+    }
+  },
+  {
+    "Name": "method_invoke_test",
+    "entries": {
+      "delta1": "Execute validation tools with available test context rather than requesting missing objects",
+      "delta2": "In unit test scenarios, directly execute validation tools assuming required test objects are implicitly available"
+    }
+  },
+  {
+    "Name": "metropolitan_museum",
+    "entries": {
+      "delta1": "Use exact function names: metropolitan_museum.get_top_artworks, not underscores",
+      "delta2": "Handle parallel requests across different tool groups simultaneously"
+    }
+  },
+  {
+    "Name": "mix_paint_color",
+    "entries": {
+      "delta1": "Handle color mixing calls concurrently with other tools when user specifies multiple parallel needs"
+    }
+  },
+  {
+    "Name": "movie_details",
+    "entries": {
+      "delta1": "Execute movie_details.brief functions simultaneously when user requests multiple movies in single message",
+      "delta2": "Use exact function names: movie_details.brief for brief movie information requests"
+    }
+  },
+  {
+    "Name": "movies_1_buy_movie_tickets",
+    "entries": {
+      "delta1": "Execute purchase with available parameters when user specifies transaction intent",
+      "delta2": "Call tool with available parameters; don't preemptively block for missing theater specification",
+      "delta3": "Call BuyMovieTickets directly when user provides purchase parameters and intent"
+    }
+  },
+  {
+    "Name": "movies_1_find_movies",
+    "entries": {
+      "delta2": "Call tool with available parameters; never block for missing dates when movie title and location criteria exist"
+    }
+  },
+  {
+    "Name": "movies_3_find_movies",
+    "entries": {
+      "delta1": "Call Movies_3_FindMovies when director parameter is specified, even if other optional parameters are missing",
+      "delta2": "Don't seek optional parameters when required parameters like genre are already available - proceed directly to search",
+      "delta3": "Execute search with user-specified genre even if genre mapping appears imperfect - let tool handle filtering",
+      "delta4": "Prioritize tool execution over explaining parameter limitations when core search criteria are available"
+    }
+  },
+  {
+    "Name": "multiply",
+    "entries": {
+      "delta1": "Use multiply when calculating totals from multiple identical contributions (e.g., 'each', 'per person')",
+      "delta2": "Recognize 'each' keyword as indicator for multiplication rather than sequential addition"
+    }
+  },
+  {
+    "Name": "museum",
+    "entries": {
+      "delta1": "Use exact function names: museum.exhibition_detail, not museum_exhibition_detail",
+      "delta2": "For parallel exhibition queries, call museum.exhibition_detail for each requested exhibition"
+    }
+  },
+  {
+    "Name": "museum_working_hours",
+    "entries": {
+      "delta1": "Proceed with tool calls using available museum parameters; don't preemptively request optional day specifications"
+    }
+  },
+  {
+    "Name": "music_3_lookup_music",
+    "entries": {
+      "delta1": "Execute lookup immediately when album title is specified; never block for track selection before lookup",
+      "delta2": "Use exact year values when explicitly specified by user, never substitute 'dontcare'",
+      "delta3": "Execute lookup when genre and artist are specified, never require year parameter clarification"
+    }
+  },
+  {
+    "Name": "music_3_play_media",
+    "entries": {
+      "delta1": "Proceed with playback when location is specified, even without specific song title"
+    }
+  },
+  {
+    "Name": "music_charts",
+    "entries": {
+      "delta1": "Execute musicCharts.getMostPlayed with reasonable defaults when duration parameters are unspecified",
+      "delta2": "Avoid blocking tool execution for parameter clarification when core intent is clear"
+    }
+  },
+  {
+    "Name": "music_generator",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation across all tool groups: tool_group.tool_name"
+    }
+  },
+  {
+    "Name": "music_theory",
+    "entries": {
+      "delta1": "Abstain from tool calls for general music questions that should be handled conversationally"
+    }
+  },
+  {
+    "Name": "musical_scale",
+    "entries": {
+      "delta1": "Execute parallel with other tools when query contains multiple independent sub-problems",
+      "delta2": "Execute in parallel with other tools when query contains multiple independent sub-problems"
+    }
+  },
+  {
+    "Name": "musical_ticket",
+    "entries": {
+      "delta1": "Proceed with purchase when show name and date are clearly specified without additional confirmation"
+    }
+  },
+  {
+    "Name": "mutation_type",
+    "entries": {
+      "delta1": "Execute mutation_type.find with available SNP ID parameters rather than seeking unnecessary clarification",
+      "delta2": "Execute mutation_type.find directly with provided SNP ID parameters, avoiding conversational deferrals for optional parameters"
+    }
+  },
+  {
+    "Name": "nested_value_fetcher",
+    "entries": {
+      "delta1": "Execute available tools directly when parameters are specified, avoiding conversational clarification loops"
+    }
+  },
+  {
+    "Name": "nfi_library",
+    "entries": {
+      "delta1": "Use default parameter values specified in function documentation without seeking user clarification",
+      "delta2": "Call NFILibrary.isMemberReadable directly with null recursive parameter when not specified"
+    }
+  },
+  {
+    "Name": "open_weather_map",
+    "entries": {
+      "delta1": "Use exact location format 'Santa Cruz, USA' when specified in expected parameters"
+    }
+  },
+  {
+    "Name": "option_spec_builder",
+    "entries": {
+      "delta1": "Use exact method names from tool specifications (e.g., OptionSpecBuilder.requiredUnless)"
+    }
+  },
+  {
+    "Name": "parse_answer",
+    "entries": {
+      "delta1": "Always invoke parseAnswer when user provides answer text for evaluation, avoiding conversational responses",
+      "delta2": "Treat answer submission scenarios as structured evaluations requiring tool usage, not general conversation"
+    }
+  },
+  {
+    "Name": "payment_1_make_payment",
+    "entries": {
+      "delta1": "Execute payment immediately when amount, recipient name, visibility, and payment method are specified - never request additional recipient identification details"
+    }
+  },
+  {
+    "Name": "payment_1_request_payment",
+    "entries": {
+      "delta1": "Execute payment requests immediately when recipient name, amount, and visibility are specified, without seeking additional recipient identification"
+    }
+  },
+  {
+    "Name": "physical",
+    "entries": {
+      "delta1": "Execute physical calculations in parallel with biological ones when both are requested"
+    }
+  },
+  {
+    "Name": "plain_text_presentation",
+    "entries": {
+      "delta1": "Use PlainTextPresentation_createPresentation for Java string parameter requirements"
+    }
+  },
+  {
+    "Name": "play_artist",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries lack clear artist playback intent or fall outside tool scope"
+    }
+  },
+  {
+    "Name": "play_song",
+    "entries": {
+      "delta1": "Avoid automatic play_song calls when users only specify volume adjustments",
+      "delta2": "Execute play_song when explicitly requested, even with only song title specified - don't block for artist",
+      "delta3": "Don't preemptively decline tool usage based on assumptions about service availability",
+      "delta4": "Don't bundle volume parameter when user explicitly requests separate playback and volume actions"
+    }
+  },
+  {
+    "Name": "play_sound_wave",
+    "entries": {
+      "delta1": "Execute all playback calls in parallel after sound generation completes"
+    }
+  },
+  {
     "Name": "play_spotify_song",
     "entries": {
-      "delta1": "For simple song requests, use the exact song title as query parameter"
+      "delta1": "For simple song requests, use the exact song title as query parameter",
+      "delta2": "Never preemptively declare tool unavailability; always attempt tool calls when available functions exist"
+    }
+  },
+  {
+    "Name": "player_statistic",
+    "entries": {
+      "delta1": "Call player_statistic with available parameters rather than seeking conversational clarification",
+      "delta2": "Tools handle parameter validation internally - don't pre-emptively clarify missing data"
+    }
+  },
+  {
+    "Name": "player_stats",
+    "entries": {
+      "delta1": "Call player_stats.getLastGame with provided player name without requesting additional parameters",
+      "delta2": "Avoid inventing parameter requirements not specified in the tool documentation"
+    }
+  },
+  {
+    "Name": "plot_sine_wave",
+    "entries": {
+      "delta1": "Process sine wave plotting in parallel with unrelated tool calls for multi-part queries"
+    }
+  },
+  {
+    "Name": "pms_product_category_controller",
+    "entries": {
+      "delta1": "Execute updateShowStatus directly when category IDs and desired state are clearly specified",
+      "delta2": "Assume standard status values (0=hidden, 1=visible) and execute directly without seeking confirmation"
+    }
+  },
+  {
+    "Name": "poker_game_winner",
+    "entries": {
+      "delta1": "Execute in parallel with other tools when query contains multiple independent sub-problems"
+    }
+  },
+  {
+    "Name": "poll_queue",
+    "entries": {
+      "delta1": "Execute pollQueue with provided parameters without requesting additional queue contents",
+      "delta2": "Avoid inventing missing requirements that prevent tool execution"
+    }
+  },
+  {
+    "Name": "population_growth_estimate",
+    "entries": {
+      "delta1": "Execute tool calls with reasonable defaults when parameters aren't specified in the query",
+      "delta2": "Avoid conversational deferrals - use tools proactively then explain calculations"
+    }
+  },
+  {
+    "Name": "population_projections",
+    "entries": {
+      "delta1": "Use population_projections tool directly with default parameters when available",
+      "delta2": "Never negotiate parameters conversationally; use tool defaults immediately when available"
+    }
+  },
+  {
+    "Name": "prob_dist",
+    "entries": {
+      "delta1": "Execute parallel with other tools when query contains multiple independent sub-problems"
+    }
+  },
+  {
+    "Name": "probabilities",
+    "entries": {
+      "delta1": "Verify parameter constraints match tool specs before calling",
+      "delta2": "Use exact tool names with proper dot notation format",
+      "delta3": "For round parameter, only use values 2 or omit entirely"
+    }
+  },
+  {
+    "Name": "probability",
+    "entries": {
+      "delta1": "Use exact tool name 'probability.dice_roll' - underscores differ from function naming",
+      "delta2": "Make separate tool calls for each distinct probability scenario in sequence",
+      "delta3": "Don't combine multiple probability calculations into single tool call"
+    }
+  },
+  {
+    "Name": "probability_of_event",
+    "entries": {
+      "delta1": "Execute separate tool calls for each distinct probability query in parallel user requests",
+      "delta2": "Count and process all numbered probability questions in multi-part queries"
+    }
+  },
+  {
+    "Name": "process_data",
+    "entries": {
+      "delta1": "Execute process_data immediately when numerical values and categories are provided with clear processing instructions",
+      "delta2": "Avoid introducing assumptions about missing values or other parameters not mentioned in the user request"
+    }
+  },
+  {
+    "Name": "product_search",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries lack specific product search intent or actionable parameters"
+    }
+  },
+  {
+    "Name": "project_api",
+    "entries": {
+      "delta1": "Execute tool calls with provided parameters unless explicitly invalid per API constraints",
+      "delta2": "Avoid substituting tool calls with conversational text about parameter validation"
+    }
+  },
+  {
+    "Name": "protein_info",
+    "entries": {
+      "delta1": "Use exact parameter values from tool schema, not user variations",
+      "delta2": "Maintain proper function naming (dots, not underscores)"
+    }
+  },
+  {
+    "Name": "proxy_connection",
+    "entries": {
+      "delta1": "Execute proxy connection tools when users provide connection objects and SQL specifications in context",
+      "delta2": "Use proxyConn parameter in prepareCall when available in the scenario context"
+    }
+  },
+  {
+    "Name": "publication_year",
+    "entries": {
+      "delta1": "Proceed with find calls when domain knowledge identifies clear work matches, avoiding unnecessary clarification"
+    }
+  },
+  {
+    "Name": "push_git_changes_to_github",
+    "entries": {
+      "delta1": "Complete multi-step workflows by pushing generated files and changes to repository"
+    }
+  },
+  {
+    "Name": "random",
+    "entries": {
+      "delta1": "Make separate tool calls for each requested output, even with same function",
+      "delta2": "Use exact function names from tool schema (e.g., random.normalvariate)"
+    }
+  },
+  {
+    "Name": "random_forest",
+    "entries": {
+      "delta1": "Include random forest training in parallel execution sets for independent multi-tool scenarios",
+      "delta2": "Treat named data references like 'my_data' as valid inputs in benchmark contexts"
+    }
+  },
+  {
+    "Name": "recall_memory_search",
+    "entries": {
+      "delta1": "Use exact query strings including punctuation as specified in parameter validation"
+    }
+  },
+  {
+    "Name": "recipe",
+    "entries": {
+      "delta1": "Execute recipe.find with stated constraints; avoid clarification loops for flexible parameters"
+    }
+  },
+  {
+    "Name": "recipe_calculator",
+    "entries": {
+      "delta1": "Abstain from tool calls when recipe queries lack specific parameters like quantity units or dish type"
+    }
+  },
+  {
+    "Name": "recipe_nutrition_info",
+    "entries": {
+      "delta1": "Execute in parallel with search and prep time when nutrition data is needed"
+    }
+  },
+  {
+    "Name": "recipe_prep_time",
+    "entries": {
+      "delta1": "Call simultaneously with other recipe tools when prep time is requested"
+    }
+  },
+  {
+    "Name": "recipe_search",
+    "entries": {
+      "delta1": "Execute all requested recipe searches in parallel using correct recipe_search.find function names",
+      "delta2": "Call all specified recipe_search.find functions simultaneously when multiple recipes are requested"
+    }
+  },
+  {
+    "Name": "record",
+    "entries": {
+      "delta1": "Use proper array type format for all record parameters, not Python list syntax"
+    }
+  },
+  {
+    "Name": "redisson_async_cache",
+    "entries": {
+      "delta1": "Use exact function names from tool schema - RedissonAsyncCache.putIfAbsent, not RedissonAsyncCache_putIfAbsent"
+    }
+  },
+  {
+    "Name": "redisson_connection",
+    "entries": {
+      "delta1": "Execute bitwise operations directly using obvious enum string representations like 'AND' without seeking clarification"
+    }
+  },
+  {
+    "Name": "redisson_map_cache",
+    "entries": {
+      "delta1": "Use RedissonMapCache_putOperationAsync for asynchronous key-value storage operations"
+    }
+  },
+  {
+    "Name": "redisson_permit_expirable_semaphore",
+    "entries": {
+      "delta1": "Use dot notation for tool names (RedissonPermitExpirableSemaphore.tryAcquireAsync) not underscores"
+    }
+  },
+  {
+    "Name": "regex_constraint",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation: RegexConstraint.initIRPattern, not underscore variants"
+    }
+  },
+  {
+    "Name": "religion",
+    "entries": {
+      "delta1": "Use exact dot notation for function calls: religion.get_origin, not religion_get_origin",
+      "delta2": "Process all parallel multi-step requests completely - don't omit belief queries after origins"
+    }
+  },
+  {
+    "Name": "religion_history",
+    "entries": {
+      "delta1": "Execute track calls sequentially when multiple valid region-religion pairs are specified in query",
+      "delta2": "Avoid unnecessary clarification when all required parameters for tracking are clearly provided"
+    }
+  },
+  {
+    "Name": "remove_background_action",
+    "entries": {
+      "delta1": "Avoid requesting image identification when manipulation parameters are explicit"
+    }
+  },
+  {
+    "Name": "render_tts",
+    "entries": {
+      "delta1": "Abstain from tool calls for flight booking and other irrelevant domains"
+    }
+  },
+  {
+    "Name": "render_ui_date_picker_widget",
+    "entries": {
+      "delta1": "Avoid rendering UI for queries clearly outside functional boundaries",
+      "delta2": "Abstain from tool calls for greetings and non-functional conversational inputs",
+      "delta3": "Verify functional intent exists before rendering any UI components"
+    }
+  },
+  {
+    "Name": "render_ui_multi_select_widget",
+    "entries": {
+      "delta1": "Withhold tool execution for irrelevant domains like flight booking"
+    }
+  },
+  {
+    "Name": "render_ui_single_select_widget",
+    "entries": {
+      "delta1": "Abstain from tool calls for flight booking queries outside meeting room scope"
+    }
+  },
+  {
+    "Name": "rental_cars_3_get_cars_available",
+    "entries": {
+      "delta1": "Execute tool directly when location, dates, and pickup time are specified - rental systems handle missing return times",
+      "delta2": "Execute tool immediately when location, dates, and pickup time are provided - avoid unnecessary confirmations about date formatting"
+    }
+  },
+  {
+    "Name": "requests",
+    "entries": {
+      "delta1": "Substitute actual parameter values directly into API URLs rather than using template placeholders"
+    }
+  },
+  {
+    "Name": "reschedule",
+    "entries": {
+      "delta1": "Proceed with tool calls when event name, date, and time are provided, avoiding unnecessary format confirmations"
+    }
+  },
+  {
+    "Name": "resize_image_action",
+    "entries": {
+      "delta1": "Execute resize tools directly when dimensions are specified in query"
+    }
+  },
+  {
+    "Name": "restaurant",
+    "entries": {
+      "delta1": "Use city-level parameters when tools accept them; avoid requesting neighborhood precision unless explicitly required"
+    }
+  },
+  {
+    "Name": "restaurant_info",
+    "entries": {
+      "delta1": "Execute in parallel with exhibition_info when user requests both dining and museum information"
+    }
+  },
+  {
+    "Name": "restaurant_search",
+    "entries": {
+      "delta1": "Process all restaurant queries concurrently when multiple meal types specified",
+      "delta2": "Execute search with available numeric rating parameters without seeking clarification on scale"
+    }
+  },
+  {
+    "Name": "restaurants_2_find_restaurants",
+    "entries": {
+      "delta1": "Execute search with available parameters even when location values might appear ambiguous or incomplete",
+      "delta2": "Execute search with reasonable cuisine inference when user intent is clear, avoid categorical validation"
+    }
+  },
+  {
+    "Name": "restaurants_2_reserve_restaurant",
+    "entries": {
+      "delta1": "Execute reservation tool when all required parameters (name, location, date, time, party size) are present without requesting additional validation",
+      "delta2": "Avoid asking for cuisine category or other optional parameters when core reservation requirements are met"
+    }
+  },
+  {
+    "Name": "ride_sharing_2_get_ride",
+    "entries": {
+      "delta1": "Execute tool calls with available parameters even when some values appear invalid",
+      "delta2": "Execute tool calls with available parameters, never pre-validate formatting or request clarification in natural language"
+    }
+  },
+  {
+    "Name": "rotate_image_action",
+    "entries": {
+      "delta1": "Execute rotation immediately when angle parameter is specified, without requesting image identification as prerequisite"
+    }
+  },
+  {
+    "Name": "rotate_vertices",
+    "entries": {
+      "delta1": "Pass vertices and pivot as native arrays, angle as number - not stringified JSON"
+    }
+  },
+  {
+    "Name": "route",
+    "entries": {
+      "delta1": "Execute route.estimate_time immediately when start, stops, and destination are explicitly specified",
+      "delta2": "Execute route.estimate_time immediately when start, stops, and destination are specified, avoiding route order confirmation",
+      "delta3": "Use exact function name 'route.estimate_time' as specified in BFCL, not variations like 'route_estimate_time'"
+    }
+  },
+  {
+    "Name": "route_planner",
+    "entries": {
+      "delta1": "Use exact tool naming format 'route_planner.calculate_route' with dot notation",
+      "delta2": "Execute route planning immediately when start/end locations are fully specified in query"
+    }
+  },
+  {
+    "Name": "run_this",
+    "entries": {
+      "delta1": "Execute runThis directly when all parameters are explicitly named in the request",
+      "delta2": "Avoid parameter type validation when parameter names are clearly specified"
+    }
+  },
+  {
+    "Name": "safeway",
+    "entries": {
+      "delta1": "Execute safeway.order with exact function name and parameter formats as defined in tool schema",
+      "delta2": "Avoid seeking redundant confirmation for clearly specified quantities like 'five pound bag' meaning one bag",
+      "delta3": "Use precise item names like 'water' instead of over-specified descriptions like 'bottles of water'"
+    }
+  },
+  {
+    "Name": "science_history",
+    "entries": {
+      "delta1": "Use science_history tools for theoretical frameworks when queries match the domain, don't assume artificial restrictions",
+      "delta2": "When scientific theories are queried, attempt tool usage rather than providing unsourced historical details"
+    }
+  },
+  {
+    "Name": "score_function_builders",
+    "entries": {
+      "delta1": "Execute tool calls when all required parameters are provided in valid formats, avoiding unnecessary clarification requests"
+    }
+  },
+  {
+    "Name": "sculpture",
+    "entries": {
+      "delta1": "Execute sculpture.create_custom when users inquire about material options or custom sculpture details"
+    }
+  },
+  {
+    "Name": "sculpture_price",
+    "entries": {
+      "delta1": "Proceed with calculate calls when core parameters are available, letting tools handle missing optional fields"
+    }
+  },
+  {
+    "Name": "sde",
+    "entries": {
+      "delta1": "Execute Sde with provided parameters, using defaults for optional fields when available",
+      "delta2": "Avoid requesting additional parameters when tool can proceed with given inputs"
+    }
+  },
+  {
+    "Name": "search_engine",
+    "entries": {
+      "delta1": "Use exact query text provided by user without modification or creative expansion"
+    }
+  },
+  {
+    "Name": "search_hit",
+    "entries": {
+      "delta1": "Accept underscore notation as equivalent to dot notation for Java method calls"
+    }
+  },
+  {
+    "Name": "search_hotels",
+    "entries": {
+      "delta1": "Use available tools for matching queries regardless of model's perceived specialization constraints"
+    }
+  },
+  {
+    "Name": "search_local_docs",
+    "entries": {
+      "delta3": "Abstain from tool calls in irrelevance scenarios where queries don't match tool capabilities"
+    }
+  },
+  {
+    "Name": "search_on_google",
+    "entries": {
+      "delta1": "Abstain from search when queries lack specific parameters or clear search intent"
+    }
+  },
+  {
+    "Name": "search_web_tool",
+    "entries": {
+      "delta1": "Use exact parameter values from user input without modification when tools have strict validation requirements",
+      "delta2": "Withhold search execution when user requests fall completely outside available tool capabilities"
+    }
+  },
+  {
+    "Name": "secure_mock_maker",
+    "entries": {
+      "delta1": "Execute SecureMockMaker.createSpy with provided parameters when test framework context is clear",
+      "delta2": "Avoid parameter clarification requests when tool inputs are specified in the query"
     }
   },
   {
     "Name": "services_1_find_provider",
     "entries": {
-      "delta1": "For location searches, use available city data immediately without requesting additional state information",
-      "delta2": "Execute find_provider calls directly when city is provided, even if state is unspecified"
+      "delta1": "Execute find_provider calls immediately for major cities like San Francisco, San Jose - no state clarification needed",
+      "delta2": "Never request state clarification for well-known cities like Berkeley, Austin, Mill Valley, Rohnert Park when city is clearly specified",
+      "delta3": "Never request gender preference clarification when city location is clearly provided"
+    }
+  },
+  {
+    "Name": "services_4_find_provider",
+    "entries": {
+      "delta1": "Execute immediately with available city parameters; never seek optional specialist details for California locations like San Jose or Sausalito",
+      "delta2": "Execute immediately with available city parameters; never seek clarification for major locations like New York",
+      "delta3": "Apply same city-first execution logic as services_1_find_provider for major locations",
+      "delta4": "Execute immediately for common multi-state cities like Lafayette without seeking state clarification"
+    }
+  },
+  {
+    "Name": "set_alarm",
+    "entries": {
+      "delta1": "Execute set_alarm with available time parameters, don't block for missing details like timezone",
+      "delta2": "Strictly use only allowed purpose values: 'wake up' or empty string"
+    }
+  },
+  {
+    "Name": "set_countdown",
+    "entries": {
+      "delta1": "Respect exact user-specified duration values, never substitute alternatives"
+    }
+  },
+  {
+    "Name": "set_volume",
+    "entries": {
+      "delta1": "Execute set_volume alone when users request volume changes without explicit playback intent",
+      "delta2": "Execute set_volume when volume adjustment is explicitly requested alongside playback"
+    }
+  },
+  {
+    "Name": "sitefinity_create_contentitem",
+    "entries": {
+      "delta1": "Execute tool directly when all required parameters are explicitly provided in user request",
+      "delta2": "Avoid seeking redundant confirmations for clearly specified content creation parameters"
+    }
+  },
+  {
+    "Name": "skip_through",
+    "entries": {
+      "delta1": "Execute skipThrough with provided node and state parameters without seeking callback implementation details"
+    }
+  },
+  {
+    "Name": "soccer",
+    "entries": {
+      "delta1": "Process all distinct tool calls concurrently for multi-part queries, including parallel execution across tool groups"
+    }
+  },
+  {
+    "Name": "soccer_scores",
+    "entries": {
+      "delta1": "Execute tool calls when contextual parameters sufficiently resolve ambiguities (e.g., Real Madrid implies Spanish La Liga)"
+    }
+  },
+  {
+    "Name": "soccer_stat",
+    "entries": {
+      "delta1": "Attempt tool calls with available parameters rather than preemptively requesting clarification",
+      "delta2": "Execute get_player_stats when player and season are specified, even if league is missing"
+    }
+  },
+  {
+    "Name": "social_media_analytics",
+    "entries": {
+      "delta1": "Match exact parameter spellings from validation constraints, including regional variations"
+    }
+  },
+  {
+    "Name": "soil_analysis",
+    "entries": {
+      "delta1": "Abstain from tool calls when queries don't align with soil analysis functions, like fertilizer recommendations"
+    }
+  },
+  {
+    "Name": "sort_list",
+    "entries": {
+      "delta1": "Process all sort_list calls in parallel when multiple sorting requests are made",
+      "delta2": "Execute single sort_list operations individually when only one sorting request is present"
+    }
+  },
+  {
+    "Name": "sourcepaths002",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation: sourcepaths002.runIt not sourcepaths002_runIt",
+      "delta2": "Ensure Java parameter types match function signatures to avoid type conversion errors"
+    }
+  },
+  {
+    "Name": "sports",
+    "entries": {
+      "delta1": "Only abstain when queries genuinely lack required parameters; use tools when sufficient information exists"
+    }
+  },
+  {
+    "Name": "sports_db",
+    "entries": {
+      "delta1": "Execute find_athlete when name and sport are explicitly specified in user query",
+      "delta2": "Execute find_athlete immediately when sport is clearly indicated; never request clarification in these cases"
+    }
+  },
+  {
+    "Name": "sports_ranking",
+    "entries": {
+      "delta1": "Execute tool calls immediately when core parameters (team, league) are present, using defaults for optional parameters without clarification"
+    }
+  },
+  {
+    "Name": "spreadsheet_presentation",
+    "entries": {
+      "delta1": "Use SpreadsheetPresentation.refreshData with exact parameter names as defined in the function signature"
+    }
+  },
+  {
+    "Name": "sql_completion_analyzer",
+    "entries": {
+      "delta1": "Execute SQLCompletionAnalyzer.makeProposalsFromObject directly when table name and parameters are provided, avoiding clarification loops"
+    }
+  },
+  {
+    "Name": "stock_forecast",
+    "entries": {
+      "delta1": "Execute tool for recognizable stock symbols without seeking clarification first"
+    }
+  },
+  {
+    "Name": "stock_invest",
+    "entries": {
+      "delta1": "Execute all requested investment calculations in parallel when user specifies multiple operations",
+      "delta2": "Verify all required functions are called for multi-part investment queries before responding"
+    }
+  },
+  {
+    "Name": "stock_market_forecast",
+    "entries": {
+      "delta1": "Proceed with tool execution when core parameters like symbol are available in the query"
+    }
+  },
+  {
+    "Name": "stock_price",
+    "entries": {
+      "delta1": "Use common ticker symbols like AAPL for Apple when exchange context is clear",
+      "delta2": "Avoid clarification loops for well-known companies with standard tickers"
+    }
+  },
+  {
+    "Name": "sum_elements",
+    "entries": {
+      "delta1": "Handle sum_elements calls concurrently with other parallel operations"
+    }
+  },
+  {
+    "Name": "sum_numbers",
+    "entries": {
+      "delta1": "Convert integer values to floats in numbers_list parameter (e.g., 133 → 133.0)"
+    }
+  },
+  {
+    "Name": "synthetic_settings_api",
+    "entries": {
+      "delta1": "Use 'name IN (value1,value2)' or 'name:value1 OR name:value2' format for multi-value filters"
+    }
+  },
+  {
+    "Name": "telemetry",
+    "entries": {
+      "delta1": "Execute telemetry calls directly when all required parameters are present. Request clarification only when parameters are missing."
+    }
+  },
+  {
+    "Name": "term_query_builder_tests",
+    "entries": {
+      "delta1": "Execute tool calls with provided field names and values without seeking mapper type clarifications",
+      "delta2": "Avoid conversational text substitutions when test scenarios specify field names and search values"
+    }
+  },
+  {
+    "Name": "thermo",
+    "entries": {
+      "delta1": "Use dot notation for function calls: thermo.calculate_energy, not thermo_calculate_energy",
+      "delta2": "Process all requested phase transitions in parallel scenarios, not just the first one"
+    }
+  },
+  {
+    "Name": "thin_q_connect",
+    "entries": {
+      "delta1": "Abstain from tool calls only for irrelevant commands; always attempt calls for relevant queries even with missing params",
+      "delta2": "Strictly adhere to documented parameter schemas; map user intents only to valid enum values",
+      "delta3": "Always initiate tool calls even when parameters are incomplete; don't substitute with conversational parameter requests",
+      "delta4": "Include all required parameters from user specifications; don't omit explicit requirements"
+    }
+  },
+  {
+    "Name": "ticket_api",
+    "entries": {
+      "delta1": "Execute contact_customer_support when expense discrepancies are mentioned",
+      "delta2": "Execute ticket operations immediately with available parameters - suppress ALL conversational text and explanatory wrapping completely",
+      "delta3": "Execute close_ticket immediately when user requests cancellation - use maintained ticket_id from prior operations",
+      "delta4": "Ensure ticket creation maintains exact API state transitions matching ground truth - ticket counter progression and queue state must align precisely without verbose output",
+      "delta5": "Execute create_ticket directly with available parameters - never prompt for login, password, or authentication steps",
+      "delta6": "Execute create_ticket immediately when user requests ticket creation with title and description provided - avoid verbose conversational responses",
+      "delta7": "Execute resolve_ticket immediately when user requests ticket resolution with available ticket_id - use empty resolution string when not specified",
+      "delta8": "Maintain ticket counter and queue state exactly matching ground truth expectations - ensure ticket ID progression aligns precisely after each operation",
+      "delta9": "Ensure ticket ID progression and queue state align exactly with ground truth - execute all specified operations regardless of perceived redundancy",
+      "delta10": "Execute get_ticket immediately when users reference specific tickets - never substitute with get_user_tickets for individual ticket lookups",
+      "delta11": "Always output structured tool call responses - never error messages or inference failures",
+      "delta12": "Execute get_ticket immediately for ticket lookup requests - never substitute with conversational tool listings or clarification queries",
+      "delta13": "Never output any conversational summaries after ticket operations - verbose text corrupts API state tracking across all systems",
+      "delta14": "In multi-turn sequences, execute all specified ticket operations sequentially - never substitute conversational analysis for required tool calls",
+      "delta15": "Execute create_ticket immediately with available parameters - never add verbose success summaries that corrupt API state tracking",
+      "delta16": "Execute create_ticket immediately when title and priority are specified - never prompt for additional description details or customer feedback",
+      "delta17": "Execute close_ticket immediately when ticket cancellation is mentioned - use maintained ticket_id from context without prompting for system clarification",
+      "delta18": "Execute create_ticket immediately when title and priority are specified - never prompt for login or password authentication"
+    }
+  },
+  {
+    "Name": "time_tracking_api",
+    "entries": {
+      "delta1": "Abstain from tool calls for requests outside time tracking scope"
+    }
+  },
+  {
+    "Name": "timezone",
+    "entries": {
+      "delta1": "Execute timezone.convert immediately when source time and target locations are specified in query"
+    }
+  },
+  {
+    "Name": "todo",
+    "entries": {
+      "delta1": "Retrieve current todo list via todoIdx before removal unless item content is explicitly specified",
+      "delta2": "Abstain from tool calls when user input lacks valid tool invocation syntax or clear todo intent"
+    }
+  },
+  {
+    "Name": "todo_add",
+    "entries": {
+      "delta1": "Preserve user's exact wording when specified for todo content without modification"
+    }
+  },
+  {
+    "Name": "todo_idx",
+    "entries": {
+      "delta1": "Use todoIdx proactively when todo operations require current state knowledge"
+    }
+  },
+  {
+    "Name": "todo_manager",
+    "entries": {
+      "delta1": "Use handle_action with action='delete' and content parameter when user provides clear todo content for deletion",
+      "delta2": "Avoid requesting additional identifiers when sufficient content is provided for tool processing"
+    }
+  },
+  {
+    "Name": "track_submit_with_validation",
+    "entries": {
+      "delta1": "Execute trackSubmitWithValidation immediately when validation flags are provided, without requesting object implementation details"
+    }
+  },
+  {
+    "Name": "trading_bot",
+    "entries": {
+      "delta1": "Execute trading orders directly when all parameters are provided, avoiding market data checks and user confirmations",
+      "delta2": "Execute operations immediately when all parameters are specified or available from context - never skip tool calls for conversational validation",
+      "delta3": "Avoid verbose order summaries, market analysis, and tool capability explanations - execute required operations only without any conversational wrapping",
+      "delta6": "Execute symbol lookup automatically for company names in all operations - never prompt for symbols or request user confirmations",
+      "delta7": "Avoid get_stock_info calls when order parameters are already specified - execute place_order directly with available information",
+      "delta8": "Execute get_order_details directly when users request order breakdowns or status updates - avoid speculative tool limitation explanations",
+      "delta9": "Execute watchlist operations directly when positional references are clear and data is available - avoid confirmation requests",
+      "delta10": "Execute cancel_order directly when users reference specific orders - avoid order status explanations or alternative suggestions",
+      "delta11": "Execute add_to_watchlist immediately after symbol lookup - avoid redundant calls and verbose explanations about system inconsistencies",
+      "delta12": "delta12: Execute fund_account directly when users specify share quantities - calculate amount from known stock prices without confirmation requests",
+      "delta13": "Ensure inference pipeline outputs proper tool call lists - avoid system error responses and handle holdout turns correctly",
+      "delta14": "Execute place_order directly when users reference symbols and quantities with market price context - avoid price confirmation requests",
+      "delta15": "Execute get_stock_info directly for company name lookups - avoid requesting full company names or symbol confirmations",
+      "delta16": "Execute get_stock_info immediately when users specify symbols - avoid initial capability questioning or conversational refusal",
+      "delta17": "Execute add_to_watchlist immediately for company names - perform automatic symbol lookup without confirmation prompts or conversational refusal",
+      "delta18": "Execute add_to_watchlist immediately when company names are provided - perform automatic symbol lookup without confirmation prompts"
+    }
+  },
+  {
+    "Name": "traffic_estimate",
+    "entries": {
+      "delta1": "Use traffic_estimate for all route queries, never calculate_distance, even when distances are implied",
+      "delta2": "Validate time_period strictly against allowed values like 'weekday', rejecting 'now' or other invalid terms",
+      "delta3": "Maintain correct start_location and end_location order as specified in user queries",
+      "delta4": "Maintain exact start_location and end_location order as specified, never reversing them"
+    }
+  },
+  {
+    "Name": "train_random_forest_classifier",
+    "entries": {
+      "delta1": "Execute with provided parameter values as-is unless explicitly invalid",
+      "delta2": "Avoid treating parameter values as placeholders requiring clarification"
+    }
+  },
+  {
+    "Name": "train_ticket",
+    "entries": {
+      "delta1": "Execute booking with provided origin, destination, and date parameters when fully specified"
+    }
+  },
+  {
+    "Name": "trains_1_find_trains",
+    "entries": {
+      "delta1": "Execute tool immediately when origin, destination and date are specified; tools handle natural language date conversion automatically",
+      "delta2": "Execute tool with available parameters even with destination ambiguity - tools handle resolution automatically without clarification"
+    }
+  },
+  {
+    "Name": "trains_1_get_train_tickets",
+    "entries": {
+      "delta1": "Execute booking immediately when booking intent is clear, even with missing parameters - tools handle validation"
+    }
+  },
+  {
+    "Name": "transform_indexer_state_tests",
+    "entries": {
+      "delta1": "Execute tool calls directly when parameter names are explicitly provided in the query",
+      "delta2": "Avoid requesting parameter details when they are clearly specified in the user's instruction"
+    }
+  },
+  {
+    "Name": "travel_1_find_attractions",
+    "entries": {
+      "delta1": "Execute search immediately with provided location parameters; tools handle geographic variations automatically without pre-validation",
+      "delta2": "Tools handle common location variations like city names automatically - no need to pre-validate granularity"
+    }
+  },
+  {
+    "Name": "travel_api",
+    "entries": {
+      "delta1": "Execute purchase_insurance immediately when insurance_cost and payment details are provided - never prompt for booking ID validation or insurance type clarification",
+      "delta2": "Use generated booking_id from successful book_flight for retrieve_invoice and cancel_booking without re-prompting - maintain full state awareness across turns",
+      "delta3": "Execute cancel_booking immediately with available booking_id from prior operations - never prompt for booking IDs that should be maintained in state",
+      "delta4": "Execute book_flight immediately with available parameters including access_token from prior context - never re-prompt for maintained authentication",
+      "delta5": "Execute contact_customer_support immediately with available booking_id - never prompt for issue details or message content",
+      "delta6": "Execute travel operations with clean state transitions - avoid verbose outputs that corrupt API instance state or alter internal tracking",
+      "delta7": "Execute all required tool calls immediately when parameters are available - never omit budget or currency operations",
+      "delta8": "Maintain state continuity across turns - use generated IDs and access tokens from prior operations without re-prompting",
+      "delta9": "Execute book_flight immediately when all flight parameters are available from prior turns - avoid re-prompting for confirmed details",
+      "delta10": "Maintain access tokens across turns without re-prompting - use tokens from prior successful operations",
+      "delta11": "Execute verify_traveler_information immediately when name and date_of_birth are provided - never prompt for optional passport details",
+      "delta12": "Execute tools immediately when all required parameters are available - avoid prompting for any fields or questioning parameter validity",
+      "delta13": "Execute get_flight_cost immediately with provided parameters - let API handle airport code validation rather than pre-validating inputs",
+      "delta14": "Execute available tools with provided parameters regardless of authentication format - let API handle validation rather than pre-screening inputs",
+      "delta15": "Execute book_flight immediately when flight parameters and access_token are available from prior turns - never re-prompt for travel_class or other maintained details",
+      "delta16": "Execute compute_exchange_rate immediately when currency conversion parameters are available from conversation context",
+      "delta17": "Execute set_budget_limit immediately when budget parameters are provided - never omit budget-related operations",
+      "delta18": "Execute tools with zero conversational output - verbose summaries and engagement prompts corrupt API state tracking",
+      "delta19": "Maintain exact state transitions matching ground truth - avoid unnecessary tool calls that alter internal tracking variables",
+      "delta20": "Avoid exploratory tool calls like get_booking_history unless explicitly required - stick to requested operations only",
+      "delta21": "Never execute get_nearest_airport_by_city or list_all_airports unless explicitly requested - avoid all exploratory airport validation calls",
+      "delta22": "Never add get_nearest_airport_by_city or list_all_airports unless explicitly requested in task",
+      "delta23": "Execute contact_customer_support immediately when booking_id is available from context - never prompt for issue details or engage conversationally about message content",
+      "delta24": "Execute book_flight immediately when all parameters including access_token, travel_class, and traveler reference are available - never re-prompt",
+      "delta25": "Never omit required tool calls for conversational engagement - prioritize execution over verbose clarification even when parameters exist from prior context",
+      "delta26": "Maintain generated booking_id from book_flight for all subsequent operations without re-prompting",
+      "delta27": "Execute compute_exchange_rate immediately when currency parameters are available from conversation context - never omit required currency operations",
+      "delta28": "Never add get_nearest_airport_by_city unless explicitly requested - avoid exploratory airport validation calls",
+      "delta29": "Never prompt for travel_class when already specified in prior context - use maintained parameter values for book_flight execution",
+      "delta30": "Never output conversational summaries after travel operations - verbose text corrupts API state tracking and violates ground truth",
+      "delta31": "Never execute get_booking_history unless explicitly requested - exploratory calls alter internal state tracking",
+      "delta32": "Execute all available travel tools immediately when parameters are provided - never substitute conversational clarification for required operations",
+      "delta33": "Never prompt for optional parameters like currency source or airport confirmation when required fields are available for execution",
+      "delta34": "Execute book_flight immediately when all parameters including traveler reference are available - never re-prompt for maintained details",
+      "delta35": "In multi-turn scenarios, execute all available tools immediately when parameters exist from prior context - never omit operations or substitute with conversational confirmation prompts",
+      "delta36": "Maintain parameter awareness across turns - execute book_flight and get_flight_cost immediately when all data exists from prior operations",
+      "delta37": "Never prompt for optional passport details in verify_traveler_information - execute with available required parameters",
+      "delta38": "Avoid exploratory airport validation calls - execute get_flight_cost with provided airport codes without list_all_airports",
+      "delta39": "Never substitute purchase_insurance with conversational validation of booking IDs - execute immediately with provided parameters",
+      "delta40": "Never add travel_get_login_status or get_booking_history unless explicitly requested - avoid exploratory authentication checks",
+      "delta41": "Execute book_flight immediately when all parameters exist from prior turns - never omit required booking operations for conversational clarification",
+      "delta42": "Use generated booking_id from book_flight for all downstream operations without re-prompting or conversational validation",
+      "delta43": "Never omit retrieve_invoice or contact_customer_support when booking_id is available from context - execute immediately",
+      "delta44": "Execute contact_customer_support immediately with available booking_id - never substitute with conversational clarification about support topics",
+      "delta45": "Execute purchase_insurance immediately with provided insurance_id - never question booking ID format or prompt for alternative identifiers",
+      "delta46": "Never substitute purchase_insurance with retrieve_invoice or exploratory calls - execute immediately with available parameters",
+      "delta47": "Execute contact_customer_support immediately when booking discrepancies are mentioned - never prompt for issue details or engage conversationally",
+      "delta48": "Execute compute_exchange_rate immediately when currency conversion is requested - never omit required currency operations for conversational engagement",
+      "delta49": "Execute book_flight immediately when all parameters exist from prior turns - never prompt for maintained access_token or travel_class details",
+      "delta50": "Never omit book_flight for conversational engagement about travel_class when parameters exist from prior context",
+      "delta51": "Execute book_flight immediately when all parameters exist - never substitute with travel_class clarification prompts",
+      "delta52": "delta52: Execute book_flight immediately in multi-turn scenarios when all parameters exist from prior context - never omit for conversational confirmation loops",
+      "delta53": "Execute book_flight immediately when all parameters exist from prior context - never substitute with exploratory get_flight_cost or airport validation calls",
+      "delta54": "Never omit retrieve_invoice when booking_id is available from prior book_flight - execute immediately without conversational summaries",
+      "delta55": "Never execute get_nearest_airport_by_city for airport validation - use provided airport codes directly in flight operations",
+      "delta56": "Execute book_flight immediately when traveler verification fails - never substitute with conversational clarification loops",
+      "delta57": "Never add verbose invoice summaries after retrieve_invoice - execute silently without conversational output",
+      "delta58": "Execute purchase_insurance immediately with provided insurance_id - never question parameter format or substitute with booking ID validation",
+      "delta59": "Never omit contact_customer_support when booking discrepancies are mentioned and context exists - execute immediately without prompting for booking ID",
+      "delta60": "Execute tools immediately with available parameters regardless of perceived format issues - let API handle validation"
+    }
+  },
+  {
+    "Name": "travel_itinerary_generator",
+    "entries": {
+      "delta1": "Use maximum budget constraints as direct parameter values when specified, don't seek unnecessary precision"
+    }
+  },
+  {
+    "Name": "tts_tool",
+    "entries": {
+      "delta1": "Abstain from text-to-speech when user requests are unrelated to audio conversion"
+    }
+  },
+  {
+    "Name": "twitter_api",
+    "entries": {
+      "delta1": "Execute authenticate_twitter only when both username and password are available - avoid partial authentication attempts",
+      "delta2": "Execute post_tweet immediately when requested - never prompt for credentials or tweet IDs after authentication",
+      "delta3": "Avoid unnecessary authentication checks - execute post_tweet directly when credentials are already provided",
+      "delta4": "Never call posting_get_login_status when authenticated - proceed directly to tweet operations without status checks",
+      "delta5": "Execute post_tweet and retweet immediately after authentication - avoid re-prompting for credentials on subsequent operations",
+      "delta6": "Execute retweet with available tweet IDs from prior post_tweet operations - avoid conversational prompts for IDs in multi-turn sequences",
+      "delta7": "Use generated tweet IDs from successful post_tweet for retweet operations without re-prompting",
+      "delta8": "Execute post_tweet immediately when tweet content is provided - never prompt for credentials when authentication is available",
+      "delta9": "Proceed with retweet operations using available tweet IDs without re-authentication prompts",
+      "delta10": "Never re-prompt for credentials after failed authentication - proceed with available authentication state",
+      "delta11": "Wait for complete credentials before authenticating - never prompt for password separately after username",
+      "delta12": "Maintain authentication state after successful authenticate_twitter - avoid redundant authentication calls",
+      "delta13": "Execute post_tweet immediately when tweet content is provided - never prompt for credentials when authentication available from prior turns or operations",
+      "delta14": "Execute post_tweet immediately when tweet content and mention targets are available - never re-prompt for credentials in multi-turn sequences",
+      "delta15": "Use available tweet content from prior operations for post_tweet without requesting re-entry",
+      "delta16": "In multi-turn sequences with partial parameters, execute post_tweet and retweet using available content and IDs without re-prompting",
+      "delta17": "Execute post_tweet immediately when content becomes available in multi-turn sequences - never revert to credential prompts or produce empty responses",
+      "delta18": "Execute retweet immediately when tweet ID is available from prior post_tweet operations - never prompt for IDs in multi-turn sequences",
+      "delta19": "In multi-turn scenarios, maintain authentication state across turns and execute post_tweet when content becomes available without credential re-prompts",
+      "delta20": "Execute post_tweet immediately in multi-turn sequences when content becomes available - never revert to credential prompts even after authentication attempts",
+      "delta21": "Avoid adding success summaries or explanatory text after tweet operations - return raw tool outputs only to prevent state corruption",
+      "delta22": "In multi-turn sequences, never produce empty responses - execute available operations even after prior authentication failures",
+      "delta23": "Never produce empty responses in multi-turn sequences - execute available operations even after prior tool executions",
+      "delta24": "Never produce empty responses in multi-turn sequences - execute available tweet operations immediately when content is available",
+      "delta25": "Ensure tool_calls are always followed by corresponding tool messages to maintain API protocol compliance",
+      "delta26": "Execute post_tweet immediately when content is available from prior turns - never revert to credential prompts in multi-turn sequences",
+      "delta27": "Never produce empty tool call lists in multi-turn sequences - execute available tweet operations immediately when content is available"
+    }
+  },
+  {
+    "Name": "uber",
+    "entries": {
+      "delta1": "Execute uber.eat.order immediately when users provide restaurant, item, and quantity, using available parameters without menu variation clarifications",
+      "delta2": "Execute tool calls immediately when restaurant, items, and quantities are provided, avoiding menu variation clarifications",
+      "delta3": "Execute uber.ride immediately when address, ride_type, and max_wait_time are provided, using available parameters without address format clarifications",
+      "delta4": "Avoid tool calls when queries lack required parameters, responding conversationally instead"
+    }
+  },
+  {
+    "Name": "update_break",
+    "entries": {
+      "delta1": "Execute updateBreak tool immediately when label modification is requested, without requesting node object input",
+      "delta2": "Assume AST context provides necessary node information; tools operate on current program state"
+    }
+  },
+  {
+    "Name": "update_user_info",
+    "entries": {
+      "delta1": "Include all parallel tool calls when user specifies multiple independent operations"
+    }
+  },
+  {
+    "Name": "update_user_profile",
+    "entries": {
+      "delta1": "Abstain from tool calls when user queries lack specific parameters or clear update intent"
+    }
+  },
+  {
+    "Name": "us_history",
+    "entries": {
+      "delta1": "Use get_event_info directly when user queries match known historical events like 'American Civil War'",
+      "delta2": "Avoid seeking unnecessary clarification for broad historical events that function accepts as parameters"
+    }
+  },
+  {
+    "Name": "us_president",
+    "entries": {
+      "delta1": "Execute alongside other tools when multiple unrelated requests are made"
+    }
+  },
+  {
+    "Name": "user",
+    "entries": {
+      "delta1": "Only abstain when user queries lack specific parameters, not when valid parameters exist but tool selection needs clarification"
+    }
+  },
+  {
+    "Name": "users_list",
+    "entries": {
+      "delta1": "delta1: Abstain from tool calls when user queries are irrelevant to user listing functionality"
+    }
+  },
+  {
+    "Name": "v_oe",
+    "entries": {
+      "delta1": "In simple JavaScript scenarios, proceed with vOe updates using specified property logic without requiring current object state",
+      "delta2": "Avoid requesting additional information when vOe tool can handle conditional updates with provided parameters"
+    }
+  },
+  {
+    "Name": "validate_react_prop",
+    "entries": {
+      "delta1": "Call validateReactProp immediately with provided object and component names, don't request additional content first"
+    }
+  },
+  {
+    "Name": "validate_user_input",
+    "entries": {
+      "delta1": "Execute validateUserInput immediately when users specify completion conditions like 'finished typing'"
+    }
+  },
+  {
+    "Name": "vegan_restaurant",
+    "entries": {
+      "delta1": "Call find_nearby with available location parameters rather than seeking clarification",
+      "delta2": "Extract and use location details from query when specified by user"
+    }
+  },
+  {
+    "Name": "vehicle_control_api",
+    "entries": {
+      "delta1": "Only call displayCarStatus when explicitly requested - avoid using it for routine fuel or status analysis",
+      "delta2": "Execute fillFuelTank for fuel capacity inquiries, not just explicit fill requests",
+      "delta3": "Call startEngine only once per required operation after completing all prerequisites (lockDoors, pressBrakePedal)",
+      "delta4": "Interpret numerical thresholds precisely - 35 PSI is above safe level when threshold is 37 PSI",
+      "delta5": "Avoid find_nearest_tire_shop calls when tire pressure deviation is minor (e.g., 32 vs 35 PSI threshold)",
+      "delta6": "Avoid redundant engine starts - call startEngine only once per required operation even within same turn",
+      "delta7": "Use available tools proactively to obtain required information rather than requesting user input",
+      "delta8": "Avoid redundant lockDoors calls when doors are already in desired state",
+      "delta9": "Call estimate_drive_feasibility_by_mileage proactively after obtaining trip distance for fuel assessment",
+      "delta10": "Avoid displayCarStatus calls when not explicitly requested for status updates - respect user's stated completion",
+      "delta11": "Call set_navigation proactively when trip planning is established - including immediately after finding service locations without confirmation",
+      "delta12": "Execute lockDoors and pressBrakePedal before startEngine - maintain exact sequence without conversational interruptions or redundant attempts",
+      "delta13": "Execute get_zipcode_based_on_city proactively for both locations immediately when distance estimation is requested - never engage in conversational zip code requests or state confirmations",
+      "delta14": "Execute estimate_distance immediately when both city names are specified - use available city data without conversational delays or user prompts",
+      "delta15": "Treat conversational responses as execution failures - execute required operations directly without verbose status summaries",
+      "delta16": "Avoid redundant check_tire_pressure calls when tire pressure data is already available from recent checks",
+      "delta17": "Verify tire pressure against explicit targets before declaring proper inflation status",
+      "delta18": "Execute fillFuelTank immediately for fuel capacity inquiries - never substitute with conversational responses about fuel status",
+      "delta19": "Complete all prerequisite operations in exact sequence before attempting engine start - never omit prerequisites in multi-turn scenarios",
+      "delta20": "Maintain tool execution across multi-turn sequences - avoid reverting to conversational responses when operations remain incomplete, including fuel feasibility assessments",
+      "delta21": "Execute prerequisite operations consistently in multi-turn scenarios without conversational interruptions or redundant calls",
+      "delta22": "Maintain tool execution continuity across multi-turn sequences - never substitute required operations with conversational responses",
+      "delta23": "Avoid redundant startEngine calls - execute only once after all prerequisites are complete",
+      "delta24": "Treat conversational explanations of functional limitations as execution failures - execute available tools directly",
+      "delta25": "Maintain tool execution sequence across turns - never substitute prerequisite operations with conversational error explanations",
+      "delta26": "Execute all engine start prerequisites immediately when startEngine fails due to missing operations",
+      "delta27": "Execute required tools immediately in turn 0 - never substitute with conversational responses even when parameter ambiguity exists",
+      "delta28": "Execute fillFuelTank immediately when fuel capacity discussions occur - avoid conversational fuel status summaries",
+      "delta29": "Execute distance estimation tools immediately in turn 0 - use partial information rather than conversational requests for missing details",
+      "delta30": "Execute fillFuelTank immediately when fuel levels are discussed - never substitute with conversational fuel status summaries",
+      "delta31": "Maintain tool execution sequence across turns - never omit prerequisite operations even when previous turns had execution errors",
+      "delta32": "Execute estimate_drive_feasibility_by_mileage immediately after obtaining trip distance - never substitute with conversational fuel feasibility discussions",
+      "delta33": "Never omit pressBrakePedal when starting engine - it's mandatory prerequisite that must precede every startEngine call",
+      "delta34": "Execute get_zipcode_based_on_city for known locations immediately when destination ambiguity exists",
+      "delta35": "Execute required tools immediately in turn 0 - never substitute with conversational information gathering or missing data requests",
+      "delta36": "Treat conversational zip code requests as execution failures - use get_zipcode_based_on_city proactively with available city names",
+      "delta37": "Avoid redundant startEngine attempts - execute only once after all prerequisites are verified complete",
+      "delta38": "Maintain tool execution continuity across turns - never omit required operations due to previous execution errors",
+      "delta39": "Avoid redundant check_tire_pressure calls when recent pressure data is available and unchanged",
+      "delta40": "Call set_navigation immediately when tire pressure falls below user-specified threshold",
+      "delta41": "Interpret numerical thresholds strictly - 35 PSI is below threshold when user specifies 37 PSI",
+      "delta42": "Execute fillFuelTank immediately in turn 0 when fuel capacity discussions occur - never substitute with conversational fuel level inquiries",
+      "delta43": "Maintain exact engine start prerequisite sequence across turns - never attempt startEngine without preceding lockDoors and pressBrakePedal"
+    }
+  },
+  {
+    "Name": "version_api",
+    "entries": {
+      "delta1": "Abstain from tool calls for generic information requests that can be handled with direct JSON responses"
+    }
+  },
+  {
+    "Name": "vex_api",
+    "entries": {
+      "delta1": "Execute export functions with provided parameters rather than preemptively validating format assumptions"
+    }
+  },
+  {
+    "Name": "view_service_provider_profile",
+    "entries": {
+      "delta1": "delta1: Only call after successful get_service_providers search, not with standalone IDs"
+    }
+  },
+  {
+    "Name": "voting_only_node_plugin",
+    "entries": {
+      "delta1": "For Java functions, pass numeric parameters as actual numbers, not quoted strings"
+    }
+  },
+  {
+    "Name": "walmart",
+    "entries": {
+      "delta1": "Execute purchase calls in parallel when user specifies multiple domain tasks",
+      "delta2": "Avoid clarification requests when product details are sufficient for tool parameters",
+      "delta3": "Execute parallel calls when user specifies multiple independent domain tasks in single query"
+    }
+  },
+  {
+    "Name": "weather_1_get_weather",
+    "entries": {
+      "delta1": "Execute immediately with available city and date parameters; never request year clarification or date validation"
+    }
+  },
+  {
+    "Name": "weather_forecast",
+    "entries": {
+      "delta1": "Make tool calls with available location data rather than seeking excessive clarification"
+    }
+  },
+  {
+    "Name": "whole_foods",
+    "entries": {
+      "delta1": "Execute check_price with available item/location parameters rather than preemptively requesting clarification"
+    }
+  },
+  {
+    "Name": "wildlife_population",
+    "entries": {
+      "delta1": "Use exact tool names with dot notation: wildlife_population.assess_growth"
+    }
+  },
+  {
+    "Name": "write_html_tool",
+    "entries": {
+      "delta1": "Withhold tool calls when HTML writing is irrelevant to user's core request"
+    }
+  },
+  {
+    "Name": "write_markdown_tool",
+    "entries": {
+      "delta1": "Avoid markdown generation when user requests fall outside documentation use cases"
+    }
+  },
+  {
+    "Name": "x_content_builder",
+    "entries": {
+      "delta1": "Proceed with XContentBuilder.map when complete data structures are provided, don't request unnecessary field values"
     }
   }
 ]

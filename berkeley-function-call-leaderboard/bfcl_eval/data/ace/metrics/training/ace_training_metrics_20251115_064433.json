@@ -1,0 +1,4484 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook_sample2000.json",
+    "split_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split_sampled_2000x1000.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 2000,
+    "start_offset": 0,
+    "planned_sample_count": 2000,
+    "samples_recorded": 188
+  },
+  "summary": {
+    "total_samples": 188,
+    "counts": {
+      "ADD": 27,
+      "MODIFY": 68,
+      "REMOVE": 0,
+      "NO_OP": 108
+    },
+    "ratios": {
+      "ADD": 0.14361702127659576,
+      "MODIFY": 0.3617021276595745,
+      "REMOVE": 0.0,
+      "NO_OP": 0.574468085106383
+    },
+    "pass_counters": {
+      "passed": 112,
+      "failed": 72,
+      "unknown": 4
+    },
+    "pass_ratio": 0.5957446808510638
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 100,
+      "size": 100,
+      "counts": {
+        "ADD": 17,
+        "MODIFY": 35,
+        "REMOVE": 0,
+        "NO_OP": 56
+      },
+      "ratios": {
+        "ADD": 0.17,
+        "MODIFY": 0.35,
+        "REMOVE": 0.0,
+        "NO_OP": 0.56
+      },
+      "pass_counters": {
+        "passed": 60,
+        "failed": 38,
+        "unknown": 2
+      },
+      "pass_ratio": 0.6
+    },
+    {
+      "batch_index": 2,
+      "start_sample": 101,
+      "end_sample": 188,
+      "size": 88,
+      "counts": {
+        "ADD": 10,
+        "MODIFY": 33,
+        "REMOVE": 0,
+        "NO_OP": 52
+      },
+      "ratios": {
+        "ADD": 0.11363636363636363,
+        "MODIFY": 0.375,
+        "REMOVE": 0.0,
+        "NO_OP": 0.5909090909090909
+      },
+      "pass_counters": {
+        "passed": 52,
+        "failed": 34,
+        "unknown": 2
+      },
+      "pass_ratio": 0.5909090909090909
+    }
+  ],
+  "per_section": {
+    "users_list": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "services_1_find_provider": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "vehicle_control_api": {
+      "ADD": 5,
+      "MODIFY": 4,
+      "REMOVE": 0
+    },
+    "events_3_find_events": {
+      "ADD": 0,
+      "MODIFY": 4,
+      "REMOVE": 0
+    },
+    "cmd_controller": {
+      "ADD": 0,
+      "MODIFY": 3,
+      "REMOVE": 0
+    },
+    "trading_bot": {
+      "ADD": 0,
+      "MODIFY": 3,
+      "REMOVE": 0
+    },
+    "travel_api": {
+      "ADD": 17,
+      "MODIFY": 11,
+      "REMOVE": 0
+    },
+    "get_custom_event_specifications": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_event_specification_infos": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "get_event_specification_infos_by_ids": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "recipe_search": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "lawsuit": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "render_tts": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "term_query_builder_tests": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "music_3_lookup_music": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "find_exhibition": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "_get_all_user_list": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "_query_meeting_room_list": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "_book_meeting_room": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "_get_meeting_room_schedule": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "ticket_api": {
+      "ADD": 3,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "change_food": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "rotate_image_action": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "flip_image_action": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "book_hotel": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "fetch_law_case_details": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "get_theater_movie_releases": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "calculate_magnetic_field": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "calculate_voltage_difference": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "route": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "play_song": {
+      "ADD": 1,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "set_volume": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "analyze_dna_sequence": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "cookie_header_test": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "chart_data_accessor_factory": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "probabilities": {
+      "ADD": 3,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "alimony_calculator": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "traffic_estimate": {
+      "ADD": 1,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "fire_bird_utils": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "search_web_tool": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "calculate_winning_percentage": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "method_invoke_test": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "media_3_find_movies": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "twitter_api": {
+      "ADD": 2,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "message_api": {
+      "ADD": 2,
+      "MODIFY": 4,
+      "REMOVE": 0
+    },
+    "ride_sharing_2_get_ride": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "flight": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "track_submit_with_validation": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "gorilla_file_system": {
+      "ADD": 2,
+      "MODIFY": 12,
+      "REMOVE": 0
+    },
+    "get_service_providers": {
+      "ADD": 0,
+      "MODIFY": 3,
+      "REMOVE": 0
+    },
+    "weather_1_get_weather": {
+      "ADD": 0,
+      "MODIFY": 4,
+      "REMOVE": 0
+    },
+    "buses_3_find_bus": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "spreadsheet_presentation": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "chart_series_generator": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "maybe_add_js_synthetic_rest_parameter": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "book_room": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "get_sensor_readings_latest": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "calculate_cagr": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "play_spotify_song": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "classfloadhk005": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "flights_4_search_oneway_flight": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "services_4_find_provider": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "pms_product_category_controller": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "hotel_booking": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "data_loading": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "linear_regression_fit": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "live_irrelevance_747-258-0",
+      "tool_groups": [
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_list",
+        "rtm_connect",
+        "search_messages",
+        "stars_add",
+        "stars_list",
+        "stars_remove",
+        "team_access_logs",
+        "team_billable_info",
+        "team_info",
+        "team_integration_logs",
+        "team_profile_get",
+        "usergroups_create",
+        "usergroups_disable",
+        "usergroups_enable",
+        "usergroups_list",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update",
+        "users_conversations",
+        "users_delete_photo",
+        "users_get_presence",
+        "users_identity",
+        "users_info",
+        "users_list",
+        "users_lookup_by_email",
+        "users_profile_get",
+        "users_profile_set",
+        "users_set_active",
+        "users_set_photo",
+        "users_set_presence",
+        "views_open",
+        "views_publish",
+        "views_push",
+        "views_update"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "users_list",
+          "normalized_section": "users_list"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_241-125-4",
+      "tool_groups": [
+        "play_spotify_song"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_71",
+      "tool_groups": [
+        "get_bureau_statistics",
+        "get_demographics",
+        "get_population"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_395-138-3",
+      "tool_groups": [
+        "services_1_book_appointment",
+        "services_1_find_provider"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "services_1_find_provider",
+          "normalized_section": "services_1_find_provider"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_95",
+      "tool_groups": [
+        "currency_exchange",
+        "unit_conversion"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_14",
+      "tool_groups": [
+        "gorilla_file_system",
+        "message_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_60",
+      "tool_groups": [
+        "country_info"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_99",
+      "tool_groups": [
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_3",
+      "tool_groups": [
+        "gorilla_file_system"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_819-177-2",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_310-76-8",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_20",
+      "tool_groups": [
+        "gorilla_file_system",
+        "twitter_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_parallel_14-10-0",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_484-138-1",
+      "tool_groups": [
+        "calculate_tax"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_152-95-9",
+      "tool_groups": [
+        "cmd_controller"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "cmd_controller",
+          "normalized_section": "cmd_controller"
+        },
+        {
+          "type": "MODIFY",
+          "section": "cmd_controller",
+          "normalized_section": "cmd_controller"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_373",
+      "tool_groups": [
+        "walmart"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_122",
+      "tool_groups": [
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_188-32-1",
+      "tool_groups": [
+        "user_authentication"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_169",
+      "tool_groups": [
+        "message_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_43",
+      "tool_groups": [
+        "gorilla_file_system",
+        "message_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_782-291-0",
+      "tool_groups": [
+        "get_custom_event_specifications",
+        "get_event_specification_infos",
+        "get_event_specification_infos_by_ids"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_custom_event_specifications",
+          "normalized_section": "get_custom_event_specifications"
+        },
+        {
+          "type": "ADD",
+          "section": "get_event_specification_infos",
+          "normalized_section": "get_event_specification_infos"
+        },
+        {
+          "type": "ADD",
+          "section": "get_event_specification_infos_by_ids",
+          "normalized_section": "get_event_specification_infos_by_ids"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_648-205-2",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_238",
+      "tool_groups": [
+        "map_coordinates"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_51",
+      "tool_groups": [
+        "recipe_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "recipe_search",
+          "normalized_section": "recipe_search"
+        },
+        {
+          "type": "MODIFY",
+          "section": "recipe_search",
+          "normalized_section": "recipe_search"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_184",
+      "tool_groups": [
+        "lawsuit"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "lawsuit",
+          "normalized_section": "lawsuit"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_248-49-0",
+      "tool_groups": [
+        "render_tts",
+        "render_ui_date_picker_widget",
+        "render_ui_finish",
+        "render_ui_multi_select_widget",
+        "render_ui_single_select_widget"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "render_tts",
+          "normalized_section": "render_tts"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_86-47-0",
+      "tool_groups": [
+        "sort_array"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_42",
+      "tool_groups": [
+        "term_query_builder_tests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "term_query_builder_tests",
+          "normalized_section": "term_query_builder_tests"
+        },
+        {
+          "type": "MODIFY",
+          "section": "term_query_builder_tests",
+          "normalized_section": "term_query_builder_tests"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_844-178-19",
+      "tool_groups": [
+        "music_3_lookup_music",
+        "music_3_play_media",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_160",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_534-151-10",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_161",
+      "tool_groups": [
+        "card_game_probability",
+        "find_exhibition",
+        "get_sculpture_info"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "find_exhibition",
+          "normalized_section": "find_exhibition"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_459-125-0",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_688-164-4",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "movies_3_find_movies"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_363",
+      "tool_groups": [
+        "restaurant_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_765-274-1",
+      "tool_groups": [
+        "_book_meeting_room",
+        "_get_all_user_list",
+        "_get_meeting_room_schedule",
+        "_query_meeting_room_list"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "_get_all_user_list",
+          "normalized_section": "_get_all_user_list"
+        },
+        {
+          "type": "MODIFY",
+          "section": "_query_meeting_room_list",
+          "normalized_section": "_query_meeting_room_list"
+        },
+        {
+          "type": "ADD",
+          "section": "_book_meeting_room",
+          "normalized_section": "_book_meeting_room"
+        },
+        {
+          "type": "ADD",
+          "section": "_get_meeting_room_schedule",
+          "normalized_section": "_get_meeting_room_schedule"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_110",
+      "tool_groups": [
+        "ticket_api",
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        },
+        {
+          "type": "MODIFY",
+          "section": "ticket_api",
+          "normalized_section": "ticket_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_140",
+      "tool_groups": [
+        "calculate_density",
+        "mix_paint_color"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_136",
+      "tool_groups": [
+        "compound_interest"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_49",
+      "tool_groups": [
+        "calc_compound_interest",
+        "calc_simple_interest",
+        "future_value"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_29",
+      "tool_groups": [
+        "gorilla_file_system"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_187",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "ticket_api",
+          "normalized_section": "ticket_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_21-4-1",
+      "tool_groups": [
+        "change_food"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "change_food",
+          "normalized_section": "change_food"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_253",
+      "tool_groups": [
+        "retrieve_religion_info"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_242",
+      "tool_groups": [
+        "get_scientist_for_discovery"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_173",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "ticket_api",
+          "normalized_section": "ticket_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_parallel_multiple_17-15-0",
+      "tool_groups": [
+        "flip_image_action",
+        "get_recommendations_action",
+        "remove_background_action",
+        "resize_image_action",
+        "rotate_image_action"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "rotate_image_action",
+          "normalized_section": "rotate_image_action"
+        },
+        {
+          "type": "MODIFY",
+          "section": "flip_image_action",
+          "normalized_section": "flip_image_action"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_382",
+      "tool_groups": [
+        "book_hotel"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "book_hotel",
+          "normalized_section": "book_hotel"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_171",
+      "tool_groups": [
+        "fetch_law_case_details"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "fetch_law_case_details",
+          "normalized_section": "fetch_law_case_details"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_579-181-1",
+      "tool_groups": [
+        "raptor"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_154",
+      "tool_groups": [
+        "message_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_776-285-0",
+      "tool_groups": [
+        "awx_create_job_templates",
+        "awx_list_job_templates",
+        "awx_run_job_templates"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_93",
+      "tool_groups": [
+        "get_theater_movie_releases"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "get_theater_movie_releases",
+          "normalized_section": "get_theater_movie_releases"
+        },
+        {
+          "type": "MODIFY",
+          "section": "get_theater_movie_releases",
+          "normalized_section": "get_theater_movie_releases"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_65-2-53",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_12",
+      "tool_groups": [
+        "calculate_magnetic_field",
+        "calculate_voltage_difference"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "calculate_magnetic_field",
+          "normalized_section": "calculate_magnetic_field"
+        },
+        {
+          "type": "ADD",
+          "section": "calculate_voltage_difference",
+          "normalized_section": "calculate_voltage_difference"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_601-193-3",
+      "tool_groups": [
+        "movies_1_buy_movie_tickets",
+        "movies_1_find_movies",
+        "movies_1_get_times_for_movie"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_587-183-0",
+      "tool_groups": [
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "rental_cars_3_get_cars_available",
+        "rental_cars_3_reserve_car"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_229",
+      "tool_groups": [
+        "get_bigfive_scores"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_583-182-3",
+      "tool_groups": [
+        "get_data_for_professional"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_808-175-14",
+      "tool_groups": [
+        "homes_2_find_home_by_area",
+        "homes_2_schedule_visit",
+        "rental_cars_3_get_cars_available",
+        "rental_cars_3_reserve_car",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_842-332-0",
+      "tool_groups": [
+        "process_transaction"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_93",
+      "tool_groups": [
+        "route"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "route",
+          "normalized_section": "route"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_117",
+      "tool_groups": [
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_1052-279-0",
+      "tool_groups": [
+        "play_song",
+        "set_volume"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "play_song",
+          "normalized_section": "play_song"
+        },
+        {
+          "type": "ADD",
+          "section": "set_volume",
+          "normalized_section": "set_volume"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_121",
+      "tool_groups": [
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_114",
+      "tool_groups": [
+        "analyze_dna_sequence"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "analyze_dna_sequence",
+          "normalized_section": "analyze_dna_sequence"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_48",
+      "tool_groups": [
+        "cookie_header_test"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "cookie_header_test",
+          "normalized_section": "cookie_header_test"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": null,
+      "notes": "evaluation_status=error"
+    },
+    {
+      "entry_id": "simple_javascript_14",
+      "tool_groups": [
+        "chart_data_accessor_factory"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "chart_data_accessor_factory",
+          "normalized_section": "chart_data_accessor_factory"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_javascript_49",
+      "tool_groups": [
+        "convert_enumerated_value"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": null,
+      "notes": "evaluation_status=error"
+    },
+    {
+      "entry_id": "live_irrelevance_624-197-0",
+      "tool_groups": [
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_116",
+      "tool_groups": [
+        "probabilities"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "probabilities",
+          "normalized_section": "probabilities"
+        },
+        {
+          "type": "ADD",
+          "section": "probabilities",
+          "normalized_section": "probabilities"
+        },
+        {
+          "type": "ADD",
+          "section": "probabilities",
+          "normalized_section": "probabilities"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_23",
+      "tool_groups": [
+        "alimony_calculator"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "alimony_calculator",
+          "normalized_section": "alimony_calculator"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_102-2-90",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_204-32-17",
+      "tool_groups": [
+        "user_authentication"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_106",
+      "tool_groups": [
+        "calculate_distance",
+        "traffic_estimate",
+        "weather_forecast"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "traffic_estimate",
+          "normalized_section": "traffic_estimate"
+        },
+        {
+          "type": "MODIFY",
+          "section": "traffic_estimate",
+          "normalized_section": "traffic_estimate"
+        },
+        {
+          "type": "ADD",
+          "section": "traffic_estimate",
+          "normalized_section": "traffic_estimate"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_2",
+      "tool_groups": [
+        "fire_bird_utils"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "fire_bird_utils",
+          "normalized_section": "fire_bird_utils"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_241-107-2",
+      "tool_groups": [
+        "generate_image_tool",
+        "get_url_content",
+        "search_web_tool",
+        "tts_tool",
+        "write_html_tool",
+        "write_markdown_tool"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "search_web_tool",
+          "normalized_section": "search_web_tool"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_705-164-21",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "movies_3_find_movies"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_107-43-5",
+      "tool_groups": [
+        "add_mtnards_server",
+        "add_postgres_server",
+        "close_project",
+        "connect_to_server",
+        "dartfx_help",
+        "default_function",
+        "list_files",
+        "list_servers",
+        "open_project",
+        "rename_server"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_878-183-3",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "movies_1_buy_movie_tickets",
+        "movies_1_find_movies",
+        "movies_1_get_times_for_movie",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_323-132-13",
+      "tool_groups": [
+        "movies_3_find_movies",
+        "restaurants_2_find_restaurants",
+        "restaurants_2_reserve_restaurant"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_230-121-0",
+      "tool_groups": [
+        "play_song"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_440-111-0",
+      "tool_groups": [
+        "generate_sea_foam"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_46",
+      "tool_groups": [
+        "calculate_winning_percentage"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "calculate_winning_percentage",
+          "normalized_section": "calculate_winning_percentage"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_452-145-3",
+      "tool_groups": [
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "hotels_2_book_house",
+        "hotels_2_search_house",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_194-32-7",
+      "tool_groups": [
+        "user_authentication"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_46",
+      "tool_groups": [
+        "method_invoke_test"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "method_invoke_test",
+          "normalized_section": "method_invoke_test"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_748-169-3",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "music_3_lookup_music",
+        "music_3_play_media",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "media_3_find_movies",
+          "normalized_section": "media_3_find_movies"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_146",
+      "tool_groups": [
+        "get_prophet_details"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_329",
+      "tool_groups": [
+        "monopoly_odds_calculator"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_943-196-1",
+      "tool_groups": [
+        "play_song",
+        "set_volume"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "play_song",
+          "normalized_section": "play_song"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_174-100-0",
+      "tool_groups": [
+        "get_service_id"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_213-34-2",
+      "tool_groups": [
+        "product_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_355",
+      "tool_groups": [
+        "recipe_info"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_68",
+      "tool_groups": [
+        "twitter_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "twitter_api",
+          "normalized_section": "twitter_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_771-280-0",
+      "tool_groups": [
+        "contains_word_gaurav"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_490-142-1",
+      "tool_groups": [
+        "contact",
+        "detail_experience_and_education",
+        "detail_project",
+        "experiences_and_education",
+        "get_tech_stack",
+        "help",
+        "list_projects"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_138",
+      "tool_groups": [
+        "message_api",
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "trading_bot",
+          "normalized_section": "trading_bot"
+        },
+        {
+          "type": "MODIFY",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_158-95-15",
+      "tool_groups": [
+        "cmd_controller"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "cmd_controller",
+          "normalized_section": "cmd_controller"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_405-140-1",
+      "tool_groups": [
+        "music_3_lookup_music",
+        "music_3_play_media",
+        "ride_sharing_2_get_ride"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "ride_sharing_2_get_ride",
+          "normalized_section": "ride_sharing_2_get_ride"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_388",
+      "tool_groups": [
+        "currency_exchange"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_362-81-23",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_160",
+      "tool_groups": [
+        "most_frequent_visitor"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_233",
+      "tool_groups": [
+        "european_history"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_251-133-0",
+      "tool_groups": [
+        "flight"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "flight",
+          "normalized_section": "flight"
+        },
+        {
+          "type": "MODIFY",
+          "section": "flight",
+          "normalized_section": "flight"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_705-231-0",
+      "tool_groups": [
+        "hotels_2_book_house",
+        "hotels_2_search_house",
+        "trains_1_find_trains",
+        "trains_1_get_train_tickets"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_671-214-0",
+      "tool_groups": [
+        "services_1_book_appointment",
+        "services_1_find_provider",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_130-11-5",
+      "tool_groups": [
+        "create_workspace",
+        "generate_password",
+        "get_current_weather",
+        "start_oncall"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_javascript_25",
+      "tool_groups": [
+        "track_submit_with_validation"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "track_submit_with_validation",
+          "normalized_section": "track_submit_with_validation"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_854-344-0",
+      "tool_groups": [
+        "compute_tax"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_123-9-3",
+      "tool_groups": [
+        "generic"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_194",
+      "tool_groups": [
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_51",
+      "tool_groups": [
+        "dice_roll_probability",
+        "flip_coin_probability",
+        "shuffle_card_probability"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_574-179-3",
+      "tool_groups": [
+        "event_query",
+        "reschedule_event"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_513-152-0",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_199-32-12",
+      "tool_groups": [
+        "user_authentication"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_45",
+      "tool_groups": [
+        "gorilla_file_system",
+        "math_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_246",
+      "tool_groups": [
+        "science_history"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_6",
+      "tool_groups": [
+        "capacitance_calculator",
+        "magnetic_field",
+        "resistance_calculator"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_698-164-14",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "movies_3_find_movies"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_978-215-2",
+      "tool_groups": [
+        "get_service_providers",
+        "view_service_provider_profile"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "get_service_providers",
+          "normalized_section": "get_service_providers"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_655-161-23",
+      "tool_groups": [
+        "alarm_1_add_alarm",
+        "alarm_1_get_alarms",
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_201-116-9",
+      "tool_groups": [
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_177",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_60-2-48",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_126",
+      "tool_groups": [
+        "event_finder",
+        "geometry",
+        "t_test"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_126-82-0",
+      "tool_groups": [
+        "telemetry"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_359-134-4",
+      "tool_groups": [
+        "movies_3_find_movies",
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_909-188-0",
+      "tool_groups": [
+        "youtube"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_177-74-0",
+      "tool_groups": [
+        "get_trip",
+        "sort_array"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_762-170-0",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "buses_3_find_bus",
+          "normalized_section": "buses_3_find_bus"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_982-215-6",
+      "tool_groups": [
+        "get_service_providers",
+        "view_service_provider_profile"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "get_service_providers",
+          "normalized_section": "get_service_providers"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_115-7-5",
+      "tool_groups": [
+        "uber"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_6",
+      "tool_groups": [
+        "spreadsheet_presentation"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "spreadsheet_presentation",
+          "normalized_section": "spreadsheet_presentation"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": null,
+      "notes": "evaluation_status=error"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_18",
+      "tool_groups": [
+        "gorilla_file_system",
+        "twitter_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "ADD",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "ADD",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_77",
+      "tool_groups": [
+        "twitter_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_javascript_15",
+      "tool_groups": [
+        "chart_series_generator"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "chart_series_generator",
+          "normalized_section": "chart_series_generator"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_765-170-3",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "buses_3_find_bus",
+          "normalized_section": "buses_3_find_bus"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_112",
+      "tool_groups": [
+        "art_auction",
+        "library"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_225-35-0",
+      "tool_groups": [
+        "check_order_status"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_933-191-21",
+      "tool_groups": [
+        "get_service_providers",
+        "view_service_provider_profile"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "get_service_providers",
+          "normalized_section": "get_service_providers"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_108",
+      "tool_groups": [
+        "run_linear_regression"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_890-185-0",
+      "tool_groups": [
+        "payment_1_make_payment",
+        "payment_1_request_payment",
+        "restaurants_2_find_restaurants",
+        "restaurants_2_reserve_restaurant"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_31",
+      "tool_groups": [
+        "redisson_rx"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": null,
+      "notes": "evaluation_status=error"
+    },
+    {
+      "entry_id": "multi_turn_long_context_78",
+      "tool_groups": [
+        "twitter_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "twitter_api",
+          "normalized_section": "twitter_api"
+        },
+        {
+          "type": "ADD",
+          "section": "twitter_api",
+          "normalized_section": "twitter_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_javascript_39",
+      "tool_groups": [
+        "maybe_add_js_synthetic_rest_parameter"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "maybe_add_js_synthetic_rest_parameter",
+          "normalized_section": "maybe_add_js_synthetic_rest_parameter"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_658-162-0",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "hotels_4_reserve_hotel",
+        "hotels_4_search_hotel"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_688-223-3",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "hotels_4_reserve_hotel",
+        "hotels_4_search_hotel"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_342-81-3",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_383",
+      "tool_groups": [
+        "book_room"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "book_room",
+          "normalized_section": "book_room"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_13",
+      "tool_groups": [
+        "corporate_finance"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_146-58-0",
+      "tool_groups": [
+        "get_sensor_alerts",
+        "get_sensor_readings_history",
+        "get_sensor_readings_history_by_interval",
+        "get_sensor_readings_latest"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "get_sensor_readings_latest",
+          "normalized_section": "get_sensor_readings_latest"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_6",
+      "tool_groups": [
+        "solve_quadratic"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_3",
+      "tool_groups": [
+        "gorilla_file_system"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_203-116-11",
+      "tool_groups": [
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_func_168",
+      "tool_groups": [
+        "message_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_176",
+      "tool_groups": [
+        "calculate_cagr"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "calculate_cagr",
+          "normalized_section": "calculate_cagr"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_simple_236-124-1",
+      "tool_groups": [
+        "play_spotify_song"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "play_spotify_song",
+          "normalized_section": "play_spotify_song"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_14",
+      "tool_groups": [
+        "animal_population",
+        "crop_yield"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_582-157-3",
+      "tool_groups": [
+        "media_3_find_movies",
+        "media_3_play_movie",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_990-221-0",
+      "tool_groups": [
+        "releases_api",
+        "sli_settings_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_565-173-0",
+      "tool_groups": [
+        "flip_image_action",
+        "get_recommendations_action",
+        "remove_background_action",
+        "resize_image_action",
+        "rotate_image_action"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_1",
+      "tool_groups": [
+        "math"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_288-70-0",
+      "tool_groups": [
+        "get_adriel_education",
+        "get_adriel_experiences",
+        "get_adriel_list_projects",
+        "get_adriel_profile",
+        "get_detail_adriel_project"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_796-305-0",
+      "tool_groups": [
+        "get_business_unit_mapping",
+        "product_list",
+        "product_selector",
+        "product_volume",
+        "sce_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_675-163-0",
+      "tool_groups": [
+        "ride_sharing_2_get_ride",
+        "travel_1_find_attractions",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_long_context_131",
+      "tool_groups": [
+        "message_api",
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        },
+        {
+          "type": "ADD",
+          "section": "message_api",
+          "normalized_section": "message_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_516-150-4",
+      "tool_groups": [
+        "movies_1_buy_movie_tickets",
+        "movies_1_find_movies",
+        "movies_1_get_times_for_movie",
+        "music_3_lookup_music",
+        "music_3_play_media"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_25",
+      "tool_groups": [
+        "lawsuit"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_207-32-20",
+      "tool_groups": [
+        "user_authentication"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_187",
+      "tool_groups": [
+        "ticket_api",
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "travel_api",
+          "normalized_section": "travel_api"
+        },
+        {
+          "type": "ADD",
+          "section": "ticket_api",
+          "normalized_section": "ticket_api"
+        },
+        {
+          "type": "MODIFY",
+          "section": "ticket_api",
+          "normalized_section": "ticket_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_64",
+      "tool_groups": [
+        "probability"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_483-138-0",
+      "tool_groups": [
+        "calculate_tax"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "irrelevance_218",
+      "tool_groups": [
+        "prepare_food"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_73",
+      "tool_groups": [
+        "religion"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_196",
+      "tool_groups": [
+        "calculate_electric_field",
+        "calculate_genotype_frequency",
+        "cellbio",
+        "locate_tallest_mountains"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_85",
+      "tool_groups": [
+        "classfloadhk005"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "classfloadhk005",
+          "normalized_section": "classfloadhk005"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_275-127-10",
+      "tool_groups": [
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "rental_cars_3_get_cars_available",
+        "rental_cars_3_reserve_car",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "weather_1_get_weather",
+          "normalized_section": "weather_1_get_weather"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_177-29-0",
+      "tool_groups": [
+        "todo"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_576-156-2",
+      "tool_groups": [
+        "movies_1_buy_movie_tickets",
+        "movies_1_find_movies",
+        "movies_1_get_times_for_movie",
+        "services_1_book_appointment",
+        "services_1_find_provider"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "services_1_find_provider",
+          "normalized_section": "services_1_find_provider"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_509-149-6",
+      "tool_groups": [
+        "flights_4_search_oneway_flight",
+        "flights_4_search_roundtrip_flights",
+        "trains_1_find_trains",
+        "trains_1_get_train_tickets"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "flights_4_search_oneway_flight",
+          "normalized_section": "flights_4_search_oneway_flight"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_19",
+      "tool_groups": [
+        "math"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_1045-272-0",
+      "tool_groups": [
+        "movies_3_find_movies",
+        "services_4_book_appointment",
+        "services_4_find_provider"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "services_4_find_provider",
+          "normalized_section": "services_4_find_provider"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_596-191-0",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "ride_sharing_2_get_ride"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "events_3_find_events",
+          "normalized_section": "events_3_find_events"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_837-327-1",
+      "tool_groups": [
+        "search_on_google"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_java_24",
+      "tool_groups": [
+        "pms_product_category_controller"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "pms_product_category_controller",
+          "normalized_section": "pms_product_category_controller"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_384",
+      "tool_groups": [
+        "hotel_booking"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "hotel_booking",
+          "normalized_section": "hotel_booking"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "parallel_multiple_21",
+      "tool_groups": [
+        "data_loading",
+        "linear_regression_fit"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "data_loading",
+          "normalized_section": "data_loading"
+        },
+        {
+          "type": "MODIFY",
+          "section": "linear_regression_fit",
+          "normalized_section": "linear_regression_fit"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    }
+  ]
+}

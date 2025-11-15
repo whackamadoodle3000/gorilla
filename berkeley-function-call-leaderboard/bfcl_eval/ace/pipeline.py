@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import random
+import shutil
+import tempfile
 import traceback
 from copy import deepcopy
 from dataclasses import dataclass
@@ -43,6 +45,8 @@ from bfcl_eval.utils import (
     is_sql,
     load_dataset_entry,
     load_ground_truth_entry,
+    populate_initial_settings_for_memory_test_cases,
+    populate_initial_settings_for_web_search_test_cases,
 )
 
 from .constants import (
@@ -54,7 +58,10 @@ from .constants import (
 from .llm import ChatCompletionClient
 from .utils import (
     camel_to_snake,
+    count_available_tools,
     determine_tool_groups,
+    extract_base_prompt_id,
+    extract_memory_ground_truth_id,
     format_conversation,
     serialize_json,
 )
@@ -77,11 +84,13 @@ def _extract_json_block(text: str) -> str:
 class DatasetCache:
     prompt: Dict[str, dict]
     ground_truth: Dict[str, dict]
+    ground_truth_aliases: Dict[str, dict]
 
     @classmethod
     def build(cls) -> "DatasetCache":
         prompt: Dict[str, dict] = {}
         ground_truth: Dict[str, dict] = {}
+        ground_truth_aliases: Dict[str, dict] = {}
 
         for category in ALL_CATEGORIES:
             prompts = load_dataset_entry(
@@ -99,13 +108,32 @@ class DatasetCache:
                 prompt[entry_id] = entry
                 if entry_id in gt_map:
                     ground_truth[entry_id] = gt_map[entry_id]
-        return cls(prompt=prompt, ground_truth=ground_truth)
+                    continue
+
+                base_id = extract_base_prompt_id(entry_id)
+                if base_id in gt_map:
+                    ground_truth_aliases[entry_id] = gt_map[base_id]
+                    continue
+
+                memory_id = extract_memory_ground_truth_id(entry_id)
+                if memory_id and memory_id in gt_map:
+                    ground_truth_aliases[entry_id] = gt_map[memory_id]
+
+        return cls(
+            prompt=prompt,
+            ground_truth=ground_truth,
+            ground_truth_aliases=ground_truth_aliases,
+        )
 
     def get_prompt(self, entry_id: str) -> Optional[dict]:
         return self.prompt.get(entry_id)
 
     def get_ground_truth(self, entry_id: str) -> Optional[dict]:
-        return self.ground_truth.get(entry_id)
+        if entry_id in self.ground_truth:
+            return self.ground_truth[entry_id]
+        if entry_id in self.ground_truth_aliases:
+            return self.ground_truth_aliases[entry_id]
+        return None
 
 
 def _sanitize_evaluation_details(
@@ -480,6 +508,23 @@ def _summarize_generator_output(result: dict) -> str:
     return serialize_json(payload)
 
 
+def _prepare_entry_for_training(entry: dict, model_result_dir: Path) -> dict:
+    """
+    Prepare a dataset entry for generator inference during playbook training.
+
+    Mirrors the setup performed in the standalone generation pipeline so that
+    simulator-backed categories (memory, web search) receive the expected bootstrapping.
+    """
+
+    prepared_entry = deepcopy(entry)
+    working_list = [prepared_entry]
+
+    populate_initial_settings_for_memory_test_cases(working_list, model_result_dir)
+    populate_initial_settings_for_web_search_test_cases(working_list)
+
+    return working_list[0]
+
+
 def _build_reflector_messages(
     playbook_text: str,
     entry: dict,
@@ -662,6 +707,9 @@ def train_playbook(
     )
 
     metrics_collector = PlaybookTrainingMetricsCollector()
+    temp_result_root = Path(tempfile.mkdtemp(prefix="ace_training_"))
+    temp_model_result_dir = temp_result_root / getattr(handler, "registry_dir_name", "ace_training_model")
+    temp_model_result_dir.mkdir(parents=True, exist_ok=True)
     run_metadata = {
         "playbook_path": str(playbook_path),
         "split_path": str(split_path),
@@ -734,9 +782,11 @@ def train_playbook(
                 )
                 continue
 
+            prepared_entry = _prepare_entry_for_training(entry, temp_model_result_dir)
+
             generator_result = multi_threaded_inference(
                 handler=handler,
-                test_case=deepcopy(entry),
+                test_case=prepared_entry,
                 include_input_log=False,
                 exclude_state_log=False,
                 playbook_text=None,
@@ -754,7 +804,7 @@ def train_playbook(
                 max_sections=len(focus_sections) if focus_sections else None,
             )
             evaluation = _evaluate_generator_result(
-                handler, entry, generator_result, ground_truth
+                handler, prepared_entry, generator_result, ground_truth
             )
             evaluation_summary = _format_evaluation_summary(evaluation)
             evaluation_summary = _append_tool_call_diff(
@@ -771,7 +821,7 @@ def train_playbook(
 
             reflection_messages = _build_reflector_messages(
                 playbook_text,
-                entry,
+                prepared_entry,
                 generator_result,
                 ground_truth,
                 tool_groups,
@@ -814,7 +864,7 @@ def train_playbook(
 
             curator_messages = _build_curator_messages(
                 playbook_text,
-                entry,
+                prepared_entry,
                 generator_result,
                 reflection_json,
                 ground_truth,
@@ -1005,6 +1055,7 @@ def train_playbook(
                 playbook.save()
     finally:
         run_metadata["samples_recorded"] = len(metrics_collector.sample_records)
+        shutil.rmtree(temp_result_root, ignore_errors=True)
         saved_paths = metrics_collector.save(metadata=run_metadata)
         if saved_paths.get("data_path"):
             tqdm.write(f"[Metrics] Training metrics saved to {saved_paths['data_path']}")

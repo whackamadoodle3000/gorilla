@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook_smoke100.json",
+    "split_path": "/Users/pranavtadepalli/Documents/GitHub/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split_sampled_100x100.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 100,
+    "start_offset": 0,
+    "planned_sample_count": 100,
+    "samples_recorded": 7
+  },
+  "summary": {
+    "total_samples": 7,
+    "counts": {
+      "ADD": 3,
+      "MODIFY": 0,
+      "REMOVE": 0,
+      "NO_OP": 4
+    },
+    "ratios": {
+      "ADD": 0.42857142857142855,
+      "MODIFY": 0.0,
+      "REMOVE": 0.0,
+      "NO_OP": 0.5714285714285714
+    },
+    "pass_counters": {
+      "passed": 3,
+      "failed": 4,
+      "unknown": 0
+    },
+    "pass_ratio": 0.42857142857142855
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 7,
+      "size": 7,
+      "counts": {
+        "ADD": 3,
+        "MODIFY": 0,
+        "REMOVE": 0,
+        "NO_OP": 4
+      },
+      "ratios": {
+        "ADD": 0.42857142857142855,
+        "MODIFY": 0.0,
+        "REMOVE": 0.0,
+        "NO_OP": 0.5714285714285714
+      },
+      "pass_counters": {
+        "passed": 3,
+        "failed": 4,
+        "unknown": 0
+      },
+      "pass_ratio": 0.42857142857142855
+    }
+  ],
+  "per_section": {
+    "publication_year": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "list_events": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "reschedule": {
+      "ADD": 1,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "update_user_info": {
+      "ADD": 2,
+      "MODIFY": 0,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "multi_turn_base_13",
+      "tool_groups": [
+        "gorilla_file_system",
+        "twitter_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_457:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=python&prompt_fmt=plaintext&style=classic:simple_python_244",
+      "tool_groups": [
+        "publication_year"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "publication_year",
+          "normalized_section": "publication_year"
+        },
+        {
+          "type": "ADD",
+          "section": "publication_year",
+          "normalized_section": "publication_year"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_739-168-1",
+      "tool_groups": [
+        "payment_1_make_payment",
+        "payment_1_request_payment",
+        "trains_1_find_trains",
+        "trains_1_get_train_tickets",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_520-157-1",
+      "tool_groups": [
+        "list_events",
+        "reschedule"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "list_events",
+          "normalized_section": "list_events"
+        },
+        {
+          "type": "ADD",
+          "section": "reschedule",
+          "normalized_section": "reschedule"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_818-314-2",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "memory_kv_29-customer-29",
+      "tool_groups": [
+        "memory_api_kv"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "format_sensitivity_94:ret_fmt=verbose_xml&tool_call_tag=False&func_doc_fmt=xml&prompt_fmt=plaintext&style=classic:simple_python_94",
+      "tool_groups": [
+        "update_user_info"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "update_user_info",
+          "normalized_section": "update_user_info"
+        },
+        {
+          "type": "ADD",
+          "section": "update_user_info",
+          "normalized_section": "update_user_info"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    }
+  ]
+}
