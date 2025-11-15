@@ -1,4 +1,5 @@
 import argparse
+import json
 import multiprocessing as mp
 import os
 import shutil
@@ -10,6 +11,9 @@ import queue
 from copy import deepcopy
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
+
+if TYPE_CHECKING:
+    from bfcl_eval.ace.metrics import DynamicQueryMetricsCollector
 
 from bfcl_eval.ace.constants import (
     ACE_PLAYBOOK_SYSTEM_MARKER,
@@ -24,6 +28,7 @@ from bfcl_eval.ace.split_manager import (
     ensure_split_exists,
     get_partition_ids,
 )
+from bfcl_eval.ace.utils import determine_tool_groups, format_conversation
 from bfcl_eval.constants.eval_config import (
     PROJECT_ROOT,
     RESULT_PATH,
@@ -38,6 +43,7 @@ from tqdm import tqdm
 
 from bfcl_eval.model_handler.base_handler import BaseHandler
 from bfcl_eval.model_handler.local_inference.base_oss_handler import OSSHandler
+from openai import OpenAI
 
 
 ACE_DATASET_SPLIT_CHOICES = {
@@ -95,6 +101,18 @@ def get_args():
         type=str,
         default=None,
         help="Path to the ACE playbook JSON (defaults to bfcl_eval/data/ace/playbook.json).",
+    )
+    parser.add_argument(
+        "--ace-prompt-log-dir",
+        type=str,
+        default=None,
+        help="Directory to save ACE prompts during testing (defaults to None).",
+    )
+    parser.add_argument(
+        "--ace-dynamic-query",
+        action="store_true",
+        default=False,
+        help="Enable dynamic playbook querying using DeepSeek API to intelligently select relevant playbook sections for each test case.",
     )
     # Optional local model path
     parser.add_argument(
@@ -242,12 +260,167 @@ def _inject_playbook_system_message(test_case: dict, playbook_text: str):
     )
 
 
+def _query_playbook_tool_function(playbook_manager: PlaybookManager, section_names: list[str]) -> str:
+    """
+    Query the playbook for entries in the specified sections.
+    Returns the playbook text in the exact same format as normal injection.
+    
+    Args:
+        playbook_manager: The PlaybookManager instance
+        section_names: List of section names (tool groups) to query
+        
+    Returns:
+        Playbook text string in the exact format produced by to_prompt_string(), or empty string on error
+    """
+    try:
+        if not section_names:
+            return ""
+        
+        # Use to_prompt_string with focus_sections to get the exact same format as normal injection
+        playbook_text = playbook_manager.to_prompt_string(
+            focus_sections=section_names or None,
+            max_sections=len(section_names) if section_names else None,
+        )
+        return playbook_text if playbook_text else ""
+    except Exception as e:
+        # Log error but return empty string to allow fallback
+        return ""
+
+
+def _dynamically_query_playbook(
+    test_case: dict,
+    playbook_manager: PlaybookManager,
+    test_case_id: str,
+    metrics_collector: Optional["DynamicQueryMetricsCollector"] = None,
+) -> str | None:
+    """
+    Use DeepSeek API to dynamically query the playbook for relevant sections based on the test case.
+    
+    Args:
+        test_case: The test case dictionary
+        playbook_manager: The PlaybookManager instance
+        test_case_id: The test case ID for logging
+        
+    Returns:
+        Playbook text string in the exact format produced by to_prompt_string(), or None on error/empty
+    """
+    try:
+        # Get available tool groups from the test case
+        tool_groups = determine_tool_groups(test_case)
+        
+        # Get all available sections from the playbook
+        available_sections = list(playbook_manager.sections())
+        
+        # Build the prompt for DeepSeek
+        conversation_text = ""
+        if "question" in test_case:
+            conversation_text = format_conversation(test_case["question"])
+        
+        user_prompt = f"""Given the following task from a function calling benchmark, identify which playbook sections (tool groups) are relevant for solving this problem. Be generous in including anything that could be relevant.
+
+Task ID: {test_case_id}
+
+Conversation:
+{conversation_text}
+
+Available tool groups from the task: {', '.join(tool_groups) if tool_groups else 'none'}
+Available playbook sections: {', '.join(sorted(available_sections))}
+
+Return a list of section names that are relevant for solving this task. Include not just the obvious ones, but also any that might be helpful."""
+        
+        # Define the tool function for querying the playbook
+        query_playbook_tool = {
+            "type": "function",
+            "function": {
+                "name": "query_playbook",
+                "description": "Query the playbook for entries in the specified sections. Returns the playbook content in the exact format used for injection.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "section_names": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "List of section names (tool groups) to query from the playbook. Be generous in including relevant sections.",
+                        }
+                    },
+                    "required": ["section_names"],
+                },
+            },
+        }
+        
+        # Create DeepSeek API client
+        api_key = os.getenv("DEEPSEEK_API_KEY")
+        if not api_key:
+            tqdm.write(f"[Warning] DEEPSEEK_API_KEY not found for dynamic playbook query for {test_case_id}. Falling back to regular playbook.")
+            return None
+        
+        client = OpenAI(
+            base_url="https://api.deepseek.com",
+            api_key=api_key,
+        )
+        
+        # Make API call with tool calling
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant that identifies relevant playbook sections for function calling tasks.",
+            },
+            {"role": "user", "content": user_prompt},
+        ]
+        
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=messages,
+            tools=[query_playbook_tool],
+            tool_choice="required",
+            temperature=0.0,
+        )
+        
+        # Extract tool call results
+        message = response.choices[0].message
+        if not message.tool_calls:
+            tqdm.write(f"[Warning] No tool call returned from DeepSeek for dynamic playbook query for {test_case_id}. Falling back to regular playbook.")
+            return None
+        
+        # Get the section names from the tool call
+        tool_call = message.tool_calls[0]
+        tool_args = json.loads(tool_call.function.arguments)
+        section_names = tool_args.get("section_names", [])
+        
+        # Record metrics if collector is provided (record even if empty to track failure rate)
+        if metrics_collector is not None:
+            metrics_collector.record_query(
+                test_case_id=test_case_id,
+                available_sections=available_sections,
+                selected_sections=section_names,
+                tool_groups=tool_groups,
+            )
+        
+        if not section_names:
+            tqdm.write(f"[Info] DeepSeek returned empty section list for dynamic playbook query for {test_case_id}. Proceeding without playbook.")
+            return None
+        
+        # Call the local tool function to get the playbook
+        playbook_text = _query_playbook_tool_function(playbook_manager, section_names)
+        
+        if not playbook_text:
+            tqdm.write(f"[Info] Dynamic playbook query returned empty playbook for {test_case_id}. Proceeding without playbook.")
+            return None
+        
+        return playbook_text
+        
+    except Exception as e:
+        tqdm.write(f"[Warning] Dynamic playbook query failed for {test_case_id}: {str(e)}. Falling back to regular playbook.")
+        return None
+
+
 def multi_threaded_inference(
     handler,
     test_case,
     include_input_log,
     exclude_state_log,
     playbook_text=None,
+    prompt_log_dir=None,
 ):
 
     assert type(test_case["function"]) is list
@@ -256,9 +429,51 @@ def multi_threaded_inference(
         test_case = deepcopy(test_case)
         if playbook_text:
             _inject_playbook_system_message(test_case, playbook_text)
+        
+        # Enable input logging if we need to save prompts for testing
+        should_log_prompts = prompt_log_dir is not None and playbook_text is not None
+        inference_include_input_log = include_input_log or should_log_prompts
+        
         result, metadata = handler.inference(
-            test_case, include_input_log, exclude_state_log
+            test_case, inference_include_input_log, exclude_state_log
         )
+
+        # Save generator prompts for testing phase if ACE is enabled
+        if should_log_prompts and "inference_log" in metadata:
+            test_case_id = test_case["id"]
+            prompt_log_path = prompt_log_dir / "testing" / test_case_id
+            prompt_log_path.mkdir(parents=True, exist_ok=True)
+
+            # Extract and save prompts from inference_log
+            inference_log = metadata.get("inference_log", [])
+            if isinstance(inference_log, list):
+                for turn_idx, turn_log in enumerate(inference_log):
+                    if isinstance(turn_log, dict):
+                        # Extract step logs (skip "begin_of_turn_query" and other non-step keys)
+                        for step_key, step_log in turn_log.items():
+                            if step_key.startswith("step_") and isinstance(step_log, list):
+                                # Extract step index
+                                step_idx = 0
+                                try:
+                                    step_idx = int(step_key.split("_")[1])
+                                except (ValueError, IndexError):
+                                    pass
+
+                                # Look for inference_input entries in this step
+                                for log_item in step_log:
+                                    if isinstance(log_item, dict) and log_item.get("role") == "inference_input":
+                                        prompt_file = prompt_log_path / f"generator_prompt_turn_{turn_idx}_step_{step_idx}.json"
+                                        prompt_data = {
+                                            "test_case_id": test_case_id,
+                                            "turn_idx": turn_idx,
+                                            "step_idx": step_idx,
+                                            "playbook_text": playbook_text,
+                                            "inference_input": log_item.get("content", ""),
+                                        }
+                                        with open(prompt_file, "w", encoding="utf-8") as f:
+                                            json.dump(prompt_data, f, indent=2, ensure_ascii=False)
+                                        break  # Only save the first inference_input per step
+
     except Exception as e:
         # This is usually the case when the model getting stuck on one particular test case.
         # For example, timeout error or FC model returning invalid JSON response.
@@ -319,10 +534,27 @@ def generate_results(args, model_name, test_cases_total):
     writer_thread.start()
 
     playbook_manager = None
+    dynamic_query_metrics_collector = None
+
+    if getattr(args, "ace_dynamic_query", False):
+        from bfcl_eval.ace.metrics import DynamicQueryMetricsCollector
+        dynamic_query_metrics_collector = DynamicQueryMetricsCollector()
 
     def render_playbook_text(test_case: dict) -> Optional[str]:
         if playbook_manager is None:
             return None
+        
+        # Try dynamic query if enabled
+        if getattr(args, "ace_dynamic_query", False):
+            test_case_id = test_case.get("id", "unknown")
+            playbook_text = _dynamically_query_playbook(
+                test_case, playbook_manager, test_case_id,
+                metrics_collector=dynamic_query_metrics_collector
+            )
+            if playbook_text:
+                return playbook_text
+        
+        # Fall back to regular playbook generation
         tool_groups = determine_tool_groups(test_case)
         focus_sections = list(dict.fromkeys(tool_groups))
         fallback_sections = [
@@ -393,6 +625,7 @@ def generate_results(args, model_name, test_cases_total):
                     args.include_input_log,
                     args.exclude_state_log,
                     render_playbook_text(test_case),
+                    args.ace_prompt_log_dir,
                 )
                 in_flight[future] = test_case_id
 
@@ -427,6 +660,7 @@ def generate_results(args, model_name, test_cases_total):
                         args.include_input_log,
                         args.exclude_state_log,
                         render_playbook_text(test_case),
+                        args.ace_prompt_log_dir,
                     )
                     in_flight[future] = test_case_id
 
@@ -434,6 +668,19 @@ def generate_results(args, model_name, test_cases_total):
         # Signal writer thread to finish and wait for it
         write_queue.put(None)
         writer_thread.join()
+
+        # Finalize dynamic query metrics if collector was created
+        if dynamic_query_metrics_collector is not None:
+            output_dir = Path(args.result_dir) / model_name.replace("/", "_") / "ace_metrics"
+            saved_paths = dynamic_query_metrics_collector.finalize(
+                output_dir=output_dir,
+                metadata={
+                    "model_name": model_name,
+                    "ace_dynamic_query": True,
+                }
+            )
+            if saved_paths.get("data_path"):
+                tqdm.write(f"[Metrics] Dynamic query metrics saved to {saved_paths['data_path']}")
 
         if is_oss_model:
             handler.shutdown_local_server()
@@ -490,6 +737,15 @@ def main(args):
     else:
         playbook_path = DEFAULT_PLAYBOOK_PATH
     args.ace_playbook_path = playbook_path
+
+    if args.ace_prompt_log_dir is not None:
+        prompt_log_dir = Path(args.ace_prompt_log_dir)
+        if not prompt_log_dir.is_absolute():
+            prompt_log_dir = PROJECT_ROOT / prompt_log_dir
+        prompt_log_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        prompt_log_dir = None
+    args.ace_prompt_log_dir = prompt_log_dir
 
     if dataset_partition:
         ensure_split_exists(output_path=split_path)

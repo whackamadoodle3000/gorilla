@@ -179,6 +179,16 @@ def generate(
         "--ace-playbook-path",
         help="Path to the ACE playbook JSON (defaults to bfcl_eval/data/ace/playbook.json).",
     ),
+    ace_prompt_log_dir: Optional[str] = typer.Option(
+        None,
+        "--ace-prompt-log-dir",
+        help="Directory to save ACE prompts during testing (relative to project root).",
+    ),
+    ace_dynamic_query: bool = typer.Option(
+        False,
+        "--ace-dynamic-query",
+        help="Enable dynamic playbook querying using DeepSeek API to intelligently select relevant playbook sections for each test case.",
+    ),
 ):
     """
     Generate the LLM response for one or more models on a test-category (same as openfunctions_evaluation.py).
@@ -209,6 +219,8 @@ def generate(
         split_path=split_path,
         ace=ace,
         ace_playbook_path=ace_playbook_path,
+        ace_prompt_log_dir=ace_prompt_log_dir,
+        ace_dynamic_query=ace_dynamic_query,
     )
     load_dotenv(dotenv_path=DOTENV_PATH, verbose=True, override=True)  # Load the .env file
     generation_main(args)
@@ -295,6 +307,11 @@ def ace_train_playbook(
         "--local-model-path",
         help="Custom path to local model weights for OSS models.",
     ),
+    prompt_log_dir: Optional[str] = typer.Option(
+        None,
+        "--prompt-log-dir",
+        help="Directory to save generator/reflector/curator prompts during training (relative to project root).",
+    ),
 ):
     """
     Build or update the ACE playbook by running the Generator → Reflector → Curator pipeline.
@@ -308,6 +325,13 @@ def ace_train_playbook(
     resolved_split_path = Path(split_path) if split_path else DEFAULT_SPLIT_PATH
     if not resolved_split_path.is_absolute():
         resolved_split_path = PROJECT_ROOT / resolved_split_path
+
+    resolved_prompt_log_dir = None
+    if prompt_log_dir:
+        resolved_prompt_log_dir = Path(prompt_log_dir)
+        if not resolved_prompt_log_dir.is_absolute():
+            resolved_prompt_log_dir = PROJECT_ROOT / resolved_prompt_log_dir
+        resolved_prompt_log_dir.mkdir(parents=True, exist_ok=True)
 
     load_dotenv(dotenv_path=DOTENV_PATH, verbose=True, override=True)
     train_playbook(
@@ -328,6 +352,7 @@ def ace_train_playbook(
         gpu_memory_utilization=gpu_memory_utilization,
         skip_server_setup=skip_server_setup,
         local_model_path=local_model_path,
+        prompt_log_dir=resolved_prompt_log_dir,
     )
 
 
