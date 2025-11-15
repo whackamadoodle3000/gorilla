@@ -812,23 +812,6 @@ def train_playbook(
 
             tool_groups = determine_tool_groups(entry)
 
-            conversation_text = format_conversation(entry.get("question", []))
-            serialized_ground_truth = serialize_json(ground_truth.get("ground_truth", {}))
-            if len(conversation_text) > 5000 or len(serialized_ground_truth) > 5000:
-                msg = (
-                    f"[Info] Skipping {entry_id}: conversation length {len(conversation_text)}, "
-                    f"ground truth length {len(serialized_ground_truth)} exceeds 5000 character limit."
-                )
-                tqdm.write(msg)
-                metrics_collector.record_sample(
-                    entry_id=entry_id,
-                    tool_groups=tool_groups,
-                    applied_operations=[],
-                    outcome="skipped_length",
-                    evaluation_passed=None,
-                    notes=msg,
-                )
-                continue
             # Save generator prompts if logging is enabled
             generator_prompt_log_path = None
             if prompt_log_dir:
