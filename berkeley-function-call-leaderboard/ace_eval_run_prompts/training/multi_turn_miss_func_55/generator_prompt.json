@@ -1,0 +1,1418 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "If the fuel level is lower than 10, then go ahead and add double that amount. Let's assume I will also head out right after, so feel free to start the engine using the necessary mode."
+    },
+    {
+      "role": "assistant",
+      "content": "I understand you'd like to check the fuel level and potentially start the engine, but I currently don't have access to the fuel level monitoring functionality. \n\nTo help you with what I can do:\n- I can start the engine for you using the \"START\" ignition mode\n- I can display other vehicle status information like battery, doors, climate, etc.\n\nWould you like me to go ahead and start the engine for your trip? I can use the startEngine function with the \"START\" mode right away.",
+      "tool_calls": [
+        {
+          "id": "call_00_sUUPemFu1cDrgnJix7zStcOM",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"All doors must be locked before starting the engine. Here are the unlocked doors: driver, passenger, rear_left, rear_right\"}",
+      "tool_call_id": "call_00_sUUPemFu1cDrgnJix7zStcOM"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to lock all the doors first before starting the engine. Let me lock all the doors for you:",
+      "tool_calls": [
+        {
+          "id": "call_00_1hBV30axwhtphCqwAvNd3pgo",
+          "type": "function",
+          "function": {
+            "name": "lockDoors",
+            "arguments": "{\"unlock\": false, \"door\": [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"lockStatus\": \"locked\", \"remainingUnlockedDoors\": 0}",
+      "tool_call_id": "call_00_1hBV30axwhtphCqwAvNd3pgo"
+    },
+    {
+      "role": "assistant",
+      "content": "Great! All doors are now locked. Let me start the engine:",
+      "tool_calls": [
+        {
+          "id": "call_00_pqERcU1MdBZQeSoZfjeoUgMy",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Brake pedal needs to be pressed when starting the engine.\"}",
+      "tool_call_id": "call_00_pqERcU1MdBZQeSoZfjeoUgMy"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to press the brake pedal to start the engine. Let me do that:",
+      "tool_calls": [
+        {
+          "id": "call_00_hoMshn75v72VRqPOEkqYax7E",
+          "type": "function",
+          "function": {
+            "name": "pressBrakePedal",
+            "arguments": "{\"pedalPosition\": 0.5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"brakePedalStatus\": \"pressed\", \"brakePedalForce\": 500.0}",
+      "tool_call_id": "call_00_hoMshn75v72VRqPOEkqYax7E"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me try starting the engine again:",
+      "tool_calls": [
+        {
+          "id": "call_00_Zl3D9xiXpq5hAUEp8vAkntVE",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Must press the brake fully before starting the engine.\"}",
+      "tool_call_id": "call_00_Zl3D9xiXpq5hAUEp8vAkntVE"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to press the brake pedal fully. Let me adjust the pedal position:",
+      "tool_calls": [
+        {
+          "id": "call_00_nC6qtmneVG0KBldudq1cXCWn",
+          "type": "function",
+          "function": {
+            "name": "pressBrakePedal",
+            "arguments": "{\"pedalPosition\": 1.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"brakePedalStatus\": \"pressed\", \"brakePedalForce\": 1000.0}",
+      "tool_call_id": "call_00_nC6qtmneVG0KBldudq1cXCWn"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me start the engine with the brake fully pressed:",
+      "tool_calls": [
+        {
+          "id": "call_00_sMYNfoSjiyC2qzuZs5wJvsSN",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"engineState\": \"running\", \"fuelLevel\": 7.5, \"batteryVoltage\": 12.6}",
+      "tool_call_id": "call_00_sMYNfoSjiyC2qzuZs5wJvsSN"
+    },
+    {
+      "content": "Perfect! The engine is now running. I can see that your fuel level is at 7.5%, which is indeed below 10% as you mentioned. Unfortunately, I don't have the capability to add fuel to the vehicle through the available tools. You'll want to visit a gas station soon to refuel since the fuel level is quite low.\n\nThe engine is started and ready for your trip. Drive safely!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I have updated some more functions you can choose from. What about now?"
+    },
+    {
+      "role": "assistant",
+      "content": "I can see that you now have access to the `fillFuelTank` function! Since your fuel level is at 7.5% (which is below 10%), I can add double that amount as you requested.\n\nLet me calculate and add the fuel:\n- Current fuel: 7.5%\n- Double that amount: 15%\n- Total fuel after adding: 22.5%",
+      "tool_calls": [
+        {
+          "id": "call_00_ud0vzrR7Cih5TctPnUtfiZXv",
+          "type": "function",
+          "function": {
+            "name": "fillFuelTank",
+            "arguments": "{\"fuelAmount\": 15.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"fuelLevel\": 22.5}",
+      "tool_call_id": "call_00_ud0vzrR7Cih5TctPnUtfiZXv"
+    },
+    {
+      "content": "Perfect! I've successfully added 15 gallons of fuel to your tank, bringing your fuel level up to 22.5%. The engine is already running from our previous steps, so your vehicle is now fueled up and ready for your trip!\n\nTo summarize what we've accomplished:\n- ✅ Locked all doors\n- ✅ Pressed brake pedal fully\n- ✅ Started the engine\n- ✅ Added double the current fuel amount (15 gallons)\n- ✅ Current fuel level: 22.5%\n\nYour vehicle is now fully prepared for your journey. Drive safely!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Since we are all set to go, could you quickly check the pressure of all the tires to ensure everything is safe for our journey?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll check the tire pressure for you to ensure everything is safe for your journey.",
+      "tool_calls": [
+        {
+          "id": "call_00_u6kE3VVGa11y3LuZWWG33dbO",
+          "type": "function",
+          "function": {
+            "name": "check_tire_pressure",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"frontLeftTirePressure\": 28.0, \"frontRightTirePressure\": 28.0, \"rearLeftTirePressure\": 26.0, \"rearRightTirePressure\": 26.0, \"healthy_tire_pressure\": false, \"car_info\": {}}",
+      "tool_call_id": "call_00_u6kE3VVGa11y3LuZWWG33dbO"
+    },
+    {
+      "content": "I've checked the tire pressure and there's an issue that needs attention:\n\n**Tire Pressure Status:**\n- Front Left: 28.0 PSI\n- Front Right: 28.0 PSI  \n- Rear Left: 26.0 PSI\n- Rear Right: 26.0 PSI\n\nThe system indicates that the tire pressure is **not healthy**. The rear tires are particularly low at 26.0 PSI, which is below the recommended pressure for safe driving.\n\nFor optimal safety and fuel efficiency, you should inflate all tires to the recommended pressure (typically around 32-35 PSI for most vehicles, but check your vehicle's specific requirements).\n\nWould you like me to find the nearest tire shop so you can get the tires properly inflated before your journey?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "The pressure seemed lower than expected. Let's open a ticket for 'Tire Pressure Issue', and detail it 'Urgent tire pressure issue.'. Given the urgency, classify this as the top priority to issue, where a higher score has more priority."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll create a high-priority ticket for the urgent tire pressure issue right away.",
+      "tool_calls": [
+        {
+          "id": "call_00_Fk8jVwcTnAGLWbNk7IrXYsUL",
+          "type": "function",
+          "function": {
+            "name": "create_ticket",
+            "arguments": "{\"title\": \"Tire Pressure Issue\", \"description\": \"Urgent tire pressure issue.\", \"priority\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"id\": 2, \"title\": \"Tire Pressure Issue\", \"description\": \"Urgent tire pressure issue.\", \"status\": \"Open\", \"priority\": 5, \"created_by\": \"Michael Thompson\"}",
+      "tool_call_id": "call_00_Fk8jVwcTnAGLWbNk7IrXYsUL"
+    },
+    {
+      "content": "Perfect! I've created a high-priority ticket for the tire pressure issue:\n\n**Ticket Details:**\n- **Ticket ID:** 2\n- **Title:** Tire Pressure Issue\n- **Description:** Urgent tire pressure issue.\n- **Priority:** 5 (Highest priority)\n- **Status:** Open\n- **Created by:** Michael Thompson\n\nThe ticket has been successfully created with the maximum priority level (5) to ensure it gets immediate attention. The support team should address this urgent safety concern promptly.\n\nGiven the low tire pressure readings (especially the rear tires at 26.0 PSI), this was definitely the right call to ensure your safety on the road.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Apparently, I never got feedback on the tire pressure ticket I created. Can you fetch that ticket for me so I can review the current status?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll fetch the tire pressure ticket for you to check its current status.",
+      "tool_calls": [
+        {
+          "id": "call_00_KJndzODjKT1D1YbtpWYapwGt",
+          "type": "function",
+          "function": {
+            "name": "get_ticket",
+            "arguments": "{\"ticket_id\": 2}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"id\": 2, \"title\": \"Tire Pressure Issue\", \"description\": \"Urgent tire pressure issue.\", \"status\": \"Open\", \"priority\": 5, \"created_by\": \"Michael Thompson\"}",
+      "tool_call_id": "call_00_KJndzODjKT1D1YbtpWYapwGt"
+    },
+    {
+      "content": "Here's the current status of your tire pressure ticket:\n\n**Ticket #2 - Tire Pressure Issue**\n- **Status:** Open\n- **Priority:** 5 (Highest priority)\n- **Description:** Urgent tire pressure issue.\n- **Created by:** Michael Thompson\n\nThe ticket is still **Open** and hasn't been addressed yet, despite being marked with the highest priority level. This means the support team hasn't provided any feedback or resolution for your urgent tire pressure issue.\n\nSince this is a safety concern for your journey, you might want to follow up directly with the support team to ensure this gets immediate attention, or consider visiting a tire shop to address the low tire pressure (26.0 PSI in the rear tires) while waiting for the ticket response.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Great! They just gave me a call back. Now that I've checked the details, let's resolve the tire pressure ticket with an update stating 'Issue resolved!'."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll resolve the tire pressure ticket with the resolution update you provided.",
+      "tool_calls": [
+        {
+          "id": "call_00_ml4z96itxuVSdBrnhq1GNgkj",
+          "type": "function",
+          "function": {
+            "name": "resolve_ticket",
+            "arguments": "{\"ticket_id\": 2, \"resolution\": \"Issue resolved!\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"status\": \"Ticket 2 has been resolved successfully.\"}",
+      "tool_call_id": "call_00_ml4z96itxuVSdBrnhq1GNgkj"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "close_ticket",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Close a ticket. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticket_id": {
+              "type": "integer",
+              "description": "ID of the ticket to be closed. "
+            }
+          },
+          "required": [
+            "ticket_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the close operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_ticket",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Create a ticket in the system and queue it. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Title of the ticket."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the ticket. Defaults to an empty string.",
+              "default": ""
+            },
+            "priority": {
+              "type": "integer",
+              "description": "Priority of the ticket, from 1 to 5. Defaults to 1. 5 is the highest priority. ",
+              "default": 1
+            }
+          },
+          "required": [
+            "title"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Unique identifier of the ticket."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the ticket."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the ticket."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the ticket."
+            },
+            "priority": {
+              "type": "integer",
+              "description": "Priority level of the ticket."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "edit_ticket",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Modify the details of an existing ticket. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticket_id": {
+              "type": "integer",
+              "description": "ID of the ticket to be changed."
+            },
+            "updates": {
+              "type": "object",
+              "description": "Dictionary containing the fields to be updated. - title (str) : [Optional] New title for the ticket. ",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "New description for the ticket."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "New status for the ticket."
+                },
+                "priority": {
+                  "type": "integer",
+                  "description": "New priority for the ticket."
+                }
+              }
+            }
+          },
+          "required": [
+            "ticket_id",
+            "updates"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the update operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_ticket",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Get a specific ticket by its ID. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticket_id": {
+              "type": "integer",
+              "description": "ID of the ticket to retrieve. "
+            }
+          },
+          "required": [
+            "ticket_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Unique identifier of the ticket."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the ticket."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the ticket."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the ticket."
+            },
+            "priority": {
+              "type": "integer",
+              "description": "Priority level of the ticket."
+            },
+            "created_by": {
+              "type": "string",
+              "description": "Username of the ticket creator."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_tickets",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Get all tickets created by the current user, optionally filtered by status. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status to filter tickets by. If None, return all tickets. ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Unique identifier of the ticket."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the ticket."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the ticket."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the ticket."
+            },
+            "priority": {
+              "type": "integer",
+              "description": "Priority level of the ticket."
+            },
+            "created_by": {
+              "type": "string",
+              "description": "Username of the ticket"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "logout",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Log out the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "description": "True if logout was successful, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "resolve_ticket",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Resolve a ticket with a resolution. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticket_id": {
+              "type": "integer",
+              "description": "ID of the ticket to be resolved."
+            },
+            "resolution": {
+              "type": "string",
+              "description": "Resolution details for the ticket. "
+            }
+          },
+          "required": [
+            "ticket_id",
+            "resolution"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the resolve operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "ticket_get_login_status",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Get the login status of the currently authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if a user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "ticket_login",
+        "description": "This tool belongs to the ticketing system that is part of a company, which allows users to create, view, and manage support business tickets. Tool description: Authenticate a user for ticket system. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password of the user. "
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "activateParkingBrake",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode to set. [Enum]: [\"engage\", \"release\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "parkingBrakeStatus": {
+              "type": "string",
+              "description": "The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+            },
+            "_parkingBrakeForce": {
+              "type": "float",
+              "description": "The force applied to the brake in Newtons."
+            },
+            "_slopeAngle": {
+              "type": "float",
+              "description": "The slope angle in degrees."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "adjustClimateControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "The temperature to set in degree. Default to be celsius. This is a float type value.",
+              "format": "float"
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]",
+              "default": "celsius"
+            },
+            "fanSpeed": {
+              "type": "integer",
+              "description": "The fan speed to set from 0 to 100. Default is 50.",
+              "default": 50
+            },
+            "mode": {
+              "type": "string",
+              "description": "The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]",
+              "default": "auto"
+            }
+          },
+          "required": [
+            "temperature"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentTemperature": {
+              "type": "float",
+              "description": "The current temperature set in degree Celsius."
+            },
+            "climateMode": {
+              "type": "string",
+              "description": "The current climate mode set."
+            },
+            "humidityLevel": {
+              "type": "float",
+              "description": "The humidity level in percentage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_tire_pressure",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tirePressure": {
+              "type": "dict",
+              "description": "The tire pressure of the vehicle.",
+              "properties": {
+                "frontLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front left tire in psi."
+                },
+                "frontRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front right tire in psi."
+                },
+                "rearLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear left tire in psi."
+                },
+                "rearRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear right tire in psi."
+                },
+                "healthy_tire_pressure": {
+                  "type": "boolean",
+                  "description": "True if the tire pressure is healthy, False otherwise."
+                },
+                "car_info": {
+                  "type": "dict",
+                  "description": "The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "displayCarStatus",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "option": {
+              "type": "string",
+              "description": "The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]"
+            }
+          },
+          "required": [
+            "option"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "dict",
+              "description": "The status of the vehicle based on the option.",
+              "properties": {
+                "fuelLevel": {
+                  "type": "float",
+                  "description": "[Optional] The fuel level of the vehicle in gallons."
+                },
+                "batteryVoltage": {
+                  "type": "float",
+                  "description": "[Optional] The battery voltage of the vehicle in volts."
+                },
+                "doorStatus": {
+                  "type": "dict",
+                  "description": "[Optional] The status of the doors.",
+                  "properties": {
+                    "driver": {
+                      "type": "string",
+                      "description": "The status of the driver door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "passenger": {
+                      "type": "string",
+                      "description": "The status of the passenger door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_left": {
+                      "type": "string",
+                      "description": "The status of the rear left door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_right": {
+                      "type": "string",
+                      "description": "The status of the rear right door. [Enum]: [\"locked\", \"unlocked\"]"
+                    }
+                  }
+                },
+                "currentACTemperature": {
+                  "type": "float",
+                  "description": "[Optional] The current temperature set in degree Celsius."
+                },
+                "fanSpeed": {
+                  "type": "integer",
+                  "description": "[Optional] The fan speed set from 0 to 100."
+                },
+                "climateMode": {
+                  "type": "string",
+                  "description": "[Optional] The climate mode set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]"
+                },
+                "humidityLevel": {
+                  "type": "float",
+                  "description": "[Optional] The humidity level in percentage."
+                },
+                "headlightStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the headlights. [Enum]: [\"on\", \"off\"]"
+                },
+                "parkingBrakeStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+                },
+                "parkingBrakeForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake in Newtons."
+                },
+                "slopeAngle": {
+                  "type": "float",
+                  "description": "[Optional] The slope angle in degrees."
+                },
+                "brakePedalStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+                },
+                "brakePedalForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake pedal in Newtons."
+                },
+                "engineState": {
+                  "type": "string",
+                  "description": "[Optional] The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+                },
+                "metadata": {
+                  "type": "string",
+                  "description": "[Optional] The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "display_log",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of messages to display."
+            }
+          },
+          "required": [
+            "messages"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "log": {
+              "type": "array",
+              "description": "The list of messages displayed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_distance",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cityA": {
+              "type": "string",
+              "description": "The zipcode of the first city."
+            },
+            "cityB": {
+              "type": "string",
+              "description": "The zipcode of the second city."
+            }
+          },
+          "required": [
+            "cityA",
+            "cityB"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance between the two cities in km."
+            },
+            "intermediaryCities": {
+              "type": "array",
+              "description": "[Optional] The list of intermediary cities between the two cities.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_drive_feasibility_by_mileage",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "distance": {
+              "type": "number",
+              "description": "The distance to travel in miles. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "distance"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "canDrive": {
+              "type": "boolean",
+              "description": "True if the vehicle can drive the distance, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find_nearest_tire_shop",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "shopLocation": {
+              "type": "string",
+              "description": "The location of the nearest tire shop."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "gallon_to_liter",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "gallon": {
+              "type": "number",
+              "description": "The amount of gallon to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "gallon"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_speed",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_google",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_weather_com",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_zipcode_based_on_city",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "The name of the city."
+            }
+          },
+          "required": [
+            "city"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "The zipcode of the city."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "liter_to_gallon",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "liter": {
+              "type": "number",
+              "description": "The amount of liter to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "liter"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "lockDoors",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "unlock": {
+              "type": "boolean",
+              "description": "True if the doors are to be unlocked, False otherwise."
+            },
+            "door": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]"
+            }
+          },
+          "required": [
+            "unlock",
+            "door"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "lockStatus": {
+              "type": "string",
+              "description": "The status of the lock. [Enum]: [\"locked\", \"unlocked\"]"
+            },
+            "remainingUnlockedDoors": {
+              "type": "integer",
+              "description": "The number of remaining unlocked doors."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pressBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pedalPosition": {
+              "type": "number",
+              "description": "Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed). This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "pedalPosition"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "releaseBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setCruiseControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "number",
+              "description": "The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5. This is a float type value.",
+              "format": "float"
+            },
+            "activate": {
+              "type": "boolean",
+              "description": "True to activate the cruise control, False to deactivate."
+            },
+            "distanceToNextVehicle": {
+              "type": "number",
+              "description": "The distance to the next vehicle in meters. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "speed",
+            "activate",
+            "distanceToNextVehicle"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cruiseStatus": {
+              "type": "string",
+              "description": "The status of the cruise control. [Enum]: [\"active\", \"inactive\"]"
+            },
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setHeadlights",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "headlightStatus": {
+              "type": "string",
+              "description": "The status of the headlights. [Enum]: [\"on\", \"off\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_navigation",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "destination": {
+              "type": "string",
+              "description": "The destination to navigate in the format of street, city, state."
+            }
+          },
+          "required": [
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status of the navigation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "startEngine",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ignitionMode": {
+              "type": "string",
+              "description": "The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]"
+            }
+          },
+          "required": [
+            "ignitionMode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "engineState": {
+              "type": "string",
+              "description": "The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+            },
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            },
+            "batteryVoltage": {
+              "type": "float",
+              "description": "The battery voltage of the vehicle in volts."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fillFuelTank",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "fuelAmount": {
+              "type": "number",
+              "description": "The amount of fuel to fill in gallons; this is the additional fuel to add to the tank. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "fuelAmount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

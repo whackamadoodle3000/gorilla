@@ -1,0 +1,1037 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "As part of my latest photography project, I need to gather files that have 'test' in their name from any folder in my current directory. Could you help me locate those?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find files with 'test' in their name from any folder in your current directory. Let me search for those files.",
+      "tool_calls": [
+        {
+          "id": "call_00_4ivu8ewKki852dNTAa5xEe3u",
+          "type": "function",
+          "function": {
+            "name": "find",
+            "arguments": "{\"name\": \"test\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"matches\": [\"./projects/photography/test_image1.jpg\", \"./projects/photography/test_document.txt\", \"./projects/photography/backup_tests\"]}",
+      "tool_call_id": "call_00_4ivu8ewKki852dNTAa5xEe3u"
+    },
+    {
+      "content": "Great! I found several items with 'test' in their name within your current directory:\n\n1. **`./projects/photography/test_image1.jpg`** - A test image file\n2. **`./projects/photography/test_document.txt`** - A test document file  \n3. **`./projects/photography/backup_tests`** - A directory containing backup tests\n\nAll of these are located in the `projects/photography/` subdirectory. These files and directories should be helpful for your photography project. Is there anything specific you'd like to do with these files once you've gathered them?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "After identifying them, the next step is to ensure the images and text files are safely copied into a folder right within the same directory. Could that be arranged?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you create a folder and copy the image and text files into it. Let me first create a new folder for this purpose, then copy the files.",
+      "tool_calls": [
+        {
+          "id": "call_00_tKc3dUWt3xTlSLEgqVPtyFvQ",
+          "type": "function",
+          "function": {
+            "name": "mkdir",
+            "arguments": "{\"dir_name\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "None",
+      "tool_call_id": "call_00_tKc3dUWt3xTlSLEgqVPtyFvQ"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me copy the image file and text file into the new folder:",
+      "tool_calls": [
+        {
+          "id": "call_00_ijIaWKJXAZaKvLsxLDsaRtrw",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_image1.jpg\", \"destination\": \"test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_sr5DH1VeKd1u6vpKYuBzAvxM",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_document.txt\", \"destination\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_image1.jpg': No such file or directory\"}",
+      "tool_call_id": "call_00_ijIaWKJXAZaKvLsxLDsaRtrw"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_document.txt': No such file or directory\"}",
+      "tool_call_id": "call_01_sr5DH1VeKd1u6vpKYuBzAvxM"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to navigate to the projects/photography directory first to access those files. Let me change directory and then copy them:",
+      "tool_calls": [
+        {
+          "id": "call_00_zWT5o6wIVcsgF8tOUzIgkswP",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"projects\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"projects\"}",
+      "tool_call_id": "call_00_zWT5o6wIVcsgF8tOUzIgkswP"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_00_TqvvN0c4Jdccgzwl7wzIYTlu",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"photography\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"photography\"}",
+      "tool_call_id": "call_00_TqvvN0c4Jdccgzwl7wzIYTlu"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me copy the files from the current directory to the backup folder:",
+      "tool_calls": [
+        {
+          "id": "call_00_gszNY1H6iyWlIWDfQYfXwuI0",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"test_image1.jpg\", \"destination\": \"test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_WPnL0S62MJB0AVJH1vROKfbB",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"test_document.txt\", \"destination\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"result\": \"'test_image1.jpg' copied to 'test_files_backup'\"}",
+      "tool_call_id": "call_00_gszNY1H6iyWlIWDfQYfXwuI0"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'test_document.txt' to 'test_files_backup': Not a directory\"}",
+      "tool_call_id": "call_01_WPnL0S62MJB0AVJH1vROKfbB"
+    },
+    {
+      "role": "assistant",
+      "content": "It seems the `test_files_backup` directory doesn't exist in the current location. Let me create it here and then copy the files:",
+      "tool_calls": [
+        {
+          "id": "call_00_ImNEnbCjT37WeLYyL384G6kD",
+          "type": "function",
+          "function": {
+            "name": "mkdir",
+            "arguments": "{\"dir_name\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"mkdir: cannot create directory 'test_files_backup': File exists\"}",
+      "tool_call_id": "call_00_ImNEnbCjT37WeLYyL384G6kD"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check what's in the current directory and then navigate back to the original location to copy the files properly:",
+      "tool_calls": [
+        {
+          "id": "call_00_IIkjQG1qTYOCpjQCCAg65yvX",
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_directory_content\": [\"test_image1.jpg\", \"test_document.txt\", \"backup_tests\", \"test_files_backup\"]}",
+      "tool_call_id": "call_00_IIkjQG1qTYOCpjQCCAg65yvX"
+    },
+    {
+      "role": "assistant",
+      "content": "I see the issue - the `test_files_backup` directory exists but it's in the photography folder. Let me navigate back to the original directory and copy the files from there:",
+      "tool_calls": [
+        {
+          "id": "call_00_c0PEXPJBljJgLCBQSgsJI7CU",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"..\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{}",
+      "tool_call_id": "call_00_c0PEXPJBljJgLCBQSgsJI7CU"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me go back to the root directory:",
+      "tool_calls": [
+        {
+          "id": "call_00_PFeDfziw26aHUOs9OjNFfSz6",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"..\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{}",
+      "tool_call_id": "call_00_PFeDfziw26aHUOs9OjNFfSz6"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the current directory:",
+      "tool_calls": [
+        {
+          "id": "call_00_DmLTKmPJu0mr85iku8oIEIRs",
+          "type": "function",
+          "function": {
+            "name": "pwd",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"/alex\"}",
+      "tool_call_id": "call_00_DmLTKmPJu0mr85iku8oIEIRs"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me copy the files properly from the full path:",
+      "tool_calls": [
+        {
+          "id": "call_00_qqopVG80z52bB3VPuiXDiIxV",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_image1.jpg\", \"destination\": \"test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_7llxa0XBde6U2vTf4HfvspvS",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_document.txt\", \"destination\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_image1.jpg': No such file or directory\"}",
+      "tool_call_id": "call_00_qqopVG80z52bB3VPuiXDiIxV"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_document.txt': No such file or directory\"}",
+      "tool_call_id": "call_01_7llxa0XBde6U2vTf4HfvspvS"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check what's in the current directory to understand the structure better:",
+      "tool_calls": [
+        {
+          "id": "call_00_HdyVtzEfnWY7f74UJ1rPIt7K",
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_directory_content\": [\"projects\", \"test_files_backup\"]}",
+      "tool_call_id": "call_00_HdyVtzEfnWY7f74UJ1rPIt7K"
+    },
+    {
+      "role": "assistant",
+      "content": "I see the issue now. Let me navigate into the projects directory and copy from there:",
+      "tool_calls": [
+        {
+          "id": "call_00_NsAnb17tidMPc8aQtiVdgv04",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"projects\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"projects\"}",
+      "tool_call_id": "call_00_NsAnb17tidMPc8aQtiVdgv04"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_00_bGOPactXVKsVFWzUxTTMnt1v",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"photography/test_image1.jpg\", \"destination\": \"../test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_AiZLsIh0tJy9Mf9ezaU8P3nF",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"photography/test_document.txt\", \"destination\": \"../test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'photography/test_image1.jpg': No such file or directory\"}",
+      "tool_call_id": "call_00_bGOPactXVKsVFWzUxTTMnt1v"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'photography/test_document.txt': No such file or directory\"}",
+      "tool_call_id": "call_01_AiZLsIh0tJy9Mf9ezaU8P3nF"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a different approach. Let me navigate to the photography directory and copy the files directly:",
+      "tool_calls": [
+        {
+          "id": "call_00_cxrSGcDSEdBSUsTEZ5FUcWy4",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"photography\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"photography\"}",
+      "tool_call_id": "call_00_cxrSGcDSEdBSUsTEZ5FUcWy4"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me copy the files to the backup folder in the root directory:",
+      "tool_calls": [
+        {
+          "id": "call_00_grD7fSm5zNfR3BwtewbrFCSu",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"test_image1.jpg\", \"destination\": \"../../test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_iPvLj7FsBlw4JYrDyoP2tYjG",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"test_document.txt\", \"destination\": \"../../test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: path not allowed in destination. Provide only a file or directory name.\"}",
+      "tool_call_id": "call_00_grD7fSm5zNfR3BwtewbrFCSu"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: path not allowed in destination. Provide only a file or directory name.\"}",
+      "tool_call_id": "call_01_iPvLj7FsBlw4JYrDyoP2tYjG"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to navigate back to the root directory first. Let me do that:",
+      "tool_calls": [
+        {
+          "id": "call_00_LYyTJyNhpBEbhZDFksrhx13k",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"..\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{}",
+      "tool_call_id": "call_00_LYyTJyNhpBEbhZDFksrhx13k"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_00_vXHmgDSt2G636vnQtww8nYaS",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"..\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{}",
+      "tool_call_id": "call_00_vXHmgDSt2G636vnQtww8nYaS"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'm back in the root directory. Let me verify the files exist and then copy them:",
+      "tool_calls": [
+        {
+          "id": "call_00_9O0GZdkVQBo4lA6hfp4l0roh",
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_directory_content\": [\"projects\", \"test_files_backup\"]}",
+      "tool_call_id": "call_00_9O0GZdkVQBo4lA6hfp4l0roh"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check if the backup folder exists and then copy the files:",
+      "tool_calls": [
+        {
+          "id": "call_00_A9Tj55nmTJ7jdDzYHmxw026z",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_image1.jpg\", \"destination\": \"test_files_backup\"}"
+          }
+        },
+        {
+          "id": "call_01_1QZRbdpQC5QhErkHhyBbPe2E",
+          "type": "function",
+          "function": {
+            "name": "cp",
+            "arguments": "{\"source\": \"projects/photography/test_document.txt\", \"destination\": \"test_files_backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_image1.jpg': No such file or directory\"}",
+      "tool_call_id": "call_00_A9Tj55nmTJ7jdDzYHmxw026z"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cp: cannot copy 'projects/photography/test_document.txt': No such file or directory\"}",
+      "tool_call_id": "call_01_1QZRbdpQC5QhErkHhyBbPe2E"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "cat",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the contents of a file of any extension from currrent directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file from current directory to display. No path is allowed. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "file_content": {
+              "type": "string",
+              "description": "The content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Change the current working directory to the specified folder. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "folder": {
+              "type": "string",
+              "description": "The folder of the directory to change to. You can only change one folder level at a time. "
+            }
+          },
+          "required": [
+            "folder"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The new current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cp",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Copy a file or directory from one location to another.  If the destination is a directory, the source file or directory will be copied into the destination directory.  Both source and destination must be local to the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The name of the file or directory to copy."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to copy the file or directory to. If the destination is a directory, the source will be copied into this directory. No file paths allowed. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the copy operation or an error message if the operation fails."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "diff",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Compare two files of any extension line by line at the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name1": {
+              "type": "string",
+              "description": "The name of the first file in current directory."
+            },
+            "file_name2": {
+              "type": "string",
+              "description": "The name of the second file in current directory. "
+            }
+          },
+          "required": [
+            "file_name1",
+            "file_name2"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "diff_lines": {
+              "type": "string",
+              "description": "The differences between the two files."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "du",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Estimate the disk usage of a directory and its contents. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "human_readable": {
+              "type": "boolean",
+              "description": "If True, returns the size in human-readable format (e.g., KB, MB). ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "disk_usage": {
+              "type": "string",
+              "description": "The estimated disk usage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "echo",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Write content to a file at current directory or display it in the terminal. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The content to write or display."
+            },
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file at current directory to write the content to. Defaults to None. ",
+              "default": "None"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "terminal_output": {
+              "type": "string",
+              "description": "The content if no file name is provided, or None if written to file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Find any file or directories under specific path that contain name in its file name.  This method searches for files of any extension and directories within a specified path that match the given name. If no name is provided, it returns all files and directories in the specified path and its subdirectories. Note: This method performs a recursive search through all subdirectories of the given path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "The directory path to start the search. Defaults to the current directory (\".\").",
+              "default": "."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the file or directory to search for. If None, all items are returned. ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matches": {
+              "type": "array",
+              "description": "A list of matching file and directory paths relative to the given path.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "grep",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Search for lines in a file of any extension at current directory that contain the specified pattern. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to search. No path is allowed and you can only perform on file at local directory."
+            },
+            "pattern": {
+              "type": "string",
+              "description": "The pattern to search for. "
+            }
+          },
+          "required": [
+            "file_name",
+            "pattern"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_lines": {
+              "type": "array",
+              "description": "Lines that match the pattern.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "ls",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: List the contents of the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "boolean",
+              "description": "Show hidden files and directories. Defaults to False. ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_directory_content": {
+              "type": "array",
+              "description": "A list of the contents of the specified directory.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mkdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new directory in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the new directory at current directory. You can only create directory at current directory."
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mv",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Move a file or directory from one location to another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Source name of the file or directory to move. Source must be local to the current directory."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to move the file or directory to. Destination must be local to the current directory and cannot be a path. If destination is not an existing directory like when renaming something, destination is the new file name. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the move operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pwd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Return the current working directory path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rm",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a file or directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file or directory to remove. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rmdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a directory at current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the directory to remove. Directory must be local to the current directory. "
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "sort",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Sort the contents of a file line by line. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file appeared at current directory to sort. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sorted_content": {
+              "type": "string",
+              "description": "The sorted content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "tail",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the last part of a file of any extension. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to display. No path is allowed and you can only perform on file at local directory."
+            },
+            "lines": {
+              "type": "integer",
+              "description": "The number of lines to display from the end of the file. Defaults to 10. ",
+              "default": 10
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "last_lines": {
+              "type": "string",
+              "description": "The last part of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "touch",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new file of any extension in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the new file in the current directory. file_name is local to the current directory and does not allow path."
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "wc",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Count the number of lines, words, and characters in a file of any extension from current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "Name of the file of current directory to perform wc operation on."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Mode of operation ('l' for lines, 'w' for words, 'c' for characters). ",
+              "default": "l"
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "The count of the number of lines, words, or characters in the file."
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of unit we are counting. [Enum]: [\"lines\", \"words\", \"characters\"]"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "user",
+      "content": "Some countries are known for producing luxury goods, including the world's most expensive tea. In April 2025, who is the richest billionaire (according to Forbes) from the country that produces the most expensive tea?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find the answer to this question by breaking it down into steps. Let me first identify which country produces the world's most expensive tea, and then find the richest billionaire from that country according to Forbes in April 2025.",
+      "tool_calls": [
+        {
+          "id": "call_00_nJA0l5dsIbdOVIOnYAmgTlNX",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"world's most expensive tea country producer\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'What Are the 7 Most Expensive Tea Brands in the World? (2025)', 'href': 'https://www.teabrands.org/what-are-the-most-expensive-tea-brands-in-the-world/'}, {'title': 'Most Expensive Tea: New Guinness Record for Ceylon Tea', 'href': 'https://www.newswire.lk/2025/09/28/most-expensive-tea-new-guinness-record-for-ceylon-tea/'}, {'title': 'Top 10 Expensive Teas In The World: This Indian Tea Is In The Elite List', 'href': 'https://www.thedailyjagran.com/trending/top-10-expensive-teas-in-the-world-this-indian-tea-is-in-the-elite-list-10212675'}, {'title': 'Top Tea Producing Countries in 2025 (Global Rankings)', 'href': 'https://worldostats.com/country-stats/tea-production-by-country/'}, {'title': 'Most expensive teas in the world: sipping luxury from a cuppa', 'href': 'https://indianexpress.com/article/lifestyle/food-wine/most-expensive-teas-in-the-world-sipping-luxury-from-a-cuppa-10360005/'}]",
+      "tool_call_id": "call_00_nJA0l5dsIbdOVIOnYAmgTlNX"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me search more specifically for the world's most expensive tea and its country of origin.",
+      "tool_calls": [
+        {
+          "id": "call_00_mxdgaowBoy8i1PqSYkkM0Jly",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"\\\"world's most expensive tea\\\" country origin\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'What Is The Most Expensive Tea In The World? - GemTaste', 'href': 'https://gemtaste.com/beverages/most-expensive-tea/'}, {'title': 'The Worlds Most Expensive Tea: 12 Crazy Expensive Teas', 'href': 'https://besttealeaves.com/worlds-most-expensive-tea/'}, {'title': \"The World's Most Expensive Tea's - by daisy - Tea Tidbits\", 'href': 'https://steepdreams.substack.com/p/the-worlds-most-expensive-teas'}, {'title': \"What Is the Most Expensive Tea in the World? - It's Never Not Teatime\", 'href': 'https://itsnevernotteatime.com/what-is-the-most-expensive-tea-in-the-world/'}, {'title': \"Exploring the Legend Behind Da Hong Pao, The World's Most Expensive Tea.\", 'href': 'https://www.limpiditea.com/post/the-world-most-expensive-tea'}]",
+      "tool_call_id": "call_00_mxdgaowBoy8i1PqSYkkM0Jly"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me fetch content from one of these sources to get specific information about the most expensive tea and its country.",
+      "tool_calls": [
+        {
+          "id": "call_00_MZvq5qsz9OvMX7Ic71ENMEJi",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://gemtaste.com/beverages/most-expensive-tea/\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"What Is The Most Expensive Tea In The World?\\nGemTaste\\nFood\\nBeverages\\nCulture\\nBarrel Basics\\nFine Implements\\nInfo\\nAbout Us\\nBeverages\\nWhat Is The Most Expensive Tea In The World?\\nDylan Foo\\nAug 26, 2023\\n6 min\\nExplore Luxury Teas and Discover The World's Most Expensive Tea\\nPhoto by\\n\\u4e94\\u7384\\u571f ORIENTO\\n/\\nUnsplash\\nTea, a cherished drink worldwide, holds deep cultural significance across continents. In China, the allure lies in black and oolong teas.\\nThe origins of tea trace back to approximately 2737 BC, when, as legend has it, Emperor Shen Nung of China serendipitously discovered the beverage. As the tale goes, some leaves from the Camellia sinensis plant drifted into his boiling water, leading to the creation of the inaugural cup of tea.\\nWhile in Japan, premium\\ngreen teas\\nlike matcha and gyokuro are revered. Meanwhile, the British are smitten with black tea concoctions, notably Earl Grey, and Indians passionately brew their chai. Meanwhile, in South America, the bold flavors of yerba mate reign supreme.\\nTo many around the world, tea isn't merely a drink. It's a bridge to ancient traditions such as\\ntea ceremony\\nand a treasure trove of novel flavors. To the true connoisseur, tea presents a unique experience, a dance of taste and scent.\\nWithout further ado, let\\u2019s explore our compilation of the world's most premium teas to augment your collection:\\n1. Da-Hong Pao Tea, China\\nPrice: $1.2 million per kilogram\\nDa Hong Pao, often referred to as Big Red Robe, stands out as a premium oolong tea celebrated for its profound richness and notable cost. But what accounts for its hefty price tag?\\nIts roots trace back to the Ming Dynasty, where it was revered as an imperial tribute. Grown in the mineral-rich terrains of China's Wuyi Mountains, these tea plants enjoy an unparalleled microclimate.\\nEach harvest yields only a limited quantity of meticulously hand-picked leaves, preserving their quality and distinctive flavor. The tea's production is an intricate dance of precision, from partial fermentation to its careful processing by adept artisans.\\nAuthentic Da Hong Pao, originating from the traditional Wuyi plants and crafted using age-old methods, sets a benchmark in quality, pushing away many market imitations. Its exceptional flavor, marked by deep earthy notes punctuated with hints of dark chocolate and a smoky undertone, further justifies its price.\\nIn essence, Da Hong Pao's premium status is a blend of its historical reverence, rare harvesting techniques, and unwavering authenticity\\u2014a true gem for tea enthusiasts.\\n2. Panda Dung Tea, China\\nPrice: $70,000 per kilogram\\nAn Yanshi, a Chinese entrepreneur, has introduced an innovative organic tea range cultivated in the Ya\\u2019an mountains of Sichuan province, with a distinctive twist \\u2013 the use of panda feces as a fertilizer.\\nPandas, predominantly feeding on wild bamboo, assimilate merely 30% of the nutrients from their consumption. This implies that the remaining 70% of the nutrition gets excreted, potentially producing a fertile ground rich in nutrients for tea plants. Since pioneering this unique tea in 2011, An has amassed 10 tons of panda waste to nourish his plantation. He assures consumers of a refined, nutty flavor profile in every sip.\\nHighlighting the science behind this, Yanshi explains that the inefficient digestive system of pandas leaves their feces laden with essential fibers and nutrients. Drawing a parallel, he mentions that just as green tea possesses potential cancer-preventing elements, bamboo, which constitutes a panda's primary diet, contains similar beneficial compounds. In China, the initial tea harvest of the year, typically in spring, is revered as the finest brew.\\n3. Pu-Erh Tea, China\\nPrice: $10,000 per kilogram\\nWhen discussing premium-priced pu-erh tea, the reference is often to sheng pu-erh. Superior sheng pu-erh typically commands a higher price than shou pu-erh due to its aging potential. As sheng pu-erh ages, it not only enhances in flavor but also appreciates in value, akin to the maturing of red wine.\\nThe escalating prices of pu-erh tea in recent times can be attributed to its soaring demand. Over the past two decades, a growing number of tea enthusiasts have embraced pu-erh, incorporating it into their daily rituals.\\nLao Ban Zhang (\\u8001\\u73ed\\u7ae0) holds the reputation as the epicenter of premium pu-erh tea. Often dubbed the 'Crown Jewel of Pu-erh Tea', teas originating from this region are renowned for their robust, bitter profile, complemented by a lingering sweetness.\\nWhile the pinnacle of pu-erh teas is sourced from ancient gushu tea trees, these constitute only a fraction of the annual harvest. The caliber of the raw material used in crafting pu-erh cakes plays a decisive role in its pricing: superior ingredients invariably lead to heftier price tags.\\n4. Vintage Narcissus Wuyi Oolong Tea, China\\nPrice: $6,500 per kilogram\\nDrawing its name from the Greek myth of Narcissus or Shui Xian in Chinese, this unique oolong tea is a rare gem cultivated in two primary regions: the majestic Wuyi mountains in China's Fujian province and the renowned PingLin tea zone in Taiwan.\\nDistinguished by its multifaceted palate, this tea mesmerizes drinkers with its robust woody and chocolate undertones, gracefully intertwined with delicate floral and fruity nuances. Beyond its splendid taste, its aroma is equally captivating, commanding attention with its potent fragrance. Such luxury doesn't come cheap; a kilogram of this special tea can set you back by approximately $6,500.\\nLike a meticulously aged wine, this tea becomes richer and more profound with time. To preserve its quality and elevate its flavor profile, it undergoes a special firing process every two years. This ritualistic drying ensures the tea remains free from excess moisture, enhancing its storied taste over the years.\\n5. Tie Guan Yin Tea, China\\nPrice: $3,000 per kilogram\\nTieguanyin, an Oolong variant from Anxi in China's Fujian province, has been a beloved tea since the 19th century. Its name, translating to \\\"Iron Goddess of Mercy,\\\" is an ode to the Buddhist bodhisattva Guanyin. Among China's most popular teas, it boasts a rich flavor infused with floral and fruity undertones, underpinned by numerous health benefits like boosting immunity and metabolism.\\nIts production involves several meticulous steps:\\nPicking:\\nUnlike other teas, Anxi Tie Guan Yin leaves mature longer and are harvested in the afternoon. This lets the buds unfurl slightly, intensifying the aroma.\\nWithering:\\nAfter a brief outdoor withering, leaves are transitioned indoors for about 7 hours. Periodically shaken four times during this period, this process lets them oxidize slightly, enhancing the flavor.\\nFiring:\\nThis occurs in metal woks over wood fires, further defining the tea's character.\\nRolling:\\nSpanning three 30-minute intervals, this phase helps essential oils rise to the leaf surface.\\nRoasting:\\nThis step defines Tie Guan Yin's unique character. Each farmer's roast duration and technique, often passed down through generations, remain closely guarded secrets.\\nQuality Tieguanyin leaves are recognized by their red-edged appearance. Originating from Anxi, with a tea cultivation history exceeding a millennium, this tea remains an embodiment of tradition and craft.\\n6. Silver Tips Imperial Tea, Darjeeling India\\nPrice: $1,850 per kilogram\\nSilver Tips Imperial tea is exclusively harvested on full moon nights, capturing the essence of its unique timing. On the full moon night just before this year's summer solstice, between midnight and 3 am, expert women harvested two leaves and a bud at Makaibari Estates in Darjeeling by the light of tallow torches.\\nThis 2-hour-59-minute plucking window was determined using the biodynamic calendar and astronomical charts. Rajah Banerjee, Makaibari's Chairman, emphasized that the full moon reduces water content in organisms, ensuring that the harvested tea is rich in flavor and character.\\nGarnering media attention, it set a record as India's priciest tea. Its impressive qualities inspired a renowned Japanese cosmetics designer to develop an anti-aging serum using it.\\nThis semi-fermented Oolong has mango and frangipani flower notes, and it's packed with potent antioxidants\\u2014attributed to cosmic energy\\u2014boosting skin health and luminosity.\\n7. Gyokuro Tea, Japan\\nPrice: $650 per kilogram\\nGyokuro, Japan's prestigious green tea, surprises many with its hefty price. Although a household name in Japan, few have savored its unique flavor.\\nThis tea, whose name translates to \\u201cjade dew\\u201d in reference to its vibrant hue, hails predominantly from Uji, Okabe, and Yame regions.\\nUnlike typical green teas, Gyokuro is shade-grown, demanding meticulous cultivation. This results in a jade-green brew rich in umami, reminiscent of the ocean.\\nThe prime factor for its high cost is its limited availability. Gyokuro is produced only once a year during the Shincha season, from April to early June, restricting its market supply.\\nThe shading process, lasting 20-30 days, enhances its sweetness and umami by increasing amino acids and theanine, reducing astringency. This makes Gyokuro's profile distinct from Sencha and even Matcha, despite similarities in shading duration. While both teas have umami tones, Gyokuro offers a brothy, savory experience as opposed to Matcha's powdered consistency.\\nBrewing Gyokuro requires precision. Oversteeping or overheating results in an undesired bitterness. While its cultivation is labor-intensive, the outcome is a top-tier Japanese tea. Given the limited annual quantity and the dedication of its farmers, Gyokuro's price is justified by its unparalleled quality.\\nRead next\\nThe World's Most Expensive Water Sources: When Nature Commands Premium Prices\\nDiscover the world's priciest waters from Arctic ice, deep aquifers, and ocean depths. Rare, pure, and costly due to complex extraction and shrinking glaciers, they offer a unique taste of Earth's untouched frontiers\\nDylan Foo\\nJun 11, 2025\\nWhy Richard Boccato's Ice Is the Top Choice for NYC's Best Bars\\nClear ice, a hallmark of premium cocktails, elevates both style and function. Leading this trend is Richard Boccato, whose expertly crafted ice powers the top cocktail bars in NYC.\\nDylan Foo\\nDec 14, 2024\\nThe Four Varieties of Japanese Shade-Grown Teas\\nShade-grown cultivation, or \\\"hifuku saibai\\\" (\\u88ab\\u8986\\u683d\\u57f9) in Japanese, is a technique where tea plants are intentionally shaded before harvest. This article highlights the four key varieties of shade-grown green tea and their unique qualities.\\nDylan Foo\\nSep 28, 2024\\nAbout\\nPrivacy Policy\\nGemTaste \\u00a9 2025. Powered by\\nGhost\"}",
+      "tool_call_id": "call_00_MZvq5qsz9OvMX7Ic71ENMEJi"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I have confirmed that China produces the world's most expensive tea (Da-Hong Pao Tea at $1.2 million per kilogram). Let me now search for the richest billionaire from China according to Forbes in April 2025.",
+      "tool_calls": [
+        {
+          "id": "call_00_wzQwv5UmYMvXFfV8utQsG1qt",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Forbes richest billionaire China April 2025\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'The 10 Richest Chinese Billionaires 2025 - Forbes', 'href': 'https://www.forbes.com/sites/ywang/2025/04/01/the-10-richest-chinese-billionaires-2025/'}, {'title': 'The 10 Richest Chinese Billionaires 2025 - Asia Tech Times', 'href': 'https://asiatechtimes.com/2025/04/09/the-10-richest-chinese-billionaires-2025/'}, {'title': 'Here Are The 10 Richest Chinese Billionaires In 2025', 'href': 'https://www.forbesmiddleeast.com/billionaires/world-billionaires/the-10-richest-chinese-billionaires-2025'}, {'title': \"China's 5 richest billionaires see combined net worth hit over $310B\", 'href': 'https://e.vnexpress.net/news/business/billionaires/china-s-5-richest-billionaires-see-combined-net-worth-hit-over-310b-4962599.html'}, {'title': 'Top 50 Richest Chinese Billionaires in 2025 - The Founders Magazine', 'href': 'https://www.thefoundersmagazine.com/top-50-richest-chinese-billionaires/'}]",
+      "tool_call_id": "call_00_wzQwv5UmYMvXFfV8utQsG1qt"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me fetch the content from the Forbes article to get the most accurate information.",
+      "tool_calls": [
+        {
+          "id": "call_00_qu6sDfjB8wnlMXDxW0ybQa6w",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.forbes.com/sites/ywang/2025/04/01/the-10-richest-chinese-billionaires-2025/\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"The 10 Richest Chinese Billionaires 2025\\nNewsletters\\nGames\\nShare a News Tip\\nFeatured\\nFeatured\\nBreaking News\\nWhite House Watch\\nDaily Cover Stories\\nAmerica's 2025 Top Wealth Management Teams Private Wealth List\\n| Paid Program\\nThe Employee Well-Being Imperative\\n| Paid Program\\nBest-In-State Top Next-Gen Wealth Advisors 2025\\nAI\\u2019s Nuanced Impact And A Quest To Quantify It\\nDNA of Success\\nVisa Infinite Asia Pacific: Getting Away, Their Own Way\\n| Paid Program\\nEmbracing And Bracing For AI\\nFacing A Volatile Market, C-Suites Look To The CFO For Strategic Guidance\\nYour Four-Part Blueprint To Unlock AI Value In 2025\\n| Paid Program\\nBy The Numbers: Meet The Forbes 30 Under 30 Europe Class Of 2025\\nNext Billion-Dollar Startups 2025\\nFour Reasons To Rethink Your Savings Strategy\\nMeet The Young Tech Trailblazers Building a New Future for Language, Learning and Medicine\\nAmerica's Most Powerful Women In Sports\\nNavigating Retirement In Today\\u2019s Economic Landscape\\nGet Your Data AI-Ready\\n| Paid Program\\nStreamline, Secure, Innovate: Inside Three Organizations That Rewired Their Networks For What\\u2019s Next\\n| Paid Program\\nCxO Spotlight: Innovation in Healthcare\\nBillionaires\\nBillionaires\\nSee All\\nWorld's Billionaires\\nForbes 400\\nAmerica's Richest Self-Made Women\\nChina's Richest\\nIndia's Richest\\nIndonesia's Richest\\nKorea's Richest\\nThailand's Richest\\nJapan's Richest\\nAustralia's Richest\\nTaiwan's Richest\\nSingapore's Richest\\nPhilippines' Richest\\nHong Kong's Richest\\nMalaysia's Richest\\nMoney & Politics\\nInnovation\\nInnovation\\nSee All\\nEmployee and Customer Experience\\nThe New Brand Growth Formula: A Data-Driven Culture Fueled By AI\\n| Paid Program\\nEnterprise AI\\nAI\\nAgentic AI\\nBig Data\\nCloud\\nCloud 100\\nConsumer Tech\\nCreator Economy\\nCybersecurity\\nDigital Transformation\\nEnterprise Tech\\nFuture Of Work\\nGaming\\nHealthcare\\nInnovation Rules\\nRetail Industry\\nSAP BrandVoice\\n| Paid Program\\nScience\\nSocial Media\\nSustainability & Climate\\nTransportation\\nVenture Capital\\nTechnology\\nTikTok BrandVoice\\n| Paid Program\\nMetronome BrandVoice\\n| Paid Program\\nLeadership\\nLeadership\\nSee All\\nUnder 30\\nC-Suite\\nCEO Network\\nCFO Network\\nCHRO Network\\nCIO Network\\nCMO Network\\nLeadership Strategies\\nCareers\\nEducation\\nFeatured Partners\\nDeloitte BrandVoice\\nSAP BrandVoice\\nStand Together BrandVoice\\nFirst Tee BrandVoice\\nDell Technologies BrandVoice\\nForbes EQ\\n| Paid Program\\nForbesBLK\\nForbes Research\\nForbesWomen\\nMoney\\nMoney\\nSee All\\nETF Investing Trends\\nBanking & Insurance\\nETFs & Mutual Funds\\nFintech\\nHedge Funds & Private Equity\\nInvesting\\nInvestor Hub\\nMarkets\\nPersonal Finance\\nRetirement\\nTaxes\\nTop Advisor | SHOOK\\nWealth Management\\nForbes Digital Assets\\nForbes Digital Assets\\nSee All\\nNews\\nCrypto Prices\\nNFT Prices\\nResearch\\nLearn\\nCrypto Basics\\nBTC\\nDeFi\\nWeb3 Education\\nNFTs\\nCrypto Investments\\nEvents\\nCrypto Portfolios\\nBusiness\\nBusiness\\nSee All\\nAerospace & Defense\\nEnergy\\nFood & Drink\\nHollywood & Entertainment\\nLaw\\nManufacturing\\nMedia\\nPolicy\\nRetail\\nSportsMoney\\nEntertainment Digest\\nSmall Business\\nSmall Business\\nSee All\\nSmall Business Tech And Innovation\\nEntrepreneurs\\nFranchises\\nSmall Business Strategy\\nLifestyle\\nLifestyle\\nSee All\\nArts\\nBoats & Planes\\nCars & Bikes\\nDining\\nForbesLife\\nForbes Travel Guide\\nSpirits\\nStyle & Beauty\\nTravel\\nVices\\nWatches\\nReal Estate\\nReal Estate\\nSee All\\nCommercial Real Estate\\nForbes Global Properties\\nResidential Real Estate\\nForbes Vetted\\nForbes Vetted\\nSee All\\nMattress & Sleep\\nBed Frames\\nMattresses\\nMattress Toppers\\nPillows\\nSheets & Bedding\\nSleep Products\\nHome\\nBathroom\\nCleaning & Laundry\\nDecor\\nFurniture\\nHeating & Cooling\\nHobbies\\nHome Office\\nKitchen & Dining\\nOutdoor\\nPets\\nStorage & Organization\\nTools\\nWine & Bar\\nFashion\\nAccessories\\nClothing\\nEyewear\\nFootwear\\nJewelry\\nHandbags & Purses\\nLingerie & Sleepwear\\nOutdoor & Fitness Apparel\\nOuterwear\\nWatches\\nKids & Baby Gear\\nBaby Gear\\nKids Clothes & Accessories\\nNursery\\nPregnancy & Postpartum\\nToys & Books\\nGear\\nApparel & Accessories\\nBikes\\nCamping & Hiking\\nClimbing\\nFishing & Hunting\\nFitness\\nGolf\\nRunning\\nTennis & Racket Sports\\nTools & Tech\\nTraining & Recovery\\nWater Sports\\nWellness\\nWinter Sports\\nBeauty & Grooming\\nHaircare\\nMakeup\\nNailcare\\nShaving\\nSkincare\\nPersonal Products\\nWellness & Self Care\\nTech & Electronics\\nAudio\\nCameras\\nComputers, Tablets & Accessories\\nGaming\\nHome Office\\nOnline Tools\\nSmart Home Devices\\nSmartphones, Smartwatches & Accessories\\nStreaming\\nTVs\\nTravel\\nCruises\\nHotels & Lodging\\nLuggage\\nTravel Products\\nGifts\\nFather's Day\\nHoliday\\nMother's Day\\nValentine's Day\\nWedding\\nDeals\\nBlack Friday\\nCyber Monday\\nAmazon Prime Day\\nBeauty & Grooming\\nBig Sales\\nFashion\\nGear\\nHome\\nTech & Electronics\\nTravel Deals\\nMattress & Sleep\\nDeals\\nDeals\\nSee All\\nFashion\\nNordstrom\\nHOKA\\nQuince\\nAbercrombie & Fitch\\nOld Navy\\nBloomingdale's\\nZappos\\nMacy's\\nBrilliant Earth\\nLululemon\\nElectronics\\nDell\\nTopResume\\nVerizon\\nNordVPN\\nSportswear & Gear\\nDick's Sporting Goods\\nREI\\nHoka\\nUnder Armour\\nNew Balance\\nMattress & Sleep\\nNectar\\nSaatva\\nBrooklinen\\nAvocado\\nDreamCloud\\nHelix Sleep\\nBear\\nLeesa\\nBrooklyn Bedding\\nTempur-Pedic\\nTravel\\nBooking.com\\nSeatGeek\\nVivid Seats\\nHome & Garden\\nFrontgate\\nWayfair\\nChewy\\nWalmart\\nWest Elm\\nAshley Furniture\\nHarry & David\\nSerena & Lily\\nPottery Barn\\nShutterfly\\nLists\\nLists\\nSee All\\n30 Under 30\\n50 Over 50\\nTop Colleges\\nAdvisor\\nAdvisor\\nSee All\\nCredit Cards\\nBest Credit Cards\\nTravel Credit Cards\\n0% APR Credit Cards\\nBalance Transfer Credit Cards\\nBusiness Credit Cards\\nBest First Credit Card\\nMortgages & Loans\\nBest Mortgage Lenders\\nMortgage Refinance Lenders\\nPersonal Loans\\nBusiness Loans\\nBad Credit Loans\\nDebt Consolidation Loans\\nDebt Relief Companies\\nStudent Loans Refinance\\nPrivate Student Loans\\nBanking\\nBest CD Rates\\nHigh Yield Savings Accounts\\nMoney Market Accounts\\nChecking Accounts\\nBusiness Checking Accounts\\nBudgeting Apps\\nBest Online Banks\\nInsurance\\nHealth Insurance Companies\\nMedicare\\nLife Insurance Companies\\nBest Car Insurance Companies\\nCheapest Car Insurance Companies\\nPet Insurance Companies\\nTravel Insurance Companies\\nHomeowners Insurance Companies\\nBusiness Services\\nHow to Start a Business\\nLLC Services\\nPayroll Services\\nHR Software\\nHRIS Systems\\nPEO Services\\nApplicant tracking Systems\\nDomain Registrars\\nHosting Services\\nWebsite Builders\\nEcomm Platforms\\nLanding Page Builders\\nVOIP Services\\nAnswering Services\\nProject Management Software\\nTask Management Software\\nGantt Chart Software\\nVPNs\\nAnti Virus Software\\nPassword Managers\\nHome Services\\nMoving Companies\\nLong Distance Moving Companies\\nCar Shipping Companies\\nHome Warranty Companies\\nSolar Companies\\nSolar Panels\\nHome Security Companies\\nHome Security Systems\\nInternet Providers\\nCheapest Internet Providers\\nFastest High Speed Internet Providers\\nPest Control Companies\\nEducation\\nForbes Advisor UK\\nForbes Advisor CA\\nForbes Advisor AU\\nHealth\\nHealth\\nSee All\\nMental Health\\nBest Online Therapy\\nOnline Therapy that Takes Insurance\\nOnline Psychiatrists\\nBest Online Dating Sites & Apps\\nBest Senior Dating Sites\\nBest LGBTQ Dating Sites\\nCBD\\nCBD Gummies\\nCBD Oil\\nCBD Creams\\nCBD for Anxiety\\nCBD for Pain\\nSupplements\\nProtein Powder\\nPreworkout\\nCollagen Powders\\nCreatine Supplements\\nCoQ10 Supplements\\nHearing Health\\nBest Hearing Aids\\nOTC Hearing Aids\\nAffordable Hearing Aids\\nMedical Devices\\nBest Medical Alert Systems\\nBest Medical Alert Systems with Fall Detection\\nDiet & Weight Loss\\nBest Weight Loss Plans\\nNewsletters\\nNewsletters\\nSee All\\nForbes Daily\\nEditorial Newsletters\\nForbes Games\\nForbes Games\\nSee All\\nFrase by Forbes\\nPinpoint by LinkedIn\\nQueens by LinkedIn\\nCrossclimb by LinkedIn\\nMore From Forbes\\nMore From Forbes\\nForbes Video\\nForbes 101\\nForbes Magazine\\nForbes Asia\\nFree Issue of Forbes\\n\\u00a9 2025 Forbes Media LLC. All Rights Reserved.\\nAdvertise with Forbes\\nForbes Licensing & Syndication\\nReport a Security Issue\\nEditorial Values and Standards\\nSite Feedback\\nContact Us\\nCareers at Forbes\\nTips\\nCorrections\\nPrivacy\\nDo Not Sell My Personal Information\\nTerms\\nAdChoices\\nReprints & Permissions\\nWorld's Billionaires List 2025\\nForbes\\u2019 39th Annual World\\u2019s Billionaires List: More Than 3,000 Worth $16 Trillion\\nForbes World\\u2019s Billionaires List 2025: The Top 200\\nNew Billionaires 2025: Schwarzenegger, Seinfeld, Springsteen And 285 Others Join The Ranks This Year\\nThe $100 Billion Club: These 15 People Have 12-Figure Fortunes\\nThe World\\u2019s Richest Person 2025\\nThe World\\u2019s Richest Woman 2025\\nThe Richest Women In The World 2025\\nThe World\\u2019s Youngest Billionaires 2025\\nThe Richest Billionaire In Each Country 2025\\nThe Countries With The Most Billionaires 2025\\nThe Cities With The Most Billionaires 2025\\nThe World\\u2019s Black Billionaires 2025\\nThe 10 Richest Indian Billionaires 2025\\nThe 10 Richest People In Latin America 2025\\nWhy Saudi Arabians Are Back On Forbes\\u2019 Billionaires List For The First Time In 8 Years\\nThe World\\u2019s Celebrity Billionaires 2025\\nThe World\\u2019s Richest Sports Team Owners 2025\\nAI Boom Billionaires: These Tech Moguls Joined The Forbes List In 2025\\nGwynne Shotwell Rides SpaceX To Billion-Dollar Fortune\\nHow Truth Social And Crypto Helped Trump Double His Fortune In Just One Year\\nMeet The Crypto Billionaire Who Helped The Trumps Make $400 Million\\nFounders Of Alo Yoga, A Hit With Celebs Like Taylor Swift And Hailey Bieber, Are Billionaires\\nThese Childhood Best Friends Made Billion-Dollar Fortunes From Chicken Fingers\\nThe Founder Of Chipotle Is Now A Billionaire\\nWhy The Odds Are Stacked Against This Sports Gambling  Billionaire\\u2019s Home Exercise Startup\\nHere\\u2019s Who Dropped Off Forbes\\u2019 2025 Billionaires List\\nHow The World\\u2019s Billionaires Got So Rich 2025\\nThese Are The 10 Richest People In Donald Trump\\u2019s Administration\\nThe Biggest Billionaire Gainers 2025\\nEditors' Pick\\nThe 10 Richest Chinese Billionaires 2025\\nJack Ma, Zhang Yiming, Li Ka-shing\\nIllustration by Neil Jamieson for Forbes; China News Service/Getty Images, VCG/Getty Images, VCG/Getty Images\\nBy\\nYue Wang\\n,\\nSenior Contributor.\\nFollow Author\\nApr 01, 2025, 06:00am EDT\\nUpdated Jul 15, 2025, 02:25pm EDT\\nShare\\nSave\\nChinese billionaires are making a comeback amid the country\\u2019s AI advancement and the government\\u2019s friendlier stance toward the private sector.\\nD\\nespite escalating trade tensions\\nwith the U.S., China\\u2019s stock markets still soared since last year\\u2019s list of\\nthe World\\u2019s Billionaires\\n. The Hang Seng Index rallied almost 20% as officials promised greater economic support, while DeepSeek\\u2019s January release of a highly affordable AI model reignited investor interest in the country\\u2019s technology sector. As a result, the collective fortune of Chinese billionaires on\\nForbes\\n\\u2019 2025 ranking reached $1.68 trillion\\u2013up 26% from $1.33 trillion a year ago and also exceeding 2023\\u2019s total of $1.67 trillion.\\nThat optimism translated to a rising number of billionaires for the country. This year, there are 450 mainland Chinese members of the three-comma club, up from 406 last year but still well short of the 495 reached in 2023. Mainland China accounts for the second-largest number of billionaires globally, behind the U.S., which has 902 billionaires.\\nMainland China doesn\\u2019t include passport holders from Hong Kong or Macau, whom\\nForbes\\nlists separately. One example is\\nLi Ka-shing\\n, Hong Kong\\u2019s richest with $38.9 billion net worth, who has built his business empire under CK Hutchison Holdings and CK Asset Holdings. Counting those billionaires, greater China has 516 members, up from 473 in 2024 but still down from 562 in 2023. In all, there are 3,028 billionaires on the planet, worth a collective $16.1 trillion.\\nWhile 23 from last year\\u2019s list fell off, there are 31 newcomers in mainland China and 37 returnees, or members who made the list in the past, fell off and have now returned to the ranks with a net worth of at least $1 billion. One notable newcomer is DeepSeek founder\\nLiang Wenfeng\\n, who has trained one of the world\\u2019s best-performing AI models at a fraction of the costs spent by rivals including OpenAI. Liang, 40, has an estimated net worth of $1 billion based on his ownership in DeepSeek and hedge fund High-Flyer.\\nThe ten richest Chinese citizens, meanwhile, are worth a collective $400.5 billion, up from $304 billion last year, and higher than the $311 billion reached in 2023. Beverage giant Nongfu Spring chairman\\nZhong Shanshan\\n, who was China\\u2019s richest person for four consecutive years, ceded the prime spot this year to ByteDance founder\\nZhang Yiming\\n. Zhong, now at No. 2, has a net worth of $57.5 billion, down from $62.3 billion in 2024.\\nChina\\u2019s wealthiest person for the first time, Zhang boosted his fortune by more than 50% over the past year, to $65.5 billion. Despite uncertainties over the fate of TikTok in the U.S., privately held ByteDance has seen its valuation increase above $300 billion from $217 billion last year as investors are encouraged by the potential of its AI technology. Its Doubao chatbot app has attracted 82 million monthly active users (MAUs), making it the world\\u2019s second most popular AI chatbot in February after OpenAI\\u2019s ChatGPT, which had 401 million MAUs, according to aicpb.com, a Hunan-based website that tracks AI products globally. DeepSeek\\u2019s chatbot ranked No. 4 with 62 million MAUs.\\nIn total, eight out of the top ten richest billionaires in China have seen their fortunes increase. The wealth of Xiaomi founder\\nLei Jun\\nsoared 300%, to $43.5 billion, as the company\\u2019s electric vehicle venture sees higher demand for its cars. But one Xiaomi vehicle under driver-assistance mode was involved in a deadly crash that happened on a Chinese highway on March 29, which caused the stock to fall as much as 6.1% on Tuesday amid worries this may dent future growth.\\nAlibaba cofounder\\nJack Ma\\nhas seen his net worth increase to $28.6 billion from $24.5 billion in 2024. Ma was among a cohort of Chinese entrepreneurs invited to meet President Xi Jinping this February, when the leader used the rare meeting to strongly signal his support for the private sector.\\nHere are the 10 richest Chinese citizens on the 2025 World\\u2019s Billionaires list\\nNET WORTHS ARE AS OF MARCH 7, 2025\\n#10. Lu Xiangyang\\nSource of Wealth:\\nAutomobiles\\n| Residence:\\nGuangzhou\\n| Net Worth:\\n$20 billion\\n(vs. $11.6 billion)\\nLu Xiangyang teamed up with his cousin Wang Chuanfu to start BYD in 1995. A former employee of the People\\u2019s Bank of China, Lu is now vice chairman of the company, which has grown from an obscure battery maker to the world\\u2019s largest electric vehicle firm by deliveries. Lu, who derives his fortune primarily from a BYD stake, also runs his own investment firm Youngy Investment Holding Group. The Guangzhou-based company\\u2019s assets include stakes in BYD and a lithium mine in the Chinese province of Sichuan, according to its website.\\n#9. Wang Chuanfu\\nSource of Wealth:\\nAutomobiles\\n| Residence:\\nShenzhen\\n| Net Worth:\\n$26.4 billion\\n(vs. $14.2 billion)\\nBYD chairman and CEO Wang Chuanfu led his electric vehicle maker to surpass Elon Musk\\u2019s Tesla in global sales in 2024. The company\\u2019s total revenues surged 29% year-on-year to $107 billion, above Tesla\\u2019s $97.7 billion. BYD, which makes plug-in hybrids as well as pure electric models, shipped 4.27 million cars worldwide. This year, Wang plans to ship 5.5 million vehicles globally as he aims to capture more markets overseas. Chinese auto brands are \\u201cno longer playing catch-up,\\u201d the mogul wrote in the company\\u2019s 2024 annual report. \\u201cWith a bold, trailblazing mindset, the group is leading the charge, partnering with other Chinese brands to expand globally.\\u201d\\n#8. He Xiangjian\\nSource of Wealth:\\nHome appliances\\n| Residence:\\nFoshan\\n| Net Worth:\\n$27 billion\\n(vs.$25.1 billion)\\nHe Xiangjian stepped down as chairman of home appliance giant Midea Group in 2012, but still holds his wealth primarily from a company stake. Midea\\u2019s Shenzhen-listed shares have risen almost 20% over the past 12 months, as China\\u2019s subsidy program for consumer trade-ins is believed to benefit the company. Riding on the momentum, Midea last September raised $4 billion in its upsized Hong Kong share sale. The company intends to use the proceeds for global expansion, upgrading its supply chain and enhancing its distribution network, according to its prospectus.\\n#7. Jack Ma\\nSource of Wealth:\\nE-commerce\\n| Residence:\\nHangzhou\\n| =Net Worth:\\n$28.6 billion\\n(vs. $24.5 billion)\\nAfter keeping a low profile over the past few years, Alibaba cofounder Jack Ma returned to the spotlight in February. He met Chinese President Xi Jinping that month when the government invited him and other business leaders, including DeepSeek founder Liang Wenfeng, to a symposium in Beijing. Ma and the others were encouraged to expand and contribute to China\\u2019s economy. The e-commerce behemoth, now led by chairman Joe Tsai and CEO Eddie Wu, has made a series of breakthroughs in AI. Its Qwen series of models have surpassed some of OpenAI\\u2019s in performance, the company says, and its technology has been chosen by Apple to power the American company\\u2019s forthcoming AI services for iPhone users in China. To support its AI endeavors, Alibaba announced this February it will invest $53 billion over the next three years in related infrastructure. Ma stepped down as chairman in 2019 but still holds a stake in the company.\\n#6. William Ding\\nSource of Wealth:\\nOnline games\\n| Residence:\\nHangzhou\\n| Net Worth:\\n$33.3 billion\\n(vs. $33.5 billion)\\nNetEase founder William Ding is trying to resuscitate growth at his gaming giant, as the lack of new titles and cut-throat competition have caused 2024 sales to grow a meager 1.7% year-on-year to $14.4 billion, while net income was essentially flat at $4.1 billion. Ding has reportedly reshuffled the management ranks behind Eggy Party, a casual mobile game that has become one of the company\\u2019s most successful titles since its release in 2022. The company should find renewed growth in the first half of 2025, thanks in part to Marvel Rivals, a shooter game developed in collaboration with Marvel Games and released in December, according to a February research note from Hong Kong-based Blue Lotus Research Institute.\\n#5. Colin Huang\\nSource of Wealth:\\nE-commerce\\n| Residence:\\nShanghai\\n| Net Worth:\\n$42.3 billion\\n(vs. $38.9 billion)\\nPDD Holdings\\u2019 founder Colin Huang moved down two spots to No.5 this year, as the e-commerce behemoth battles stiff competition and faces geopolitical challenges. The headwinds are particularly pronounced in its 2024 fourth quarter results. The Temu parent posted in March a 24% year-on-year rise in revenues to $15.2 billion for the period \\u2013 marking its slowest pace of quarterly expansion in years. As the company hands out consumer coupons and reduces merchant fees amid fierce competition with rivals including Alibaba, its net income grew only 18% year-on-year to $3.8 billion \\u2013 down from the blistering pace of two-fold increases seen in the fourth quarter of 2023. While faster growth in early 2024 still helped full-year sales increase 59% to $54 billion and net income jumped 87% to 15.4 billion, PDD Holdings faces mounting uncertainties in its overseas expansion. Temu, its international arm that acts as a key growth driver, is confronted with the threat of possible changes to a U.S. policy that exempts items worth less than $800 from tariff charges. Temu has grabbed market share from Amazon thanks to dirt cheap goods, such as $8 shoes, that are largely shipped from China.\\n#4. Lei Jun\\nSource of Wealth:\\nSmartphones, automobiles\\n| Residence:\\nBeijing\\n| Net Worth:\\n$43.5 billion\\n(vs. $10.9 billion)\\nLei Jun\\u2019s wealth grew by three-fold to $43.5 billion amid investor optimism over Xiaomi\\u2019s electric vehicle business. Before the March 29 crash, the company chairman and CEO raised Xiaomi\\u2019s 2025 EV delivery target to 350,000 units from 300,000, as demand for its Telsa Model 3 competitor the SU7 sedan\\u2014which has a starting price of 215,900 yuan ($30,000) in China \\u2014 has far outstripped supply. To shorten the waitlist for the car, which can still stretch into eight months, Xiaomi is reportedly expanding the size of a planned second factory in Beijing. Earlier in March, the Hong Kong-listed company raised $5.5 billion in an upsized share sale to fund its business expansion and technology research.\\n#3. Ma Huateng\\nSource of Wealth:\\nOnline games\\n| Residence:\\nShenzhen\\n| Net Worth:\\n$56.2 billion\\n(vs. $30.2 billion)\\nTencent\\u2019s Hong Kong-listed shares nearly doubled over the past 12 months amid a broad rally of China\\u2019s technology-related companies. They might have more room for growth, as Ma invests for the future. The Chinese tech giant will spend $1.3 billion for a 25% stake in a newly created entity that hosts some of Ubisoft\\u2019s (a French game maker) most popular assets, including Assassin\\u2019s Creed; Tencent aims to turn the video game franchises into \\u201clong-term evergreen game platforms,\\u201d according to a statement released in March. The company is also bullish on AI as it starts to integrate its proprietary AI technologies into WeChat, providing functions such as AI-powered search to the messaging app\\u2019s nearly 1.4 billion users. Its separate AI app, the Yuanbao digital assistant, can perform more tasks like taking phone calls and generating content summaries.\\n#2. Zhong Shanshan\\nSource of Wealth:\\nBeverages, pharmaceuticals\\n| Residence:\\nHangzhou\\n| Net Worth:\\n$57.7 billion (vs. 62.3 billion)\\nIt has shaped out to be a tough year for Nongfu Spring founder Zhong Shanshan, who was China\\u2019s richest man from 2021 to 2024. In sharp contrast with previous years, when sales grew by double digits, 2024 revenues were essentially flat at $5.9 billion. Net income, which came in at $1.7 billion, barely grew either. The Hong Kong-listed company is feeling the fallout from a public opinion crisis earlier last year, when nationalist consumers vowed to boycott its bottled drinks as they criticized Nongfu Spring for being \\u201cpro-Japan\\u201d because the packaging of certain products supposedly resembled Japanese architecture. And as the company launched purified water products that sell for less than $0.14 per bottle to attract frugal shoppers, earnings took its own hit as well.\\n#1.\\tZhang Yiming\\nSource of Wealth:\\nInternet media\\n| Residence:\\nSingapore\\n| Net Worth:\\n$65.5 billion\\n(vs. $43.4 billion)\\nAlthough TikTok\\u2019s fate still hangs in the balance in the U.S.\\u2014 where it faces an April 5 deadline to be sold or banned \\u2014 parent ByteDance is seeing its valuation increase to $312 billion in private markets. This is partly due to the AI craze, as investors bet the next breakthrough may still come from China, after DeepSeek in January released a highly affordable model that shocked Silicon Valley. Zhang stepped down as ByteDance chairman in 2021 but still plays a key role in the company\\u2019s AI strategy that ranges from capital expenditure to hiring. The reclusive mogul wants artificial general intelligence (AGI), or AI to match or surpass human intelligence, according to state-affiliated news outlet The Paper.\\nMore From Forbes\\nForbes\\nHow Truth Social And Crypto Helped Trump Double His Fortune In Just One Year\\nBy\\nDan Alexander\\nForbes\\nAI Boom Billionaires: These Tech Moguls Joined The Forbes List In 2025\\nBy\\nPhoebe Liu\\nForbes\\nThe World\\u2019s Richest Person 2025\\nBy\\nJohn Hyatt\\nForbes\\nThe Richest Women In The World 2025\\nBy\\nJulie Goldenberg\\nForbes\\nThe World\\u2019s Richest Woman 2025\\nBy\\nJulie Goldenberg\\nEditorial Standards\\nReprints & Permissions\\n\\u00a9 2025 Forbes Media LLC. All Rights Reserved.\\nAdChoices\\nPrivacy Statement\\nYour Privacy Choices\\nCookie Preferences\\nDigital Terms of Sale\\nTerms of Service\\nContact Us\\nSend Us Feedback\\nReport a Security Issue\\nJobs At Forbes\\nReprints & Permissions\\nForbes Press Room\\nAdvertise\"}",
+      "tool_call_id": "call_00_qu6sDfjB8wnlMXDxW0ybQa6w"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

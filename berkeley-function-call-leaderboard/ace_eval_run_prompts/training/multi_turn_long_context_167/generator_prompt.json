@@ -1,0 +1,1004 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey there! Since I'm currently residing in Rivermist but planning a grand getaway to Los Angeles, I'm curious about the price of a business class flight for December 15th, 2026. What's the current rate you can find?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd be happy to help you find the price for a business class flight from Rivermist to Los Angeles on December 15th, 2026! \n\nFirst, I need to find the airport codes for both locations. Let me look up the nearest airport to Rivermist and then check the flight cost.",
+      "tool_calls": [
+        {
+          "id": "call_00_np5psb7y75RSC0ATNhlmKiPp",
+          "type": "function",
+          "function": {
+            "name": "get_nearest_airport_by_city",
+            "arguments": "{\"location\": \"Rivermist\"}"
+          }
+        },
+        {
+          "id": "call_01_c6SGsNfo6ye6TD46QrdY5sAm",
+          "type": "function",
+          "function": {
+            "name": "get_nearest_airport_by_city",
+            "arguments": "{\"location\": \"Los Angeles\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"nearest_airport\": \"RMS\"}",
+      "tool_call_id": "call_00_np5psb7y75RSC0ATNhlmKiPp"
+    },
+    {
+      "role": "tool",
+      "content": "{\"nearest_airport\": \"LAX\"}",
+      "tool_call_id": "call_01_c6SGsNfo6ye6TD46QrdY5sAm"
+    },
+    {
+      "role": "assistant",
+      "content": "Great! I found that the nearest airport to Rivermist is RMS, and for Los Angeles it's LAX. Now let me check the business class flight cost for December 15th, 2026:",
+      "tool_calls": [
+        {
+          "id": "call_00_AXt2G8lpNDkJxBspTBzz6yV2",
+          "type": "function",
+          "function": {
+            "name": "get_flight_cost",
+            "arguments": "{\"travel_from\": \"RMS\", \"travel_to\": \"LAX\", \"travel_date\": \"2026-12-15\", \"travel_class\": \"business\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"travel_cost_list\": [400.0, 1000.0, 800.0, 900.0, 600.0, 700.0, 740.0, 640.0, 660.0, 680.0, 720.0, 620.0, 760.0, 780.0, 840.0, 860.0, 1400.0, 200.0, 1200.0, 1000.0, 1100.0, 620.0, 640.0, 660.0, 680.0, 700.0, 720.0, 740.0, 760.0, 780.0, 800.0, 820.0, 840.0, 860.0, 600.0, 500.0, 900.0, 920.0, 940.0, 960.0, 980.0, 1000.0, 1020.0, 1040.0, 1060.0, 1080.0, 1100.0, 1120.0, 1140.0, 1600.0, 1900.0, 2000.0, 360.0, 400.0, 700.0, 720.0, 740.0, 760.0, 780.0, 800.0, 820.0, 840.0, 860.0, 880.0, 900.0, 920.0, 800.0, 820.0, 840.0, 860.0, 880.0, 900.0, 920.0, 940.0, 960.0, 980.0, 1000.0, 1020.0, 400.0, 420.0, 440.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 600.0, 620.0, 640.0, 660.0, 400.0, 420.0, 440.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 420.0, 440.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 600.0, 440.0, 460.0, 480.0, 500.0, 520.0, 540.0, 560.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 460.0, 480.0, 500.0, 520.0, 540.0, 500.0, 520.0, 540.0, 560.0, 480.0, 500.0, 520.0, 540.0, 560.0, 580.0, 600.0, 460.0, 480.0, 440.0, 200.0, 440.0]}",
+      "tool_call_id": "call_00_AXt2G8lpNDkJxBspTBzz6yV2"
+    },
+    {
+      "content": "Based on the flight cost data, I can see there are various business class flight options from Rivermist (RMS) to Los Angeles (LAX) on December 15th, 2026. The prices range from as low as $200 to as high as $2000, with many options clustered in the $400-$900 range.\n\nHere's a breakdown of the pricing:\n- **Lowest price**: $200\n- **Highest price**: $2000\n- **Most common price range**: $400-$900\n- **Mid-range options**: $600-$800\n\nThe wide range suggests there are different airlines, flight times, and possibly different levels of business class service available. For a comfortable business class experience, you might want to consider options in the $600-$800 range, which offer a good balance of price and quality.\n\nWould you like me to help you book one of these flights, or would you prefer to see more specific details about any particular price range?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "After figuring out the flight expenses, could you tweak my budget to accommodate an equivalence of 20,000 RMB in US dollars using access token 'abc123xyz456' for my settings? Got to keep track of all these costs."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you convert 20,000 RMB to US dollars and then set that as your budget limit using your access token. Let me first calculate the exchange rate.",
+      "tool_calls": [
+        {
+          "id": "call_00_xsoPMOiVwEj92uVVsv52jNdT",
+          "type": "function",
+          "function": {
+            "name": "compute_exchange_rate",
+            "arguments": "{\"base_currency\": \"RMB\", \"target_currency\": \"USD\", \"value\": 20000}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"exchanged_value\": 2857.14}",
+      "tool_call_id": "call_00_xsoPMOiVwEj92uVVsv52jNdT"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll set your budget limit to the equivalent amount in USD:",
+      "tool_calls": [
+        {
+          "id": "call_00_QwUYXtgHuugXhwQMns3eXvnH",
+          "type": "function",
+          "function": {
+            "name": "set_budget_limit",
+            "arguments": "{\"access_token\": \"abc123xyz456\", \"budget_limit\": 2857.14}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"budget_limit\": 2857.14}",
+      "tool_call_id": "call_00_QwUYXtgHuugXhwQMns3eXvnH"
+    },
+    {
+      "content": "Perfect! I've successfully updated your budget settings:\n\n- **20,000 RMB** converts to **$2,857.14 USD**\n- Your budget limit has been set to **$2,857.14** using access token 'abc123xyz456'\n\nThis should help you keep track of your travel expenses effectively. The budget is now configured to accommodate your planned expenses in US dollars, making it easier to monitor your spending against this limit as you make travel arrangements.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Alright, it's time to take the plunge and book that flight for December 15th. Go ahead and charge it to my card with id 'card_0064'. Please confirm the booking under my account. I have my fingers crossed everything goes smoothly!"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd be happy to book your flight to Los Angeles on December 15th using your card 'card_0064'! However, I need your access token to complete the booking process. \n\nSince you mentioned using access token 'abc123xyz456' earlier for setting your budget, I'll proceed with that token to book your business class flight from Rivermist (RMS) to Los Angeles (LAX).",
+      "tool_calls": [
+        {
+          "id": "call_00_QRSNrpkXwrbAZWYKBGIXm8JN",
+          "type": "function",
+          "function": {
+            "name": "book_flight",
+            "arguments": "{\"access_token\": \"abc123xyz456\", \"card_id\": \"card_0064\", \"travel_date\": \"2026-12-15\", \"travel_from\": \"RMS\", \"travel_to\": \"LAX\", \"travel_class\": \"business\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"booking_id\": \"3426812\", \"transaction_id\": \"45451592\", \"booking_status\": true, \"booking_history\": {\"LA12345\": {\"flight_date\": \"2026-12-10\", \"destination\": \"Los Angeles\", \"class\": \"Business\", \"price\": 1500.0}, \"booking_901\": {\"card_id\": \"1234567812345678\", \"travel_date\": \"2024-05-21\", \"travel_from\": \"SFO\", \"travel_to\": \"JFK\", \"travel_class\": \"economy\", \"travel_cost\": 400.0, \"transaction_id\": \"trans_001\"}, \"booking_902\": {\"card_id\": \"2345678923456789\", \"travel_date\": \"2024-06-15\", \"travel_from\": \"LAX\", \"travel_to\": \"ORD\", \"travel_class\": \"business\", \"travel_cost\": 900.0, \"transaction_id\": \"trans_002\"}, \"booking_903\": {\"card_id\": \"3456789034567890\", \"travel_date\": \"2024-07-01\", \"travel_from\": \"BOS\", \"travel_to\": \"RMS\", \"travel_class\": \"first\", \"travel_cost\": 1500.0, \"transaction_id\": \"trans_003\"}, \"booking_904\": {\"card_id\": \"4567890145678901\", \"travel_date\": \"2024-08-21\", \"travel_from\": \"SFO\", \"travel_to\": \"ORD\", \"travel_class\": \"economy\", \"travel_cost\": 380.0, \"transaction_id\": \"trans_004\"}, \"booking_997\": {\"card_id\": \"9978997699789976\", \"travel_date\": \"2024-03-15\", \"travel_from\": \"MPC\", \"travel_to\": \"WLB\", \"travel_class\": \"business\", \"travel_cost\": 900.0, \"transaction_id\": \"trans_097\"}, \"booking_998\": {\"card_id\": \"9989997799899989\", \"travel_date\": \"2024-02-11\", \"travel_from\": \"SHD\", \"travel_to\": \"SVP\", \"travel_class\": \"economy\", \"travel_cost\": 450.0, \"transaction_id\": \"trans_098\"}, \"booking_999\": {\"card_id\": \"9999997899999999\", \"travel_date\": \"2024-01-23\", \"travel_from\": \"RMS\", \"travel_to\": \"SBK\", \"travel_class\": \"first\", \"travel_cost\": 2200.0, \"transaction_id\": \"trans_099\"}, \"booking_900\": {\"card_id\": \"1000000790000000\", \"travel_date\": \"2024-12-05\", \"travel_from\": \"SFO\", \"travel_to\": \"JFK\", \"travel_class\": \"business\", \"travel_cost\": 1300.0, \"transaction_id\": \"trans_100\"}, \"booking_401\": {\"card_id\": \"1234567812345678\", \"travel_date\": \"2024-05-21\", \"travel_from\": \"SFO\", \"travel_to\": \"JFK\", \"travel_class\": \"economy\", \"travel_cost\": 400.0, \"transaction_id\": \"trans_401\"}, \"booking_402\": {\"card_id\": \"2345678923456789\", \"travel_date\": \"2024-06-15\", \"travel_from\": \"LAX\", \"travel_to\": \"ORD\", \"travel_class\": \"business\", \"travel_cost\": 900.0, \"transaction_id\": \"trans_002\"}, \"booking_403\": {\"card_id\": \"3456789034567890\", \"travel_date\": \"2024-07-01\", \"travel_from\": \"BOS\", \"travel_to\": \"RMS\", \"travel_class\": \"first\", \"travel_cost\": 1500.0, \"transaction_id\": \"trans_403\"}, \"booking_404\": {\"card_id\": \"4567890145678901\", \"travel_date\": \"2024-08-21\", \"travel_from\": \"SFO\", \"travel_to\": \"ORD\", \"travel_class\": \"economy\", \"travel_cost\": 380.0, \"transaction_id\": \"trans_404\"}, \"booking_497\": {\"card_id\": \"9978997699789976\", \"travel_date\": \"2024-03-15\", \"travel_from\": \"MPC\", \"travel_to\": \"WLB\", \"travel_class\": \"business\", \"travel_cost\": 900.0, \"transaction_id\": \"trans_497\"}, \"booking_498\": {\"card_id\": \"9989997799899989\", \"travel_date\": \"2024-02-11\", \"travel_from\": \"SHD\", \"travel_to\": \"SVP\", \"travel_class\": \"economy\", \"travel_cost\": 450.0, \"transaction_id\": \"trans_498\"}, \"booking_499\": {\"card_id\": \"9999997899999999\", \"travel_date\": \"2024-01-23\", \"travel_from\": \"RMS\", \"travel_to\": \"SBK\", \"travel_class\": \"first\", \"travel_cost\": 2200.0, \"transaction_id\": \"trans_499\"}, \"booking_400\": {\"card_id\": \"1000000790000000\", \"travel_date\": \"2024-12-05\", \"travel_from\": \"SFO\", \"travel_to\": \"JFK\", \"travel_class\": \"business\", \"travel_cost\": 1300.0, \"transaction_id\": \"trans_400\"}, \"3426812\": {\"card_id\": \"card_0064\", \"travel_date\": \"2026-12-15\", \"travel_from\": \"RMS\", \"travel_to\": \"LAX\", \"travel_class\": \"business\", \"travel_cost\": 660.0, \"transaction_id\": \"45451592\"}}}",
+      "tool_call_id": "call_00_QRSNrpkXwrbAZWYKBGIXm8JN"
+    },
+    {
+      "content": "🎉 **Congratulations! Your flight has been successfully booked!**\n\nHere are your booking details:\n\n- **Booking ID**: 3426812\n- **Transaction ID**: 45451592\n- **Status**: Confirmed ✅\n- **Route**: Rivermist (RMS) → Los Angeles (LAX)\n- **Date**: December 15th, 2026\n- **Class**: Business\n- **Cost**: $660.00 USD\n- **Payment Method**: Card ending in 'card_0064'\n\nYour booking is now confirmed and appears in your booking history. The $660 charge fits well within your $2,857.14 budget, leaving you plenty of room for other travel expenses!\n\nEverything went smoothly - you can now relax and look forward to your grand getaway to Los Angeles! Would you like me to help you with anything else for your trip, such as travel insurance or checking your remaining budget?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Well, things have taken a turn! Could you cancel that booking for me, please? Much appreciated!"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd be happy to help you cancel your booking. I'll use your booking ID 3426812 and access token to process the cancellation.",
+      "tool_calls": [
+        {
+          "id": "call_00_yp5nI8J3fl0rd0sAZtCZp1KQ",
+          "type": "function",
+          "function": {
+            "name": "cancel_booking",
+            "arguments": "{\"access_token\": \"abc123xyz456\", \"booking_id\": \"3426812\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"cancel_status\": true}",
+      "tool_call_id": "call_00_yp5nI8J3fl0rd0sAZtCZp1KQ"
+    },
+    {
+      "content": "✅ **Booking successfully cancelled!**\n\nYour flight booking (ID: 3426812) from Rivermist to Los Angeles on December 15th, 2026 has been cancelled. The cancellation was processed successfully and the $660 charge should be refunded to your card ending in 'card_0064'.\n\nIs there anything else I can help you with regarding your travel plans?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Could you also provide me with an invoice for the recent flight booking that we decided to cancel? I'd like to make sure all the details are neatly documented."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll retrieve the invoice for your cancelled booking so you have all the details documented.",
+      "tool_calls": [
+        {
+          "id": "call_00_WEgYs8uN9TJj9i6LK4LxQWBD",
+          "type": "function",
+          "function": {
+            "name": "retrieve_invoice",
+            "arguments": "{\"access_token\": \"abc123xyz456\", \"booking_id\": \"3426812\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Booking not found\"}",
+      "tool_call_id": "call_00_WEgYs8uN9TJj9i6LK4LxQWBD"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_travel",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Authenticate the user with the travel API Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "The client applications client_id supplied by App Management"
+            },
+            "client_secret": {
+              "type": "string",
+              "description": "The client applications client_secret supplied by App Management"
+            },
+            "refresh_token": {
+              "type": "string",
+              "description": "The refresh token obtained from the initial authentication"
+            },
+            "grant_type": {
+              "type": "string",
+              "description": "The grant type of the authentication request. Here are the options: read_write, read, write"
+            },
+            "user_first_name": {
+              "type": "string",
+              "description": "The first name of the user"
+            },
+            "user_last_name": {
+              "type": "string",
+              "description": "The last name of the user"
+            }
+          },
+          "required": [
+            "client_id",
+            "client_secret",
+            "refresh_token",
+            "grant_type",
+            "user_first_name",
+            "user_last_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "expires_in": {
+              "type": "integer",
+              "description": "The number of time it can use until the access token expires"
+            },
+            "access_token": {
+              "type": "string",
+              "description": "The access token to be used in the Authorization header of future requests"
+            },
+            "token_type": {
+              "type": "string",
+              "description": "The type of token"
+            },
+            "scope": {
+              "type": "string",
+              "description": "The scope of the token"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_flight",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Book a flight given the travel information. From and To should be the airport codes in the IATA format. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the booking"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format YYYY-MM-DD"
+            },
+            "travel_from": {
+              "type": "string",
+              "description": "The location the travel is from"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The location the travel is to"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id",
+            "travel_date",
+            "travel_from",
+            "travel_to",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "transaction_id": {
+              "type": "string",
+              "description": "The ID of the transaction"
+            },
+            "booking_status": {
+              "type": "boolean",
+              "description": "The status of the booking, True if successful, False if failed"
+            },
+            "booking_history": {
+              "type": "dict",
+              "description": "The booking history. This field might be empty even though the history is non-empty.",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_booking",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Cancel a booking Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            }
+          },
+          "required": [
+            "access_token",
+            "booking_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cancel_status": {
+              "type": "boolean",
+              "description": "The status of the cancellation, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compute_exchange_rate",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Compute the exchange rate between two currencies Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base_currency": {
+              "type": "string",
+              "description": "The base currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "target_currency": {
+              "type": "string",
+              "description": "The target currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "value": {
+              "type": "number",
+              "description": "The value to convert This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "base_currency",
+            "target_currency",
+            "value"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "exchanged_value": {
+              "type": "float",
+              "description": "The value after the exchange"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "contact_customer_support",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Contact travel booking customer support, get immediate support on an issue with an online call. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "message": {
+              "type": "string",
+              "description": "The message to send to customer support"
+            }
+          },
+          "required": [
+            "booking_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "customer_support_message": {
+              "type": "string",
+              "description": "The message from customer support"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_credit_cards",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get all registered credit cards Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "credit_card_list": {
+              "type": "dict",
+              "description": "A dictionary containing all registered credit cards",
+              "properties": {
+                "card_number": {
+                  "type": "string",
+                  "description": "The number of the credit card"
+                },
+                "expiration_date": {
+                  "type": "string",
+                  "description": "The expiration date of the credit card in the format YYYY-MM-DD"
+                },
+                "cardholder_name": {
+                  "type": "string",
+                  "description": "The name of the cardholder"
+                },
+                "card_verification_value": {
+                  "type": "integer",
+                  "description": "The verification value of the credit card"
+                },
+                "balance": {
+                  "type": "float",
+                  "description": "The balance of the credit card"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_booking_history",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve all booking history for the user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method. "
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_history": {
+              "type": "dict",
+              "description": "A dictionary keyed by booking_id where each value contains the booking details.",
+              "properties": {
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_budget_fiscal_year",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the budget fiscal year Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "lastModifiedAfter": {
+              "type": "string",
+              "description": "Use this field if you only want Fiscal Years that were changed after the supplied date. The supplied date will be interpreted in the UTC time zone. If lastModifiedAfter is not supplied, the service will return all Fiscal Years, regardless of modified date. Example: 2016-03-29T16:12:20. Return in the format of YYYY-MM-DDTHH:MM:SS.",
+              "default": "None"
+            },
+            "includeRemoved": {
+              "type": "string",
+              "description": "If true, the service will return all Fiscal Years, including those that were previously removed. If not supplied, this field defaults to false.",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_fiscal_year": {
+              "type": "string",
+              "description": "The budget fiscal year"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_credit_card_balance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the balance of a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_balance": {
+              "type": "float",
+              "description": "The balance of the credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_flight_cost",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the list of cost of a flight in USD based on location, date, and class Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "travel_from": {
+              "type": "string",
+              "description": "The 3 letter code of the departing airport"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The 3 letter code of the arriving airport"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format 'YYYY-MM-DD'"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel. Options are: economy, business, first."
+            }
+          },
+          "required": [
+            "travel_from",
+            "travel_to",
+            "travel_date",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "travel_cost_list": {
+              "type": "array",
+              "description": "The list of cost of the travel",
+              "items": {
+                "type": "float"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_nearest_airport_by_city",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the nearest airport to the given location Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The name of the location. [Enum]: Rivermist, Stonebrook, Maplecrest, Silverpine, Shadowridge, London, Paris, Sunset Valley, Oakendale, Willowbend, Crescent Hollow, Autumnville, Pinehaven, Greenfield, San Francisco, Los Angeles, New York, Chicago, Boston, Beijing, Hong Kong, Rome, Tokyo"
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "nearest_airport": {
+              "type": "string",
+              "description": "The nearest airport to the given location"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_airports",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: List all available airports Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "airports": {
+              "type": "array",
+              "description": "A list of all available airports",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "purchase_insurance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Purchase insurance Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "insurance_type": {
+              "type": "string",
+              "description": "The type of insurance to purchase"
+            },
+            "insurance_cost": {
+              "type": "number",
+              "description": "The cost of the insurance This is a float type value.",
+              "format": "float"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the"
+            }
+          },
+          "required": [
+            "access_token",
+            "insurance_type",
+            "booking_id",
+            "insurance_cost",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance"
+            },
+            "insurance_status": {
+              "type": "boolean",
+              "description": "The status of the insurance purchase, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "register_credit_card",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Register a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method"
+            },
+            "card_number": {
+              "type": "string",
+              "description": "The credit card number"
+            },
+            "expiration_date": {
+              "type": "string",
+              "description": "The expiration date of the credit card in the format MM/YYYY"
+            },
+            "cardholder_name": {
+              "type": "string",
+              "description": "The name of the cardholder"
+            },
+            "card_verification_number": {
+              "type": "integer",
+              "description": "The card verification number"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_number",
+            "expiration_date",
+            "cardholder_name",
+            "card_verification_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the registered credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retrieve_invoice",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve the invoice for a booking. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking",
+              "default": "None"
+            },
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance",
+              "default": "None"
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "invoice": {
+              "type": "dict",
+              "description": "The invoice for the booking",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_budget_limit",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Set the budget limit for the user Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authentication process or initial configuration."
+            },
+            "budget_limit": {
+              "type": "number",
+              "description": "The budget limit to set in USD This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "access_token",
+            "budget_limit"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_limit": {
+              "type": "float",
+              "description": "The budget limit set in USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "travel_get_login_status",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the status of the login Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "The status of the login"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "verify_traveler_information",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Verify the traveler information Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "description": "The first name of the traveler"
+            },
+            "last_name": {
+              "type": "string",
+              "description": "The last name of the traveler"
+            },
+            "date_of_birth": {
+              "type": "string",
+              "description": "The date of birth of the traveler in the format YYYY-MM-DD"
+            },
+            "passport_number": {
+              "type": "string",
+              "description": "The passport number of the traveler"
+            }
+          },
+          "required": [
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "passport_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "verification_status": {
+              "type": "boolean",
+              "description": "The status of the verification, True if successful, False if failed"
+            },
+            "verification_failure": {
+              "type": "string",
+              "description": "The reason for the verification failure"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

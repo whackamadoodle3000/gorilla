@@ -1,0 +1,208 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "user",
+      "content": "Acclaimed chefs often come from prestigious culinary backgrounds that shape their careers. At which restaurant did the head chefs of the restaurant named the world's best by CNN in 2024 meet?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll search for information about the world's best restaurant according to CNN in 2024 and where its head chefs met.",
+      "tool_calls": [
+        {
+          "id": "call_00_yUNYRKVUh6mc5gRxpEZjQ5uX",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"CNN world's best restaurant 2024 head chefs met where\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': \"This is the world's best restaurant for 2024 | National Post\", 'href': 'https://nationalpost.com/life/food/worlds-50-best-restaurants-list-2024', 'body': \"Disfrutar chef-owners Oriol Castro, Eduard Xatruch and Mateu Casañas met while working at Ferran Adrià's legendary El Bulli, which topped the World's 50 Best Restaurants list a record five ...\"}, {'title': \"World's 50 Best Restaurants for 2024 revealed | CNN\", 'href': 'https://edition.cnn.com/travel/worlds-50-best-restaurants-for-2024', 'body': \"Any doubts that Spain remains the fine dining center of the world may just have evaporated with the revealing of the World's 50 Best Restaurants for 2024 list. Five eateries from the European ...\"}, {'title': \"World's best restaurant for 2024 revealed - KION TV\", 'href': 'https://kioncentralcoast.com/entertainment/cnn-style/2024/06/06/worlds-best-restaurant-for-2024-revealed/', 'body': \"By Karla Cripps, CNN (CNN) — Any doubts that Spain remains the fine dining center of the world may just have evaporated with the revealing of the World's 50 Best Restaurants for 2024 list. Five eateries from the European nation made the list - three of them in the top five.\"}, {'title': \"The World's 50 Best Restaurants in 2024: who took the top spot?\", 'href': 'https://www.cntravellerme.com/story/worlds-50-best-restaurants-in-2024', 'body': \"Which chefs and restaurants won individual awards during The World's 50 Best Restaurants? Every year, the panel awards special prizes to chefs, front-of-house staff, and activists who are leading the charge in hospitality in 2025.\"}, {'title': \"World's best restaurant for 2025 revealed - CNN\", 'href': 'https://www.cnn.com/2025/06/20/travel/worlds-50-best-restaurants-2025', 'body': \"The 'World's 50 Best Restaurants' awards — considered the Oscars of innovative fine dining — were handed out at a ceremony in Turin, Italy, with a restaurant in South America walking ...\"}, {'title': \"THIS Is The 2024 World's Best Restaurant As Named By 50 Best - Haute Living\", 'href': 'https://hauteliving.com/2024/06/this-is-the-2024-worlds-best-restaurant-as-named-by-50-best/752360/', 'body': \"This Spanish eatery was just named the 2024 World's Best Restaurant by the 50 Best organization at their annual ceremony, held in Las Vegas. But who won?\"}, {'title': \"Here's the 2024 World's 50 Best Restaurants List - Eater\", 'href': 'https://www.eater.com/24171671/worlds-50-best-restaurants-2024-the-full-list-of-winners', 'body': \"The restaurant's march to the top of the World's 50 Best list was a steady drumbeat in recent years: It took the No. 2 spot on the 2023 list, and was No. 3 in 2022.\"}, {'title': \"The World's 50 Best Restaurants in 2024: Barcelona takes the top spot\", 'href': 'https://www.houseandgarden.co.uk/article/worlds-50-best-restaurants-2024-list', 'body': \"The World's 50 Best Restaurants awards make waves across the food world each year when they celebrate the best of the international food industry. The 2024 ceremony took place at the Wynn Hotel on the Las Vegas strip, gathering a whole host of star-studded chefs from around the world. Lima restaurant 'Central' took the coveted top spot in 2023 - it was the first restaurant not in Europe ...\"}, {'title': \"The World's 50 Best Restaurants 2024: see the full list\", 'href': 'https://www.finedininglovers.co.uk/explore/articles/disfrutar-named-best-restaurant-world-2024', 'body': \"Barcelona's Disfrutar has been named the best restaurant in the world 2024 by The World's 50 Best Restaurants with Asador Etxebarri in second place and Table by Bruno Verjus in third.\"}, {'title': \"The World's 50 Best Restaurants 2024 Names Spain's Disfrutar No. 1\", 'href': 'https://appetitomagazine.com/news/the-worlds-50-best-restaurants-2024-names-spains-disfrutar-no-1', 'body': \"Led by a trio of chefs from the legendary El Bulli, Oriol Castro, Eduard Xatruch and Mateu Casañas, Disfrutar earns bragging rights as The World's Best Restaurant according to the well-known list, which is assembled by a panel of over 1,000 judges including chefs, members of the food media, and others, and awarded in an annual ceremony ...\"}]",
+      "tool_call_id": "call_00_yUNYRKVUh6mc5gRxpEZjQ5uX"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me get more specific information about Disfrutar restaurant and where the chefs met.",
+      "tool_calls": [
+        {
+          "id": "call_00_2kL6rStVbILl2TLQYt90zkPw",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://nationalpost.com/life/food/worlds-50-best-restaurants-list-2024\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"This is the world's best restaurant for 2024 | National Post\\nSkip to Content\\nWatch live entertainment at home with VEEPS. Get 30% discount.\\nLimited time only >>\\nWatch live entertainment at home with VEEPS. Get 30% discount.\\nLimited time only >>\\nSections\\nSearch\\nSearch nationalpost.com\\nPerform search\\nShare\\nShare this Story :\\nThis 'iconoclastic' Spanish spot is the world's best restaurant for 2024\\nCopy Link\\nEmail\\nX\\nReddit\\nPinterest\\nLinkedIn\\nTumblr\\nSubscribe $12 for 1 year\\nUser\\nMy Account\\nSubscribe $12 for 1 year\\nSearch nationalpost.com\\nPerform search\\nSubscribe\\nOur Offers\\nMy Account\\nManage My Subscriptions\\nFAQ\\nNewsletters\\nCanada\\nCanadian True Crime\\nCanadian Politics\\nHealth\\nWorld\\nIsrael & Middle East\\nFinancial Post\\nNP Comment\\nLongreads\\nPuzzmo\\nDiversions\\nPuzzles\\nComics\\nNP News Quiz\\nNew York Times Crossword\\nHoroscopes\\nLife\\nEating & Drinking\\nStyle\\nSponsored\\nPlay for Ontario\\nTravel\\nTravel Canada\\nTravel USA\\nTravel International\\nCruises\\nTravel Essentials\\nTravel Deals\\nCulture\\nBooks\\nCelebrity\\nMovies\\nMusic\\nTheatre\\nTelevision\\nBusiness Essentials\\nAdvice\\nLives Told\\nShopping\\nBuy Canadian\\nHome Living\\nOutdoor Living\\nTech\\nStyle & Beauty\\nKitchen & Dining\\nPersonal Care\\nEntertainment & Hobbies\\nGift Guide\\nTravel Guide\\nDeals\\nSavings\\nNational Post Store\\nMore\\nSports\\nHockey\\nBaseball\\nBasketball\\nFootball\\nSoccer\\nGolf\\nTennis\\nDriving\\nVehicle Research\\nReviews\\nNews\\nGear Guide\\nObituaries\\nPlace an Obituary\\nPlace an In Memoriam\\nClassifieds\\nPlace an Ad\\nCelebrations\\nWorking\\nBusiness Ads\\nArchives\\nHealthing\\nEpaper\\nManage Print Subscription\\nProfile\\nSettings\\nMy Subscriptions\\nSaved Articles\\nMy Offers\\nNewsletters\\nCustomer Service\\nFAQ\\nSign Out\\nNewsletters\\nCanada\\nWorld\\nFinancial Post\\nNP Comment\\nLongreads\\nPuzzmo\\nDiversions\\nLife\\nShopping\\nEpaper\\nManage Print Subscription\\nAdvertisement 1\\nThis advertisement has not loaded yet, but your article continues below.\\nBreadcrumb Trail Links\\nHome\\nLife\\nEating & Drinking\\nShare this Story :\\nThis 'iconoclastic' Spanish spot is the world's best restaurant for 2024\\nCopy Link\\nEmail\\nX\\nReddit\\nPinterest\\nLinkedIn\\nTumblr\\nThis 'iconoclastic' Spanish spot is the world's best restaurant for 2024\\nThe complete list of winners on the World's 50 Best Restaurants list, including Disfrutar in Barcelona at No. 1\\nAuthor of the article:\\nBy\\nLaura Brehaut\\nPublished Jun 06, 2024\\nLast updated Jun 07, 2024\\n3 minute read\\nJoin the conversation\\nYou can save this article by registering for free\\nhere\\n. Or\\nsign-in\\nif you have an account.\\n\\\"The tasting menu showcases a Mediterranean identity with avant-garde flavours to deliver daring contemporary food that is truly thought-provoking,\\\" the World's 50 Best Restaurants says of Barcelona's Disfrutar, No. 1 for 2024.\\nPhoto by Ernest Abentin\\nReviews and recommendations are unbiased and products are independently selected. Postmedia may earn an affiliate commission from purchases made through links on this page.\\nArticle content\\nSpain reigns on the\\nWorld\\u2019s 50 Best Restaurants\\nlist for 2024, announced at an awards ceremony in Las Vegas on June 5.\\nDisfrutar\\nin Barcelona took the top spot in the annual ranking.\\nAsador Etxebarri\\nin Atxondo, Spain,\\nTable by Bruno Verjus\\nin Paris,\\nDiverxo\\nin Madrid and\\nMaido\\nin Lima rounded out the top five.\\nTHIS CONTENT IS RESERVED FOR SUBSCRIBERS\\nEnjoy the latest local, national and international news.\\nExclusive articles by Conrad Black, Barbara Kay and others. Plus, special edition NP Platformed and First Reading newsletters and virtual events.\\nUnlimited online access to National Post.\\nNational Post ePaper, an electronic replica of the print edition to view on any device, share and comment on.\\nDaily puzzles including the New York Times Crossword.\\nSupport local journalism.\\nSUBSCRIBE FOR MORE ARTICLES\\nEnjoy the latest local, national and international news.\\nExclusive articles by Conrad Black, Barbara Kay and others. Plus, special edition NP Platformed and First Reading newsletters and virtual events.\\nUnlimited online access to National Post.\\nNational Post ePaper, an electronic replica of the print edition to view on any device, share and comment on.\\nDaily puzzles including the New York Times Crossword.\\nSupport local journalism.\\nREGISTER / SIGN IN TO UNLOCK MORE ARTICLES\\nCreate an account or sign in to continue with your reading experience.\\nAccess articles from across Canada with one account.\\nShare your thoughts and join the conversation in the comments.\\nEnjoy additional articles per month.\\nGet email updates from your favourite authors.\\nTHIS ARTICLE IS FREE TO READ REGISTER TO UNLOCK.\\nCreate an account or sign in to continue with your reading experience.\\nAccess articles from across Canada with one account\\nShare your thoughts and join the conversation in the comments\\nEnjoy additional articles per month\\nGet email updates from your favourite authors\\nSign In or Create an Account\\nEmail Address\\nContinue\\nor\\nView more offers\\nIf you are a Home delivery print subscriber, online access is\\nincluded\\nin your subscription.\\nActivate your Online Access Now\\nArticle content\\nRising from No. 2 last year, Disfrutar\\u2019s roughly 30-course menu \\u201cshowcases a Mediterranean identity with avant-garde flavours to deliver daring contemporary food that is truly thought-provoking,\\u201d according to the World\\u2019s 50 Best Restaurants.\\nArticle content\\nArticle content\\nArticle content\\nDisfrutar chef-owners Oriol Castro, Eduard Xatruch and Mateu Casa\\u00f1as met while working at Ferran Adri\\u00e0\\u2019s legendary El Bulli, which topped the World\\u2019s 50 Best Restaurants list a record five times. After El Bulli closed in 2011, the three chefs opened Compartir in Cadaqu\\u00e9s and, in 2014, Disfrutar in Barcelona.\\nArticle content\\nCook This\\nJoin Laura Brehaut on a weekly food adventure with mouth-watering reads delivered Fridays.\\nThere was an error, please provide a valid email address.\\nSign Up\\nBy signing up you consent to receive the above newsletter from Postmedia Network Inc.\\nThanks for signing up!\\nA welcome email is on its way. If you don't see it, please check your junk folder.\\nThe next issue of Cook This will soon be in your inbox.\\nWe encountered an issue signing you up. Please try again\\nInterested in more newsletters?\\nBrowse here.\\nArticle content\\nThe restaurant offers two parallel tasting menus: Classic, which features the chefs\\u2019 favourite dishes from the past decade, and Festival, a compilation of their latest creations grounded in extensive culinary research.\\nArticle content\\nThe World\\u2019s 50 Best Restaurants describes the pace of meals at Disfrutar as \\u201cfast and fantastic,\\u201d with interactive elements and theatrical flourishes, such as Fear: The Prawn. To conclude the savoury courses, servers set down a pool of dry ice and instruct diners to \\u201cblindly fish into the vapour with bare hands to hunt for and retrieve perfectly cooked crustacea.\\u201d\\nArticle content\\nThe 2024 ranking includes restaurants from 26 countries and five continents. Six restaurants are in Spain, three of which made the top five. France and Thailand have the second-greatest representation, with four spots each, followed by Italy, Japan, Mexico and Peru, with three restaurants apiece.\\nArticle content\\nArticle content\\nMateu Casa\\u00f1as, Oriol Castro and Eduard Xatruch, chef-owners of Barcelona\\u2019s Disfrutar, No. 1 for 2024.\\nPhoto by The World's 50 Best Restaurants\\nArticle content\\nNew York City\\u2019s\\nAtomix\\n(No. 6) is the best restaurant in North America, followed by\\nQuintonil\\n(No. 7) in Mexico City. No Canadian restaurants made the 50 Best list.\\nArticle content\\nRead More\\nThis Montreal restaurant is Canada's best for the second year running\\nOne Canadian restaurant chain has managed to lower prices to 2021 levels\\nAdvertisement 1\\nStory continues below\\nThis advertisement has not loaded yet, but your article continues below.\\nArticle content\\nRestaurants from four new cities have entered or reentered the list, with\\nOteque\\nin Rio de Janeiro (No. 37), Mingles in Seoul (No. 44),\\nSingleThread\\nin California\\u2019s Sonoma Valley (No. 46) and\\nLa Colombe\\nin Cape Town (No. 49) making this year\\u2019s ranking.\\nArticle content\\nWing\\n(No. 20) in Hong Kong earned the Highest New Entry Award, while The Chairman (No. 26), also in Hong Kong, received the Highest Climber Award. Berlin\\u2019s\\nNobelhart & Schmutzig\\nwon the Sustainable Restaurant Award for its \\u201cbrutally local\\u201d ethos and advocacy for better agricultural policies.\\nArticle content\\nThe votes of the 1,080-member World\\u2019s 50 Best Restaurants Academy \\u2014 a group of industry experts and \\u201cwell-travelled gourmets\\u201d from 27 regions worldwide \\u2014 determine the list. As of 2019, restaurants can only reach the top once; past winners, such as last year\\u2019s No. 1, Central in Lima, join the \\u201cBest of the Best\\u201d list.\\nAdvertisement 1\\nThis advertisement has not loaded yet.\\nTrending\\nSophie Gr\\u00e9goire Trudeau opens up about coping with Justin's public romance with Katy Perry\\nCanada\\nSome Canadians could be denied a U.S. visa due to obesity, cancer or other medical conditions\\nCanada\\nAdvertisement 2\\nStory continues below\\nThis advertisement has not loaded yet, but your article continues below.\\nWith an eye on the party's future, go-getter Tory MP Jivani says he doesn't have time for party infighting\\nCanada\\nTodd Howard: A message to those who injured my Jewish daughter in TMU attack\\nNP Comment\\nNP View: The media's double standard on Pierre Poilievre\\nNP Comment\\nAdvertisement 2\\nAdvertisement\\nThis advertisement has not loaded yet, but your article continues below.\\nArticle content\\nWilliam Drew, the organization\\u2019s content director, said: \\u201c(Disfrutar\\u2019s team) has shown extraordinary dedication to its craft, amazing and delighting diners with every dish on its extensive menu. This year sees the culinary community celebrate a truly global list featuring restaurants across 26 territories, demonstrating that the appetite for diversity and excellence in hospitality shows no sign of waning.\\u201d\\nArticle content\\nThe World\\u2019s 50 Best Restaurants describes the pace of meals at Disfrutar as \\u201cfast and fantastic,\\u201d with interactive elements and theatrical flourishes.\\nPhoto by Francesc Guillamet\\nArticle content\\nThe World\\u2019s 50 Best Restaurants 2024\\nArticle content\\nDisfrutar (Barcelona, Spain)\\nAsador Etxebarri (Atxondo, Spain)\\nTable by Bruno Verjus (Paris, France)\\nDiverxo (Madrid, Spain)\\nMaido (Lima, Peru)\\nAtomix (New York City, United States)\\nQuintonil (Mexico City, Mexico)\\nAlchemist (Copenhagen, Denmark)\\nGaggan Anand (Bangkok, Thailand)\\nDon Julio (Buenos Aires, Argentina)\\nSeptime (Paris, France)\\nLido 84 (Gardone Riviera, Italy)\\nTr\\u00e8sind Studio (Dubai, UAE)\\nQuique Dacosta (Denia, Spain)\\nS\\u00e9zanne (Tokyo, Japan)\\nKjolle (Lima, Peru)\\nKol (London, England)\\nPl\\u00e9nitude (Paris, France)\\nReale (Castel di Sangro, Spain)\\nWing (Hong Kong)\\nFloril\\u00e8ge (Tokyo, Japan)\\nSteirereck (Vienna, Austria)\\nSuhring (Bangkok, Thailand)\\nOdette (Singapore)\\nEl Chato (Bogot\\u00e1, Colombia)\\nThe Chairman (Hong Kong)\\nA Casa do Porco (S\\u00e3o Paulo, Brazil)\\nElkano (Getaria, Spain)\\nBorag\\u00f3 (Santiago, Chile)\\nRestaurant Tim Raue (Berlin, Germany)\\nBelcanto (Lisbon, Portugal)\\nDen (Tokyo, Japan)\\nPujol (Mexico City, Mexico)\\nRosetta (Mexico City, Mexico)\\nFrantz\\u00e9n (Stockholm, Sweden)\\nThe Jane (Antwerp, Belgium)\\nOteque (Rio de Janeiro, Brazil)\\nSorn (Bangkok, Thailand)\\nPiazza Duomo (Alba, Italy)\\nLe Du (Bangkok, Thailand)\\nMayta (Lima, Peru)\\nIkoyi (London, England)\\nNobelhart & Schmutzig (Berlin, Germany)\\nMingles (Seoul, South Korea)\\nArpege (Paris, France)\\nSingleThread (Healdsburg, Calif., United States)\\nSchloss Schauenstein (F\\u00fcrstenau, Switzerland)\\nHi\\u0161a Franko (Kobarid, Slovenia)\\nLa Colombe (Cape Town, South Africa)\\nUliassi (Senigallia, Italy)\\nArticle content\\nOur website is the place for the latest breaking news, exclusive scoops, longreads and provocative commentary. Please bookmark\\nnationalpost.com\\nand sign up for our cookbook and recipe newsletter, Cook This,\\nhere\\n.\\nArticle content\\nShare this article in your social network\\nShare this Story :\\nThis 'iconoclastic' Spanish spot is the world's best restaurant for 2024\\nCopy Link\\nEmail\\nX\\nReddit\\nPinterest\\nLinkedIn\\nTumblr\\nGet the latest from Laura Brehaut straight to your inbox\\nSign Up\\nComments\\nYou must be logged in to join the discussion or read more comments.\\nCreate an Account\\nSign in\\nJoin the Conversation\\nPostmedia is committed to maintaining a lively but civil forum for discussion. Please keep comments relevant and respectful. Comments may take up to an hour to appear on the site. You will receive an email if there is a reply to your comment, an update to a thread you follow or if a user you follow comments. Visit our\\nCommunity Guidelines\\nfor more information.\\nLatest from Shopping Essentials\\nMade in suede: 5 stylish suede finds\\nFrom the perfect suede jacket for women to brown suede loafers, here are five trending suede styles\\n1\\u00a0day ago\\nFashion & Beauty\\nTop early Black Friday deals in Canada you can shop right now\\nEditor-approved deals actually worth shopping\\n1\\u00a0day ago\\nDeals\\nWhat should you look for when buying glasses online? An optician shares tips\\nAn optician shares her recommendations for lenses and more\\n1\\u00a0day ago\\nWellness\\nAdvertisement 3\\nStory continues below\\nThis advertisement has not loaded yet, but your article continues below.\\nExpert shares what to feed senior dogs to keep them happy and healthy\\nPlus, more vet-approved diet tips in time for Senior Pet Month\\n1\\u00a0day ago\\nPets\\nOffice software in need of an upgrade? Save on Microsoft Office 2021\\nMicrosoft Office is now available as a lifetime license\\n1\\u00a0day ago\\nDigital Offers\\nFeatured Local Savings\\nSubscribe $12 for 1 year\\nCategories\\nNewsletters\\nCanada\\nWorld\\nFinancial Post\\nNP Comment\\nLongreads\\nPuzzmo\\nDiversions\\nLife\\nLives Told\\nShopping\\nEpaper\\nManage Print Subscription\\nSubscribe\\nSecondary Links\\nManage Account\\nMy Account\\nManage My Print Subscription\\nManage My Tax Receipt\\nePaper\\nContact Us\\nAdvertise\\nAdvertise With Us\\nAdvertising Solutions\\nPostmedia Ad Manager\\nAppointment Notice\\nContent Works\\nPartnerships\\nResources\\nClassified\\nRemembering\\nCelebrating\\nClassifieds Marketplace\\nCareers\\nSavings\\nPost a Classified ad\\nLocal Directory\\nSales\\nAbout Us\\nPostmedia Network\\nFinancial Post\\nCanada.com\\nCanoe\\nDriving.ca\\nThe GrowthOp\\nWinnipeg Sun\\nThe London Free Press\\nRegina Leader-Post\\nSaskatoon StarPhoenix\\nWindsor Star\\nOttawa Citizen\\nThe Province\\nVancouver Sun\\nEdmonton Journal\\nCalgary Herald\\nMontreal Gazette\\nToronto Sun\\nOttawa Sun\\nCalgary Sun\\nEdmonton Sun\\nFinancial Post\\n\\u276f\\nFollow us\\nGive us some feedback!\\n365 Bloor Street East, Toronto, Ontario, M4W 3L4\\n\\u00a9 2025 National Post, a division of Postmedia Network Inc. All rights reserved. Unauthorized distribution, transmission or republication strictly prohibited.\\nBottom links\\nPrivacy Policy\\nTerms of Use\\nCopyright\\nDigital Ad Registry\\nFAQ\\nSitemap\\nContact us\\nNotice for the Postmedia Network\\nThis website uses cookies to personalize your content (including ads), and allows us to analyze our traffic. Read more about\\ncookies here\\n. By continuing to use our site, you agree to our\\nTerms of Use\\nand\\nPrivacy Policy\\n.\\nOK\\nYou've reached the 20 article limit.\\nYou can manage saved articles in your account.\\nSubscribe $12 for 1 year\\nand save up to 100 articles!\\nLooks like you've reached your saved article limit!\\nYou can manage your saved articles in your\\naccount\\nand clicking the X located at the bottom right of the article.\"}",
+      "tool_call_id": "call_00_2kL6rStVbILl2TLQYt90zkPw"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect! I found the exact information needed. Let me also verify this information from another source to be thorough.",
+      "tool_calls": [
+        {
+          "id": "call_00_eXmL5hybAIZgsId8Yr1zY5pZ",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Disfrutar chefs Oriol Castro Eduard Xatruch Mateu Casañas met at El Bulli\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'How three former El Bulli chefs reached the 50 Best list with Disfrutar ...', 'href': 'https://www.theworlds50best.com/stories/News/how-three-former-el-bulli-chefs-reached-50-best-list-disfrutar-barcelona.html', 'body': \"Header images: Mateu Casañas, Oriol Castro and Eduard Xatruch (image: Joan Valera) and the Disfrutar kitchen (image: Adrià Goula) As Disfrutar in Barcelona wins The Miele One To Watch Award 2017, 50 Best's Academy Chair Cristina Jolonch speaks to its three chef-owners, Oriol Castro, Eduard Xatruch and Mateu Casañas. When El Bulli closed its doors in 2011 as the only five-time No.1 in The ...\"}, {'title': 'DISFRUTAR', 'href': 'https://www.disfrutarbarcelona.com/', 'body': 'Restaurant Disfrutar Open since December 2014, the restaurant Disfrutar (in English \"Enjoy\") arose after years of intense work at elBulli, where Mateu Casañas, Oriol Castro and Eduard Xatruch met and trained professionally, and after reaffirming the work done at Compartir opened in April 2012 in Cadaqués.'}, {'title': 'Mateu Casañas, Oriol Castro and Eduard Xatruch - FOUR Magazine', 'href': 'https://www.four-magazine.com/chefs/mateu-casanas-oriol-castro-and-eduard-xatruch/', 'body': \"This trio of multi-talented chefs is the culinary force behind 2 Michelin-starred Disfrutar in Barcelona and Compartir in Cadaqués. Oriol, Mateu and Eduard met in the famed kitchen of Ferran Adrià'S elBulli more than 16 years ago.\"}, {'title': 'Disfrutar - Barcelona - a MICHELIN Guide Restaurant', 'href': 'https://guide.michelin.com/at/en/catalunya/barcelona/restaurant/disfrutar', 'body': \"This restaurant, which always has a waiting list, is characterised by the inventive spirit of the three chefs at the helm (Eduard Xatruch, Oriol Castro and Mateu Casañas) who have made creativity their watchword - clearly their time working alongside Ferran Adrià at El Bulli made a real impression! What's so special about this place? Firstly, the food itself is highly innovative, with the ...\"}, {'title': \"The Results Are In: Barcelona's Disfrutar Is The 2024 World's Best ...\", 'href': 'https://www.thedailymeal.com/1597429/2024-worlds-best-restaurant-disfrutar/', 'body': \"Barcelona's Disfrutar by former el Bulli chefs Oriol Castro, Eduard Xatruch, and Mateu Casañas is officially the World's Best Restaurant in 2024.\"}, {'title': 'Oriol Castro, uno de los chefs de Disfrutar, el mejor ... - Infobae', 'href': 'https://www.infobae.com/espana/2025/01/28/oriol-castro-uno-de-los-chefs-de-disfrutar-el-mejor-restaurante-del-mundo-hasta-en-el-viaje-de-coche-para-aca-hemos-ido-imaginando-ideas-nuevas/', 'body': 'Junto a Eduard Xatruch y Mateu Casañas, Oriol es el chef al frente de Disfrutar, un restaurante que ha heredado la inventiva de elBulli y que ha traído hasta Madrid Fusión sus innovaciones más ...'}, {'title': 'Oriol Castro, Mateu Casañas y Eduard Xatruch - Disfrutar', 'href': 'https://www.scoolinary.com/author/disfrutar-scoolinary', 'body': \"Who is Oriol Castro, Mateu Casañas y Eduard Xatruch - Disfrutar? The creators of 'Disfrutar', the chefs who are reinventing fine dining, reveal the secrets behind their creativity and revolutionary technique.\"}, {'title': 'PDF Mateu Casañas, Oriol Castro and Eduard Xatruch | FOUR Magazine', 'href': 'https://www.disfrutarbarcelona.com/api/uploads/press/elements/files/3d82b06aa14a962c74e3dda2af7a52dd_php29Xfm7.pdf', 'body': \"Mateu Casañas, Oriol Castro and Eduard Xatruch This trio of multi-talented chefs is the culinary force behind 2 Michelin-starred Disfrutar in Barcelona and Compartir in Cadaqués. Oriol, Mateu and Eduard met in the famed kitchen of Ferran Adrià'S elBulli more than 16 years ago.\"}, {'title': \"Best of the Best I Disfrutar - The World's 50 Best Restaurants\", 'href': 'https://www.theworlds50best.com/awards/best-of-the-best/disfrutar.html', 'body': \"The restaurant is owned and run by three chefs: Oriol Castro, Eduard Xatruch and Mateu Casañas. The trio met at the legendary El Bulli (which reached No.1 in The World's 50 Best Restaurants a record-equalling five times), where each worked from a young age until its closure in 2011.\"}, {'title': 'Castro, Xatruch y Casañas, chefs de Disfrutar: \"Es un sueño para ...', 'href': 'https://forbes.es/economia/474157/castro-xatruch-y-casanas-chefs-de-disfrutar-es-un-sueno-para-nosotros-y-para-cataluna/', 'body': \"Los chefs del restaurante Disfrutar de Barcelona, Oriol Castro, Eduard Xatruch y Mateu Casañas, han celebrado haberse coronado como el mejor restaurante del mundo en 2024 durante la celebración de la gala 'The World's 50 Best Restaurants' celebrada este jueves en Las Vegas (EEUU): «Es un sueño para nosotros y para Catalunya». «Primero tuvimos El Bulli, después el Celler de Can ...\"}]",
+      "tool_call_id": "call_00_eXmL5hybAIZgsId8Yr1zY5pZ"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}
