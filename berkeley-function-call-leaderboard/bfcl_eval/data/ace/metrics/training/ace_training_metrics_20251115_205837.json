@@ -1,0 +1,517 @@
+{
+  "metadata": {
+    "playbook_path": "/Users/saiguntabonu/Documents/cAI/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/playbook.json",
+    "split_path": "/Users/saiguntabonu/Documents/cAI/gorilla/berkeley-function-call-leaderboard/bfcl_eval/data/ace/dataset_split.json",
+    "split_seed": 2025,
+    "train_ratio": 0.8,
+    "generator_model": "DeepSeek-V3.2-Exp-FC",
+    "reflector_model": "deepseek-chat",
+    "curator_model": "deepseek-chat",
+    "generator_temperature": 0.001,
+    "completion_temperature": 0.0,
+    "limit": 20,
+    "start_offset": 0,
+    "planned_sample_count": 20,
+    "samples_recorded": 20
+  },
+  "summary": {
+    "total_samples": 20,
+    "counts": {
+      "ADD": 1,
+      "MODIFY": 6,
+      "REMOVE": 0,
+      "NO_OP": 13
+    },
+    "ratios": {
+      "ADD": 0.05,
+      "MODIFY": 0.3,
+      "REMOVE": 0.0,
+      "NO_OP": 0.65
+    },
+    "pass_counters": {
+      "passed": 13,
+      "failed": 7,
+      "unknown": 0
+    },
+    "pass_ratio": 0.65
+  },
+  "per_batch": [
+    {
+      "batch_index": 1,
+      "start_sample": 1,
+      "end_sample": 20,
+      "size": 20,
+      "counts": {
+        "ADD": 1,
+        "MODIFY": 6,
+        "REMOVE": 0,
+        "NO_OP": 13
+      },
+      "ratios": {
+        "ADD": 0.05,
+        "MODIFY": 0.3,
+        "REMOVE": 0.0,
+        "NO_OP": 0.65
+      },
+      "pass_counters": {
+        "passed": 13,
+        "failed": 7,
+        "unknown": 0
+      },
+      "pass_ratio": 0.65
+    }
+  ],
+  "per_section": {
+    "vehicle_control_api": {
+      "ADD": 3,
+      "MODIFY": 0,
+      "REMOVE": 0
+    },
+    "music_3_lookup_music": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "criminal_history": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "connect_to_server": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "trains_1_find_trains": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    },
+    "gorilla_file_system": {
+      "ADD": 0,
+      "MODIFY": 2,
+      "REMOVE": 0
+    },
+    "historical_contrib": {
+      "ADD": 0,
+      "MODIFY": 1,
+      "REMOVE": 0
+    }
+  },
+  "sample_history": [
+    {
+      "entry_id": "simple_python_127",
+      "tool_groups": [
+        "calculate_npv"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_235-40-0",
+      "tool_groups": [
+        "add_mtnards_server",
+        "add_postgres_server",
+        "dartfx_help",
+        "list_servers"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_61",
+      "tool_groups": [
+        "message_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": true,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        },
+        {
+          "type": "ADD",
+          "section": "vehicle_control_api",
+          "normalized_section": "vehicle_control_api"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_191",
+      "tool_groups": [
+        "travel_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_738-168-0",
+      "tool_groups": [
+        "payment_1_make_payment",
+        "payment_1_request_payment",
+        "trains_1_find_trains",
+        "trains_1_get_train_tickets",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_121",
+      "tool_groups": [
+        "trading_bot"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_47-18-2",
+      "tool_groups": [
+        "inventory_management",
+        "order_status_check",
+        "product_search"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_843-178-18",
+      "tool_groups": [
+        "music_3_lookup_music",
+        "music_3_play_media",
+        "weather_1_get_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "music_3_lookup_music",
+          "normalized_section": "music_3_lookup_music"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "simple_python_157",
+      "tool_groups": [
+        "criminal_history"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "criminal_history",
+          "normalized_section": "criminal_history"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_533-165-0",
+      "tool_groups": [
+        "question"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_101-42-5",
+      "tool_groups": [
+        "add_mtnards_server",
+        "add_postgres_server",
+        "close_project",
+        "connect_to_server",
+        "dartfx_help",
+        "default_function",
+        "list_files",
+        "list_servers",
+        "open_project"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "connect_to_server",
+          "normalized_section": "connect_to_server"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_513-152-0",
+      "tool_groups": [
+        "requests"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_1049-276-0",
+      "tool_groups": [
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house",
+        "trains_1_find_trains",
+        "trains_1_get_train_tickets",
+        "travel_1_find_attractions"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "trains_1_find_trains",
+          "normalized_section": "trains_1_find_trains"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_426-102-0",
+      "tool_groups": [
+        "get_response"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_base_6",
+      "tool_groups": [
+        "gorilla_file_system"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        },
+        {
+          "type": "MODIFY",
+          "section": "gorilla_file_system",
+          "normalized_section": "gorilla_file_system"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_100-2-88",
+      "tool_groups": [
+        "get_current_weather"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_irrelevance_647-205-1",
+      "tool_groups": [
+        "buses_3_buy_bus_ticket",
+        "buses_3_find_bus",
+        "events_3_buy_event_tickets",
+        "events_3_find_events",
+        "hotels_2_book_house",
+        "hotels_2_search_house"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "live_multiple_70-30-1",
+      "tool_groups": [
+        "add_mtnards_server",
+        "add_postgres_server",
+        "dartfx_help",
+        "list_servers"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multi_turn_miss_param_97",
+      "tool_groups": [
+        "message_api",
+        "vehicle_control_api"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": false,
+        "REMOVE": false,
+        "NO_OP": true
+      },
+      "operations": [],
+      "outcome": "no_update",
+      "evaluation_passed": true,
+      "notes": "evaluation_status=evaluated"
+    },
+    {
+      "entry_id": "multiple_156",
+      "tool_groups": [
+        "historical_contrib",
+        "math",
+        "music"
+      ],
+      "flags": {
+        "ADD": false,
+        "MODIFY": true,
+        "REMOVE": false,
+        "NO_OP": false
+      },
+      "operations": [
+        {
+          "type": "MODIFY",
+          "section": "historical_contrib",
+          "normalized_section": "historical_contrib"
+        }
+      ],
+      "outcome": "applied",
+      "evaluation_passed": false,
+      "notes": "evaluation_status=evaluated"
+    }
+  ]
+}
