@@ -30,9 +30,15 @@ class DatasetEntry:
     groups: List[str]
 
 
-def _load_all_entries(include_prereq: bool = False) -> List[DatasetEntry]:
+def _load_all_entries(
+    include_prereq: bool = False,
+    exclude_categories: Sequence[str] | None = None,
+) -> List[DatasetEntry]:
     entries: List[DatasetEntry] = []
+    excluded = set(exclude_categories or [])
     for category in ALL_CATEGORIES:
+        if category in excluded:
+            continue
         prompt_entries = load_dataset_entry(
             category,
             include_prereq=include_prereq,
@@ -157,13 +163,14 @@ def ensure_split_exists(
     train_ratio: float = DEFAULT_TRAIN_RATIO,
     output_path: Path = DEFAULT_SPLIT_PATH,
     regenerate: bool = False,
+    exclude_categories: Sequence[str] | None = None,
 ) -> Path:
     output_path = Path(output_path)
     if output_path.exists() and not regenerate:
         return output_path
 
     rng = random.Random(seed)
-    entries = _load_all_entries()
+    entries = _load_all_entries(exclude_categories=exclude_categories)
 
     coverage = _ensure_group_coverage(entries, rng)
     _assign_remaining(entries, coverage, rng, train_ratio)
