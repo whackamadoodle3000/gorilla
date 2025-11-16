@@ -1,0 +1,265 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "user",
+      "content": "Art auctions set records for the most valuable works sold, often highlighting renowned artists. Which country does the artist who created the artwork that sold for the highest price at auction in 2024 come from?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll search for information about the highest-priced artwork sold at auction in 2024 and the artist's country of origin.",
+      "tool_calls": [
+        {
+          "id": "call_00_bQzZbG0EQLQsho8CywF7K4jD",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"highest price artwork auction 2024 record sale artist country\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'The 10 Most Expensive Paintings Auctioned in 2024', 'href': 'https://www.barnebys.com/blog/the-10-most-expensive-paintings-auctioned-in-2024', 'body': \"The closest was Leonora Carrington, whose Les Distractions de Dagobert set a new auction record for the artist, achieving $28.485 million in May at Sotheby's, securing 13th place on the list of the highest art sales of 2024.\"}, {'title': 'The 10 Most Expensive Works Sold at Auction in 2024 - Artsy', 'href': 'https://www.artsy.net/article/artsy-editorial-10-expensive-works-sold-auction-2024', 'body': \"Still, some four of the 50 most expensive lots this year were by women artists— Leonora Carrington, Georgia O'Keeffe, and Joan Mitchell (with two works in the top 50)—compared to three last year. The standout sale was Carrington's Les Distractions de Dagobert (1945), which fetched $28.5 million at Sotheby's New York in May, a new auction record for the artist. As the Carrington and ...\"}, {'title': '2024 Auction Wrapped | The top 10 most expensive paintings sold this ...', 'href': 'https://en.thevalue.com/articles/2024-auction-wrap-up-top-10-most-expesive-paintings-sold', 'body': \"The art market faced significant headwinds in 2024 amid persistent global economic challenges. The year's top ten auction sales reveal total revenues of US$511.6 million, marking a 24% decline from 2023 (US$675.4 million). The entry threshold for the top ten decreased by about US$11 million to US$32.2 million.\"}, {'title': \"2024's top ten art auction results - Artprice\", 'href': 'https://www.artprice.com/artmarketinsight/2024-top-ten-art-auction-results', 'body': \"Works by Magritte, Monet, Klimt and Warhol (among others) elicited the highest art auction bids of the year 2024. But what art market trends do these exceptional results illustrate? 2024's art market saw few masterpieces on the podiums… a far cry from the splendor of 2022 when five different paintings from the Paul Allen Collection fetched prices beyond the $100 million threshold. However ...\"}, {'title': 'Most Valuable Artworks Sold At Auction in 2024 Is Stark Drop From 2022', 'href': 'https://www.artnews.com/art-news/news/most-valuable-artworks-sold-at-auction-in-2024-1234728501/', 'body': 'In 2024, the art auction market showed signs of recovery but fell well short of the highs reached in 2022, or even the lower totals from last year.'}, {'title': 'Who Were the Top-Selling Artists at Auction in 2024?', 'href': 'https://news.artnet.com/market/2024-artist-auction-rankings-2596803', 'body': \"Of course 2023 saw the second-highest Picasso sale at auction, for Femme à la Montre (1932), from the collection of Emily Fisher-Landau, which fetched $139.4 million at Sotheby's.\"}, {'title': 'The art market in 2024: auctions and best-selling works', 'href': 'https://econique.art/en/the-art-market-in-2024-auctions-and-best-selling-works/', 'body': 'The art market in 2024 has recorded a series of auction sales of artworks that have set new records, reflecting significant trends and consolidating the position of historical and contemporary artists. The 10 most expensive works Analyzing the ten most expensive artworks sold during the year, interesting dynamics emerge that, compared with previous years, offer an overview of the evolution of ...'}, {'title': 'Most valuable art sold at auction in 2024 drops sharply from 2022', 'href': 'https://artoday.net/?p=14383', 'body': \"In 2024, the art auction market shows signs of recovery, but it is far from reaching the high point in 2022, and is even lower than last year's level. The cumulative value of the top ten auction lots sold in 2024 was $512.6 million. This is down 22.3% from the 2023 total of $660 million and down 53% from the 2022 total of $1.1 billion. Meanwhile, public auction sales in the Old Master ...\"}, {'title': 'Top Auction Sales of 2024 - MutualArt', 'href': 'https://www.mutualart.com/Article/From-Pop-to-Impressionism--Top-Auction-S/453CFA7F15F4FD26', 'body': \"The art world reached new heights in 2024, with breathtaking auction sales showcasing masterpieces from a variety of artistic movements and eras. Ed Ruscha 's Standard Station, Ten-Cent Western Being Torn in Half led the pack with a record-breaking $68.2 million at Christie's, symbolizing the evolution of American culture from the Wild West ...\"}, {'title': 'Art market: top artists by auction revenue 2024| Statista', 'href': 'https://www.statista.com/statistics/245173/artists-with-the-highest-art-auction-sales/', 'body': 'Who are the most valuable artists at auction? In 2024, René Magritte and Claude Monet recorded the highest revenue at fine art auctions worldwide.'}]",
+      "tool_call_id": "call_00_bQzZbG0EQLQsho8CywF7K4jD"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me search more specifically for the highest-priced artwork sold in 2024 and the artist's nationality.",
+      "tool_calls": [
+        {
+          "id": "call_00_ZHe4LgrTPPDRDiQyHzBmyT0r",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"\\\"highest price\\\" \\\"2024 auction\\\" \\\"most expensive\\\" artwork artist nationality\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': '10 most expensive cars sold for up to $17 million at the annual ...', 'href': 'https://www.cnbctv18.com/photos/auto/ten-most-expensive-cars-sold-at-the-annual-monterey-auction-2024-19463029.htm', 'body': 'Seven out of the top ten cars that got the highest bids were Ferrari. The highest price for a car at the 2024 auction in Monterey, California, was over $17 million. Check out the other models that got the top dollar and why. A 1962 Ferrari 250 GT SWB Coupe sold for $30 million at the 2023 auction.'}]",
+      "tool_call_id": "call_00_ZHe4LgrTPPDRDiQyHzBmyT0r"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me search for specific auction records from 2024 with more targeted keywords.",
+      "tool_calls": [
+        {
+          "id": "call_00_egkbF1677n4o7DewMcYrGxiT",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"\\\"2024 auction record\\\" \\\"highest price\\\" painting artwork Christie's Sotheby's\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_egkbF1677n4o7DewMcYrGxiT"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a different search approach to find the most expensive artwork sold in 2024.",
+      "tool_calls": [
+        {
+          "id": "call_00_GmWmsgUdxGsHg14BmBhTNyj9",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"most expensive painting sold 2024 auction record price\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'The 10 Most Expensive Works Sold at Auction in 2024 - Artsy', 'href': 'https://www.artsy.net/article/artsy-editorial-10-expensive-works-sold-auction-2024', 'body': 'Picking up from a \" subdued \" 2023, this year at auction continued a downward trend for top lots under the hammer. This year, the total price for the 100 most expensive lots sold at auction totaled just shy of $1.8 billion, compared to $2.4 billion in 2023 and $4.1 billion in 2022. Only one work— René Magritte \\'s L\\'empire des lumières (1954)—sold for more than $100 million ...'}, {'title': '2024 Auction Wrapped | The top 10 most expensive paintings sold this ...', 'href': 'https://en.thevalue.com/articles/2024-auction-wrap-up-top-10-most-expesive-paintings-sold', 'body': \"The art market faced significant headwinds in 2024 amid persistent global economic challenges. The year's top ten auction sales reveal total revenues of US$511.6 million, marking a 24% decline from 2023 (US$675.4 million).\"}, {'title': 'List of most expensive paintings - Wikipedia', 'href': 'https://en.wikipedia.org/wiki/List_of_most_expensive_paintings', 'body': 'Jeff Koons holds the record for the highest price paid for a piece of art by a living artist. [16] His Rabbit sculpture sold for $91.1 million at a 2019 auction, and remains the living artist record as of May 2025. [17] Among the listed top paintings listed, only seven are by non-Western artists.'}, {'title': 'The 10 Most Expensive Paintings Auctioned in 2024', 'href': 'https://www.barnebys.com/blog/the-10-most-expensive-paintings-auctioned-in-2024', 'body': 'Discover the top 10 most expensive paintings sold at auction in 2024.'}, {'title': 'Most Valuable Artworks Sold At Auction in 2024 Is Stark Drop From 2022', 'href': 'https://www.artnews.com/art-news/news/most-valuable-artworks-sold-at-auction-in-2024-1234728501/', 'body': 'In 2024, the art auction market showed signs of recovery but fell well short of the highs reached in 2022, or even the lower totals from last year.'}, {'title': \"2024's top ten art auction results - Artprice\", 'href': 'https://www.artprice.com/artmarketinsight/2024-top-ten-art-auction-results', 'body': \"Read: Surrealism's Centenary excites collectors [11/26/2024] Top 10 fine art auction results in 2024 Ed Ruscha: auction record gains 30% The only living artist in the ranking, Ed Ruscha left his mark on the year with a powerful new auction record of $68 million at Christie's for Standard Station, Ten-Cent Western Being Torn in Half (1964).\"}, {'title': '5 Most Expensive Vintage Art Sales at Auction in 2024', 'href': 'https://www.heirloomsathome.com/most-expensive-vintage-art-sales-at-auction-in-2024/', 'body': 'From record-smashing surrealist paintings to some classic Impressionist pieces, auction houses saw competitive bidding wars drive prices into the stratosphere. Below is a quick recap of the most expensive antique art auction sales of 2024.'}, {'title': 'Most valuable art sold at auction in 2024 drops sharply from 2022', 'href': 'https://artoday.net/?p=14383', 'body': \"The most expensive work sold at auction in 2024: a work by René Magritte empire of light (1954), which was sold for $121.1 million after intense bidding at Christie's 20th Century Evening Sale in New York in November, setting a new record for the artist.\"}, {'title': 'The Most Expensive Art & Artifacts of 2024-2025 - WERDERART', 'href': 'https://werderart.com/blogs/creator-stories/the-most-expensive-art-amp-artifacts-of-2024-2025', 'body': \"From iconic paintings to one-of-a-kind artifacts, these sales not only set new price records but also highlighted the enduring value of cultural heritage. I've gathered for you some of the most fascinating and expensive lots sold at auction during this period. NUMBER 1.\"}, {'title': 'Top 5 Paintings Sold at Auction in 2024 - rounia.com', 'href': 'https://rounia.com/top-5-paintings-sold-at-auction-in-2024/', 'body': 'The art world witnessed some remarkable sales in 2024, with several iconic paintings fetching record-breaking prices at auctions.'}]",
+      "tool_call_id": "call_00_GmWmsgUdxGsHg14BmBhTNyj9"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I can see that the most expensive artwork sold at auction in 2024 was René Magritte's \"L'empire des lumières\" (The Empire of Light) which sold for $121.1 million. Let me get more specific information about this sale and confirm the artist's nationality.",
+      "tool_calls": [
+        {
+          "id": "call_00_i0j2IgbrxF4rsH4aKwmvI7me",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://artoday.net/?p=14383\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"Most valuable art sold at auction in 2024 drops sharply from 2022 \\u2013 Art Today\\nClose Menu\\nSubscribe to Updates\\nGet the latest creative news from FooBar about art, design and business.\\nBy signing up, you agree to the our terms and our\\nPrivacy Policy\\nagreement.\\nWhat's Hot\\nSalwa Zeidan: A Journey Rooted in Place, Shaped by the World\\nNovember 14, 2025\\nVandorn Hinnant: A Dialogue With Form and the Unseen\\nNovember 14, 2025\\nDoug Caplan: Framing the Essence of Form\\nNovember 9, 2025\\nFacebook\\nX (Twitter)\\nInstagram\\nSubscribe\\nHome\\nExhibitions & Events\\nArt Market Trends\\nArt News\\nArt Reviews\\nCulture\\nHome\\n\\u00bb\\nArtist\\n\\u00bb\\nMost valuable art sold at auction in 2024 drops sharply from 2022\\nArtist\\nMost valuable art sold at auction in 2024 drops sharply from 2022\\nBy\\nIris\\nDecember 25, 2024\\nNo Comments\\n3 Mins Read\\nShare\\nFacebook\\nTwitter\\nLinkedIn\\nPinterest\\nEmail\\nCopy Link\\nIn 2024, the art auction market shows signs of recovery, but it is far from reaching the high point in 2022, and is even lower than last year\\u2019s level.\\nThe cumulative value of the top ten auction lots sold in 2024 was $512.6 million. This is down 22.3% from the 2023 total of $660 million and down 53% from the 2022 total of $1.1 billion. Meanwhile, public auction sales in the Old Master, modern, post-war and contemporary art categories at auction houses Sotheby\\u2019s, Christie\\u2019s and Phillips will total $4.1 billion in 2024, according to a recent report by London-based analytics firm ArtTactic. This number is down 29% from 2023 and 47.9% from 2022.\\nRelated articles\\nThe most expensive work sold at auction in 2024: a work by Ren\\u00e9 Magritte\\nempire of light\\n(1954), which was sold for $121.1 million after intense bidding at Christie\\u2019s 20th Century Evening Sale in New York in November, setting a new record for the artist. However, its value is far less than Andy Warhol\\u2019s $195 million\\nShooting Sage Blue Marilyn\\n(1964) just two years earlier. Meanwhile, Vincent van Gogh\\u2019s 10th most expensive work of 2024\\nmoored canoe\\n(1887), sold for $32.2 million, well below the $79.8 million benchmark set by Magritte\\nempire of light\\nIn March 2022, it became the tenth most expensive work of the year.\\nPablo Picasso\\u2019s works, usually the benchmark for the market, fell in 2024. The total value of this year\\u2019s top 10 Picasso works is $114.6 million, down from $344.4 million in 2023, $274.8 million in 2022 and $340.7 million in 2021. For the first time in three years, the cumulative value of Picasso\\u2019s top ten works fell below $200 million. Meanwhile, the top 20 Picasso works have sold a total of $128.4 million at auction. This figure is down significantly from $690 million in 2023. This is the highest auction price for a Picasso work this year,\\nstatue\\n(1925), sold for US$24.8 million in November, down 82% from US$139 million\\nwoman wearing watch\\n(1932) 2023.\\nHowever, one should be cautious about drawing too many conclusions from these numbers. In the past four years alone, Basquiat\\u2019s highest-priced work has fluctuated wildly, jumping from $15 million in 2020 to $93 million in 2021 before falling to $85 million in 2022 and 2023. of US$67 million. This year\\u2019s top work sold for $46 million. At the same time, Magritte\\u2019s top work this year may have been sold for $121.1 million, but the sales of his top works have fluctuated year by year, from $24.6 million in 2020 to $17.2 million in 2021 to $79.4 million in 2022. million, and $42.3 million by 2023.\\nAs the ArtTactic report makes clear, these valuations do not represent changes in the market for either artist. Rather, they represent the normal range of values \\u200b\\u200bfor blue-chip artists of the 20th century, with high water marks more representative of the material that was available that year.\\n(Methodology: The above report relies on art sales data provided by market analysis publishers Artnet and ArtTactic.)\\nSource link\\nShare.\\nFacebook\\nTwitter\\nPinterest\\nLinkedIn\\nTumblr\\nEmail\\nCopy Link\\nIris\\nWebsite\\nRelated\\nPosts\\nSalwa Zeidan: A Journey Rooted in Place, Shaped by the World\\nNovember 14, 2025\\nVandorn Hinnant: A Dialogue With Form and the Unseen\\nNovember 14, 2025\\nDoug Caplan: Framing the Essence of Form\\nNovember 9, 2025\\nCarolin Rechberg: The Space Between Gesture and Stillness\\nNovember 9, 2025\\nAdamo Macri: Into the Hidden Depths\\nOctober 30, 2025\\nKimberly McGuiness: Where Emotion Becomes Form\\nOctober 30, 2025\\nAdd A Comment\\nLeave A Reply\\nCancel Reply\\nSave my name, email, and website in this browser for the next time I comment.\\nSubscribe to Updates\\nGet the latest creative news from SmartMag about art & design.\\nBy signing up, you agree to the our terms and our\\nPrivacy Policy\\nagreement.\\nLatest Posts\\nSalwa Zeidan: A Journey Rooted in Place, Shaped by the World\\nNovember 14, 2025\\nVandorn Hinnant: A Dialogue With Form and the Unseen\\nNovember 14, 2025\\nDoug Caplan: Framing the Essence of Form\\nNovember 9, 2025\\nCarolin Rechberg: The Space Between Gesture and Stillness\\nNovember 9, 2025\\nDon't Miss\\n\\u201cAnomaly\\u201d by artist So Youn Lee\\nBy\\nIris\\nJune 30, 2024\\nThis is the latest work by Korean-born, Los Angeles-based artist So Youn Lee (who has\\u2026\\nPhotographer Megan Reilly\\u2019s \\u201cA Deal with God\\u201d\\nJune 30, 2024\\n\\u201cThe Essence of Existence\\u201d by illustrator Noopur Choksi\\nJune 30, 2024\\nLegal Pages\\nAbout Us\\nContact Us\\nDisclaimer\\nPrivacy Policy\\nOur Picks\\nThe World\\u2019s Most Valuable Art Collections\\nMarch 18, 2025\\nThe sun eats the banana Cattleya bought for $6.2 million at Sotheby\\u2019s\\nDecember 5, 2024\\nArtReview\\u2019s 2024 Power 100 list reveals the growing influence of the Middle Eastern art scene.\\nDecember 5, 2024\\nMost Popular\\nBritish Museum (British Museum) visits UK attractions in the second year of 2024\\nMarch 23, 2025\\nA memetic tribute to Luigi Mangione\\nDecember 12, 2024\\nAuction houses are luring young collectors into the Old Masters market\\nDecember 11, 2024\\n\\u00a9 2025 ThemeSphere. Designed by\\nThemeSphere\\n.\\nAbout Us\\nContact Us\\nDisclaimer\\nPrivacy Policy\\nSubmit\\nType above and press\\nEnter\\nto search. Press\\nEsc\\nto cancel.\"}",
+      "tool_call_id": "call_00_i0j2IgbrxF4rsH4aKwmvI7me"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me search for information about René Magritte's nationality to confirm his country of origin.",
+      "tool_calls": [
+        {
+          "id": "call_00_OkaJyCWfFNmQgNiGSVsOh1ar",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"René Magritte nationality country of origin Belgian artist\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'René Magritte - Wikipedia', 'href': 'https://en.wikipedia.org/wiki/Ren%C3%A9_Magritte', 'body': 'René François Ghislain Magritte (French: [ʁəne fʁɑ̃swa ɡilɛ̃ maɡʁit]; 21 November 1898 - 15 August 1967) was a Belgian surrealist artist known for his depictions of familiar objects in unfamiliar, unexpected contexts, which often provoked questions about the nature and boundaries of reality and representation. [1]'}, {'title': 'Rene Magritte | Biography, Art, Paintings, Time Transfixed, & Facts ...', 'href': 'https://www.britannica.com/biography/Rene-Magritte', 'body': 'Rene Magritte, Belgian artist, a prominent Surrealist painter, whose bizarre flights of fancy blended horror, peril, comedy, and mystery. His best-known paintings included The Treachery of Images and Time Transfixed. His works were characterized by particular symbols—the bowler hat, apple, and other ordinary objects.'}, {'title': 'Rene Magritte Biography', 'href': 'https://www.renemagritte.org/biography.jsp', 'body': \"Popular interest in Magritte's work rose considerably in the 1960s, and his imagery has influenced pop, minimalist and conceptual art. In 2005 he came 9th in the Walloon version of De Grootste Belg (The Greatest Belgian); in the Flemish version he was 18th.\"}, {'title': 'Rene Magritte: Biography of the Belgian Surrealist, Artwork, About of ...', 'href': 'https://arthive.com/renemagritte', 'body': 'Rene Magritte was born in a small town of Lessines in the western part of Belgium, in 1898, and died in 1967 in Brussels. Whilst staying in Paris, he became very close with the Surrealist circle around the poet Andre Breton and acquainted with the art of Dali, Miro, and de Chirico. Rene Magritte was influenced by the items and symbols of advertising world that was on the rise, and built his ...'}, {'title': 'Biography - Magritte Museum', 'href': 'https://musee-magritte-museum.be/en/about-the-museum/biography', 'body': 'René Magritte was born in Lessines, in the province of Hainaut, on 21 November 1898. A major figure in Belgian Surrealism, Magritte was rapidly surrounded by Belgian, French and American artists, who influenced him and his work throughout his life.'}]",
+      "tool_call_id": "call_00_OkaJyCWfFNmQgNiGSVsOh1ar"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

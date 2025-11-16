@@ -1,0 +1,227 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "user",
+      "content": "Basketball leagues play a crucial role in shaping the careers of top-performing athletes worldwide. In the country with the highest GDP in 2024, what player (as of December 2024) had the highest points per game on the champion team of the main basketball league governing most levels of competition?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find this information by breaking down the question and searching for the relevant details.",
+      "tool_calls": [
+        {
+          "id": "call_00_VdTqO3q9doxR6nwOcstzl9xH",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"highest GDP country 2024\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'List of countries by GDP (nominal) - Wikipedia', 'href': 'https://en.wikipedia.org/wiki/List_of_countries_by_GDP_%28nominal%29', 'body': 'Gross domestic product (GDP) is the market value of all final goods and services from a nation in a given year. [2] Countries are sorted by nominal GDP estimates from financial and statistical institutions, which are calculated at market or government official exchange rates.'}, {'title': 'Largest economies in the world, 2024 - FactoData', 'href': 'https://factodata.com/largest-economies-in-the-world-2024/', 'body': '20 largest Economies in the world by GDP, 2024 USA is the biggest in the list of largest economies in the world based on GDP nominal closely followed by China reflecting their significant influence on global markets. United state of America has the highest nominal GDP as per reports from IMF in 2024 with 26.5% of share in World GDP.'}, {'title': 'The 50 largest economies in the world - Worlddata.info', 'href': 'https://www.worlddata.info/largest-economies.php', 'body': \"The world's largest economies The economic strength of a country is determined by its gross domestic product (GDP). In other words, the amount of all income generated in the country from the sale of goods and services. With a GDP of 29.18 trillion dollars, the USA is by far the world's largest economy in this ranking for 2024.\"}, {'title': 'Top 10 Largest Economies in the World By GDP (2024)', 'href': 'https://economicsinsider.com/largest-economies-in-the-world-by-gdp-24/', 'body': 'Conclusion The top 10 largest economies in the world have the highest GDPs, which means they produce the most goods and services. These countries play a key role in driving global trade, innovation, and shaping the future of the world economy. However, they also face major challenges such as income inequality and environmental challenges.'}, {'title': \"World's largest economies in 2024, ranked by GDP\", 'href': 'https://economymiddleeast.com/worlds-largest-economies-ranked-by-gdp/', 'body': \"This influx of foreign investment further bolsters the country's economic standing and contributes to its position as the world's largest economy. Largest economies in the world by nominal GDP in 2024 Let's take a look at the largest economies in the world as per the country's GDP, according to the IMF as of July 1, 2024.\"}]",
+      "tool_call_id": "call_00_VdTqO3q9doxR6nwOcstzl9xH"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I need to find the main basketball league in the United States and its champion team as of December 2024.",
+      "tool_calls": [
+        {
+          "id": "call_00_fr0zCYyCQOmb1yM5GWev1iV4",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"NBA champion team 2024 December\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': '2024 NBA Finals | NBA.com', 'href': 'https://www.nba.com/playoffs/2024/nba-finals?os=i&ref=app', 'body': \"2024 NBA FinalsChasing History: Celtics clinch banner 18 (Ep. 25) Jayson Tatum and Finals MVP Jaylen Brown close out Dallas in Game 5 to secure Boston's NBA-record 18th championship.\"}, {'title': '2024 NBA Finals - Wikipedia', 'href': 'https://en.wikipedia.org/wiki/2024_NBA_Finals', 'body': \"The 2024 NBA Finals was the championship series of the National Basketball Association (NBA)'s 2023-24 season and conclusion to the season's playoffs. In the best-of-seven playoffs series, the Eastern Conference champion Boston Celtics defeated the Western Conference champion Dallas Mavericks four games to one, winning their first championship since 2008 and 18th overall, giving the Celtics ...\"}, {'title': 'NBA 2024 Championship | StatMuse', 'href': 'https://www.statmuse.com/nba/ask/nba-2024-championship', 'body': 'The Boston Celtics won in the 2024 NBA Finals against the Dallas Mavericks, 4 games to 1.'}, {'title': '2024-25 NBA Standings Through December - Champs or Chumps', 'href': 'https://champsorchumps.us/summary/nba/2025/through-december', 'body': 'Full summary, standings, statistics and playoffs results from the 2024-25 basketball season through December.'}, {'title': 'Boston Celtics win 2024 NBA championship: Franchise clinches historic ...', 'href': 'https://www.cbssports.com/nba/news/boston-celtics-win-2024-nba-championship-franchise-clinches-historic-18th-title-beating-mavericks-in-game-5/live/', 'body': 'The Boston Celtics are the 2024 NBA champions. The Celtics clinched a record-setting 18th title in franchise history and their first since 2008 on Monday night with a 106-88 Game 5 win over the ...'}]",
+      "tool_call_id": "call_00_fr0zCYyCQOmb1yM5GWev1iV4"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I need to find the player with the highest points per game on the Boston Celtics during the 2023-24 season.",
+      "tool_calls": [
+        {
+          "id": "call_00_EykD9g3h9uLEKtODjQi3jSbz",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Boston Celtics 2023-24 season points per game leader\", \"max_results\": 5}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': '2023-24 Boston Celtics Roster and Stats | Basketball-Reference.com', 'href': 'https://www.basketball-reference.com/teams/BOS/2024.html', 'body': 'Checkout the latest Boston Celtics Roster and Stats for 2023-24 on Basketball-Reference.com'}, {'title': 'Boston Celtics Regular Season Ppg 2023/24 | StatMuse', 'href': 'https://www.statmuse.com/nba/ask?q=boston+celtics+regular+season+ppg+2023%2F24', 'body': 'The Boston Celtics scored 120.6 points per game in 2023-24.'}, {'title': '2023-24 Boston Celtics Player Stats - Regular Season', 'href': 'https://www.landofbasketball.com/stats_by_team/2023_2024_celtics_rs.htm', 'body': 'Stats per game recorded by the 2023-2024 Celtics players in the Regular Season, including games, points, rebounds, assists, steals, blocks and shooting details.'}, {'title': 'Boston Celtics 2025-26 NBA Regular Season Stats - ESPN', 'href': 'https://www.espn.com/nba/team/stats/_/name/bos/boston-celtics', 'body': 'Full team stats for the 2025-26 Regular Season Boston Celtics on ESPN. Includes team leaders in points, rebounds and assists.'}, {'title': '2024 Boston Celtics Points Per Game Stats & Leaders - FOX Sports', 'href': 'https://www.foxsports.com/nba/boston-celtics-team-stats?category=scoring&season=2024&sort=ppg', 'body': 'View 2024 Boston Celtics Points Per Game Stats and team leaders.'}]",
+      "tool_call_id": "call_00_EykD9g3h9uLEKtODjQi3jSbz"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me fetch the detailed statistics from the Basketball Reference page.",
+      "tool_calls": [
+        {
+          "id": "call_00_bdaUynVrkLIgBX5VksRXKC2m",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.basketball-reference.com/teams/BOS/2024.html\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"2023-24 Boston Celtics Roster and Stats | Basketball-Reference.com\\nSports\\u00a0Reference\\u202f\\u00ae\\nBaseball\\nFootball\\n(college)\\nBasketball\\n(college)\\nHockey\\nSoccer\\nBlog\\nStathead\\u202f\\u00ae\\nImmaculate Grid\\u202f\\u00ae\\nQuestions or Comments?\\nWelcome\\n\\u00b7\\nYour Account\\nLogout\\nAd-Free Login\\nCreate Account\\nMENU\\nPlayers\\nTeams\\nSeasons\\nLeaders\\nScores\\nWNBA\\nDraft\\nStathead\\nNewsletter\\nFull Site Menu Below\\nYou are here:\\nBBR Home Page\\n>\\nTeams\\n>\\nBoston Celtics\\n>\\n2023-24 Roster and Stats\\nWelcome\\n\\u00b7\\nYour Account\\nLogout\\nAd-Free Login\\nCreate Account\\nYour All Access pass to Basketball Reference is our search engine, Stathead.\\nClaim your free trial\\n.\\nvia Sports Logos.net\\nAbout logos\\n2023-24\\nBoston Celtics\\nRoster and Stats\\nPrevious Season\\nNext Season\\nRecord:\\n64-18, Finished 1st in\\nNBA\\nEastern Conference\\nCoach:\\nJoe Mazzulla\\n(64-18)\\nExecutive:\\nBrad Stevens\\nPTS/G:\\n120.6 (2nd of 30)\\nOpp PTS/G:\\n109.2 (5th of 30)\\nSRS\\n: 10.74 (1st of 30)\\nPace\\n: 97.2 (23rd of 30)\\nOff Rtg\\n: 123.2 (1st of 30)\\nDef Rtg\\n: 111.6 (3rd of 30)\\nNet Rtg\\n: +11.6 (1st of 30)\\nExpected W-L\\n: 66-16 (1st of 30)\\nPreseason Odds:\\nChampionship +450\\n,\\nOver-Under \\n            54.5\\nArena:\\nTD Garden\\nAttendance:\\n785,396 (10th of 30)\\nNBA 2024 Playoffs\\n:\\nWon NBA Eastern Conference First Round (4-1) versus\\nMiami Heat\\n(\\nSeries Stats\\n)\\nWon NBA Eastern Conference Semifinals (4-1) versus\\nCleveland Cavaliers\\n(\\nSeries Stats\\n)\\nWon NBA Eastern Conference Finals (4-0) versus\\nIndiana Pacers\\n(\\nSeries Stats\\n)\\nWon NBA Finals (4-1) versus\\nDallas Mavericks\\n(\\nSeries Stats\\n)\\nMore Team Info\\nNBA Champions\\nEastern Conference Champions\\nAtlantic Div Champs\\nBest Regular Season Record\\nBecome a Stathead & surf this site ad-free.\\nCeltics Franchise Index\\nRoster & Stats\\nSchedule & Results\\nTransactions\\nMore 2023-24 Celtics Pages\\nGame Log\\nSplits\\nLineups\\nOn/Off\\nStarting Lineups\\nDepth Charts\\nReferees\\nMore 2023-24 Celtics Pages\\nRoster & Stats\\nSchedule & Results\\nTransactions\\nGame Log\\nSplits\\nLineups\\nOn/Off\\nStarting Lineups\\nDepth Charts\\nReferees\\nOn this page:\\nRoster\\nAssistant Coaches and Staff\\nTeam and Opponent Stats\\nTeam Misc\\nPer Game\\nTotals\\nPer 36 Minutes\\nPer 100 Poss\\nAdvanced\\nAdjusted Shooting\\nShooting\\nPlay-by-Play\\nPlayers on League Leaderboards\\nSalaries\\nFull Site Menu\\nRecent\\nGame Results\\nHeight of bar is margin of victory  \\u2022 Mouseover bar for details  \\u2022 Click for box score  \\u2022 Grouped by Month\\n1. Oct 25 @ NYK, BOS (1-0) beat NYK, 108-104\\n2. Oct 27, BOS (2-0) beat MIA, 119-111\\n3. Oct 30 @ WAS, BOS (3-0) beat WAS, 126-107\\n4. Nov 1, BOS (4-0) beat IND, 155-104\\n5. Nov 4 @ BRK, BOS (5-0) beat BRK, 124-114\\n6. Nov 6 @ MIN, BOS (5-1) lost to MIN, 109-114\\n7. Nov 8 @ PHI, BOS (5-2) lost to PHI, 103-106\\n8. Nov 10, BOS (6-2) beat BRK, 121-107\\n9. Nov 11, BOS (7-2) beat TOR, 117-94\\n10. Nov 13, BOS (8-2) beat NYK, 114-98\\n11. Nov 15 @ PHI, BOS (9-2) beat PHI, 117-107\\n12. Nov 17 @ TOR, BOS (10-2) beat TOR, 108-105\\n13. Nov 19 @ MEM, BOS (11-2) beat MEM, 102-100\\n14. Nov 20 @ CHO, BOS (11-3) lost to CHO, 118-121\\n15. Nov 22, BOS (12-3) beat MIL, 119-116\\n16. Nov 24 @ ORL, BOS (12-4) lost to ORL, 96-113\\n17. Nov 26, BOS (13-4) beat ATL, 113-103\\n18. Nov 28, BOS (14-4) beat CHI, 124-97\\n19. Dec 1, BOS (15-4) beat PHI, 125-119\\n20. Dec 4 @ IND, BOS (15-5) lost to IND, 112-122\\n21. Dec 8, BOS (16-5) beat NYK, 133-123\\n22. Dec 12, BOS (17-5) beat CLE, 120-113\\n23. Dec 14, BOS (18-5) beat CLE, 116-107\\n24. Dec 15, BOS (19-5) beat ORL, 128-111\\n25. Dec 17, BOS (20-5) beat ORL, 114-97\\n26. Dec 19 @ GSW, BOS (20-6) lost to GSW, 126-132\\n27. Dec 20 @ SAC, BOS (21-6) beat SAC, 144-119\\n28. Dec 23 @ LAC, BOS (22-6) beat LAC, 145-108\\n29. Dec 25 @ LAL, BOS (23-6) beat LAL, 126-115\\n30. Dec 28, BOS (24-6) beat DET, 128-122\\n31. Dec 29, BOS (25-6) beat TOR, 120-118\\n32. Dec 31 @ SAS, BOS (26-6) beat SAS, 134-101\\n33. Jan 2 @ OKC, BOS (26-7) lost to OKC, 123-127\\n34. Jan 5, BOS (27-7) beat UTA, 126-97\\n35. Jan 6 @ IND, BOS (28-7) beat IND, 118-101\\n36. Jan 8 @ IND, BOS (28-8) lost to IND, 131-133\\n37. Jan 10, BOS (29-8) beat MIN, 127-120\\n38. Jan 11 @ MIL, BOS (29-9) lost to MIL, 102-135\\n39. Jan 13, BOS (30-9) beat HOU, 145-113\\n40. Jan 15 @ TOR, BOS (31-9) beat TOR, 105-96\\n41. Jan 17, BOS (32-9) beat SAS, 117-98\\n42. Jan 19, BOS (32-10) lost to DEN, 100-102\\n43. Jan 21 @ HOU, BOS (33-10) beat HOU, 116-107\\n44. Jan 22 @ DAL, BOS (34-10) beat DAL, 119-110\\n45. Jan 25 @ MIA, BOS (35-10) beat MIA, 143-110\\n46. Jan 27, BOS (35-11) lost to LAC, 96-115\\n47. Jan 29, BOS (36-11) beat NOP, 118-112\\n48. Jan 30, BOS (37-11) beat IND, 129-124\\n49. Feb 1, BOS (37-12) lost to LAL, 105-114\\n50. Feb 4, BOS (38-12) beat MEM, 131-91\\n51. Feb 7, BOS (39-12) beat ATL, 125-117\\n52. Feb 9, BOS (40-12) beat WAS, 133-129\\n53. Feb 11 @ MIA, BOS (41-12) beat MIA, 110-106\\n54. Feb 13 @ BRK, BOS (42-12) beat BRK, 118-110\\n55. Feb 14, BOS (43-12) beat BRK, 136-86\\n56. Feb 22 @ CHI, BOS (44-12) beat CHI, 129-112\\n57. Feb 24 @ NYK, BOS (45-12) beat NYK, 116-102\\n58. Feb 27, BOS (46-12) beat PHI, 117-99\\n59. Mar 1, BOS (47-12) beat DAL, 138-110\\n60. Mar 3, BOS (48-12) beat GSW, 140-88\\n61. Mar 5 @ CLE, BOS (48-13) lost to CLE, 104-105\\n62. Mar 7 @ DEN, BOS (48-14) lost to DEN, 109-115\\n63. Mar 9 @ PHO, BOS (49-14) beat PHO, 117-107\\n64. Mar 11 @ POR, BOS (50-14) beat POR, 121-99\\n65. Mar 12 @ UTA, BOS (51-14) beat UTA, 123-107\\n66. Mar 14, BOS (52-14) beat PHO, 127-112\\n67. Mar 17 @ WAS, BOS (53-14) beat WAS, 130-104\\n68. Mar 18, BOS (54-14) beat DET, 119-94\\n69. Mar 20, BOS (55-14) beat MIL, 122-119\\n70. Mar 22 @ DET, BOS (56-14) beat DET, 129-102\\n71. Mar 23 @ CHI, BOS (57-14) beat CHI, 124-113\\n72. Mar 25 @ ATL, BOS (57-15) lost to ATL, 118-120\\n73. Mar 28 @ ATL, BOS (57-16) lost to ATL, 122-123\\n74. Mar 30 @ NOP, BOS (58-16) beat NOP, 104-92\\n75. Apr 1 @ CHO, BOS (59-16) beat CHO, 118-104\\n76. Apr 3, BOS (60-16) beat OKC, 135-100\\n77. Apr 5, BOS (61-16) beat SAC, 101-100\\n78. Apr 7, BOS (62-16) beat POR, 124-107\\n79. Apr 9 @ MIL, BOS (62-17) lost to MIL, 91-104\\n80. Apr 11, BOS (62-18) lost to NYK, 109-118\\n81. Apr 12, BOS (63-18) beat CHO, 131-98\\n82. Apr 14, BOS (64-18) beat WAS, 132-122\\nRoster\\nRoster Table\\nNo.\\nPlayer\\nPos\\nHt\\nWt\\nBirth Date\\nBirth\\nExp\\nCollege\\n45\\nDalano Banton\\nPG\\n6-9\\n204\\nNovember 7, 1999\\nca\\nCA\\n2\\nNebraska\\n12\\nOshae Brissett\\nSF\\n6-7\\n210\\nJune 20, 1998\\nca\\nCA\\n4\\nSyracuse\\n7\\nJaylen Brown\\nSF\\n6-6\\n223\\nOctober 24, 1996\\nus\\nUS\\n7\\nCalifornia\\n20\\nJD Davison\\nSG\\n6-1\\n195\\nOctober 3, 2002\\nus\\nUS\\n1\\nAlabama\\n30\\nSam Hauser\\nSF\\n6-8\\n215\\nDecember 8, 1997\\nus\\nUS\\n2\\nMarquette\\n,\\nVirginia\\n4\\nJrue Holiday\\nPG\\n6-4\\n205\\nJune 12, 1990\\nus\\nUS\\n14\\nUCLA\\n42\\nAl Horford\\nC\\n6-9\\n240\\nJune 3, 1986\\ndo\\nDO\\n16\\nFlorida\\n40\\nLuke Kornet\\nC\\n7-2\\n250\\nJuly 15, 1995\\nus\\nUS\\n6\\nVanderbilt\\n50\\nSvi Mykhailiuk\\nSF\\n6-7\\n205\\nJune 10, 1997\\nua\\nUA\\n5\\nKansas\\n13\\nDrew Peterson\\nPF\\n6-9\\n205\\nNovember 9, 1999\\nus\\nUS\\nR\\nRice University\\n,\\nUSC\\n8\\nKristaps Porzi\\u00c5\\u0086\\u00c4\\u00a3is\\nC\\n7-2\\n240\\nAugust 2, 1995\\nlv\\nLV\\n7\\n11\\nPayton Pritchard\\nPG\\n6-1\\n195\\nJanuary 28, 1998\\nus\\nUS\\n3\\nOregon\\n88\\nNeemias Queta\\nC\\n7-0\\n245\\nJuly 13, 1999\\npt\\nPT\\n2\\nUtah State University\\n44\\nJaden Springer\\nSG\\n6-4\\n204\\nSeptember 25, 2002\\nus\\nUS\\n2\\nTennessee\\n77\\nLamar Stevens\\nPF\\n6-6\\n230\\nJuly 9, 1997\\nus\\nUS\\n3\\nPenn State\\n0\\nJayson Tatum\\nPF\\n6-8\\n210\\nMarch 3, 1998\\nus\\nUS\\n6\\nDuke\\n26\\nXavier Tillman Sr.\\nPF\\n6-8\\n245\\nJanuary 12, 1999\\nus\\nUS\\n3\\nMichigan State\\n27\\nJordan Walsh\\nSF\\n6-7\\n205\\nMarch 3, 2004\\nus\\nUS\\nR\\nArkansas\\n9\\nDerrick White\\nSG\\n6-4\\n190\\nJuly 2, 1994\\nus\\nUS\\n6\\nColorado-Colorado Springs\\n,\\nColorado\\nAssistant Coaches and Staff\\nTeam and Opponent Stats\\nRanks are per game (except for MP, which are total) and sorted descending (except for TOV and PF); opponents ranked are flipped; year/year calculations are also per game\\nBecome a Stathead & surf this site ad-free.\\nTeam Misc\\nPer Game\\n\\u2728\\nUpgraded\\n\\u2728\\nPer Game\\n\\u2728\\nUpgraded\\n\\u2728\\nRegular Season\\nPlayoffs\\nPer Game Table\\nRk\\nPlayer\\nAge\\nPos\\nG\\nGS\\nMP\\nFG\\nFGA\\nFG%\\n3P\\n3PA\\n3P%\\n2P\\n2PA\\n2P%\\neFG%\\nFT\\nFTA\\nFT%\\nORB\\nDRB\\nTRB\\nAST\\nSTL\\nBLK\\nTOV\\nPF\\nPTS\\nAwards\\n1\\nJayson Tatum\\n25\\nPF\\n74\\n74\\n35.7\\n9.1\\n19.3\\n.471\\n3.1\\n8.2\\n.376\\n6.0\\n11.0\\n.542\\n.552\\n5.6\\n6.7\\n.833\\n0.9\\n7.2\\n8.1\\n4.9\\n1.0\\n0.6\\n2.5\\n2.0\\n26.9\\nMVP-6\\n,\\nCPOY-9\\n,\\nAS\\n,\\nNBA1\\n2\\nJaylen Brown\\n27\\nSF\\n70\\n70\\n33.5\\n9.0\\n17.9\\n.499\\n2.1\\n5.9\\n.354\\n6.9\\n12.1\\n.570\\n.557\\n3.0\\n4.3\\n.703\\n1.2\\n4.3\\n5.5\\n3.6\\n1.2\\n0.5\\n2.4\\n2.6\\n23.0\\nAS\\n3\\nJrue Holiday\\n33\\nPG\\n69\\n69\\n32.8\\n4.8\\n10.0\\n.480\\n2.0\\n4.7\\n.429\\n2.8\\n5.3\\n.526\\n.581\\n0.9\\n1.0\\n.833\\n1.2\\n4.2\\n5.4\\n4.8\\n0.9\\n0.8\\n1.8\\n1.6\\n12.5\\nDPOY-6\\n,\\nDEF2\\n4\\nDerrick White\\n29\\nSG\\n73\\n73\\n32.6\\n5.3\\n11.5\\n.461\\n2.7\\n6.8\\n.396\\n2.6\\n4.7\\n.555\\n.578\\n1.9\\n2.1\\n.901\\n0.7\\n3.5\\n4.2\\n5.2\\n1.0\\n1.2\\n1.5\\n2.1\\n15.2\\nDPOY-8\\n,\\nDEF2\\n5\\nKristaps Porzi\\u00c5\\u0086\\u00c4\\u00a3is\\n28\\nC\\n57\\n57\\n29.6\\n6.8\\n13.2\\n.516\\n1.9\\n5.1\\n.375\\n4.9\\n8.1\\n.606\\n.589\\n4.5\\n5.3\\n.858\\n1.7\\n5.5\\n7.2\\n2.0\\n0.7\\n1.9\\n1.6\\n2.7\\n20.1\\n6\\nAl Horford\\n37\\nC\\n65\\n33\\n26.8\\n3.3\\n6.4\\n.511\\n1.7\\n4.0\\n.419\\n1.6\\n2.5\\n.658\\n.640\\n0.4\\n0.5\\n.867\\n1.3\\n5.1\\n6.4\\n2.6\\n0.6\\n1.0\\n0.7\\n1.4\\n8.6\\n7\\nPayton Pritchard\\n26\\nPG\\n82\\n5\\n22.3\\n3.6\\n7.7\\n.468\\n1.8\\n4.7\\n.385\\n1.8\\n3.1\\n.593\\n.583\\n0.6\\n0.7\\n.821\\n0.9\\n2.4\\n3.2\\n3.4\\n0.5\\n0.1\\n0.7\\n1.3\\n9.6\\n8\\nSam Hauser\\n26\\nSF\\n79\\n13\\n22.0\\n3.2\\n7.1\\n.446\\n2.5\\n5.9\\n.424\\n0.7\\n1.2\\n.559\\n.623\\n0.2\\n0.2\\n.895\\n0.6\\n2.9\\n3.5\\n1.0\\n0.5\\n0.3\\n0.4\\n1.3\\n9.0\\n9\\nLuke Kornet\\n28\\nC\\n63\\n7\\n15.6\\n2.3\\n3.2\\n.700\\n0.0\\n0.0\\n1.000\\n2.2\\n3.2\\n.698\\n.702\\n0.8\\n0.9\\n.907\\n1.9\\n2.3\\n4.1\\n1.1\\n0.4\\n1.0\\n0.3\\n1.2\\n5.3\\n10\\nXavier Tillman Sr.\\n25\\nPF\\n20\\n2\\n13.7\\n1.7\\n3.3\\n.515\\n0.4\\n1.4\\n.286\\n1.3\\n1.9\\n.684\\n.576\\n0.2\\n0.4\\n.571\\n0.7\\n2.0\\n2.7\\n1.0\\n0.5\\n0.5\\n0.3\\n0.8\\n4.0\\n11\\nNeemias Queta\\n24\\nC\\n28\\n0\\n11.9\\n2.4\\n3.7\\n.644\\n0.0\\n0.0\\n2.4\\n3.7\\n.644\\n.644\\n0.7\\n1.0\\n.714\\n1.9\\n2.5\\n4.4\\n0.7\\n0.5\\n0.8\\n0.5\\n1.8\\n5.5\\n12\\nOshae Brissett\\n25\\nSF\\n55\\n1\\n11.5\\n1.2\\n2.8\\n.444\\n0.3\\n1.0\\n.273\\n1.0\\n1.8\\n.541\\n.493\\n0.9\\n1.5\\n.602\\n1.1\\n1.8\\n2.9\\n0.8\\n0.3\\n0.1\\n0.4\\n1.0\\n3.7\\n13\\nSvi Mykhailiuk\\n26\\nSF\\n41\\n2\\n10.1\\n1.4\\n3.3\\n.416\\n1.0\\n2.6\\n.389\\n0.4\\n0.7\\n.517\\n.569\\n0.1\\n0.2\\n.667\\n0.3\\n1.0\\n1.2\\n0.9\\n0.3\\n0.0\\n0.3\\n0.5\\n4.0\\n14\\nJordan Walsh\\n19\\nSF\\n9\\n1\\n9.2\\n0.7\\n1.7\\n.400\\n0.2\\n1.0\\n.222\\n0.4\\n0.7\\n.667\\n.467\\n0.1\\n0.2\\n.500\\n0.6\\n1.7\\n2.2\\n0.6\\n0.6\\n0.1\\n0.3\\n1.2\\n1.7\\n15\\nDrew Peterson\\n24\\nPF\\n3\\n0\\n7.7\\n1.3\\n2.0\\n.667\\n1.0\\n1.7\\n.600\\n0.3\\n0.3\\n1.000\\n.917\\n0.0\\n0.0\\n0.0\\n0.3\\n0.3\\n0.3\\n0.7\\n0.0\\n0.3\\n0.3\\n3.7\\n16\\nJaden Springer\\n21\\nSG\\n17\\n1\\n7.6\\n0.8\\n1.8\\n.433\\n0.1\\n0.6\\n.182\\n0.6\\n1.1\\n.579\\n.467\\n0.4\\n0.5\\n.875\\n0.5\\n0.7\\n1.2\\n0.5\\n0.6\\n0.2\\n0.5\\n1.0\\n2.1\\n17\\nDalano Banton\\n24\\nPG\\n24\\n1\\n7.1\\n0.8\\n2.1\\n.373\\n0.1\\n0.7\\n.125\\n0.7\\n1.5\\n.486\\n.392\\n0.7\\n0.8\\n.800\\n0.5\\n1.0\\n1.5\\n0.8\\n0.2\\n0.1\\n0.4\\n0.8\\n2.3\\n18\\nLamar Stevens\\n26\\nPF\\n19\\n1\\n6.4\\n1.1\\n2.4\\n.467\\n0.2\\n0.4\\n.375\\n0.9\\n1.9\\n.486\\n.500\\n0.4\\n0.6\\n.727\\n0.6\\n1.0\\n1.6\\n0.4\\n0.3\\n0.3\\n0.5\\n0.7\\n2.8\\n19\\nJD Davison\\n21\\nSG\\n8\\n0\\n4.9\\n0.6\\n1.5\\n.417\\n0.4\\n0.9\\n.429\\n0.3\\n0.6\\n.400\\n.542\\n0.4\\n0.5\\n.750\\n0.3\\n1.0\\n1.3\\n1.3\\n0.1\\n0.1\\n0.3\\n0.5\\n2.0\\nTeam Totals\\n82\\n82\\n241.8\\n43.9\\n90.2\\n.487\\n16.5\\n42.5\\n.388\\n27.4\\n47.7\\n.575\\n.578\\n16.3\\n20.2\\n.807\\n10.7\\n35.6\\n46.3\\n26.9\\n6.8\\n6.6\\n11.9\\n16.2\\n120.6\\nPer Game Table\\nRk\\nPlayer\\nAge\\nPos\\nG\\nGS\\nMP\\nFG\\nFGA\\nFG%\\n3P\\n3PA\\n3P%\\n2P\\n2PA\\n2P%\\neFG%\\nFT\\nFTA\\nFT%\\nORB\\nDRB\\nTRB\\nAST\\nSTL\\nBLK\\nTOV\\nPF\\nPTS\\nAwards\\n1\\nJayson Tatum\\n25\\nPF\\n19\\n19\\n40.4\\n8.4\\n19.6\\n.427\\n2.1\\n7.3\\n.283\\n6.3\\n12.3\\n.513\\n.480\\n6.2\\n7.2\\n.861\\n0.9\\n8.8\\n9.7\\n6.3\\n1.1\\n0.7\\n2.6\\n2.8\\n25.0\\n2\\nJrue Holiday\\n33\\nPG\\n19\\n19\\n37.9\\n5.1\\n10.2\\n.503\\n1.8\\n4.6\\n.402\\n3.3\\n5.6\\n.585\\n.593\\n1.1\\n1.2\\n.955\\n1.9\\n4.2\\n6.1\\n4.4\\n1.1\\n0.6\\n1.5\\n2.1\\n13.2\\n3\\nJaylen Brown\\n27\\nSF\\n19\\n19\\n37.2\\n9.2\\n17.8\\n.516\\n1.9\\n5.8\\n.327\\n7.3\\n12.1\\n.607\\n.569\\n3.6\\n5.4\\n.660\\n1.2\\n4.8\\n5.9\\n3.3\\n1.2\\n0.6\\n2.7\\n2.7\\n23.9\\nFinals MVP-1\\n4\\nDerrick White\\n29\\nSG\\n19\\n19\\n35.6\\n5.7\\n12.7\\n.452\\n3.4\\n8.5\\n.404\\n2.3\\n4.2\\n.550\\n.587\\n1.8\\n2.0\\n.921\\n1.0\\n3.3\\n4.3\\n4.1\\n0.9\\n1.2\\n0.8\\n2.3\\n16.7\\n5\\nAl Horford\\n37\\nC\\n19\\n15\\n30.3\\n3.5\\n7.3\\n.478\\n1.8\\n5.0\\n.368\\n1.6\\n2.3\\n.721\\n.605\\n0.4\\n0.6\\n.636\\n1.8\\n5.2\\n7.0\\n2.1\\n0.8\\n0.8\\n0.6\\n1.5\\n9.2\\n6\\nKristaps Porzi\\u00c5\\u0086\\u00c4\\u00a3is\\n28\\nC\\n7\\n4\\n23.6\\n4.0\\n8.6\\n.467\\n1.4\\n4.1\\n.345\\n2.6\\n4.4\\n.581\\n.550\\n2.9\\n3.1\\n.909\\n0.6\\n3.9\\n4.4\\n1.1\\n0.7\\n1.6\\n0.7\\n2.1\\n12.3\\n7\\nPayton Pritchard\\n26\\nPG\\n19\\n0\\n18.7\\n2.3\\n5.5\\n.419\\n1.2\\n3.2\\n.383\\n1.1\\n2.4\\n.467\\n.529\\n0.6\\n0.6\\n.917\\n0.7\\n1.2\\n1.9\\n2.1\\n0.2\\n0.0\\n0.7\\n1.2\\n6.4\\n8\\nSam Hauser\\n26\\nSF\\n19\\n0\\n14.9\\n1.9\\n4.4\\n.429\\n1.4\\n3.7\\n.380\\n0.5\\n0.7\\n.692\\n.589\\n0.2\\n0.2\\n1.000\\n0.4\\n1.7\\n2.2\\n0.6\\n0.3\\n0.2\\n0.2\\n1.1\\n5.4\\n9\\nLuke Kornet\\n28\\nC\\n13\\n0\\n10.2\\n1.1\\n1.6\\n.667\\n0.0\\n0.0\\n1.1\\n1.6\\n.667\\n.667\\n0.8\\n1.0\\n.846\\n1.5\\n1.7\\n3.2\\n0.5\\n0.1\\n0.4\\n0.5\\n0.8\\n3.0\\n10\\nXavier Tillman Sr.\\n25\\nPF\\n8\\n0\\n8.6\\n0.6\\n1.0\\n.625\\n0.1\\n0.1\\n1.000\\n0.5\\n0.9\\n.571\\n.688\\n0.1\\n0.1\\n1.000\\n0.5\\n1.3\\n1.8\\n0.4\\n0.4\\n0.4\\n0.4\\n0.9\\n1.5\\n11\\nOshae Brissett\\n25\\nSF\\n10\\n0\\n5.5\\n0.6\\n1.1\\n.545\\n0.2\\n0.2\\n1.000\\n0.4\\n0.9\\n.444\\n.636\\n0.2\\n0.4\\n.500\\n0.3\\n1.1\\n1.4\\n0.0\\n0.3\\n0.2\\n0.1\\n0.2\\n1.6\\n12\\nJaden Springer\\n21\\nSG\\n4\\n0\\n5.5\\n0.5\\n0.8\\n.667\\n0.0\\n0.0\\n0.5\\n0.8\\n.667\\n.667\\n0.0\\n0.0\\n0.0\\n0.8\\n0.8\\n0.3\\n0.0\\n0.3\\n0.5\\n0.3\\n1.0\\n13\\nNeemias Queta\\n24\\nC\\n3\\n0\\n4.3\\n0.7\\n1.0\\n.667\\n0.0\\n0.0\\n0.7\\n1.0\\n.667\\n.667\\n0.0\\n0.0\\n0.3\\n0.7\\n1.0\\n0.0\\n0.0\\n0.3\\n0.0\\n0.0\\n1.3\\n14\\nSvi Mykhailiuk\\n26\\nSF\\n8\\n0\\n4.0\\n0.4\\n1.5\\n.250\\n0.3\\n1.1\\n.222\\n0.1\\n0.4\\n.333\\n.333\\n0.0\\n0.0\\n0.1\\n0.5\\n0.6\\n0.1\\n0.1\\n0.0\\n0.3\\n0.4\\n1.0\\n15\\nJordan Walsh\\n19\\nSF\\n3\\n0\\n3.7\\n0.3\\n1.0\\n.333\\n0.0\\n0.3\\n.000\\n0.3\\n0.7\\n.500\\n.333\\n0.0\\n0.0\\n0.0\\n0.7\\n0.7\\n0.0\\n0.0\\n0.0\\n0.0\\n0.0\\n0.7\\nTeam Totals\\n19\\n19\\n241.3\\n39.3\\n83.8\\n.469\\n14.5\\n40.2\\n.360\\n24.8\\n43.6\\n.569\\n.555\\n15.7\\n19.3\\n.812\\n9.7\\n33.4\\n43.1\\n23.8\\n6.3\\n5.4\\n11.5\\n15.7\\n108.8\\nBold\\nseason totals indicate player led league.\\nBlack Ink appears for stats with a\\nleaderboard\\n.\\nPer 36 Minutes\\n\\u2728\\nUpgraded\\n\\u2728\\nPer 36 Minutes\\n\\u2728\\nUpgraded\\n\\u2728\\nRegular Season\\nPlayoffs\\nPer 36 Minutes Table\\nRk\\nPlayer\\nAge\\nPos\\nG\\nGS\\nMP\\nFG\\nFGA\\nFG%\\n3P\\n3PA\\n3P%\\n2P\\n2PA\\n2P%\\neFG%\\nFT\\nFTA\\nFT%\\nORB\\nDRB\\nTRB\\nAST\\nSTL\\nBLK\\nTOV\\nPF\\nPTS\\nAwards\\n1\\nJayson Tatum\\n25\\nPF\\n74\\n74\\n2645\\n9.1\\n19.4\\n.471\\n3.1\\n8.3\\n.376\\n6.0\\n11.1\\n.542\\n.552\\n5.6\\n6.8\\n.833\\n0.9\\n7.3\\n8.2\\n5.0\\n1.0\\n0.6\\n2.6\\n2.0\\n27.0\\nMVP-6\\n,\\nCPOY-9\\n,\\nAS\\n,\\nNBA1\\n2\\nDerrick White\\n29\\nSG\\n73\\n73\\n2381\\n5.9\\n12.7\\n.461\\n3.0\\n7.5\\n.396\\n2.9\\n5.2\\n.555\\n.578\\n2.1\\n2.3\\n.901\\n0.8\\n3.9\\n4.7\\n5.7\\n1.1\\n1.3\\n1.7\\n2.3\\n16.7\\nDPOY-8\\n,\\nDEF2\\n3\\nJaylen Brown\\n27\\nSF\\n70\\n70\\n2343\\n9.6\\n19.3\\n.499\\n2.2\\n6.3\\n.354\\n7.4\\n13.0\\n.570\\n.557\\n3.2\\n4.6\\n.703\\n1.3\\n4.7\\n5.9\\n3.8\\n1.3\\n0.6\\n2.6\\n2.8\\n24.7\\nAS\\n4\\nJrue Holiday\\n33\\nPG\\n69\\n69\\n2263\\n5.3\\n11.0\\n.480\\n2.2\\n5.1\\n.429\\n3.1\\n5.8\\n.526\\n.581\\n1.0\\n1.1\\n.833\\n1.3\\n4.6\\n5.9\\n5.3\\n1.0\\n0.8\\n2.0\\n1.7\\n13.7\\nDPOY-6\\n,\\nDEF2\\n5\\nPayton Pritchard\\n26\\nPG\\n82\\n5\\n1825\\n5.9\\n12.5\\n.468\\n2.9\\n7.5\\n.385\\n3.0\\n5.0\\n.593\\n.583\\n0.9\\n1.1\\n.821\\n1.4\\n3.8\\n5.2\\n5.5\\n0.8\\n0.1\\n1.2\\n2.1\\n15.5\\n6\\nSam Hauser\\n26\\nSF\\n79\\n13\\n1741\\n5.1\\n11.5\\n.446\\n4.1\\n9.6\\n.424\\n1.1\\n1.9\\n.559\\n.623\\n0.4\\n0.4\\n.895\\n0.9\\n4.8\\n5.7\\n1.7\\n0.8\\n0.5\\n0.7\\n2.0\\n14.7\\n7\\nAl Horford\\n37\\nC\\n65\\n33\\n1740\\n4.4\\n8.7\\n.511\\n2.2\\n5.3\\n.419\\n2.2\\n3.3\\n.658\\n.640\\n0.5\\n0.6\\n.867\\n1.7\\n6.8\\n8.5\\n3.5\\n0.8\\n1.3\\n1.0\\n1.9\\n11.6\\n8\\nKristaps Porzi\\u00c5\\u0086\\u00c4\\u00a3is\\n28\\nC\\n57\\n57\\n1690\\n8.3\\n16.0\\n.516\\n2.3\\n6.2\\n.375\\n5.9\\n9.8\\n.606\\n.589\\n5.5\\n6.4\\n.858\\n2.1\\n6.6\\n8.7\\n2.4\\n0.9\\n2.4\\n1.9\\n3.3\\n24.4\\n9\\nLuke Kornet\\n28\\nC\\n63\\n7\\n983\\n5.2\\n7.4\\n.700\\n0.0\\n0.0\\n1.000\\n5.2\\n7.4\\n.698\\n.702\\n1.8\\n2.0\\n.907\\n4.3\\n5.2\\n9.6\\n2.5\\n0.8\\n2.2\\n0.8\\n2.8\\n12.2\\n10\\nOshae Brissett\\n25\\nSF\\n55\\n1\\n630\\n3.9\\n8.7\\n.444\\n0.9\\n3.1\\n.273\\n3.0\\n5.6\\n.541\\n.493\\n2.9\\n4.7\\n.602\\n3.5\\n5.7\\n9.1\\n2.5\\n1.1\\n0.5\\n1.1\\n3.1\\n11.5\\n11\\nSvi Mykhailiuk\\n26\\nSF\\n41\\n2\\n413\\n5.0\\n11.9\\n.416\\n3.7\\n9.4\\n.389\\n1.3\\n2.5\\n.517\\n.569\\n0.5\\n0.8\\n.667\\n1.0\\n3.5\\n4.4\\n3.1\\n1.0\\n0.1\\n1.0\\n1.7\\n14.1\\n12\\nNeemias Queta\\n24\\nC\\n28\\n0\\n333\\n7.2\\n11.2\\n.644\\n0.0\\n0.0\\n7.2\\n11.2\\n.644\\n.644\\n2.2\\n3.0\\n.714\\n5.7\\n7.5\\n13.2\\n2.2\\n1.4\\n2.3\\n1.4\\n5.4\\n16.6\\n13\\nXavier Tillman Sr.\\n25\\nPF\\n20\\n2\\n274\\n4.5\\n8.7\\n.515\\n1.1\\n3.7\\n.286\\n3.4\\n5.0\\n.684\\n.576\\n0.5\\n0.9\\n.571\\n1.8\\n5.3\\n7.1\\n2.6\\n1.2\\n1.2\\n0.7\\n2.0\\n10.5\\n14\\nDalano Banton\\n24\\nPG\\n24\\n1\\n171\\n4.0\\n10.7\\n.373\\n0.4\\n3.4\\n.125\\n3.6\\n7.4\\n.486\\n.392\\n3.4\\n4.2\\n.800\\n2.5\\n4.8\\n7.4\\n4.0\\n1.1\\n0.6\\n2.1\\n4.2\\n11.8\\n15\\nJaden Springer\\n21\\nSG\\n17\\n1\\n130\\n3.6\\n8.3\\n.433\\n0.6\\n3.0\\n.182\\n3.0\\n5.3\\n.579\\n.467\\n1.9\\n2.2\\n.875\\n2.2\\n3.3\\n5.5\\n2.5\\n3.0\\n1.1\\n2.2\\n4.7\\n9.7\\n16\\nLamar Stevens\\n26\\nPF\\n19\\n1\\n122\\n6.2\\n13.3\\n.467\\n0.9\\n2.4\\n.375\\n5.3\\n10.9\\n.486\\n.500\\n2.4\\n3.2\\n.727\\n3.5\\n5.6\\n9.1\\n2.4\\n1.8\\n1.5\\n2.7\\n4.1\\n15.6\\n17\\nJordan Walsh\\n19\\nSF\\n9\\n1\\n83\\n2.6\\n6.5\\n.400\\n0.9\\n3.9\\n.222\\n1.7\\n2.6\\n.667\\n.467\\n0.4\\n0.9\\n.500\\n2.2\\n6.5\\n8.7\\n2.2\\n2.2\\n0.4\\n1.3\\n4.8\\n6.5\\n18\\nJD Davison\\n21\\nSG\\n8\\n0\\n39\\n4.6\\n11.1\\n.417\\n2.8\\n6.5\\n.429\\n1.8\\n4.6\\n.400\\n.542\\n2.8\\n3.7\\n.750\\n1.8\\n7.4\\n9.2\\n9.2\\n0.9\\n0.9\\n1.8\\n3.7\\n14.8\\n19\\nDrew Peterson\\n24\\nPF\\n3\\n0\\n23\\n6.3\\n9.4\\n.667\\n4.7\\n7.8\\n.600\\n1.6\\n1.6\\n1.000\\n.917\\n0.0\\n0.0\\n0.0\\n1.6\\n1.6\\n1.6\\n3.1\\n0.0\\n1.6\\n1.6\\n17.2\\nPer 36 Minutes Table\\nRk\\nPlayer\\nAge\\nPos\\nG\\nGS\\nMP\\nFG\\nFGA\\nFG%\\n3P\\n3PA\\n3P%\\n2P\\n2PA\\n2P%\\neFG%\\nFT\\nFTA\\nFT%\\nORB\\nDRB\\nTRB\\nAST\\nSTL\\nBLK\\nTOV\\nPF\\nPTS\\nAwards\\n1\\nJayson Tatum\\n25\\nPF\\n19\\n19\\n768\\n7.5\\n17.4\\n.427\\n1.8\\n6.5\\n.283\\n5.6\\n11.0\\n.513\\n.480\\n5.5\\n6.4\\n.861\\n0.8\\n7.8\\n8.6\\n5.6\\n0.9\\n0.6\\n2.3\\n2.5\\n22.3\\n2\\nJrue Holiday\\n33\\nPG\\n19\\n19\\n720\\n4.8\\n9.6\\n.503\\n1.7\\n4.3\\n.402\\n3.1\\n5.3\\n.585\\n.593\\n1.0\\n1.1\\n.955\\n1.8\\n4.0\\n5.8\\n4.1\\n1.0\\n0.6\\n1.4\\n2.0\\n12.5\\n3\\nJaylen Brown\\n27\\nSF\\n19\\n19\\n707\\n8.9\\n17.3\\n.516\\n1.8\\n5.6\\n.327\\n7.1\\n11.7\\n.607\\n.569\\n3.5\\n5.2\\n.660\\n1.1\\n4.6\\n5.8\\n3.2\\n1.2\\n0.6\\n2.6\\n2.6\\n23.1\\nFinals MVP-1\\n4\\nDerrick White\\n29\\nSG\\n19\\n19\\n676\\n5.8\\n12.8\\n.452\\n3.5\\n8.6\\n.404\\n2.3\\n4.3\\n.550\\n.587\\n1.9\\n2.0\\n.921\\n1.0\\n3.3\\n4.3\\n4.1\\n1.0\\n1.2\\n0.9\\n2.3\\n16.9\\n5\\nAl Horford\\n37\\nC\\n19\\n15\\n575\\n4.1\\n8.6\\n.478\\n2.2\\n5.9\\n.368\\n1.9\\n2.7\\n.721\\n.605\\n0.4\\n0.7\\n.636\\n2.2\\n6.1\\n8.3\\n2.5\\n0.9\\n1.0\\n0.8\\n1.8\\n10.9\\n6\\nPayton Pritchard\\n26\\nPG\\n19\\n0\\n355\\n4.5\\n10.6\\n.419\\n2.3\\n6.1\\n.383\\n2.1\\n4.6\\n.467\\n.529\\n1.1\\n1.2\\n.917\\n1.4\\n2.3\\n3.8\\n4.1\\n0.4\\n0.0\\n1.4\\n2.2\\n12.4\\n7\\nSam Hauser\\n26\\nSF\\n19\\n0\\n283\\n4.6\\n10.7\\n.429\\n3.4\\n9.0\\n.380\\n1.1\\n1.7\\n.692\\n.589\\n0.5\\n0.5\\n1.000\\n1.0\\n4.2\\n5.2\\n1.4\\n0.6\\n0.4\\n0.4\\n2.5\\n13.1\\n8\\nKristaps Porzi\\u00c5\\u0086\\u00c4\\u00a3is\\n28\\nC\\n7\\n4\\n165\\n6.1\\n13.1\\n.467\\n2.2\\n6.3\\n.345\\n3.9\\n6.8\\n.581\\n.550\\n4.4\\n4.8\\n.909\\n0.9\\n5.9\\n6.8\\n1.7\\n1.1\\n2.4\\n1.1\\n3.3\\n18.8\\n9\\nLuke Kornet\\n28\\nC\\n13\\n0\\n133\\n3.8\\n5.7\\n.667\\n0.0\\n0.0\\n3.8\\n5.7\\n.667\\n.667\\n3.0\\n3.5\\n.846\\n5.1\\n6.0\\n11.1\\n1.9\\n0.3\\n1.4\\n1.6\\n3.0\\n10.6\\n10\\nXavier Tillman Sr.\\n25\\nPF\\n8\\n0\\n69\\n2.6\\n4.2\\n.625\\n0.5\\n0.5\\n1.000\\n2.1\\n3.7\\n.571\\n.688\\n0.5\\n0.5\\n1.000\\n2.1\\n5.2\\n7.3\\n1.6\\n1.6\\n1.6\\n1.6\\n3.7\\n6.3\\n11\\nOshae Brissett\\n25\\nSF\\n10\\n0\\n55\\n3.9\\n7.2\\n.545\\n1.3\\n1.3\\n1.000\\n2.6\\n5.9\\n.444\\n.636\\n1.3\\n2.6\\n.500\\n2.0\\n7.2\\n9.2\\n0.0\\n2.0\\n1.3\\n0.7\\n1.3\\n10.5\\n12\\nSvi Mykhailiuk\\n26\\nSF\\n8\\n0\\n32\\n3.4\\n13.5\\n.250\\n2.3\\n10.1\\n.222\\n1.1\\n3.4\\n.333\\n.333\\n0.0\\n0.0\\n1.1\\n4.5\\n5.6\\n1.1\\n1.1\\n0.0\\n2.3\\n3.4\\n9.0\\n13\\nJaden Springer\\n21\\nSG\\n4\\n0\\n22\\n3.3\\n4.9\\n.667\\n0.0\\n0.0\\n3.3\\n4.9\\n.667\\n.667\\n0.0\\n0.0\\n0.0\\n4.9\\n4.9\\n1.6\\n0.0\\n1.6\\n3.3\\n1.6\\n6.5\\n14\\nNeemias Queta\\n24\\nC\\n3\\n0\\n13\\n5.5\\n8.3\\n.667\\n0.0\\n0.0\\n5.5\\n8.3\\n.667\\n.667\\n0.0\\n0.0\\n2.8\\n5.5\\n8.3\\n0.0\\n0.0\\n2.8\\n0.0\\n0.0\\n11.1\\n15\\nJordan Walsh\\n19\\nSF\\n3\\n0\\n11\\n3.3\\n9.8\\n.333\\n0.0\\n3.3\\n.000\\n3.3\\n6.5\\n.500\\n.333\\n0.0\\n0.0\\n0.0\\n6.5\\n6.5\\n0.0\\n0.0\\n0.0\\n0.0\\n0.0\\n6.5\\nBold\\nseason totals indicate player led league.\\nBlack Ink appears for stats with a\\nleaderboard\\n.\\nPlayers on League Leaderboards\\nQualified\\nplayers in the top 20\\u00a0\\u00a0\\u00b7 \\u00a0Includes full-season stats for all players who saw court time during the regular season or playoffs.\\nSalaries\\nMore 2023-24 Celtics Pages\\nCeltics Franchise Index\\nRoster & Stats\\nSchedule & Results\\nTransactions\\nGame Log\\nSplits\\nLineups\\nOn/Off\\nStarting Lineups\\nDepth Charts\\nReferees\\nPrevious Season\\nNext Season\\nWelcome\\n\\u00b7\\nYour Account\\nLogout\\nAd-Free Login\\nCreate Account\\nYou are here:\\nBBR Home Page\\n>\\nTeams\\n>\\nBoston Celtics\\n>\\n2023-24 Roster and Stats\\nFull Site Menu\\nReturn to Top\\nPlayers\\nIn the News\\n:\\nV. Wembanyama\\n,\\nL. James\\n,\\nK. Durant\\n,\\nJ. Embiid\\n,\\nJ. Harden\\n,\\nS. Curry\\n,\\nL. Don\\u00c4\\u008di\\u00c4\\u0087\\n...\\nAll-Time Greats\\n:\\nE. Hayes\\n,\\nJ. Stockton\\n,\\nH. Olajuwon\\n,\\nW. Chamberlain\\n,\\nD. Schayes\\n,\\nJ. Havlicek\\n...\\nActive Greats\\n:\\nL. James\\n,\\nG. Antetokounmpo\\n,\\nC. Paul\\n,\\nJ. Harden\\n,\\nS. Curry\\n,\\nK. Durant\\n...\\nTeams\\nAtlantic\\n:\\nToronto\\n,\\nBoston\\n,\\nNew York\\n,\\nBrooklyn\\n,\\nPhiladelphia\\nCentral\\n:\\nCleveland\\n,\\nIndiana\\n,\\nDetroit\\n,\\nChicago\\n,\\nMilwaukee\\nSoutheast\\n:\\nMiami\\n,\\nAtlanta\\n,\\nCharlotte\\n,\\nWashington\\n,\\nOrlando\\nNorthwest\\n:\\nOklahoma City\\n,\\nPortland\\n,\\nUtah\\n,\\nDenver\\n,\\nMinnesota\\nPacific\\n:\\nGolden State\\n,\\nLos Angeles Clippers\\n,\\nSacramento\\n,\\nPhoenix\\n,\\nLos Angeles Lakers\\nSouthwest\\n:\\nSan Antonio\\n,\\nDallas\\n,\\nMemphis\\n,\\nHouston\\n,\\nNew Orleans\\nSeasons\\n2025-26\\n,\\n2024-25\\n,\\n2023-24\\n,\\n2022-23\\n,\\n2021-22\\n,\\n2020-21\\n,\\n2019-20\\n...\\nLeaders\\nSeason Points\\n,\\nCareer Rebounds\\n,\\nActive Assists\\n,\\nYearly Steals\\n,\\nProgressive Blocks\\n...\\nOr, view\\n\\\"Trailers\\\"\\nfor\\nSeason Field Goal Pct\\n, or\\nCareer Blocks Per Game\\nNBA Scores\\nYesterday's Games\\nand\\nScores from any date in BAA/NBA or ABA history\\nNBA Schedules\\nTeam Schedules\\nand\\nLeague Schedules\\nNBA Standings\\nToday's Standings\\nand\\nStandings for any date in history\\nStathead\\nPlayer Finders\\n:\\nSeason Finder\\n,\\nGame Finder\\n,\\nStreak Finder\\n,\\nSpan Finder\\nTeam Finders\\n:\\nSeason Finder\\n,\\nGame Finder\\n,\\nStreak Finder\\n,\\nSpan Finder\\nOther Finders\\n:\\nVersus Finder\\n,\\nShot Finder\\nCollege Tools\\n:\\nPlayer Season Finder\\n,\\nPlayer Game Finder\\n,\\nTeam Season Finder\\n,\\nTeam Game Finder\\nCoaches\\nRichie Guerin\\n,\\nRudy Tomjanovich\\n,\\nJim O'Brien\\n,\\nMike Fratello\\n,\\nAlvin Gentry\\n...\\nAwards\\nNBA MVP\\n,\\nAll-NBA\\n,\\nDefensive Player of the Year\\n,\\nRookie of the Year\\n,\\nAll-Rookie\\n,\\nHall of Fame\\n...\\nNBA Contracts\\nMain Index\\n,\\nTeam Payrolls\\n,\\nPlayer Contracts\\n,\\nGlossary\\n...\\nPlayoffs\\n2025 NBA Playoffs\\n,\\n2024 NBA Playoffs\\n,\\n2023 NBA Playoffs\\n,\\n2022 NBA Playoffs\\n,\\n2021 NBA Playoffs\\n,\\n2020 NBA Playoffs\\n,\\n2019 NBA Playoffs\\n,\\nPlayoffs Series History\\n...\\nAll-Star Games\\n2025 All-Star Game\\n,\\n2024 All-Star Game\\n,\\n2023 All-Star Game\\n,\\n2022 All-Star Game\\n,\\n2021 All-Star Game\\n,\\n2020 All-Star Game\\n,\\n2019 All-Star Game\\n...\\nNBA Draft\\n2025 Draft\\n,\\n2024 Draft\\n,\\n2023 Draft\\n,\\n2022 Draft\\n,\\n2021 Draft\\n,\\n2020 Draft\\n,\\n2019 Draft\\n...\\nFrivolities\\nPlayers who played for multiple teams\\n(WNBA)\\n,\\nBirthdays\\n,\\nColleges\\n,\\nHigh Schools\\n,\\nMilestone Watch\\n...\\nExecutives\\nDaryl Morey\\n,\\nMasai Ujiri\\n,\\nPat Riley\\n,\\nDanny Ainge\\n,\\nJon Horst\\n...\\nReferees\\nJoe Forte\\n,\\nTony Brothers\\n,\\nDan Crawford\\n,\\nRon Olesiak\\n,\\nDavid Jones\\n...\\nG League Stats\\nPlayers\\n,\\nTeams\\n,\\nSeasons\\n,\\nLeaders\\n,\\nAwards\\n...\\nInternational Basketball Stats\\nPlayers\\n,\\nTeams\\n,\\nSeasons\\n,\\nLeaders\\n,\\nAwards\\n...\\nWNBA\\nPlayers\\n,\\nTeams\\n,\\nSeasons\\n,\\nLeaders\\n,\\nAwards\\n,\\nAll-Star Games\\n,\\nExecutives\\n...\\nNBL\\nPlayers\\n,\\nTeams\\n,\\nSeasons\\n,\\nLeaders\\n,\\nAwards\\n...\\nAbout\\nGlossary\\n,\\nContact and Media Information\\n,\\nFrequently Asked Questions about the NBA, WNBA and Basketball\\n,\\nNBA Data Coverage\\n,\\nABA Data Coverage\\n, \\n      ...\\nImmaculate Grid (Men's)\\nand\\nImmaculate Grid (Women's)\\nPut your basketball knowledge to the test with our daily basketball trivia games. Can you complete the grids?\\nBasketball-Reference.com Blog and Articles\\nWe're Social...for Statheads\\nSite Last Updated:\\nSunday, November 16,  2:33AM\\nQuestion, Comment, Feedback, or Correction?\\nSubscribe to our Free Email Newsletter\\nSubscribe to Stathead Basketball: Get your first month FREE\\nYour All-Access Ticket to the Basketball Reference Database\\nDo you have a sports website? Or write about sports? We have tools and resources that can help you use sports data.  Find out more.\\nFAQs, Tip & Tricks\\nTips and Tricks from our Blog.\\nDo you have a blog? Join our linker program.\\nWatch our How-To Videos to Become a Stathead\\nSubscribe to Stathead and get access to more data than you can imagine\\nAll logos are the trademark & property of their owners and not Sports Reference LLC.  We present them here for purely educational purposes.\\nOur reasoning for presenting offensive logos.\\nLogos were compiled by the amazing\\nSportsLogos.net.\\nData Provided By\\nthe official stats partner of the NBA, NHL and MLB.\\nCopyright \\u00a9 2000-2025\\nSports Reference LLC\\n. All rights reserved.\\nThe SPORTS REFERENCE, STATHEAD, IMMACULATE GRID, and IMMACULATE FOOTY trademarks are owned exclusively by Sports Reference LLC. Use without license or authorization is expressly prohibited.\\nSports\\u00a0Reference\\u202f\\u00ae\\nBaseball\\nFootball\\n(college)\\nBasketball\\n(college)\\nHockey\\nSoccer\\nBlog\\nStathead\\u202f\\u00ae\\nImmaculate Grid\\u202f\\u00ae\\nAbout\\n\\u2022\\nConditions & Terms of Service\\n\\u2022\\nAdvertise With Us\\n\\u2022\\nJobs at SR\\n\\u2022\\nBasketball-Reference.com T-Shirts & Store\\n\\u2022\\nCookie Preferences\\nSports Reference Purpose: We will be the trusted source of information and tools that inspire and empower users to enjoy, understand, and share the sports they love.\\nPrivacy Policy\\n\\u2022\\nGambling Revenue Policy\\n\\u2022\\nAccessibility Policy\\n\\u2022\\nUse of Data\"}",
+      "tool_call_id": "call_00_bdaUynVrkLIgBX5VksRXKC2m"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

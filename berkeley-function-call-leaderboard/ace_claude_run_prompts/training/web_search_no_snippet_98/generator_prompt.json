@@ -1,0 +1,265 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "user",
+      "content": "Ironman competitions push athletes to their limits, with record holders continually setting new benchmarks. In 2024, how many days of driving were banned for the athlete who recorded the fastest time at the 2024 IRONMAN World Championship among participants with amputations below and above the knee? Format your answer as a single number."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll search for information about the 2024 IRONMAN World Championship and the driving ban for the fastest athlete with amputations.",
+      "tool_calls": [
+        {
+          "id": "call_00_LF3jMuFiZ6i2vk80sEYmcqwR",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"2024 IRONMAN World Championship fastest time amputations below above knee driving ban days\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'Billy Monger awarded Guinness World Record Icon status ... - IRONMAN', 'href': 'https://www.ironman.com/news/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-2024-ironman'}, {'title': 'After a double-leg amputation in 2017, Billy Monger has broken an ... - CNN', 'href': 'https://www.cnn.com/2025/03/21/sport/billy-monger-ironman-world-record-spt-intl'}, {'title': 'Race driver who had both legs amputated sets incredible world record', 'href': 'https://www.dailymail.co.uk/sport/othersports/article-14009363/Race-driver-Billy-Monger-legs-amputated-horror-crash-sets-incredible-sporting-record-beating-old-mark-TWO-HOURS.html'}, {'title': 'Double amputee Billy Monger smashes Ironman record by more than TWO ...', 'href': 'https://www.gbnews.com/sport/other-sport/billy-monger-ironman-record-two-hours-seven-years-horror-crash'}, {'title': \"Official Guinness World Record for Billy Monger's IRONMAN World ...\", 'href': 'https://endurance.biz/2025/industry-news/official-guinness-world-record-for-billy-mongers-ironman-world-championship-challenge/'}, {'title': 'How Race Car Driver Billy Monger Broke an IRONMAN Record', 'href': 'https://www.menshealth.com/fitness/a63590501/an-accident-took-his-legs-it-didnt-stop-him-from-making-ironman-history/'}, {'title': 'Ironman World Championship: Billy Monger breaks double amputee record ...', 'href': 'https://www.bbc.co.uk/sport/triathlon/articles/c2077kg7gzxo'}, {'title': 'Fastest time to complete the IRONMAN® World Championship (male) (LA1 ...', 'href': 'https://www.guinnessworldrecords.cn/world-records/772385-fastest-140-6-triathlon-distance-male-la1-la2'}, {'title': \"Men's Ironman World Championship 2024 - How the Race Unfolded\", 'href': 'https://www.trirating.com/mens-ironman-world-championship-2024-how-the-race-unfolded/'}, {'title': 'Bilateral Above-knee Amputee Sets Precedent Finishing the IRONMAN World ...', 'href': 'https://livingwithamplitude.com/bilateral-above-knee-amputee-sets-precedent-finishing-the-ironman-world-championship/'}]",
+      "tool_call_id": "call_00_LF3jMuFiZ6i2vk80sEYmcqwR"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me get more specific information about Billy Monger's driving ban.",
+      "tool_calls": [
+        {
+          "id": "call_00_bCbPeN2OAfY6AGTELAeyIl4v",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Billy Monger driving ban days 2024 IRONMAN World Championship\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'Surrey: Billy Monger given 49-day driving ban after crash - BBC', 'href': 'https://www.bbc.co.uk/news/articles/cwylwxl055xo'}, {'title': \"Race Across The World's Billy Monger banned from driving after losing ...\", 'href': 'https://www.mirror.co.uk/3am/celebrity-news/breaking-race-across-worlds-billy-33849007'}, {'title': 'Billy Monger: Reality TV star banned from driving', 'href': 'https://www.nationalworld.com/culture/celebrity/billy-monger-ex-racing-driver-celebrity-race-across-the-world-star-banned-from-driving-after-car-crash-4817772'}, {'title': \"BBC star banned from driving after 'smashing into multiple cars'\", 'href': 'https://metro.co.uk/2024/10/09/race-across-world-star-banned-driving-multi-car-crash-21762985/'}, {'title': 'Billy Monger: Driving ban for ex-racing driver and Celebrity Race ...', 'href': 'https://news.sky.com/story/ex-racing-driver-billy-monger-banned-from-driving-for-crashing-into-three-parked-cars-13231011'}, {'title': 'Ex-racing star banned from driving after smashing into three parked ...', 'href': 'https://www.thesun.co.uk/sport/30980280/ex-racing-star-banned-driving-horror-crash-three-cars/'}, {'title': 'Ironman World Championship 2024: Billy Monger smashes predicted time in ...', 'href': 'https://www.220triathlon.com/news/ironman-world-championships-2024-billy-monger-smashes-race'}, {'title': 'Ex-racing star banned from driving after horror crash in high-speed ...', 'href': 'https://www.the-sun.com/sport/12641420/ex-racing-star-banned-driving-horror-crash-three-cars/'}, {'title': 'Billy Monger | IRONMAN', 'href': 'https://www.ironman.com/news/billy-monger'}, {'title': 'BBC TV star banned from driving after crash involving three parked cars', 'href': 'https://www.birminghammail.co.uk/news/showbiz-tv/bbc-tv-star-banned-driving-30107992'}]",
+      "tool_call_id": "call_00_bCbPeN2OAfY6AGTELAeyIl4v"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me fetch the specific article about Billy Monger's driving ban to get the exact number of days.",
+      "tool_calls": [
+        {
+          "id": "call_00_D2UqM2voZizmmD5Ej4qCN20D",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.bbc.co.uk/news/articles/cwylwxl055xo\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"Surrey: Billy Monger given 49-day driving ban after crash - BBC News\\nBBC Homepage\\nSkip to content\\nAccessibility Help\\nYour account\\nHome\\nNews\\nSport\\nEarth\\nReel\\nWorklife\\nTravel\\nCulture\\nFuture\\nMusic\\nTV\\nWeather\\nSounds\\nMore menu\\nMore menu\\nSearch BBC\\nHome\\nNews\\nSport\\nEarth\\nReel\\nWorklife\\nTravel\\nCulture\\nFuture\\nMusic\\nTV\\nWeather\\nSounds\\nClose menu\\nBBC News\\nMenu\\nHome\\nIsrael-Gaza war\\nWar in Ukraine\\nClimate\\nVideo\\nWorld\\nUS & Canada\\nUK\\nBusiness\\nTech\\nMore\\nScience\\nEntertainment & Arts\\nHealth\\nIn Pictures\\nBBC Verify\\nWorld News TV\\nNewsbeat\\nEngland\\nRegions\\nSurrey\\nBilly Monger given 49-day driving ban after crash\\nImage source,\\nGetty Images\\nImage caption,\\nBilly Monger pleaded guilty to driving without due care and attention\\nBy\\nEmily Coady-Stemp\\nBBC News, South East\\nPublished\\n9 October 2024\\nBroadcaster and former racing driver Billy Monger has been banned from driving for 49 days after a crash in Surrey.\\nMr Monger, 25, crashed into three parked cars and also damaged a lamp-post and a front garden wall in the January crash, according to police.\\nSurrey Police said he pleaded guilty to driving without due care and attention at Guildford Magistrates' Court.\\nHe was driving a black Toyota Supra along a 30mph road just before midnight on 19 January in Limpsfield when he crashed into a Volkswagen Lupo, a Volkswagen Golf and a Citroen C, police said.\\nImage source,\\nSurrey Police\\nImage caption,\\nSurrey Police said three cars were damaged in the crash\\nAs well as being disqualified from driving, he was ordered to pay fines and costs totalling \\u00c2\\u00a32,694 when he was sentenced on Friday.\\nRick Scholey, supervisor for the Road Traffic Collision Team, said Mr Monger was not paying attention when he lost control of his car \\\"causing significant damage to the vehicles\\\" before hitting a hedge and wall belonging to a nearby house.\\nHe added: \\\"Thankfully, no one was in the road at the time otherwise this could have had far more serious consequences.\\\"\\nLater in October, Mr Monger will take on a 3.8km ocean swim, followed by a 180km coastal cycle and a marathon in Hawaii when he\\naims to break the record\\nfor the fastest double amputee to complete the annual Ironman World Championship.\\nHe raised more than \\u00c2\\u00a33m for Comic Relief in 2021 by walking, cycling and kayaking across England over four days.\\nImage source,\\nSurrey Police\\nImage caption,\\nPolice said Mr Monger was not paying attention when he lost control of his car\\nFollow BBC Surrey on\\nFacebook\\n,\\nexternal\\n, and on\\nX\\n,\\nexternal\\n. Send your story ideas to\\nsoutheasttoday@bbc.co.uk\\n,\\nexternal\\nor WhatsApp us on 08081 002250.\\nRelated topics\\nLimpsfield\\nCharlwood\\nSurrey Police\\nMore on this story\\nBilly Monger 'feeling ready' for Ironman challenge\\nPublished\\n16 September 2024\\nBilly Monger to take on charity Ironman challenge\\nPublished\\n24 July 2024\\nRelated Internet Links\\nSurrey Police\\nFrom other local news sites\\nPatchy rain expected today turning sunny tomorrow\\nExternal\\nFarnham Herald\\nWATCH: Festive cheer as Farnham switches on its Christmas lights\\nExternal\\nFarnham Herald\\nPopular north Surrey pub reopens after stunning three-week refurbishment\\nExternal\\nSurrey Comet\\nPerson dies after being hit by train in Kent with cancellations across London\\nExternal\\nSurrey Comet\\nInformation about BBC links to other news sites\\nTop stories\\nLive\\n.\\u00c2\\nIllegal migration 'dividing our country', home secretary says ahead of asylum policy shake-up\\n7878 viewing\\n7.9k viewing\\nFeud erupts between Trump and ally Marjorie Taylor Greene ahead of Epstein files vote\\nPublished\\n1 hour ago\\nMajor incident still in place after Storm Claudia causes severe flooding\\nPublished\\n51 minutes ago\\nMore to explore\\nHe takes medical cannabis every day - but worries people think he's a lazy stoner\\nEnd of 'golden ticket' asylum rules and Labour leadership talk\\nMy mum was a 17-year-old free spirit - so she was locked up and put in a coma\\nBin bags are piling up on this street - residents have had enough\\nWhy India caps pollution reading at 500 when the air is far more toxic\\nRetirement? World title shot? What next for Eubank and Benn?\\n'Head in hands': Ministers fume at No 10's self-inflicted chaos\\nEpstein files: Who else was mentioned?\\nOff Air with Laura K: Get Laura Kuenssberg\\u00e2\\u0080\\u0099s weekly newsletter emailed directly to you\\nElsewhere on the BBC\\nThe engrossing biopic of a Hollywood icon's early years\\nMeet Mhara who found her true self through Druidry\\nStylish spy thriller with Tom Hiddleston and Hugh Laurie\\nCan we use science to stop the rain from falling?\\nMost read\\n1\\nFeud erupts between Trump and ally Marjorie Taylor Greene ahead of Epstein files vote\\n2\\nMy mum was a 17-year-old free spirit - so she was locked up and put in a coma\\n3\\nData centre in the shed reduces energy bills to \\u00c2\\u00a340\\n4\\nMajor incident still in place after Storm Claudia causes severe flooding\\n5\\nEnd of 'golden ticket' asylum rules and Labour leadership talk\\n6\\nAll you need to know as I\\u00e2\\u0080\\u0099m a Celebrity 2025 kicks off\\n7\\nMatch abandoned after 'sexist' abuse of referee\\n8\\nBin bags are piling up on this street - residents have had enough\\n9\\nHe takes medical cannabis every day - but worries people think he's a lazy stoner\\n10\\nFuelled by fear, Benn ends 35-year wait for revenge\\nBBC News Services\\nOn your mobile\\nOn smart speakers\\nGet news alerts\\nContact BBC News\\nHome\\nNews\\nSport\\nEarth\\nReel\\nWorklife\\nTravel\\nCulture\\nFuture\\nMusic\\nTV\\nWeather\\nSounds\\nTerms of Use\\nAbout the BBC\\nPrivacy Policy\\nCookies\\nAccessibility Help\\nParental Guidance\\nContact the BBC\\nBBC emails for you\\nAdvertise with us\\nCopyright \\u00c2\\u00a9 2025 BBC. The BBC is not responsible for the content of external sites.\\nRead about our approach to external linking.\"}",
+      "tool_call_id": "call_00_D2UqM2voZizmmD5Ej4qCN20D"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me verify Billy Monger's Ironman World Championship performance in 2024.",
+      "tool_calls": [
+        {
+          "id": "call_00_qPjaYwizjhSeB4ol0uSrupo0",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Billy Monger 2024 IRONMAN World Championship fastest time amputations record\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'Billy Monger awarded Guinness World Record Icon status ... - IRONMAN', 'href': 'https://www.ironman.com/news/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-2024-ironman'}, {'title': 'After a double-leg amputation in 2017, Billy Monger has broken an ... - CNN', 'href': 'https://www.cnn.com/2025/03/21/sport/billy-monger-ironman-world-record-spt-intl'}, {'title': 'Ironman World Championship: Billy Monger breaks double amputee record ...', 'href': 'https://www.bbc.com/sport/triathlon/articles/c2077kg7gzxo'}, {'title': \"Official Guinness World Record for Billy Monger's IRONMAN World ...\", 'href': 'https://endurance.biz/2025/industry-news/official-guinness-world-record-for-billy-mongers-ironman-world-championship-challenge/'}, {'title': 'Billy Monger reveals the TOUGHEST part of his record-breaking Ironman ...', 'href': 'https://www.tri247.com/triathlon-news/billy-monger-toughest-part-ironman-kona-world-championships-record'}, {'title': 'Billy Monger shatters IRONMAN World record after double amputation', 'href': 'https://www.toinews.com/sports/news/against-all-odds-billy-monger-shatters-ironman-world-record-after-double-amputation/articleshow/119310268.html'}, {'title': 'Billy Monger: Fastest IRONMAN World Championship', 'href': 'https://www.guinnessworldrecords.com/records/icons/billy-monger-fastest-ironman-world-championship'}, {'title': 'Fastest time to complete the IRONMAN® World Championship (male) (LA1 ...', 'href': 'https://www.guinnessworldrecords.cn/world-records/772385-fastest-140-6-triathlon-distance-male-la1-la2'}, {'title': 'Double amputee Billy Monger smashes Ironman record by more than TWO ...', 'href': 'https://www.gbnews.com/sport/other-sport/billy-monger-ironman-record-two-hours-seven-years-horror-crash'}, {'title': 'Billy Monger Awarded Guinness World Record Icon Status Following ...', 'href': 'https://www.endurancesportswire.com/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-at-the-2024-ironman-world-championship-triathlon/'}]",
+      "tool_call_id": "call_00_qPjaYwizjhSeB4ol0uSrupo0"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me fetch the official IRONMAN article to confirm Billy Monger's record.",
+      "tool_calls": [
+        {
+          "id": "call_00_hCZyO319ydslmcnOQZIwJJo2",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.ironman.com/news/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-2024-ironman\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"An error occurred while fetching https://www.ironman.com/news/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-2024-ironman: 403 Client Error: Forbidden for url: https://www.ironman.com/news/billy-monger-awarded-guinness-world-record-icon-status-following-historical-feat-2024-ironman\"}",
+      "tool_call_id": "call_00_hCZyO319ydslmcnOQZIwJJo2"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try another source to confirm Billy Monger's Ironman achievement.",
+      "tool_calls": [
+        {
+          "id": "call_00_ffvbhGEsSOtjBaJ0L64mc3AP",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.bbc.com/sport/triathlon/articles/c2077kg7gzxo\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"Ironman World Championship: Billy Monger breaks double amputee record as Patrick Lange wins title - BBC Sport\\nBBC Homepage\\nSkip to content\\nAccessibility Help\\nYour account\\nHome\\nNews\\nSport\\nBusiness\\nInnovation\\nCulture\\nTravel\\nEarth\\nAudio\\nVideo\\nLive\\nMore menu\\nMore menu\\nSearch BBC\\nHome\\nNews\\nSport\\nBusiness\\nInnovation\\nCulture\\nTravel\\nEarth\\nAudio\\nVideo\\nLive\\nClose menu\\nBBC Sport\\nMenu\\nHome\\nFootball\\nCricket\\nFormula 1\\nRugby U\\nTennis\\nGolf\\nAthletics\\nCycling\\nMore\\nA-Z Sports\\nAmerican Football\\nAthletics\\nBasketball\\nBoxing\\nCricket\\nCycling\\nDarts\\nDisability Sport\\nFootball\\nFormula 1\\nGaelic Games\\nGolf\\nGymnastics\\nHorse Racing\\nMixed Martial Arts\\nMotorsport\\nNetball\\nOlympic Sports\\nRugby League\\nRugby Union\\nSnooker\\nSwimming\\nTennis\\nWinter Sports\\nFull Sports A-Z\\nMore from Sport\\nEngland\\nScotland\\nWales\\nNorthern Ireland\\nNews Feeds\\nHelp & FAQs\\nTriathlon\\nMonger breaks Ironman record for double amputee\\nImage source,\\nGetty Images\\nImage caption,\\nBilly Monger is the youngest double amputee to complete the Ironman World Championships course\\nPublished\\n27 October 2024\\nFormer racing driver Billy Monger broke the Ironman record for a double amputee at the World Championship in Kona, Hawaii.\\nMonger, 25, completed the 226.3km (140.6 miles) course in 14 hours 23 minutes 56 seconds, more than two hours inside the previous record.\\n\\\"That was the longest day of my life!\\\" Monger told Comic Relief, the charity he completed the challenge for.\\n\\\"I just felt so much love out on the course, that was really special.\\n\\\"I am absolutely chuffed \\u00e2\\u0080\\u0093 it was a race I couldn\\u00e2\\u0080\\u0099t have dreamed of. I hope you guys have loved the journey as much as I have.\\\"\\nMonger also said that he had been stung by a jellyfish during the swim and thanked his support team for helping him get through the gruelling course.\\nMonger completed the 3.8km swim in 1:07:29, the 180km cycle in 7:26:50 and the marathon run in 5:26:26.\\nGermany's Patrick Lange won the race in 7:35:53, knocking almost five minutes off Gustav Iden's 2022 course record to claim his third world title.\\nMonger's legs were amputated after he was involved in a\\nnear-fatal crash\\nwhile racing at Donington Park in 2017.\\nHe has since moved into broadcasting, featuring in the BBC series Celebrity Race Across the World and completing Billy's Big Challenge in 2021, when he walked, cycled and kayaked across Britain and raised more than \\u00c2\\u00a33m for Comic Relief.\\nOne of his legs is amputated above the knee and the other below. His bike and prosthetics were modified to make riding and running more comfortable.\\nMonger said that when he began training he\\nstruggled to run 5km\\nwithout feeling pain from his prosthetics.\\nRelated topics\\nTriathlon\\nMore on this story\\nDriven: The Billy Monger Story\\nTop stories\\nSouth Africa shock India in low-scoring thriller\\nPublished\\n19 minutes ago\\nLive\\n.\\u00c2\\nDP World Tour Championship - McIlroy goes clear of Ryder Cup team-mates\\n2732 viewing\\n2.7k viewing\\nFuelled by fear, Benn ends 35-year wait for revenge\\nPublished\\n3 hours ago\\nElsewhere on the BBC\\nAre England capable of beating the All Blacks?\\nMotivating music from Sara's nearest and dearest\\nPreview the rise and fall of four powerful civilisations\\nJennifer Lawrence reveals her creative inspirations\\nElsewhere in Sport\\n'Call it a day' - Frampton & Bellew react to Eubank's loss\\n'Scotland resuscitated after World Cup dream almost dies thrilling death'\\nRetirement? World title shot? What next for Eubank and Benn?\\nHow Twickenham learned to love the bomb and Borthwick\\n'Hansen shines brightest as Ireland heed Farrell's call'\\nHow dazzling Hemp can boost Man City's title hopes\\nEubank v Benn 2 - big-fight predictions\\nSeven games, 20 goals, none conceded - England close in on perfection\\nLe Tissier on her and stepbrother Alex Scott's unique football journey  Video\\nLe Tissier on her and stepbrother Alex Scott's unique football journey\\n'I thought my career was over - I felt like punching a wall'\\n'Proper players and me' - Fifa award nomination shocks Brentford's Cheatley\\nA 'circus' or sign of the times - should Joshua take Paul fight?\\nWill Ronaldo be banned at World Cup after red card?\\nIs anything being done about poor player behaviour?\\nWeekly sports quiz: How many World Cups has Ronaldo played in?\\nWho are the NFL's play-off contenders and pretenders? Video\\nWho are the NFL's play-off contenders and pretenders?\\nReinventing Football - five things fans would change\\n'Sea legs meant I couldn't bowl' - when England travelled to Australia by boat\\nHome\\nNews\\nSport\\nBusiness\\nInnovation\\nCulture\\nTravel\\nEarth\\nAudio\\nVideo\\nLive\\nTerms of Use\\nAbout the BBC\\nPrivacy Policy\\nCookies\\nAccessibility Help\\nParental Guidance\\nContact the BBC\\nBBC emails for you\\nAdvertise with us\\nCopyright \\u00c2\\u00a9 2025 BBC. The BBC is not responsible for the content of external sites.\\nRead about our approach to external linking.\"}",
+      "tool_call_id": "call_00_ffvbhGEsSOtjBaJ0L64mc3AP"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

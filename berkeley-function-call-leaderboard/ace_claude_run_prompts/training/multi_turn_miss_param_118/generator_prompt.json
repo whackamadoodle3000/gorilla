@@ -1,0 +1,900 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey, I was wondering if you could look at some stock for me? I want to make sure I'm on top of my investments."
+    },
+    {
+      "content": "I'd be happy to help you look at your stocks! To get started, I can help you with several things:\n\n1. **Check your current watchlist** - see what stocks you're currently tracking\n2. **Get stock information** - provide details on specific stocks you're interested in\n3. **Review your account** - check your current holdings and balance\n4. **Look at order history** - see your recent trading activity\n\nCould you let me know:\n- Are there specific stocks you'd like me to look up information for?\n- Would you like me to check your current watchlist first?\n- Or would you prefer to see your account overview and recent activity?\n\nJust let me know what you'd like to start with, and I'll help you stay on top of your investments!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "All stocks on my wishlist."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll check your watchlist for you right away.",
+      "tool_calls": [
+        {
+          "id": "call_00_OLhDGtH4tR4CvvSeMaMYGBJZ",
+          "type": "function",
+          "function": {
+            "name": "get_watchlist",
+            "arguments": ""
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: TradingBot.get_watchlist() got an unexpected keyword argument 'value'",
+      "tool_call_id": "call_00_OLhDGtH4tR4CvvSeMaMYGBJZ"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try that again without any parameters:",
+      "tool_calls": [
+        {
+          "id": "call_00_JwvDI04xfDHL5lNsq3DP4DZC",
+          "type": "function",
+          "function": {
+            "name": "get_watchlist",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"watchlist\": [\"NVDA\", \"TSLA\", \"GOOG\"]}",
+      "tool_call_id": "call_00_JwvDI04xfDHL5lNsq3DP4DZC"
+    },
+    {
+      "content": "Here are the stocks currently on your watchlist:\n\n1. **NVDA** - NVIDIA Corporation\n2. **TSLA** - Tesla, Inc.  \n3. **GOOG** - Alphabet Inc. (Google)\n\nWould you like me to get detailed information about any of these specific stocks, or would you prefer to see current pricing and performance data for all of them?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": " Would you mind taking the first one off my watchlist?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll remove NVDA from your watchlist for you.",
+      "tool_calls": [
+        {
+          "id": "call_00_8GTkwv8D1lho6nTnjxZsG8T3",
+          "type": "function",
+          "function": {
+            "name": "remove_stock_from_watchlist",
+            "arguments": "{\"symbol\": \"NVDA\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"status\": \"Stock NVDA removed from watchlist successfully.\"}",
+      "tool_call_id": "call_00_8GTkwv8D1lho6nTnjxZsG8T3"
+    },
+    {
+      "content": "NVDA has been successfully removed from your watchlist. Your updated watchlist now contains:\n- TSLA\n- GOOG\n\nIs there anything else you'd like me to help you with regarding your investments or watchlist?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I'm thinking about buying some shares today. Could you help me out by ordering 100 shares of AAPL at the current market price? I don't need the specifics—I'm relying on your expertise!"
+    },
+    {
+      "role": "assistant",
+      "content": "I'd be happy to help you place an order for AAPL shares! However, to place the order, I need to know the current market price. Let me check the current stock information for AAPL first, and then I can help you place the order.",
+      "tool_calls": [
+        {
+          "id": "call_00_0BFelob1XTzlvctYsev7Geg5",
+          "type": "function",
+          "function": {
+            "name": "get_stock_info",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"price\": 227.16, \"percent_change\": 0.17, \"volume\": 2.552, \"MA(5)\": 227.11, \"MA(20)\": 227.09}",
+      "tool_call_id": "call_00_0BFelob1XTzlvctYsev7Geg5"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll place your order for 100 shares of AAPL at the current market price of $227.16:",
+      "tool_calls": [
+        {
+          "id": "call_00_7PZCpTlaLP6KYrAiybRSgjvc",
+          "type": "function",
+          "function": {
+            "name": "place_order",
+            "arguments": "{\"order_type\": \"Buy\", \"symbol\": \"AAPL\", \"price\": 227.16, \"amount\": 100}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"order_id\": 12446, \"order_type\": \"Buy\", \"status\": \"Pending\", \"price\": 227.16, \"amount\": 100}",
+      "tool_call_id": "call_00_7PZCpTlaLP6KYrAiybRSgjvc"
+    },
+    {
+      "content": "Great! I've successfully placed your order for 100 shares of AAPL at $227.16 per share. Here are the order details:\n\n- **Order ID**: 12446\n- **Stock**: AAPL\n- **Order Type**: Buy\n- **Quantity**: 100 shares\n- **Price**: $227.16 per share\n- **Total Cost**: $22,716\n- **Status**: Pending\n\nThe order is now pending execution. Would you like me to check your account balance to ensure you have sufficient funds, or would you like me to monitor this order for you?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I might have bought more shares than I meant to before. Could you tell me the details of my latest order? Just want to be certain everything's correct before I make my next move."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll check the details of your latest order for you. Let me get your order history first to find the most recent order.",
+      "tool_calls": [
+        {
+          "id": "call_00_R2d1spHYswRF4o8bTRjs2TnI",
+          "type": "function",
+          "function": {
+            "name": "get_order_history",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"history\": [12345, \"order_type\", 12446]}",
+      "tool_call_id": "call_00_R2d1spHYswRF4o8bTRjs2TnI"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me get the details of your most recent order (order ID 12446):",
+      "tool_calls": [
+        {
+          "id": "call_00_50IMp15CCE8bMlU9tMmIMzZY",
+          "type": "function",
+          "function": {
+            "name": "get_order_details",
+            "arguments": "{\"order_id\": 12446}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"id\": 12446, \"order_type\": \"Buy\", \"symbol\": \"AAPL\", \"price\": 227.16, \"amount\": 100, \"status\": \"Open\"}",
+      "tool_call_id": "call_00_50IMp15CCE8bMlU9tMmIMzZY"
+    },
+    {
+      "content": "Here are the details of your most recent order:\n\n**Order Details:**\n- **Order ID**: 12446\n- **Order Type**: Buy\n- **Stock**: AAPL\n- **Price**: $227.16 per share\n- **Quantity**: 100 shares\n- **Total Cost**: $22,716\n- **Status**: Open\n\nThis confirms the order we just placed for 100 shares of AAPL at $227.16 per share. The order is currently \"Open\" status, which means it hasn't been executed yet.\n\nWould you like me to:\n1. Cancel this order if you'd like to adjust the quantity?\n2. Check your account balance to see if you have sufficient funds?\n3. Or proceed with your next move as planned?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Actually, I think I should cancel that last order. I need to rethink my strategy with all the current market changes happening."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll cancel that last order for you right away.",
+      "tool_calls": [
+        {
+          "id": "call_00_XF1enKi1VqWu1joAToYjPAFG",
+          "type": "function",
+          "function": {
+            "name": "cancel_order",
+            "arguments": "{\"order_id\": 12446}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"order_id\": 12446, \"status\": \"Cancelled\"}",
+      "tool_call_id": "call_00_XF1enKi1VqWu1joAToYjPAFG"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add_to_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Add a stock to the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stock": {
+              "type": "string",
+              "description": "the stock symbol to add to the watchlist. "
+            }
+          },
+          "required": [
+            "stock"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "watchlist": {
+              "type": "array",
+              "description": "the watchlist.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Cancel an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order to cancel. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the cancelled order."
+            },
+            "status": {
+              "type": "string",
+              "description": "New status of the order after cancellation attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "filter_stocks_by_price",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Filter stocks based on a price range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to filter."
+            },
+            "min_price": {
+              "type": "number",
+              "description": "Minimum stock price. This is a float type value.",
+              "format": "float"
+            },
+            "max_price": {
+              "type": "number",
+              "description": "Maximum stock price.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "min_price",
+            "max_price"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "filtered_stocks": {
+              "type": "array",
+              "description": "Filtered list of stock symbols within the price range.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fund_account",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Fund the account with the specified amount. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to fund the account with.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the funding operation."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after funding."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_account_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get account information. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "account_id": {
+              "type": "integer",
+              "description": "ID of the account."
+            },
+            "balance": {
+              "type": "float",
+              "description": "Current balance of the account."
+            },
+            "binding_card": {
+              "type": "integer",
+              "description": "Card number associated with the account."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_available_stocks",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get a list of stock symbols in the given sector. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "sector": {
+              "type": "string",
+              "description": "The sector to retrieve stocks from (e.g., 'Technology'). "
+            }
+          },
+          "required": [
+            "sector"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stock_list": {
+              "type": "array",
+              "description": "List of stock symbols in the specified sector.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_time",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the current time. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_time": {
+              "type": "string",
+              "description": "Current time in HH:MM AM/PM format."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_details",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock in the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the order. [Enum]: [\"Open\", \"Pending\", \"Completed\", \"Cancelled\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the stock order ID history. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_history": {
+              "type": "array",
+              "description": "List of orders ID in the order history.",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_stock_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of a stock. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol that uniquely identifies the stock. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "price": {
+              "type": "float",
+              "description": "Current price of the stock."
+            },
+            "percent_change": {
+              "type": "float",
+              "description": "Percentage change in stock price."
+            },
+            "volume": {
+              "type": "float",
+              "description": "Trading volume of the stock."
+            },
+            "MA(5)": {
+              "type": "float",
+              "description": "5-day Moving Average of the stock."
+            },
+            "MA(20)": {
+              "type": "float",
+              "description": "20-day Moving Average of the stock."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_symbol_by_name",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the symbol of a stock by company name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the company. "
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock or \"Stock not found\" if not available."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_transaction_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the transaction history within a specified date range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the history (format: 'YYYY-MM-DD').",
+              "default": "None"
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the history (format: 'YYYY-MM-DD'). ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "transaction_history": {
+              "type": "array",
+              "description": "List of transactions within the specified date range.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of transaction. [Enum]: [\"deposit\", \"withdrawal\"]"
+                  },
+                  "amount": {
+                    "type": "float",
+                    "description": "Amount involved in the transaction."
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "description": "Timestamp of the transaction, formatted as 'YYYY-MM-DD HH:MM:SS'."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "watchlist": {
+              "type": "array",
+              "description": "List of stock symbols in the watchlist.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "notify_price_change",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Notify if there is a significant price change in the stocks. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to check."
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Percentage change threshold to trigger a notification.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "threshold"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "notification": {
+              "type": "string",
+              "description": "Notification message about the price changes."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "place_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Place an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to trade."
+            },
+            "price": {
+              "type": "number",
+              "description": "Price at which to place the order. This is a float type value.",
+              "format": "float"
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares to trade. "
+            }
+          },
+          "required": [
+            "order_type",
+            "symbol",
+            "price",
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the newly placed order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "status": {
+              "type": "string",
+              "description": "Initial status of the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "remove_stock_from_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Remove a stock from the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to remove. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the removal operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_get_login_status",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the login status. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Login status."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_login",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user login. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username for authentication."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password for authentication. "
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Login status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_logout",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user logout for trading system. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Logout status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "withdraw_funds",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Withdraw funds from the account balance. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to withdraw from the account.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the transaction."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after the transaction."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

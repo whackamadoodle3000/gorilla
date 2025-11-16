@@ -1,0 +1,1679 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "I'm organizing a trip from San Francisco to Rome on October 10th 2026 and considering to fly business class. Secure a flight reservation that aligns with my financial constraints using my card with id card_7243 and access token 'abc123xyz'. Be sure to convert the ticket cost to EUR for an accurate currency reference."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you organize your trip from San Francisco to Rome on October 10th, 2026 in business class. Let me first check the flight cost and then book it for you, converting the price to EUR for reference.\n\nFirst, let me get the flight cost:",
+      "tool_calls": [
+        {
+          "id": "call_00_WDp2LIXkNmYb22fzzYfcm24s",
+          "type": "function",
+          "function": {
+            "name": "get_flight_cost",
+            "arguments": "{\"travel_from\": \"SFO\", \"travel_to\": \"FCO\", \"travel_date\": \"2026-10-10\", \"travel_class\": \"business\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: No available route for the given airports.",
+      "tool_call_id": "call_00_WDp2LIXkNmYb22fzzYfcm24s"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the available airports to find the correct airport codes for San Francisco and Rome:",
+      "tool_calls": [
+        {
+          "id": "call_00_MhsUEtsnHzdwijrqqVdOL0lU",
+          "type": "function",
+          "function": {
+            "name": "list_all_airports",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "['RMS', 'SBK', 'MPC', 'SVP', 'SHD', 'CDG', 'LHR', 'SSV', 'OKD', 'WLB', 'PEK', 'HND', 'HKG', 'CIA', 'CRH', 'ATV', 'PHV', 'GFD', 'SFO', 'LAX', 'JFK', 'ORD', 'BOS']",
+      "tool_call_id": "call_00_MhsUEtsnHzdwijrqqVdOL0lU"
+    },
+    {
+      "role": "assistant",
+      "content": "I can see SFO (San Francisco) is available, but I need to find the correct airport code for Rome. Let me check the nearest airport to Rome:",
+      "tool_calls": [
+        {
+          "id": "call_00_4ouqx45mMZIITxMgFhygQ8Mg",
+          "type": "function",
+          "function": {
+            "name": "get_nearest_airport_by_city",
+            "arguments": "{\"location\": \"Rome\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"nearest_airport\": \"CIA\"}",
+      "tool_call_id": "call_00_4ouqx45mMZIITxMgFhygQ8Mg"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I have the correct airport codes. Let me check the flight cost from SFO to CIA (Rome):",
+      "tool_calls": [
+        {
+          "id": "call_00_WyhipOD8zOT5vbeliRzg7XmO",
+          "type": "function",
+          "function": {
+            "name": "get_flight_cost",
+            "arguments": "{\"travel_from\": \"SFO\", \"travel_to\": \"CIA\", \"travel_date\": \"2026-10-10\", \"travel_class\": \"business\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"travel_cost_list\": [2800.0]}",
+      "tool_call_id": "call_00_WyhipOD8zOT5vbeliRzg7XmO"
+    },
+    {
+      "role": "assistant",
+      "content": "Great! The business class flight from San Francisco to Rome on October 10th, 2026 costs $2,800 USD. Now let me convert this to EUR for your reference:",
+      "tool_calls": [
+        {
+          "id": "call_00_JsnrJpVPxaXwuPWNSrdvQzZQ",
+          "type": "function",
+          "function": {
+            "name": "compute_exchange_rate",
+            "arguments": "{\"base_currency\": \"USD\", \"target_currency\": \"EUR\", \"value\": 2800.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"exchanged_value\": 2240.0}",
+      "tool_call_id": "call_00_JsnrJpVPxaXwuPWNSrdvQzZQ"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll book the flight for you:",
+      "tool_calls": [
+        {
+          "id": "call_00_n4dZvDckEaXVTR9tmqkm9zxG",
+          "type": "function",
+          "function": {
+            "name": "book_flight",
+            "arguments": "{\"access_token\": \"abc123xyz\", \"card_id\": \"card_7243\", \"travel_date\": \"2026-10-10\", \"travel_from\": \"SFO\", \"travel_to\": \"CIA\", \"travel_class\": \"business\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"booking_id\": \"3426812\", \"transaction_id\": \"45451592\", \"booking_status\": true, \"booking_history\": {}}",
+      "tool_call_id": "call_00_n4dZvDckEaXVTR9tmqkm9zxG"
+    },
+    {
+      "content": "Perfect! I've successfully booked your business class flight from San Francisco (SFO) to Rome (CIA) on October 10th, 2026. Here's a summary of your reservation:\n\n**Flight Details:**\n- Route: San Francisco (SFO) → Rome (CIA)\n- Date: October 10th, 2026\n- Class: Business\n- Booking ID: 3426812\n- Transaction ID: 45451592\n\n**Cost Information:**\n- Flight cost: $2,800 USD\n- Equivalent in EUR: €2,240 EUR\n\nThe booking was successfully processed using your credit card (card_7243) and the transaction has been completed. Your flight reservation is now confirmed and ready for your trip to Rome!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I wish to secure travel insurance for this booking to safeguard against potential unexpected situations. Ensure the insurance is approximately 150 euros and utilize the same card, assuming it has adequate funds. Opt for 'travel' type insurance."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you secure travel insurance for your booking. First, let me convert the 150 EUR insurance cost to USD since the travel system processes payments in USD:",
+      "tool_calls": [
+        {
+          "id": "call_00_CUHXMeJ3FXoiIdH9iRCZwZkS",
+          "type": "function",
+          "function": {
+            "name": "compute_exchange_rate",
+            "arguments": "{\"base_currency\": \"EUR\", \"target_currency\": \"USD\", \"value\": 150.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"exchanged_value\": 187.5}",
+      "tool_call_id": "call_00_CUHXMeJ3FXoiIdH9iRCZwZkS"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll purchase the travel insurance for your booking:",
+      "tool_calls": [
+        {
+          "id": "call_00_fnwrtgEx4KoITYO7BCQmmKfN",
+          "type": "function",
+          "function": {
+            "name": "purchase_insurance",
+            "arguments": "{\"access_token\": \"abc123xyz\", \"insurance_type\": \"travel\", \"insurance_cost\": 187.5, \"booking_id\": \"3426812\", \"card_id\": \"card_7243\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"insurance_id\": \"498276044\", \"insurance_status\": true}",
+      "tool_call_id": "call_00_fnwrtgEx4KoITYO7BCQmmKfN"
+    },
+    {
+      "content": "Excellent! I've successfully secured travel insurance for your booking. Here are the details:\n\n**Travel Insurance Confirmed:**\n- Insurance Type: Travel\n- Insurance ID: 498276044\n- Cost: €150 EUR (equivalent to $187.50 USD)\n- Booking ID: 3426812\n- Payment Method: Your card (card_7243)\n\nThe travel insurance has been successfully purchased and is now active for your flight from San Francisco to Rome on October 10th, 2026. This insurance will provide you with protection against unexpected situations during your travels. The transaction was processed successfully using the same credit card as your flight booking.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Now, consolidate an invoice covering my flight and the insurance costs. This will allow me to verify the comprehensive expense and ensure each detail is accurate within a single document."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll retrieve a consolidated invoice covering both your flight and insurance costs. Let me get that for you:",
+      "tool_calls": [
+        {
+          "id": "call_00_aF5SxtmaVjsn7f41wsdDrxr6",
+          "type": "function",
+          "function": {
+            "name": "retrieve_invoice",
+            "arguments": "{\"access_token\": \"abc123xyz\", \"booking_id\": \"3426812\", \"insurance_id\": \"498276044\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"invoice\": {\"booking_id\": \"3426812\", \"travel_date\": \"2026-10-10\", \"travel_from\": \"SFO\", \"travel_to\": \"CIA\", \"travel_class\": \"business\", \"travel_cost\": 2800.0, \"transaction_id\": \"45451592\"}}",
+      "tool_call_id": "call_00_aF5SxtmaVjsn7f41wsdDrxr6"
+    },
+    {
+      "role": "assistant",
+      "content": "I notice the invoice only shows the flight booking details. Let me try retrieving the invoice with just the access token to see if it provides a more comprehensive view:",
+      "tool_calls": [
+        {
+          "id": "call_00_KD0w3Gh0CqlqN2m30k2uLWwc",
+          "type": "function",
+          "function": {
+            "name": "retrieve_invoice",
+            "arguments": "{\"access_token\": \"abc123xyz\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Booking not found\"}",
+      "tool_call_id": "call_00_KD0w3Gh0CqlqN2m30k2uLWwc"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check your booking history to ensure we have the correct information:",
+      "tool_calls": [
+        {
+          "id": "call_00_MS0rxBt02Z0NHCajbdKLqpTt",
+          "type": "function",
+          "function": {
+            "name": "get_booking_history",
+            "arguments": "{\"access_token\": \"abc123xyz\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"booking_history\": {\"booking_001\": {\"flight_number\": \"RO1234\", \"departure\": \"San Francisco International\", \"arrival\": \"Leonardo da Vinci\\u2013Fiumicino Airport\", \"class\": \"Business\", \"date\": \"2026-09-10\", \"cost_usd\": 5200.0}, \"3426812\": {\"card_id\": \"card_7243\", \"travel_date\": \"2026-10-10\", \"travel_from\": \"SFO\", \"travel_to\": \"CIA\", \"travel_class\": \"business\", \"travel_cost\": 2800.0, \"transaction_id\": \"45451592\"}}}",
+      "tool_call_id": "call_00_MS0rxBt02Z0NHCajbdKLqpTt"
+    },
+    {
+      "content": "Based on the information available, here is your consolidated invoice:\n\n**COMPREHENSIVE TRAVEL INVOICE**\n\n**Flight Booking Details:**\n- Booking ID: 3426812\n- Transaction ID: 45451592\n- Route: San Francisco (SFO) → Rome (CIA)\n- Travel Date: October 10th, 2026\n- Class: Business\n- Flight Cost: $2,800.00 USD\n\n**Travel Insurance Details:**\n- Insurance ID: 498276044\n- Insurance Type: Travel\n- Insurance Cost: €150.00 EUR ($187.50 USD)\n\n**Total Costs:**\n- Flight: $2,800.00 USD\n- Insurance: $187.50 USD\n- **Grand Total: $2,987.50 USD**\n\n**Payment Information:**\n- Credit Card Used: card_7243\n- Access Token: abc123xyz\n\n**Currency Conversion Reference:**\n- Flight cost in EUR: €2,240.00 EUR\n- Insurance cost in EUR: €150.00 EUR\n- **Total in EUR: €2,390.00 EUR**\n\nAll transactions have been successfully processed and your travel arrangements are confirmed. The insurance provides coverage for unexpected situations during your trip from San Francisco to Rome.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Login twitter with 'bookworm_traveler' and password of 'Tr@v3lB00ks2023'.’m keen to share the thrilling announcement of my upcoming trip on Twitter, expressing \"Off to Rome! Can't wait to explore the ancient wonders and dive into Italian cuisine!\"."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you log into Twitter and share your exciting travel announcement. Let me first authenticate with your Twitter account:",
+      "tool_calls": [
+        {
+          "id": "call_00_3538b9zDytjdD8yicac8vQ7k",
+          "type": "function",
+          "function": {
+            "name": "authenticate_twitter",
+            "arguments": "{\"username\": \"bookworm_traveler\", \"password\": \"Tr@v3lB00ks2023\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"authentication_status\": true}",
+      "tool_call_id": "call_00_3538b9zDytjdD8yicac8vQ7k"
+    },
+    {
+      "role": "assistant",
+      "content": "Great! You're now logged into Twitter. Let me post your travel announcement:",
+      "tool_calls": [
+        {
+          "id": "call_00_wyMH8RRYudCJLN3sX9aB6ltD",
+          "type": "function",
+          "function": {
+            "name": "post_tweet",
+            "arguments": "{\"content\": \"Off to Rome! Can't wait to explore the ancient wonders and dive into Italian cuisine!\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"id\": 10, \"username\": \"bookworm_traveler\", \"content\": \"Off to Rome! Can't wait to explore the ancient wonders and dive into Italian cuisine!\", \"tags\": [], \"mentions\": []}",
+      "tool_call_id": "call_00_wyMH8RRYudCJLN3sX9aB6ltD"
+    },
+    {
+      "content": "Perfect! Your travel announcement has been successfully posted on Twitter. Here's what was shared:\n\n**Tweet Details:**\n- Username: bookworm_traveler\n- Content: \"Off to Rome! Can't wait to explore the ancient wonders and dive into Italian cuisine!\"\n- Tweet ID: 10\n\nYour exciting news about your upcoming trip to Rome is now live on Twitter for all your followers to see! The tweet captures your enthusiasm for exploring ancient wonders and enjoying Italian cuisine. Your Twitter account is now active and ready for more posts about your travel adventures.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Would you also kindly append"
+    },
+    {
+      "content": "I notice your message was cut off. You mentioned \"Would you also kindly append\" but it seems the rest of your request didn't come through. \n\nCould you please let me know what you'd like me to append to your tweet or what additional action you'd like me to take on Twitter? For example, would you like to:\n- Add hashtags to your tweet?\n- Mention other users in your tweet?\n- Add something specific to the content?\n- Or perform another Twitter action?\n\nPlease complete your request and I'll be happy to help!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "oh, append a thoughtful comment to the tweet: \"Safe travels and enjoy every moment!\""
+    },
+    {
+      "role": "assistant",
+      "content": "I'll add a thoughtful comment to your tweet. Let me post the comment:",
+      "tool_calls": [
+        {
+          "id": "call_00_4pp3MBwOVd1Mwt3SenIZdzua",
+          "type": "function",
+          "function": {
+            "name": "comment",
+            "arguments": "{\"tweet_id\": 10, \"comment_content\": \"Safe travels and enjoy every moment!\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"comment_status\": \"Comment added successfully\"}",
+      "tool_call_id": "call_00_4pp3MBwOVd1Mwt3SenIZdzua"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_twitter",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Authenticate a user with username and password. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password of the user."
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "authentication_status": {
+              "type": "boolean",
+              "description": "True if authenticated, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "comment",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Comment on a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to comment on."
+            },
+            "comment_content": {
+              "type": "string",
+              "description": "Content of the comment."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "comment_content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comment_status": {
+              "type": "string",
+              "description": "Status of the comment action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "follow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Follow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_follow": {
+              "type": "string",
+              "description": "Username of the user to follow."
+            }
+          },
+          "required": [
+            "username_to_follow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "follow_status": {
+              "type": "boolean",
+              "description": "True if followed, False if already following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the retrieved tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the tweet's author."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet_comments",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all comments for a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve comments for."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comments": {
+              "type": "array",
+              "description": "List of dictionaries, each containing comment information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the commenter."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the comment."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_stats",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get statistics for a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user to get statistics for."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tweet_count": {
+              "type": "integer",
+              "description": "Number of tweets posted by the user."
+            },
+            "following_count": {
+              "type": "integer",
+              "description": "Number of users the specified user is following."
+            },
+            "retweet_count": {
+              "type": "integer",
+              "description": "Number of retweets made by the user."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all tweets from a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user whose tweets to retrieve."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_following",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: List all users that the authenticated user is following. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "following_list": {
+              "type": "array",
+              "description": "List of all users that the authenticated user is following.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mention",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Mention specified users in a tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet where users are mentioned."
+            },
+            "mentioned_usernames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of usernames to be mentioned."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "mentioned_usernames"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "mention_status": {
+              "type": "string",
+              "description": "Status of the mention action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "post_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Post a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of tags for the tweet. Tag name should start with #. This is only relevant if the user wants to add tags to the tweet.",
+              "default": []
+            },
+            "mentions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of users mentioned in the tweet. Mention name should start with @. This is only relevant if the user wants to add mentions to the tweet.",
+              "default": []
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the posted tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the poster."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "posting_get_login_status",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retweet a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retweet."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "retweet_status": {
+              "type": "string",
+              "description": "Status of the retweet action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Search for tweets containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to search for in the content of the tweets."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "unfollow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Unfollow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_unfollow": {
+              "type": "string",
+              "description": "Username of the user to unfollow."
+            }
+          },
+          "required": [
+            "username_to_unfollow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "unfollow_status": {
+              "type": "boolean",
+              "description": "True if unfollowed, False if not following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_travel",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Authenticate the user with the travel API Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "The client applications client_id supplied by App Management"
+            },
+            "client_secret": {
+              "type": "string",
+              "description": "The client applications client_secret supplied by App Management"
+            },
+            "refresh_token": {
+              "type": "string",
+              "description": "The refresh token obtained from the initial authentication"
+            },
+            "grant_type": {
+              "type": "string",
+              "description": "The grant type of the authentication request. Here are the options: read_write, read, write"
+            },
+            "user_first_name": {
+              "type": "string",
+              "description": "The first name of the user"
+            },
+            "user_last_name": {
+              "type": "string",
+              "description": "The last name of the user"
+            }
+          },
+          "required": [
+            "client_id",
+            "client_secret",
+            "refresh_token",
+            "grant_type",
+            "user_first_name",
+            "user_last_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "expires_in": {
+              "type": "integer",
+              "description": "The number of time it can use until the access token expires"
+            },
+            "access_token": {
+              "type": "string",
+              "description": "The access token to be used in the Authorization header of future requests"
+            },
+            "token_type": {
+              "type": "string",
+              "description": "The type of token"
+            },
+            "scope": {
+              "type": "string",
+              "description": "The scope of the token"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_flight",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Book a flight given the travel information. From and To should be the airport codes in the IATA format. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the booking"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format YYYY-MM-DD"
+            },
+            "travel_from": {
+              "type": "string",
+              "description": "The location the travel is from"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The location the travel is to"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id",
+            "travel_date",
+            "travel_from",
+            "travel_to",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "transaction_id": {
+              "type": "string",
+              "description": "The ID of the transaction"
+            },
+            "booking_status": {
+              "type": "boolean",
+              "description": "The status of the booking, True if successful, False if failed"
+            },
+            "booking_history": {
+              "type": "dict",
+              "description": "The booking history. This field might be empty even though the history is non-empty.",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_booking",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Cancel a booking Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            }
+          },
+          "required": [
+            "access_token",
+            "booking_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cancel_status": {
+              "type": "boolean",
+              "description": "The status of the cancellation, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compute_exchange_rate",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Compute the exchange rate between two currencies Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base_currency": {
+              "type": "string",
+              "description": "The base currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "target_currency": {
+              "type": "string",
+              "description": "The target currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "value": {
+              "type": "number",
+              "description": "The value to convert This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "base_currency",
+            "target_currency",
+            "value"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "exchanged_value": {
+              "type": "float",
+              "description": "The value after the exchange"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "contact_customer_support",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Contact travel booking customer support, get immediate support on an issue with an online call. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "message": {
+              "type": "string",
+              "description": "The message to send to customer support"
+            }
+          },
+          "required": [
+            "booking_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "customer_support_message": {
+              "type": "string",
+              "description": "The message from customer support"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_credit_cards",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get all registered credit cards Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "credit_card_list": {
+              "type": "dict",
+              "description": "A dictionary containing all registered credit cards",
+              "properties": {
+                "card_number": {
+                  "type": "string",
+                  "description": "The number of the credit card"
+                },
+                "expiration_date": {
+                  "type": "string",
+                  "description": "The expiration date of the credit card in the format YYYY-MM-DD"
+                },
+                "cardholder_name": {
+                  "type": "string",
+                  "description": "The name of the cardholder"
+                },
+                "card_verification_value": {
+                  "type": "integer",
+                  "description": "The verification value of the credit card"
+                },
+                "balance": {
+                  "type": "float",
+                  "description": "The balance of the credit card"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_booking_history",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve all booking history for the user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method. "
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_history": {
+              "type": "dict",
+              "description": "A dictionary keyed by booking_id where each value contains the booking details.",
+              "properties": {
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_budget_fiscal_year",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the budget fiscal year Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "lastModifiedAfter": {
+              "type": "string",
+              "description": "Use this field if you only want Fiscal Years that were changed after the supplied date. The supplied date will be interpreted in the UTC time zone. If lastModifiedAfter is not supplied, the service will return all Fiscal Years, regardless of modified date. Example: 2016-03-29T16:12:20. Return in the format of YYYY-MM-DDTHH:MM:SS.",
+              "default": "None"
+            },
+            "includeRemoved": {
+              "type": "string",
+              "description": "If true, the service will return all Fiscal Years, including those that were previously removed. If not supplied, this field defaults to false.",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_fiscal_year": {
+              "type": "string",
+              "description": "The budget fiscal year"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_credit_card_balance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the balance of a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_balance": {
+              "type": "float",
+              "description": "The balance of the credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_flight_cost",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the list of cost of a flight in USD based on location, date, and class Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "travel_from": {
+              "type": "string",
+              "description": "The 3 letter code of the departing airport"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The 3 letter code of the arriving airport"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format 'YYYY-MM-DD'"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel. Options are: economy, business, first."
+            }
+          },
+          "required": [
+            "travel_from",
+            "travel_to",
+            "travel_date",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "travel_cost_list": {
+              "type": "array",
+              "description": "The list of cost of the travel",
+              "items": {
+                "type": "float"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_nearest_airport_by_city",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the nearest airport to the given location Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The name of the location. [Enum]: Rivermist, Stonebrook, Maplecrest, Silverpine, Shadowridge, London, Paris, Sunset Valley, Oakendale, Willowbend, Crescent Hollow, Autumnville, Pinehaven, Greenfield, San Francisco, Los Angeles, New York, Chicago, Boston, Beijing, Hong Kong, Rome, Tokyo"
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "nearest_airport": {
+              "type": "string",
+              "description": "The nearest airport to the given location"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_airports",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: List all available airports Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "airports": {
+              "type": "array",
+              "description": "A list of all available airports",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "purchase_insurance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Purchase insurance Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "insurance_type": {
+              "type": "string",
+              "description": "The type of insurance to purchase"
+            },
+            "insurance_cost": {
+              "type": "number",
+              "description": "The cost of the insurance This is a float type value.",
+              "format": "float"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the"
+            }
+          },
+          "required": [
+            "access_token",
+            "insurance_type",
+            "booking_id",
+            "insurance_cost",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance"
+            },
+            "insurance_status": {
+              "type": "boolean",
+              "description": "The status of the insurance purchase, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "register_credit_card",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Register a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method"
+            },
+            "card_number": {
+              "type": "string",
+              "description": "The credit card number"
+            },
+            "expiration_date": {
+              "type": "string",
+              "description": "The expiration date of the credit card in the format MM/YYYY"
+            },
+            "cardholder_name": {
+              "type": "string",
+              "description": "The name of the cardholder"
+            },
+            "card_verification_number": {
+              "type": "integer",
+              "description": "The card verification number"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_number",
+            "expiration_date",
+            "cardholder_name",
+            "card_verification_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the registered credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retrieve_invoice",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve the invoice for a booking. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking",
+              "default": "None"
+            },
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance",
+              "default": "None"
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "invoice": {
+              "type": "dict",
+              "description": "The invoice for the booking",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_budget_limit",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Set the budget limit for the user Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authentication process or initial configuration."
+            },
+            "budget_limit": {
+              "type": "number",
+              "description": "The budget limit to set in USD This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "access_token",
+            "budget_limit"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_limit": {
+              "type": "float",
+              "description": "The budget limit set in USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "travel_get_login_status",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the status of the login Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "The status of the login"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "verify_traveler_information",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Verify the traveler information Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "description": "The first name of the traveler"
+            },
+            "last_name": {
+              "type": "string",
+              "description": "The last name of the traveler"
+            },
+            "date_of_birth": {
+              "type": "string",
+              "description": "The date of birth of the traveler in the format YYYY-MM-DD"
+            },
+            "passport_number": {
+              "type": "string",
+              "description": "The passport number of the traveler"
+            }
+          },
+          "required": [
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "passport_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "verification_status": {
+              "type": "boolean",
+              "description": "The status of the verification, True if successful, False if failed"
+            },
+            "verification_failure": {
+              "type": "string",
+              "description": "The reason for the verification failure"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

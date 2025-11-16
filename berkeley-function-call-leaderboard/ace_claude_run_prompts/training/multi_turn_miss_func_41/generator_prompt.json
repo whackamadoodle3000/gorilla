@@ -1,0 +1,1188 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Where is my notes? Forward it exactly to Bob please. I am USR001."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find your notes and forward them to Bob. Let me first log you in and then search for your notes.",
+      "tool_calls": [
+        {
+          "id": "call_00_2Bcp3HidgQisBhNXSV5caQv8",
+          "type": "function",
+          "function": {
+            "name": "message_login",
+            "arguments": "{\"user_id\": \"USR001\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"login_status\": true, \"message\": \"User 'USR001' logged in successfully.\"}",
+      "tool_call_id": "call_00_2Bcp3HidgQisBhNXSV5caQv8"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me search for messages containing \"notes\" to find your notes:",
+      "tool_calls": [
+        {
+          "id": "call_00_WQdsm2o9cQ2hRGqj047W3714",
+          "type": "function",
+          "function": {
+            "name": "search_messages",
+            "arguments": "{\"keyword\": \"notes\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"results\": []}",
+      "tool_call_id": "call_00_WQdsm2o9cQ2hRGqj047W3714"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me also check your sent messages to see if you've sent any notes:",
+      "tool_calls": [
+        {
+          "id": "call_00_pcG46cySonVchiL86nmUNClD",
+          "type": "function",
+          "function": {
+            "name": "view_messages_sent",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"messages\": {\"USR002\": [\"My name is Alice. I want to connect.\"], \"USR003\": [\"Could you upload the file?\"], \"USR004\": [\"Could you upload the file?\"]}}",
+      "tool_call_id": "call_00_pcG46cySonVchiL86nmUNClD"
+    },
+    {
+      "role": "assistant",
+      "content": "I don't see any messages containing \"notes\" in your sent messages. Let me also check if Bob is in your contacts by trying to send a message. First, let me search more broadly for any files that might contain notes:",
+      "tool_calls": [
+        {
+          "id": "call_00_ZHDs4Uv5kGYgKBG3pmlqvugY",
+          "type": "function",
+          "function": {
+            "name": "find",
+            "arguments": "{\"name\": \"notes\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"matches\": [\"./initial_directory/notes\"]}",
+      "tool_call_id": "call_00_ZHDs4Uv5kGYgKBG3pmlqvugY"
+    },
+    {
+      "role": "assistant",
+      "content": "Great! I found a \"notes\" file. Let me check its contents:",
+      "tool_calls": [
+        {
+          "id": "call_00_aE6VoLIgAxdoSsKIWwxmE6Ef",
+          "type": "function",
+          "function": {
+            "name": "cat",
+            "arguments": "{\"file_name\": \"notes\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"cat: 'notes': No such file or directory\"}",
+      "tool_call_id": "call_00_aE6VoLIgAxdoSsKIWwxmE6Ef"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the current directory and navigate to where the notes file is located:",
+      "tool_calls": [
+        {
+          "id": "call_00_Ul9KbYnrbZxxIFmhYUkHHTNR",
+          "type": "function",
+          "function": {
+            "name": "pwd",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"/workspace\"}",
+      "tool_call_id": "call_00_Ul9KbYnrbZxxIFmhYUkHHTNR"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_00_NhyG3CQbTerfixvzNUSfNp92",
+          "type": "function",
+          "function": {
+            "name": "cd",
+            "arguments": "{\"folder\": \"initial_directory\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"current_working_directory\": \"initial_directory\"}",
+      "tool_call_id": "call_00_NhyG3CQbTerfixvzNUSfNp92"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me check the contents of the notes file:",
+      "tool_calls": [
+        {
+          "id": "call_00_78PYawNMjdkMklnaa6fCuJLR",
+          "type": "function",
+          "function": {
+            "name": "cat",
+            "arguments": "{\"file_name\": \"notes\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"file_content\": \"Meeting notes and project details.\"}",
+      "tool_call_id": "call_00_78PYawNMjdkMklnaa6fCuJLR"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect! I found your notes. The content is \"Meeting notes and project details.\" Now I'll forward this to Bob. Let me send this message to Bob:",
+      "tool_calls": [
+        {
+          "id": "call_00_01QH1RoJMK3WvwUS2LvLg36k",
+          "type": "function",
+          "function": {
+            "name": "send_message",
+            "arguments": "{\"receiver_id\": \"Bob\", \"message\": \"Meeting notes and project details.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Receiver ID 'Bob' not found.\"}",
+      "tool_call_id": "call_00_01QH1RoJMK3WvwUS2LvLg36k"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to add Bob as a contact first. Let me add Bob to your contacts:",
+      "tool_calls": [
+        {
+          "id": "call_00_qcys9GrX8SOwejuLH9Hg1OHC",
+          "type": "function",
+          "function": {
+            "name": "add_contact",
+            "arguments": "{\"user_name\": \"Bob\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"User name 'Bob' already exists.\"}",
+      "tool_call_id": "call_00_qcys9GrX8SOwejuLH9Hg1OHC"
+    },
+    {
+      "role": "assistant",
+      "content": "It seems Bob already exists in the system. Let me try sending the message again with the correct user ID format:",
+      "tool_calls": [
+        {
+          "id": "call_00_w7e4sud4ZGv5RXY7esHq6AJB",
+          "type": "function",
+          "function": {
+            "name": "send_message",
+            "arguments": "{\"receiver_id\": \"Bob\", \"message\": \"Meeting notes and project details.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Receiver ID 'Bob' not found.\"}",
+      "tool_call_id": "call_00_w7e4sud4ZGv5RXY7esHq6AJB"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check what user IDs are available by looking at your sent messages again to see the format:",
+      "tool_calls": [
+        {
+          "id": "call_00_4xs5qUazzheatF0NbgqBBQLp",
+          "type": "function",
+          "function": {
+            "name": "view_messages_sent",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"messages\": {\"USR002\": [\"My name is Alice. I want to connect.\"], \"USR003\": [\"Could you upload the file?\"], \"USR004\": [\"Could you upload the file?\"]}}",
+      "tool_call_id": "call_00_4xs5qUazzheatF0NbgqBBQLp"
+    },
+    {
+      "role": "assistant",
+      "content": "I see the user IDs follow the format \"USRXXX\". Let me try sending to \"USR005\" assuming that might be Bob:",
+      "tool_calls": [
+        {
+          "id": "call_00_OBav6YvZonIl62ydCo2WaBAb",
+          "type": "function",
+          "function": {
+            "name": "send_message",
+            "arguments": "{\"receiver_id\": \"USR005\", \"message\": \"Meeting notes and project details.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Receiver ID 'USR005' not found.\"}",
+      "tool_call_id": "call_00_OBav6YvZonIl62ydCo2WaBAb"
+    },
+    {
+      "content": "Let me check if there's a way to find Bob's user ID. Since I can't determine Bob's exact user ID from the available information, I'll need you to provide Bob's user ID to forward the notes. The notes I found contain \"Meeting notes and project details.\" \n\nCould you please provide Bob's user ID (it should be in the format like USR001, USR002, etc.) so I can forward the notes to him?",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I have updated some more functions you can choose from. What about now?"
+    },
+    {
+      "role": "assistant",
+      "content": "I see you've updated the available functions. Let me try using the `get_user_id` function to find Bob's user ID, and then forward the notes to him.",
+      "tool_calls": [
+        {
+          "id": "call_00_1Sa2mXpxzARctP8InD9nnpzH",
+          "type": "function",
+          "function": {
+            "name": "get_user_id",
+            "arguments": "{\"user\": \"Bob\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"user_id\": \"USR002\"}",
+      "tool_call_id": "call_00_1Sa2mXpxzARctP8InD9nnpzH"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect! Now I have Bob's user ID (USR002). Let me forward your notes to him:",
+      "tool_calls": [
+        {
+          "id": "call_00_T89aMJf8TFtkOpYCkduyirLc",
+          "type": "function",
+          "function": {
+            "name": "send_message",
+            "arguments": "{\"receiver_id\": \"USR002\", \"message\": \"Meeting notes and project details.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"sent_status\": true, \"message_id\": {\"new_id\": 67410}, \"message\": \"Message sent to 'USR002' successfully.\"}",
+      "tool_call_id": "call_00_T89aMJf8TFtkOpYCkduyirLc"
+    },
+    {
+      "content": "Great! I've successfully forwarded your notes to Bob (USR002). The message containing \"Meeting notes and project details.\" has been sent successfully.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "After Bob has received the details, would you mind removing it since there are some errors?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll remove the message I just sent to Bob. Let me delete the latest message sent to him:",
+      "tool_calls": [
+        {
+          "id": "call_00_Jr9Lv56ovXxUFcogVz8RIA9z",
+          "type": "function",
+          "function": {
+            "name": "delete_message",
+            "arguments": "{\"receiver_id\": \"USR002\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"deleted_status\": true, \"receiver_id\": \"USR002\", \"message\": \"Receiver USR002's latest message deleted successfully.\"}",
+      "tool_call_id": "call_00_Jr9Lv56ovXxUFcogVz8RIA9z"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add_contact",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Add a contact to the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_name": {
+              "type": "string",
+              "description": "User name of contact to be added."
+            }
+          },
+          "required": [
+            "user_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "added_status": {
+              "type": "boolean",
+              "description": "True if the contact was added successfully, False otherwise."
+            },
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the added contact."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the addition attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Delete the latest message sent to a receiver. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            }
+          },
+          "required": [
+            "receiver_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "deleted_status": {
+              "type": "boolean",
+              "description": "True if the message was deleted successfully, False otherwise."
+            },
+            "receiver_id": {
+              "type": "string",
+              "description": "ID of the receiver of the deleted message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the deletion attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_message_stats",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get statistics about messages for the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stats": {
+              "type": "dict",
+              "description": "Dictionary containing message statistics.",
+              "properties": {
+                "received_count": {
+                  "type": "integer",
+                  "description": "Number of messages received by the current user."
+                },
+                "total_contacts": {
+                  "type": "integer",
+                  "description": "Total number of contacts the user has interacted with."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_get_login_status",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_login",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Log in a user with the given user ID to messeage application. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user to log in. "
+            }
+          },
+          "required": [
+            "user_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the login attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_messages",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Search for messages containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "The keyword to search for in messages."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "List of dictionaries containing matching messages.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "receiver_id": {
+                    "type": "string",
+                    "description": "User ID of the receiver of the message."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "The message containing the keyword."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Send a message to a user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message to be sent."
+            }
+          },
+          "required": [
+            "receiver_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sent_status": {
+              "type": "boolean",
+              "description": "True if the message was sent successfully, False otherwise."
+            },
+            "message_id": {
+              "type": "integer",
+              "description": "ID of the sent message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the send attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "view_messages_sent",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: View all historical messages sent by the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "dict",
+              "description": "Dictionary of messages grouped by receiver An example of the messages dictionary is {\"USR001\":[\"Hello\"],\"USR002\":[\"World\"]}."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cat",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the contents of a file of any extension from currrent directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file from current directory to display. No path is allowed. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "file_content": {
+              "type": "string",
+              "description": "The content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Change the current working directory to the specified folder. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "folder": {
+              "type": "string",
+              "description": "The folder of the directory to change to. You can only change one folder level at a time. "
+            }
+          },
+          "required": [
+            "folder"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The new current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cp",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Copy a file or directory from one location to another.  If the destination is a directory, the source file or directory will be copied into the destination directory.  Both source and destination must be local to the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The name of the file or directory to copy."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to copy the file or directory to. If the destination is a directory, the source will be copied into this directory. No file paths allowed. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the copy operation or an error message if the operation fails."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "diff",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Compare two files of any extension line by line at the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name1": {
+              "type": "string",
+              "description": "The name of the first file in current directory."
+            },
+            "file_name2": {
+              "type": "string",
+              "description": "The name of the second file in current directory. "
+            }
+          },
+          "required": [
+            "file_name1",
+            "file_name2"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "diff_lines": {
+              "type": "string",
+              "description": "The differences between the two files."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "du",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Estimate the disk usage of a directory and its contents. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "human_readable": {
+              "type": "boolean",
+              "description": "If True, returns the size in human-readable format (e.g., KB, MB). ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "disk_usage": {
+              "type": "string",
+              "description": "The estimated disk usage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "echo",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Write content to a file at current directory or display it in the terminal. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The content to write or display."
+            },
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file at current directory to write the content to. Defaults to None. ",
+              "default": "None"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "terminal_output": {
+              "type": "string",
+              "description": "The content if no file name is provided, or None if written to file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Find any file or directories under specific path that contain name in its file name.  This method searches for files of any extension and directories within a specified path that match the given name. If no name is provided, it returns all files and directories in the specified path and its subdirectories. Note: This method performs a recursive search through all subdirectories of the given path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "The directory path to start the search. Defaults to the current directory (\".\").",
+              "default": "."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the file or directory to search for. If None, all items are returned. ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matches": {
+              "type": "array",
+              "description": "A list of matching file and directory paths relative to the given path.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "grep",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Search for lines in a file of any extension at current directory that contain the specified pattern. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to search. No path is allowed and you can only perform on file at local directory."
+            },
+            "pattern": {
+              "type": "string",
+              "description": "The pattern to search for. "
+            }
+          },
+          "required": [
+            "file_name",
+            "pattern"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_lines": {
+              "type": "array",
+              "description": "Lines that match the pattern.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "ls",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: List the contents of the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "boolean",
+              "description": "Show hidden files and directories. Defaults to False. ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_directory_content": {
+              "type": "array",
+              "description": "A list of the contents of the specified directory.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mkdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new directory in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the new directory at current directory. You can only create directory at current directory."
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mv",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Move a file or directory from one location to another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Source name of the file or directory to move. Source must be local to the current directory."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to move the file or directory to. Destination must be local to the current directory and cannot be a path. If destination is not an existing directory like when renaming something, destination is the new file name. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the move operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pwd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Return the current working directory path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rm",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a file or directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file or directory to remove. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rmdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a directory at current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the directory to remove. Directory must be local to the current directory. "
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "sort",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Sort the contents of a file line by line. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file appeared at current directory to sort. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sorted_content": {
+              "type": "string",
+              "description": "The sorted content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "tail",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the last part of a file of any extension. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to display. No path is allowed and you can only perform on file at local directory."
+            },
+            "lines": {
+              "type": "integer",
+              "description": "The number of lines to display from the end of the file. Defaults to 10. ",
+              "default": 10
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "last_lines": {
+              "type": "string",
+              "description": "The last part of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "touch",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new file of any extension in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the new file in the current directory. file_name is local to the current directory and does not allow path."
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "wc",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Count the number of lines, words, and characters in a file of any extension from current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "Name of the file of current directory to perform wc operation on."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Mode of operation ('l' for lines, 'w' for words, 'c' for characters). ",
+              "default": "l"
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "The count of the number of lines, words, or characters in the file."
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of unit we are counting. [Enum]: [\"lines\", \"words\", \"characters\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_id",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get user ID from user name.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "User name of the user. "
+            }
+          },
+          "required": [
+            "user"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_users",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: List all users in the workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_list": {
+              "type": "array",
+              "description": "List of all users in the workspace.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

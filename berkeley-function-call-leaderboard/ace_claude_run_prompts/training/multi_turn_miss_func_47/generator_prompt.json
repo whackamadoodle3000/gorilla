@@ -1,0 +1,1280 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "I have a list of student record in this directory, could you find me where is it by telling me its name and using 'find'?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find the student records in the current directory using the `find` command. Let me search for files that might contain student records.",
+      "tool_calls": [
+        {
+          "id": "call_00_HYtaxgUMr82BgKn8HTkrCAg3",
+          "type": "function",
+          "function": {
+            "name": "find",
+            "arguments": "{\"name\": \"student\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"matches\": [\"./student_record.txt\"]}",
+      "tool_call_id": "call_00_HYtaxgUMr82BgKn8HTkrCAg3"
+    },
+    {
+      "content": "Great! I found a file containing student records. The file is named `student_record.txt` and it's located in the current directory.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Look at the student_record.txt and tell me the average score."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll read the student_record.txt file to see the contents and then calculate the average score.",
+      "tool_calls": [
+        {
+          "id": "call_00_Ni9d7uQp94HtppaQxWBR6YTG",
+          "type": "function",
+          "function": {
+            "name": "cat",
+            "arguments": "{\"file_name\": \"student_record.txt\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"file_content\": \"John: 100 Jane: 95 Alice: 85 Bob: 90 Tom: 88 Olivia: 92\"}",
+      "tool_call_id": "call_00_Ni9d7uQp94HtppaQxWBR6YTG"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I can see the student records with their scores. Let me extract the scores and calculate the average:",
+      "tool_calls": [
+        {
+          "id": "call_00_6fQ0WOGe1jrMzC17r0MpPkDu",
+          "type": "function",
+          "function": {
+            "name": "sum_values",
+            "arguments": "{\"numbers\": [100, 95, 85, 90, 88, 92]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"result\": 550}",
+      "tool_call_id": "call_00_6fQ0WOGe1jrMzC17r0MpPkDu"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll calculate the average by dividing the total sum by the number of students (6):",
+      "tool_calls": [
+        {
+          "id": "call_00_VvpWMVa82zzvqU9udBpJEAXc",
+          "type": "function",
+          "function": {
+            "name": "divide",
+            "arguments": "{\"a\": 550, \"b\": 6}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"result\": 91.66666666666667}",
+      "tool_call_id": "call_00_VvpWMVa82zzvqU9udBpJEAXc"
+    },
+    {
+      "content": "The average score of the students is **91.67** (rounded to two decimal places).\n\nTo summarize:\n- Total sum of scores: 550\n- Number of students: 6\n- Average score: 91.67",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I have updated some more functions you can choose from. What about now?"
+    },
+    {
+      "role": "assistant",
+      "content": "I see you've mentioned that more functions are available, but I don't see any new tools in my current list. The tools I have access to are still the same file system operations and math functions.\n\nHowever, I notice that we could have used the `mean` function from the Math API to calculate the average score more directly, rather than manually summing and dividing. Let me demonstrate that approach:",
+      "tool_calls": [
+        {
+          "id": "call_00_ZH8Xsc7BwP4Vf6CfKasDuIoX",
+          "type": "function",
+          "function": {
+            "name": "mean",
+            "arguments": "{\"numbers\": [100, 95, 85, 90, 88, 92]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"result\": 91.66666666666667}",
+      "tool_call_id": "call_00_ZH8Xsc7BwP4Vf6CfKasDuIoX"
+    },
+    {
+      "content": "Using the `mean` function gives us the same result: **91.67** average score.\n\nIf there are additional functions you'd like me to use or if you have other tasks related to the student records, please let me know!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "What about the standard deviation?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll calculate the standard deviation of the student scores from the student_record.txt file.",
+      "tool_calls": [
+        {
+          "id": "call_00_Ohg5SinqbCkmcyT3hkgRXyBA",
+          "type": "function",
+          "function": {
+            "name": "standard_deviation",
+            "arguments": "{\"numbers\": [100, 95, 85, 90, 88, 92]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"result\": 4.853406592853679}",
+      "tool_call_id": "call_00_Ohg5SinqbCkmcyT3hkgRXyBA"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "cat",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the contents of a file of any extension from currrent directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file from current directory to display. No path is allowed. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "file_content": {
+              "type": "string",
+              "description": "The content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Change the current working directory to the specified folder. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "folder": {
+              "type": "string",
+              "description": "The folder of the directory to change to. You can only change one folder level at a time. "
+            }
+          },
+          "required": [
+            "folder"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The new current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cp",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Copy a file or directory from one location to another.  If the destination is a directory, the source file or directory will be copied into the destination directory.  Both source and destination must be local to the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "The name of the file or directory to copy."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to copy the file or directory to. If the destination is a directory, the source will be copied into this directory. No file paths allowed. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the copy operation or an error message if the operation fails."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "diff",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Compare two files of any extension line by line at the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name1": {
+              "type": "string",
+              "description": "The name of the first file in current directory."
+            },
+            "file_name2": {
+              "type": "string",
+              "description": "The name of the second file in current directory. "
+            }
+          },
+          "required": [
+            "file_name1",
+            "file_name2"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "diff_lines": {
+              "type": "string",
+              "description": "The differences between the two files."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "du",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Estimate the disk usage of a directory and its contents. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "human_readable": {
+              "type": "boolean",
+              "description": "If True, returns the size in human-readable format (e.g., KB, MB). ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "disk_usage": {
+              "type": "string",
+              "description": "The estimated disk usage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "echo",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Write content to a file at current directory or display it in the terminal. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The content to write or display."
+            },
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file at current directory to write the content to. Defaults to None. ",
+              "default": "None"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "terminal_output": {
+              "type": "string",
+              "description": "The content if no file name is provided, or None if written to file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Find any file or directories under specific path that contain name in its file name.  This method searches for files of any extension and directories within a specified path that match the given name. If no name is provided, it returns all files and directories in the specified path and its subdirectories. Note: This method performs a recursive search through all subdirectories of the given path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "The directory path to start the search. Defaults to the current directory (\".\").",
+              "default": "."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the file or directory to search for. If None, all items are returned. ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matches": {
+              "type": "array",
+              "description": "A list of matching file and directory paths relative to the given path.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "grep",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Search for lines in a file of any extension at current directory that contain the specified pattern. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to search. No path is allowed and you can only perform on file at local directory."
+            },
+            "pattern": {
+              "type": "string",
+              "description": "The pattern to search for. "
+            }
+          },
+          "required": [
+            "file_name",
+            "pattern"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_lines": {
+              "type": "array",
+              "description": "Lines that match the pattern.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "ls",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: List the contents of the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "boolean",
+              "description": "Show hidden files and directories. Defaults to False. ",
+              "default": false
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_directory_content": {
+              "type": "array",
+              "description": "A list of the contents of the specified directory.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mkdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new directory in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the new directory at current directory. You can only create directory at current directory."
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mv",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Move a file or directory from one location to another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Source name of the file or directory to move. Source must be local to the current directory."
+            },
+            "destination": {
+              "type": "string",
+              "description": "The destination name to move the file or directory to. Destination must be local to the current directory and cannot be a path. If destination is not an existing directory like when renaming something, destination is the new file name. "
+            }
+          },
+          "required": [
+            "source",
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the move operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pwd",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Return the current working directory path. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_working_directory": {
+              "type": "string",
+              "description": "The current working directory path."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rm",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a file or directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file or directory to remove. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "rmdir",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Remove a directory at current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "dir_name": {
+              "type": "string",
+              "description": "The name of the directory to remove. Directory must be local to the current directory. "
+            }
+          },
+          "required": [
+            "dir_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "The result of the remove operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "sort",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Sort the contents of a file line by line. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file appeared at current directory to sort. "
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sorted_content": {
+              "type": "string",
+              "description": "The sorted content of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "tail",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Display the last part of a file of any extension. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the file to display. No path is allowed and you can only perform on file at local directory."
+            },
+            "lines": {
+              "type": "integer",
+              "description": "The number of lines to display from the end of the file. Defaults to 10. ",
+              "default": 10
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "last_lines": {
+              "type": "string",
+              "description": "The last part of the file."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "touch",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Create a new file of any extension in the current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "The name of the new file in the current directory. file_name is local to the current directory and does not allow path."
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "wc",
+        "description": "This tool belongs to the Gorilla file system. It is a simple file system that allows users to perform basic file operations such as navigating directories, creating files and directories, reading and writing to files, etc. Tool description: Count the number of lines, words, and characters in a file of any extension from current directory. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_name": {
+              "type": "string",
+              "description": "Name of the file of current directory to perform wc operation on."
+            },
+            "mode": {
+              "type": "string",
+              "description": "Mode of operation ('l' for lines, 'w' for words, 'c' for characters). ",
+              "default": "l"
+            }
+          },
+          "required": [
+            "file_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "description": "The count of the number of lines, words, or characters in the file."
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of unit we are counting. [Enum]: [\"lines\", \"words\", \"characters\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "absolute_value",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the absolute value of a number. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number",
+              "description": "The number to calculate the absolute value of.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The absolute value of the number."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "add",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Add two numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "First number. This is a float type value.",
+              "format": "float"
+            },
+            "b": {
+              "type": "number",
+              "description": "Second number.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Sum of the two numbers."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "divide",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Divide one number by another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "Numerator. This is a float type value.",
+              "format": "float"
+            },
+            "b": {
+              "type": "number",
+              "description": "Denominator.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Quotient of the division."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "imperial_si_conversion",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Convert a value between imperial and SI units. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Value to be converted. This is a float type value.",
+              "format": "float"
+            },
+            "unit_in": {
+              "type": "string",
+              "description": "Unit of the input value."
+            },
+            "unit_out": {
+              "type": "string",
+              "description": "Unit to convert the value to. "
+            }
+          },
+          "required": [
+            "value",
+            "unit_in",
+            "unit_out"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Converted value in the new unit."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "logarithm",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Compute the logarithm of a number with adjustable precision using mpmath. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "The number to compute the logarithm of. This is a float type value.",
+              "format": "float"
+            },
+            "base": {
+              "type": "number",
+              "description": "The base of the logarithm. This is a float type value.",
+              "format": "float"
+            },
+            "precision": {
+              "type": "integer",
+              "description": "Desired precision for the result. "
+            }
+          },
+          "required": [
+            "value",
+            "base",
+            "precision"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The logarithm of the number with respect to the given base."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "max_value",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Find the maximum value in a list of numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "List of numbers to find the maximum from. "
+            }
+          },
+          "required": [
+            "numbers"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The maximum value in the list."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "min_value",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Find the minimum value in a list of numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "List of numbers to find the minimum from. "
+            }
+          },
+          "required": [
+            "numbers"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The minimum value in the list."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "multiply",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Multiply two numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "First number. This is a float type value.",
+              "format": "float"
+            },
+            "b": {
+              "type": "number",
+              "description": "Second number.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Product of the two numbers."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "percentage",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the percentage of a part relative to a whole. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "part": {
+              "type": "number",
+              "description": "The part value. This is a float type value.",
+              "format": "float"
+            },
+            "whole": {
+              "type": "number",
+              "description": "The whole value.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "part",
+            "whole"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The percentage of the part relative to the whole."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "power",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Raise a number to a power. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "number",
+              "description": "The base number. This is a float type value.",
+              "format": "float"
+            },
+            "exponent": {
+              "type": "number",
+              "description": "The exponent.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "base",
+            "exponent"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The base raised to the power of the exponent."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "round_number",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Round a number to a specified number of decimal places. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number",
+              "description": "The number to round. This is a float type value.",
+              "format": "float"
+            },
+            "decimal_places": {
+              "type": "integer",
+              "description": "The number of decimal places to round to. Defaults to 0. ",
+              "default": 0
+            }
+          },
+          "required": [
+            "number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The rounded number."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "si_unit_conversion",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Convert a value from one SI unit to another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Value to be converted. This is a float type value.",
+              "format": "float"
+            },
+            "unit_in": {
+              "type": "string",
+              "description": "Unit of the input value."
+            },
+            "unit_out": {
+              "type": "string",
+              "description": "Unit to convert the value to. "
+            }
+          },
+          "required": [
+            "value",
+            "unit_in",
+            "unit_out"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Converted value in the new unit."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "square_root",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the square root of a number with adjustable precision using the decimal module. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number",
+              "description": "The number to calculate the square root of. This is a float type value.",
+              "format": "float"
+            },
+            "precision": {
+              "type": "integer",
+              "description": "Desired precision for the result. "
+            }
+          },
+          "required": [
+            "number",
+            "precision"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The square root of the number, or an error message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "standard_deviation",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the standard deviation of a list of numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "List of numbers to calculate the standard deviation of. "
+            }
+          },
+          "required": [
+            "numbers"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Standard deviation of the numbers."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "subtract",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Subtract one number from another. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number",
+              "description": "Number to subtract from. This is a float type value.",
+              "format": "float"
+            },
+            "b": {
+              "type": "number",
+              "description": "Number to subtract.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Difference between the two numbers."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "sum_values",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the sum of a list of numbers. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "List of numbers to sum. "
+            }
+          },
+          "required": [
+            "numbers"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "The sum of all numbers in the list."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mean",
+        "description": "This tool belongs to the Math API, which provides various mathematical operations. Tool description: Calculate the mean of a list of numbers.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "numbers": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "List of numbers to calculate the mean of. "
+            }
+          },
+          "required": [
+            "numbers"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "result": {
+              "type": "float",
+              "description": "Mean of the numbers."
+            }
+          }
+        }
+      }
+    }
+  ]
+}
