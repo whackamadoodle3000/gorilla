@@ -40,11 +40,30 @@ DEFAULT_API_KEY_ENV = "DEEPSEEK_API_KEY"
 DEFAULT_BASE_URL = "https://api.deepseek.com"
 
 
+OPENROUTER_API_KEY_ENV = "OPENROUTER_API_KEY"
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
 def _infer_defaults(model_name: str) -> tuple[str, str | None]:
+    """
+    Infer the base URL and API key environment variable based on model name.
+    
+    Supports:
+    - DeepSeek: deepseek-chat, deepseek-reasoner, etc.
+    - Claude Haiku 4.5 via OpenRouter: anthropic/claude-haiku-4.5
+    """
     lower = model_name.lower()
     if "deepseek" in lower:
         return DEFAULT_BASE_URL, DEFAULT_API_KEY_ENV
-    return None, "OPENAI_API_KEY"
+    # Claude Haiku 4.5 via OpenRouter
+    elif "claude-haiku-4.5" in lower or "claude-haiku" in lower:
+        return OPENROUTER_BASE_URL, OPENROUTER_API_KEY_ENV
+    else:
+        raise ValueError(
+            f"Unsupported model: {model_name}. "
+            "Supported models: DeepSeek models (deepseek-chat, etc.) or anthropic/claude-haiku-4.5"
+        )
+
 
 
 @dataclass
