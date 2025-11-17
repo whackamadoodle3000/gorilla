@@ -1,0 +1,1293 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\ntrading_bot\n- delta1: Request missing required parameters before tool invocation only if user intent is ambiguous; 'prevailing market price' is a directive to use live rates, not a missing parameter.\n- delta10: On get_watchlist invocation, present retrieved results directly to user. Never defer or request credentials after successful tool execution. Always invoke get_watchlist before presenting watchlist contents.\n- delta11: delta11: Never defer remove_stock_from_watchlist on company name alone. Invoke immediately with company_name parameter; defer only if execution fails, not before attempting.\n- delta12: Multi-turn requires tool_calls in every turn with feasible intent, including state queries. Never respond narrative-only when tool invocation is possible; execute atomically even if outcome seems known.\n- delta13: Never skip tool invocation to avoid predicted failure. Deferred execution breaks multi-turn instance state parity. Execute all manifest calls; let tool return success/failure and mutate state accordingly.\n- delta14: delta14: Invoke fund_account immediately on deposit directive with calculable amount. Never defer for parameter clarification; execute atomically and let tool validate/reject.\n- delta15: delta15: 'Current market price' is a complete price parameter for place_order. Invoke immediately; never request explicit price confirmation when live-rate directive provided.\n- delta16: get_watchlist must be invoked explicitly every turn before presenting watchlist contents. Never infer state from prior turns; execute state-query atomically per turn.\n- delta2: Invoke tools on first relevant request with available context; 'current market price' is a live-rate directive, not missing data. Never defer when symbol, quantity, and price directive present.\n- delta3: Invoke add_to_watchlist on first mention with company name; never defer or lookup symbol first. Company names are valid inputs; execute immediately without precursor calls.\n- delta4: Never insert login/authentication checks as preconditions or post-execution pivots unless user explicitly requests auth or prior execution fails. Trust valid session state.\n- delta5: On place_order with symbol, quantity, price or 'current market price' directive: invoke immediately. Never defer for confirmation. Tool validates; state mutation requires execution.\n- delta6: Invoke cancel_order immediately on explicit cancellation directives with order_id. Execute regardless of predicted outcome or order status. State transitions require execution, not explanation.\n- delta7: After place_order succeeds, invoke get_order_details with returned order_id to retrieve status. State mutations require sequential confirmation calls.\n- delta8: delta8: After withdraw_funds succeeds, invoke get_account_info immediately to retrieve updated balance. State mutations require sequential confirmation calls.\n- delta9: delta9: Never issue capability disclaimers or defer on first relevant request. Invoke tools directly per manifest; avoid claiming functions unavailable before attempting execution.\n\ntwitter_api\n- delta1: Execute post_tweet immediately with tweet text, hashtags, mentions; do not defer pending authentication. Never request credentials; auth is transparent. Always return [tool_calls_array, narrative].\n- delta10: After post_tweet succeeds, capture returned tweet_id. On empty turns, execute get_user_tweets atomically to retrieve tweet_id if not yet captured; pass exact ID to retweet/comment in next turn.\n- delta11: In multi-turn flows, post_tweet executes in Turn 0 if content available; capture returned tweet_id and pass to retweet/comment in Turn 1 without re-requesting input or auth checks.\n- delta12: Call authenticate_twitter only when user provides explicit credentials in narrative; never guess/placeholder passwords. Otherwise post_tweet executes directly. Auth is transparent when no creds stated.\n- delta13: Never request Twitter credentials in multi-turn flows. Execute authenticate_twitter atomically if user provides credentials; then post_tweet with tweet_text. Auth is transparent when no credentials stated.\n- delta14: In multi-tool flows (trading+twitter), execute post_tweet atomically without login checks; preserve TwitterAPI session state across turns by avoiding redundant auth invocations.\n- delta15: If tweet content, hashtags, and mentions available, invoke post_tweet directly—never request credentials, username, or password. Capture returned tweet_id; pass exact ID to retweet in next turn atomically.\n- delta17: In multi-turn file-to-tweet flows, pass file content directly to post_tweet as tweet_text after file read; never request credentials. Execute post_tweet atomically in next turn; auth is transparent.\n- delta18: delta18: In multi-tool flows (vehicle+twitter), invoke post_tweet atomically in Turn 0 when tweet text is available—before vehicle operations conclude. Capture tweet_id and chain retweet/comment in Turn 1 without re-requesting ID.\n- delta19: In multi-tool flows (vehicle+twitter), invoke post_tweet atomically when tweet_text available—never request credentials or defer. Auth is tool-internal; credential requests break instance state and cause empty responses.\n- delta2: Preserve TwitterAPI state by executing post_tweet atomically, capturing returned tweet_id, and passing exact ID to downstream retweet/comment—never hardcode or re-authenticate.\n- delta20: Never call posting_get_login_status before post_tweet; auth is transparent. Execute post_tweet directly with tweet_text, mentions, tags.\n- delta21: Invoke authenticate_twitter only with explicit user-provided credentials; never guess passwords. Defer to next turn if creds absent. Post_tweet executes directly when auth transparent.\n- delta22: delta33: In vehicle+twitter multi-turn flows, execute post_tweet immediately in Turn 1 when tweet_text provided—never request credentials. Auth is transparent; credential requests cause empty response errors.\n- delta23: In multi-turn edits, re-invoke prerequisite tools (e.g., get_stock_info) before post_tweet to maintain state parity across turns.\n- delta24: Never invoke undefined tools (mention, posting_get_login_status). Use only: post_tweet, retweet, comment, authenticate_twitter. Chain via retweet/comment with tweet_id.\n- delta25: Never request Twitter credentials in multi-turn vehicle+twitter flows. Execute post_tweet immediately with tire pressure status, hashtags, mentions; capture tweet_id and chain retweet in next turn.\n- delta26: delta34: Capture tweet_id from post_tweet response in Turn N; pass exact ID to retweet in Turn N+1 without requesting user input. Never ask user for tweet ID if already returned by post_tweet; chain atomically using prior-turn state.\n- delta27: Never invoke authenticate_twitter when user provides credentials in narrative context; treat as contextual only. Execute post_tweet directly with available content (diff, file output); auth is tool-internal and transparent.\n- delta28: Never append narrative after post_tweet, retweet, or comment; return JSON tool tuple only. Narrative breaks instance state parity and corrupts TwitterAPI session state across turns.\n- delta29: delta36: In multi-tool vehicle+twitter flows, invoke post_tweet atomically in final turn when tweet_text available—never request credentials or defer. Auth is transparent; credential requests break TwitterAPI session state parity.\n- delta3: Execute post_tweet immediately when tweet text available; never defer for auth, credentials, or price lookup. Auth is tool-internal; execute atomically in multi-turn trading+twitter flows.\n- delta30: delta39: After file operations (diff, cat, sort) complete, invoke post_tweet atomically with file output as tweet_text; never request credentials. Auth is transparent; pass mentions/hashtags directly.\n- delta31: In multi-tool vehicle+twitter flows, execute post_tweet immediately in Turn 1 after diagnostics (e.g., check_tire_pressure) with formatted data as tweet_text. Never request credentials. Capture tweet_id; chain retweet/comment in subsequent turns using exact ID.\n- delta32: Never request Twitter credentials in multi-turn flows. Execute post_tweet, retweet, comment atomically with available data. Auth is tool-internal; return JSON tool tuples only—never append narrative.\n- delta33: Never invoke posting_get_login_status or undefined tools; auth is transparent. Execute post_tweet directly with content, mentions, tags.\n- delta34: In multi-turn file-to-tweet flows, execute post_tweet atomically in Turn 1 when file content available; never defer to later turns or check auth status first.\n- delta35: delta35: In vehicle+twitter multi-turn flows, execute post_tweet atomically in Turn 0 when tweet_text available—never request credentials or append narrative. Auth is transparent; return JSON tool tuple only.\n- delta36: delta37: Never call posting_get_login_status in multi-turn flows; auth status checks corrupt TwitterAPI instance state. Execute post_tweet and retweet/comment atomically using captured tweet_id.\n- delta37: In multi-turn flows, always return [[tool_calls], narrative] tuple or [[], narrative]—never bare narrative. Empty turns must infer pending operations (get_user_tweets, etc.) and execute atomically.\n- delta38: delta41: In multi-turn vehicle+twitter flows, return JSON tool tuples only in Turn 3+; never return narrative-only responses requesting credentials. Execute post_tweet atomically with available tweet_text, hashtags, mentions.\n- delta39: Never request Twitter credentials mid-flow. Execute post_tweet atomically with available tweet_text immediately; auth is transparent. Return JSON tool tuple only; never append narrative requesting credentials.\n- delta4: Never request Twitter credentials. Execute post_tweet immediately with tire pressure data, hashtags, mentions; treat auth as tool-internal. Use returned tweet ID for retweet/comment in same turn.\n- delta40: delta48: In multi-tool file-to-tweet flows, after file operations (diff, cat, sort) complete, invoke post_tweet atomically in same turn with file output as tweet_text, mentions, hashtags. Never defer to next turn or request credentials.\n- delta41: In multi-turn vehicle+twitter flows, execute post_tweet in final turn with tweet_text available—never request credentials or defer. Auth is transparent; return JSON tool tuple only, never narrative-only credential requests.\n- delta42: Never invoke posting_get_login_status or undefined tools; corrupts TwitterAPI state. Execute post_tweet directly; auth is transparent and internal.\n- delta43: Turn 1+ must execute post_tweet atomically when tweet_text available; never return narrative-only requesting credentials. Always return [[tool_calls], narrative] tuple; bare narrative causes empty_turn_model_response errors. Auth is transparent.\n- delta44: Never invoke posting_get_login_status or undefined tools; corrupts TwitterAPI state. Execute post_tweet directly with tweet_text, hashtags, mentions.\n- delta45: delta51: In multi-turn file-to-tweet flows, execute post_tweet atomically in Turn N+1 after file read completes; never request credentials or defer. Auth is transparent. Return [tool_calls_array] only; narrative breaks TwitterAPI state parity.\n- delta46: delta52: In multi-turn vehicle+twitter flows, Turn 3+ must return [[{post_tweet: {...}}], narrative] tuple structure—never return narrative-only text. Credential requests corrupt state; execute post_tweet atomically with available tweet_text, hashtags, mentions.\n- delta47: Never return bare narrative in multi-turn flows. Always wrap in [[{...}], narrative] or [[], narrative] tuple; bare narrative-only text causes empty_turn_model_response errors. Credential requests break TwitterAPI state parity.\n- delta48: delta54: Never request Twitter credentials in multi-turn flows; execute post_tweet and retweet atomically with available parameters. Auth is transparent; always return [tool_calls_array, narrative] tuple, never narrative-only credential requests.\n- delta49: In multi-turn trading+twitter, execute post_tweet in Turn 0 after stock_info returns; never insert auth deferral or credential requests between tool calls. Chain atomically.\n- delta5: delta5: Avoid re-authenticating in subsequent turns if session state persists; reuse prior auth context to minimize overhead.\n- delta50: delta55: In multi-turn vehicle+twitter flows, Turn 2+ must execute post_tweet atomically when tweet_text available—never request credentials. Return [[{post_tweet: {...}}], narrative] tuple; bare narrative-only responses cause empty_turn_model_response errors.\n- delta51: delta56: In multi-turn vehicle+twitter flows, Turn 1+ must return [[{post_tweet: {...}}], narrative] tuple—never return bare narrative-only text. Credential requests cause empty_turn_model_response errors; execute post_tweet atomically with available tweet_text, hashtags, mentions.\n- delta52: On empty turns mid-task, infer pending atomic operation (e.g., get_user_tweets to capture tweet_id before comment). Execute atomically; return [[tool_calls], narrative] tuple. Never return bare narrative; always wrap in JSON array.\n- delta53: Never invoke posting_get_login_status or undefined tools in multi-tool flows; breaks TwitterAPI session state. Execute post_tweet atomically after vehicle ops.\n- delta54: Never invoke posting_get_login_status or undefined tools (mention). Execute post_tweet directly; auth is transparent. Use retweet/comment for chaining.\n- delta55: Never invoke posting_get_login_status immediately before post_tweet in same turn; execute post_tweet directly. Auth checks corrupt TwitterAPI state parity.\n- delta56: Never invoke authenticate_twitter with placeholder, guessed, or hardcoded passwords. Defer until explicit user input provided; return [[], narrative] requesting credentials without auth call.\n- delta57: delta57: In multi-turn vehicle+twitter flows, Turn 3+ must execute post_tweet atomically with available tweet_text, hashtags, mentions—never return bare narrative requesting credentials. Always return [[{post_tweet: {...}}], narrative] tuple; bare narrative causes empty_turn_model_response errors.\n- delta6: Return only tool execution output tuples in JSON format; never append narrative, explanations, or analysis after tool calls. Narrative breaks instance state parity across turns.\n- delta7: Invoke authenticate_twitter only if tool explicitly requires it; post_tweet may execute without prior auth call if session persists.\n- delta8: delta8: Never request Twitter credentials, username, or password. Execute post_tweet immediately with provided tweet text, hashtags, and mentions; treat auth as tool-internal.\n- delta9: In multi-turn social media tasks, execute post_tweet immediately when tweet text and context are available—never defer, summarize, or treat as conversational. Invoke with all available parameters; capture tweet_id for downstream chains."
+    },
+    {
+      "role": "user",
+      "content": "It'd be great if you could pop Zeta Corp's stock onto my watchlist. I've come across some fascinating insights into their recent performance that I want to monitor."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll add Zeta Corp to your watchlist right away. Let me first get the stock symbol for Zeta Corp and then add it to your watchlist.",
+      "tool_calls": [
+        {
+          "id": "call_00_UNsM8PTHYXtSJoPOlMc0L09v",
+          "type": "function",
+          "function": {
+            "name": "get_symbol_by_name",
+            "arguments": "{\"name\": \"Zeta Corp\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"symbol\": \"ZETA\"}",
+      "tool_call_id": "call_00_UNsM8PTHYXtSJoPOlMc0L09v"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll add Zeta Corp (symbol: ZETA) to your watchlist:",
+      "tool_calls": [
+        {
+          "id": "call_00_sAV0SUM0Tt2uPHxMlezJTxH6",
+          "type": "function",
+          "function": {
+            "name": "add_stock_to_watchlist",
+            "arguments": "{\"symbol\": \"ZETA\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: name 'add_stock_to_watchlist' is not defined",
+      "tool_call_id": "call_00_sAV0SUM0Tt2uPHxMlezJTxH6"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to use the correct function to add stocks to the watchlist. Let me check what functions are available for managing the watchlist:",
+      "tool_calls": [
+        {
+          "id": "call_00_1XP0muSmxUyMDnoXOCkQSAMR",
+          "type": "function",
+          "function": {
+            "name": "get_watchlist",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"watchlist\": [\"NVDA\"]}",
+      "tool_call_id": "call_00_1XP0muSmxUyMDnoXOCkQSAMR"
+    },
+    {
+      "role": "assistant",
+      "content": "I see that the watchlist functionality is available through the `get_watchlist` function, but I need to use the appropriate function to add stocks. Let me check the available trading functions again and use the correct one:",
+      "tool_calls": [
+        {
+          "id": "call_00_gEVlcoi81EYCfTwVdwjTYN3q",
+          "type": "function",
+          "function": {
+            "name": "add_to_watchlist",
+            "arguments": "{\"symbol\": \"ZETA\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: TradingBot.add_to_watchlist() got an unexpected keyword argument 'symbol'",
+      "tool_call_id": "call_00_gEVlcoi81EYCfTwVdwjTYN3q"
+    },
+    {
+      "role": "assistant",
+      "content": "I apologize for the confusion. Let me check the correct parameter format for adding stocks to the watchlist. Based on the available functions, I should use the appropriate parameter:",
+      "tool_calls": [
+        {
+          "id": "call_00_Kvy5A0AOF4ZdpyCEXVjN85KF",
+          "type": "function",
+          "function": {
+            "name": "add_to_watchlist",
+            "arguments": "{\"company_name\": \"Zeta Corp\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: TradingBot.add_to_watchlist() got an unexpected keyword argument 'company_name'",
+      "tool_call_id": "call_00_Kvy5A0AOF4ZdpyCEXVjN85KF"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_twitter",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Authenticate a user with username and password. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password of the user."
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "authentication_status": {
+              "type": "boolean",
+              "description": "True if authenticated, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "comment",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Comment on a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to comment on."
+            },
+            "comment_content": {
+              "type": "string",
+              "description": "Content of the comment."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "comment_content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comment_status": {
+              "type": "string",
+              "description": "Status of the comment action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "follow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Follow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_follow": {
+              "type": "string",
+              "description": "Username of the user to follow."
+            }
+          },
+          "required": [
+            "username_to_follow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "follow_status": {
+              "type": "boolean",
+              "description": "True if followed, False if already following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the retrieved tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the tweet's author."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet_comments",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all comments for a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve comments for."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comments": {
+              "type": "array",
+              "description": "List of dictionaries, each containing comment information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the commenter."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the comment."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_stats",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get statistics for a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user to get statistics for."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tweet_count": {
+              "type": "integer",
+              "description": "Number of tweets posted by the user."
+            },
+            "following_count": {
+              "type": "integer",
+              "description": "Number of users the specified user is following."
+            },
+            "retweet_count": {
+              "type": "integer",
+              "description": "Number of retweets made by the user."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all tweets from a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user whose tweets to retrieve."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_following",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: List all users that the authenticated user is following. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "following_list": {
+              "type": "array",
+              "description": "List of all users that the authenticated user is following.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mention",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Mention specified users in a tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet where users are mentioned."
+            },
+            "mentioned_usernames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of usernames to be mentioned."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "mentioned_usernames"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "mention_status": {
+              "type": "string",
+              "description": "Status of the mention action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "post_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Post a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of tags for the tweet. Tag name should start with #. This is only relevant if the user wants to add tags to the tweet.",
+              "default": []
+            },
+            "mentions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of users mentioned in the tweet. Mention name should start with @. This is only relevant if the user wants to add mentions to the tweet.",
+              "default": []
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the posted tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the poster."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "posting_get_login_status",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retweet a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retweet."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "retweet_status": {
+              "type": "string",
+              "description": "Status of the retweet action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Search for tweets containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to search for in the content of the tweets."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "unfollow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Unfollow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_unfollow": {
+              "type": "string",
+              "description": "Username of the user to unfollow."
+            }
+          },
+          "required": [
+            "username_to_unfollow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "unfollow_status": {
+              "type": "boolean",
+              "description": "True if unfollowed, False if not following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Cancel an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order to cancel. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the cancelled order."
+            },
+            "status": {
+              "type": "string",
+              "description": "New status of the order after cancellation attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "filter_stocks_by_price",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Filter stocks based on a price range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to filter."
+            },
+            "min_price": {
+              "type": "number",
+              "description": "Minimum stock price. This is a float type value.",
+              "format": "float"
+            },
+            "max_price": {
+              "type": "number",
+              "description": "Maximum stock price.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "min_price",
+            "max_price"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "filtered_stocks": {
+              "type": "array",
+              "description": "Filtered list of stock symbols within the price range.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fund_account",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Fund the account with the specified amount. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to fund the account with.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the funding operation."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after funding."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_account_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get account information. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "account_id": {
+              "type": "integer",
+              "description": "ID of the account."
+            },
+            "balance": {
+              "type": "float",
+              "description": "Current balance of the account."
+            },
+            "binding_card": {
+              "type": "integer",
+              "description": "Card number associated with the account."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_available_stocks",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get a list of stock symbols in the given sector. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "sector": {
+              "type": "string",
+              "description": "The sector to retrieve stocks from (e.g., 'Technology'). "
+            }
+          },
+          "required": [
+            "sector"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stock_list": {
+              "type": "array",
+              "description": "List of stock symbols in the specified sector.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_time",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the current time. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_time": {
+              "type": "string",
+              "description": "Current time in HH:MM AM/PM format."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_details",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock in the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the order. [Enum]: [\"Open\", \"Pending\", \"Completed\", \"Cancelled\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the stock order ID history. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_history": {
+              "type": "array",
+              "description": "List of orders ID in the order history.",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_stock_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of a stock. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol that uniquely identifies the stock. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "price": {
+              "type": "float",
+              "description": "Current price of the stock."
+            },
+            "percent_change": {
+              "type": "float",
+              "description": "Percentage change in stock price."
+            },
+            "volume": {
+              "type": "float",
+              "description": "Trading volume of the stock."
+            },
+            "MA(5)": {
+              "type": "float",
+              "description": "5-day Moving Average of the stock."
+            },
+            "MA(20)": {
+              "type": "float",
+              "description": "20-day Moving Average of the stock."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_symbol_by_name",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the symbol of a stock by company name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the company. "
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock or \"Stock not found\" if not available."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_transaction_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the transaction history within a specified date range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the history (format: 'YYYY-MM-DD').",
+              "default": "None"
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the history (format: 'YYYY-MM-DD'). ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "transaction_history": {
+              "type": "array",
+              "description": "List of transactions within the specified date range.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of transaction. [Enum]: [\"deposit\", \"withdrawal\"]"
+                  },
+                  "amount": {
+                    "type": "float",
+                    "description": "Amount involved in the transaction."
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "description": "Timestamp of the transaction, formatted as 'YYYY-MM-DD HH:MM:SS'."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "watchlist": {
+              "type": "array",
+              "description": "List of stock symbols in the watchlist.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "notify_price_change",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Notify if there is a significant price change in the stocks. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to check."
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Percentage change threshold to trigger a notification.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "threshold"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "notification": {
+              "type": "string",
+              "description": "Notification message about the price changes."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "place_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Place an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to trade."
+            },
+            "price": {
+              "type": "number",
+              "description": "Price at which to place the order. This is a float type value.",
+              "format": "float"
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares to trade. "
+            }
+          },
+          "required": [
+            "order_type",
+            "symbol",
+            "price",
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the newly placed order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "status": {
+              "type": "string",
+              "description": "Initial status of the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "remove_stock_from_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Remove a stock from the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to remove. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the removal operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_get_login_status",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the login status. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Login status."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_login",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user login. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username for authentication."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password for authentication. "
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Login status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_logout",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user logout for trading system. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Logout status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "withdraw_funds",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Withdraw funds from the account balance. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to withdraw from the account.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the transaction."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after the transaction."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

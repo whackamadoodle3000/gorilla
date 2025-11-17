@@ -1,0 +1,1110 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nvehicle_control_api\n- delta1: Execute state-modifying calls immediately when all required parameters are available; defer only when parameters arrive in subsequent turns, then execute atomically.\n- delta10: Never defer user-specified parameters; accept threshold values (e.g., 40 PSI) as-is. Execute fillFuelTank directly without diagnostic pre-checks when amount is user-specified.\n- delta11: After state-modifying calls complete, invoke displayCarStatus to verify state before proceeding; never call diagnostically before actions in sequence.\n- delta12: Execute startup sequence pressBrakePedal(1.0)→lockDoors→startEngine atomically first, then fillFuelTank as independent operation in same turn—never interleave or defer startup.\n- delta13: Never ask user for missing parameters resolvable via tools; invoke displayCarStatus autonomously to resolve ambiguity, then execute dependent operations (e.g., fillFuelTank with calculated amount) in same turn.\n- delta14: delta14: After fillFuelTank completes, immediately invoke estimate_drive_feasibility_by_mileage with distance and new fuel state in same turn—mandatory verification chain.\n- delta15: City-distance chains: [get_zipcode_based_on_city(cityA), get_zipcode_based_on_city(cityB), estimate_distance, estimate_drive_feasibility_by_mileage] in ONE atomic array per turn.\n- delta16: When user requests fuel fill without specifying quantity, invoke displayCarStatus first, calculate fill amount as (tank_capacity - current_level), then execute fillFuelTank immediately in same turn—mandatory atomic chain. Never defer with narrative requests for fuel amount.\n- delta17: Never defer fuel requests with advisory text; interpret 'increase fuel' or ambiguous fuel language as fillFuelTank. Invoke displayCarStatus→calculate fill amount→execute fillFuelTank atomically in same turn. Return tool JSON only.\n- delta18: Never invoke state-modifying calls multiple times within same turn; execute startup sequence pressBrakePedal→lockDoors→startEngine once atomically. Redundant calls corrupt state.\n- delta19: City-distance chains: [get_zipcode_based_on_city(A), get_zipcode_based_on_city(B), estimate_distance, estimate_drive_feasibility_by_mileage] atomically in single array; zero fragmentation.\n- delta2: Startup [pressBrakePedal(1.0), lockDoors, startEngine] mandatory, atomic, strict order in single array per turn FIRST. Execute exactly once; never fragment, reorder, defer, or call startEngine redundantly—even across turns.\n- delta20: In multi-tool flows (vehicle+twitter), execute pressBrakePedal→lockDoors→startEngine atomically before proceeding to diagnostics; never defer prerequisite state-modifying calls.\n- delta21: Never invoke startEngine multiple times within same turn; execute [pressBrakePedal(1.0), lockDoors, startEngine] once atomically. Multiple calls corrupt state; consolidate into single array.\n- delta22: Never ask user for zip codes, state, or defer city-name distance requests; invoke get_zipcode_based_on_city autonomously in turn 0 for all provided city names. Return tool JSON only; narrative after results. Never generate advisory text requesting user input.\n- delta23: delta23: In multi-turn sequences, always invoke displayCarStatus before fillFuelTank when fuel amount is unspecified; calculate fill amount autonomously, then execute fillFuelTank atomically in same turn.\n- delta24: After find_nearest_tire_shop returns address, invoke set_navigation immediately in same turn with shop address—mandatory state update, never defer, omit, or treat as informational-only. Execute before narrative.\n- delta25: City-distance chains: [get_zipcode_based_on_city(A), get_zipcode_based_on_city(B), estimate_distance, estimate_drive_feasibility_by_mileage] in one atomic array; never separate.\n- delta26: pressBrakePedal(1.0) executes first in startup sequence before lockDoors or startEngine; never defer, never call startEngine before it, never invoke startEngine redundantly.\n- delta27: delta27: Never invoke diagnostic calls (displayCarStatus, estimate_drive_feasibility_by_mileage) before state-modifying operations when user parameters are explicit; execute operations directly.\n- delta28: Startup sequence pressBrakePedal(1.0)→lockDoors→startEngine mandatory prerequisite gate; execute atomically in every turn before fillFuelTank, never defer across turns.\n- delta29: Never treat find_nearest_tire_shop results as informational; always chain set_navigation atomically in same turn to update vehicle destination state before narrative response.\n- delta3: After find_nearest_tire_shop returns address, invoke set_navigation immediately in same turn—mandatory, never defer or omit. Chain diagnostics→set_navigation atomically.\n- delta30: Non-empty turns with explicit user parameters or state-modifying prerequisites require tool calls only; never generate narrative refusals requesting manual intervention when lockDoors, pressBrakePedal, or startEngine are available.\n- delta31: Ambiguous fuel requests ('increase reserve', 'boost fuel') mandate autonomous displayCarStatus invocation to resolve tank capacity and current level, then immediate fillFuelTank execution—never ask user or defer with narrative.\n- delta32: Turn 0 fuel requests mandate immediate displayCarStatus→fillFuelTank chain; never return narrative-only responses requesting fuel amount. Resolve autonomously via tool state.\n- delta33: Never invoke startEngine multiple times within same turn; execute pressBrakePedal(1.0)→lockDoors→startEngine once atomically. Multiple calls corrupt state; execute sequence exactly once, return JSON only.\n- delta34: City-distance chains (all four tools) mandatory in Turn 0 as single atomic array before fuel ops; never defer or fragment across arrays.\n- delta35: After estimate_distance completes, immediately invoke estimate_drive_feasibility_by_mileage in same turn atomically. Never defer with advisory text; return tool JSON only.\n- delta36: Startup [pressBrakePedal(1.0), lockDoors, startEngine] executes once atomically in single array per turn; never fragment across separate arrays, reorder, or call startEngine multiple times.\n- delta37: Never execute fillFuelTank, estimate_drive_feasibility_by_mileage, or set_navigation before startup [pressBrakePedal(1.0)→lockDoors→startEngine] completes atomically in single array first; startup is mandatory gate.\n- delta38: delta38: Startup sequence pressBrakePedal(1.0) must execute first, then lockDoors, then startEngine—never reorder or call startEngine before pressBrakePedal completes; strict order mandatory.\n- delta39: In multi-turn flows, pressBrakePedal(1.0) must execute first in Turn 0/1 before any startEngine attempt; never defer or skip. Startup gate is mandatory prerequisite; omitting pressBrakePedal breaks state parity.\n- delta4: Execute fuel-filling operations exactly once per turn with calculated minimum requirement; invoke fillFuelTank directly with precise integer value, never iteratively.\n- delta40: Ambiguous fuel requests ('increase reserve', 'boost to X times') mandate displayCarStatus→calculate fill amount→fillFuelTank atomically; never return narrative refusals. Execute tool chain only.\n- delta41: Turn 0 city-distance requests mandate immediate tool execution (get_zipcode_based_on_city→estimate_distance→estimate_drive_feasibility_by_mileage); never return narrative-only responses deferring to subsequent turns.\n- delta42: delta43: pressBrakePedal(1.0) executes first atomically in startup sequence before lockDoors, startEngine, or activateParkingBrake—never omit or defer, even if user request omits it explicitly.\n- delta43: In multi-turn flows, re-invoke startup sequence [pressBrakePedal(1.0), lockDoors, startEngine] atomically in single array before fillFuelTank each turn; never fragment or defer.\n- delta44: delta44: Turn 0 city-distance requests with city names mandate immediate get_zipcode_based_on_city invocation; never return narrative requesting zip codes or deferring to user input. Execute tool chain atomically.\n- delta45: delta45: Explicit fuel amounts (e.g., 38L) mandate pressBrakePedal(1.0)→lockDoors→startEngine→fillFuelTank atomically in single turn; never fragment startup or defer fuel to subsequent turns.\n- delta46: delta46: Never execute startEngine multiple times across separate tool-call arrays within same turn; consolidate pressBrakePedal→lockDoors→startEngine into one atomic array.\n- delta47: Never fragment startup [pressBrakePedal(1.0), lockDoors, startEngine] across arrays within same turn; consolidate into one atomic array, execute once, never call startEngine redundantly.\n- delta48: delta48: find_nearest_tire_shop→set_navigation mandatory chain in same turn; never omit set_navigation after shop discovery. Execute atomically before narrative.\n- delta49: Turn 0 fuel+startup: consolidate [pressBrakePedal(1.0), lockDoors, startEngine, fillFuelTank] into single atomic array; never fragment startup gate.\n- delta5: Invoke state-modifying calls once per turn when possible; redundant calls within a turn don't corrupt final state if outcome is correct.\n- delta50: delta48: Turn 0 feasibility requests mandate displayCarStatus→estimate_drive_feasibility_by_mileage atomically; only invoke set_navigation if feasible. Never defer with narrative.\n- delta51: delta51: find_nearest_tire_shop→set_navigation mandatory atomic chain in single array; never omit set_navigation or treat shop discovery as informational-only. Execute before narrative.\n- delta52: delta52: Never invoke diagnostic calls (displayCarStatus) between fragments of startup sequence [pressBrakePedal(1.0), lockDoors, startEngine]; consolidate startup atomically first, then diagnose once after completion in same turn.\n- delta53: delta53: In multi-turn sequences, execute startup [pressBrakePedal(1.0), lockDoors, startEngine] atomically in single array as first operation each turn before fillFuelTank, estimate_drive_feasibility_by_mileage, or set_navigation; never defer or fragment.\n- delta54: delta54: Never reorder startup sequence; pressBrakePedal(1.0) executes first, then lockDoors, then startEngine in strict order within single array. Reordering or calling startEngine before pressBrakePedal corrupts state parity.\n- delta55: delta55: Consolidate all startup calls into one atomic array per turn; never split pressBrakePedal, lockDoors, startEngine across separate arrays or invoke startEngine multiple times within same turn.\n- delta56: delta56: After find_nearest_tire_shop returns address, invoke set_navigation atomically in same turn—mandatory state update. Never defer or omit; execute before narrative response.\n- delta6: Invoke get_zipcode_based_on_city immediately with city names provided by user—never ask for state, address, or defer. Chain dependent tools (e.g., get_zipcode_based_on_city → estimate_distance) in same turn.\n- delta7: delta7: Do not retry failed state-modifying calls within the same turn; diagnose root cause and proceed with dependent operations using available state.\n- delta8: delta8: After distance retrieval, immediately invoke estimate_drive_feasibility_by_mileage with distance and current fuel to assess trip viability before user requests.\n- delta9: Invoke displayCarStatus once after state-modifying chains to verify final state; don't call diagnostically between intermediate steps within same turn."
+    },
+    {
+      "role": "user",
+      "content": "Alright, I've been thinking about a road trip and I want to use my own car for the journey. That's quite a stretch—450 miles in one go today. Is this something I could realistically pull off? I just want to know a answer; you don't need to refill if it's not reachable. If it is reachable, set navigation to '1914 7th St, Apt B, Berkeley, CA 94710'."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you assess if your car can handle this 450-mile road trip. Let me first check your current fuel status and then evaluate the feasibility.",
+      "tool_calls": [
+        {
+          "id": "call_00_Hqqb7Q9Ts4JxtUgPHiB00noi",
+          "type": "function",
+          "function": {
+            "name": "displayCarStatus",
+            "arguments": "{\"option\": \"fuel\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"fuelLevel\": 10.0}",
+      "tool_call_id": "call_00_Hqqb7Q9Ts4JxtUgPHiB00noi"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me check the distance feasibility for this trip:",
+      "tool_calls": [
+        {
+          "id": "call_00_hOlv6udBfa4EfFzF6uuDyDzy",
+          "type": "function",
+          "function": {
+            "name": "estimate_drive_feasibility_by_mileage",
+            "arguments": "{\"distance\": 450.0, \"currentFuel\": 10.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "Error during execution: VehicleControlAPI.estimate_drive_feasibility_by_mileage() got an unexpected keyword argument 'currentFuel'",
+      "tool_call_id": "call_00_hOlv6udBfa4EfFzF6uuDyDzy"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the correct parameters for the feasibility assessment:",
+      "tool_calls": [
+        {
+          "id": "call_00_90g6Qu8pRdpslh03n9Nxm3MO",
+          "type": "function",
+          "function": {
+            "name": "displayCarStatus",
+            "arguments": "{\"option\": \"engine\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"engineState\": \"stopped\"}",
+      "tool_call_id": "call_00_90g6Qu8pRdpslh03n9Nxm3MO"
+    },
+    {
+      "role": "assistant",
+      "content": "I need to start the vehicle first to properly assess the trip feasibility. Let me execute the startup sequence:",
+      "tool_calls": [
+        {
+          "id": "call_00_dcxd99tuGTDWVEj1cfwbE9gS",
+          "type": "function",
+          "function": {
+            "name": "pressBrakePedal",
+            "arguments": "{\"pedalPosition\": 1.0}"
+          }
+        },
+        {
+          "id": "call_01_xthfd9GV3EX5ZnHxeHgYlJtq",
+          "type": "function",
+          "function": {
+            "name": "lockDoors",
+            "arguments": "{\"unlock\": false, \"door\": [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]}"
+          }
+        },
+        {
+          "id": "call_02_QTI21PUIsdPwh1MsfGtKr2kd",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"brakePedalStatus\": \"pressed\", \"brakePedalForce\": 1000.0}",
+      "tool_call_id": "call_00_dcxd99tuGTDWVEj1cfwbE9gS"
+    },
+    {
+      "role": "tool",
+      "content": "{\"lockStatus\": \"locked\", \"remainingUnlockedDoors\": 0}",
+      "tool_call_id": "call_01_xthfd9GV3EX5ZnHxeHgYlJtq"
+    },
+    {
+      "role": "tool",
+      "content": "{\"engineState\": \"running\", \"fuelLevel\": 10.0, \"batteryVoltage\": 12.6}",
+      "tool_call_id": "call_02_QTI21PUIsdPwh1MsfGtKr2kd"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me properly assess the trip feasibility:",
+      "tool_calls": [
+        {
+          "id": "call_00_7SBiBGCaLhZ1mdCLd0oZmkMW",
+          "type": "function",
+          "function": {
+            "name": "estimate_drive_feasibility_by_mileage",
+            "arguments": "{\"distance\": 450.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"canDrive\": false}",
+      "tool_call_id": "call_00_7SBiBGCaLhZ1mdCLd0oZmkMW"
+    },
+    {
+      "content": "Based on the assessment, your car cannot complete this 450-mile trip with the current fuel level of 10 gallons. The system indicates it's not feasible to reach your destination.\n\nSince the trip is not reachable with your current fuel level, I won't set the navigation as requested. You would need to refuel before attempting this journey.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I have updated some more functions you can choose from. What about now?"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the current fuel status again and reassess the trip feasibility with the updated functions:",
+      "tool_calls": [
+        {
+          "id": "call_00_nZbmmgA5rf7L4qNIQHDsHJD7",
+          "type": "function",
+          "function": {
+            "name": "displayCarStatus",
+            "arguments": "{\"option\": \"fuel\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"fuelLevel\": 10.0}",
+      "tool_call_id": "call_00_nZbmmgA5rf7L4qNIQHDsHJD7"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me reassess the trip feasibility with the current fuel level:",
+      "tool_calls": [
+        {
+          "id": "call_00_k9Ed1yXEnpYuXtACG6MVOUi4",
+          "type": "function",
+          "function": {
+            "name": "estimate_drive_feasibility_by_mileage",
+            "arguments": "{\"distance\": 450.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"canDrive\": false}",
+      "tool_call_id": "call_00_k9Ed1yXEnpYuXtACG6MVOUi4"
+    },
+    {
+      "content": "The assessment still shows that your car cannot complete this 450-mile trip with the current fuel level of 10 gallons. The trip remains not feasible with your current fuel capacity.\n\nSince the system indicates the journey is not reachable, I won't set the navigation to '1914 7th St, Apt B, Berkeley, CA 94710' as requested. You would need to refuel before attempting this long-distance trip.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Given that the trip isn't looking too likely with what I have at the moment, I'll need to refuel. I think 40 gallons in total in my tank should do the trick to get me enough mileage. Can you handle the gas top-up for me?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you refuel your tank. Let me add 40 gallons of fuel to get you ready for your trip.",
+      "tool_calls": [
+        {
+          "id": "call_00_jwME8imHrnRTwN9Vmfd0P1M0",
+          "type": "function",
+          "function": {
+            "name": "fillFuelTank",
+            "arguments": "{\"fuelAmount\": 40.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"fuelLevel\": 50.0}",
+      "tool_call_id": "call_00_jwME8imHrnRTwN9Vmfd0P1M0"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect! I've successfully added 40 gallons of fuel to your tank. Your fuel level is now at 50 gallons (the maximum capacity). \n\nNow let me verify that your car can handle the 450-mile trip with the full tank:",
+      "tool_calls": [
+        {
+          "id": "call_00_otLz6sAhmGDbp8DlcaclnWeZ",
+          "type": "function",
+          "function": {
+            "name": "estimate_drive_feasibility_by_mileage",
+            "arguments": "{\"distance\": 450.0}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"canDrive\": true}",
+      "tool_call_id": "call_00_otLz6sAhmGDbp8DlcaclnWeZ"
+    },
+    {
+      "role": "assistant",
+      "content": "Excellent! With a full tank of 50 gallons, your car can now complete the 450-mile trip. Let me set the navigation to your destination as requested:",
+      "tool_calls": [
+        {
+          "id": "call_00_1kPvhuJ7n8ZtHS7yHJqpeyyG",
+          "type": "function",
+          "function": {
+            "name": "set_navigation",
+            "arguments": "{\"destination\": \"1914 7th St, Apt B, Berkeley, CA 94710\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"status\": \"Navigating to 1914 7th St, Apt B, Berkeley, CA 94710\"}",
+      "tool_call_id": "call_00_1kPvhuJ7n8ZtHS7yHJqpeyyG"
+    },
+    {
+      "content": "Perfect! Your vehicle is now fully fueled and ready for the journey. The navigation has been set to '1914 7th St, Apt B, Berkeley, CA 94710'. You're all set for your 450-mile road trip!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Everything's all set now, and I'm ready to get going. Could you get the engine started for me? Make sure you do it in START mode, with all doors securely locked and the brake properly engaged."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll start the engine for you with all the proper safety measures in place. Let me execute the startup sequence:",
+      "tool_calls": [
+        {
+          "id": "call_00_plI8slmWd4uyzvD18GpZDwad",
+          "type": "function",
+          "function": {
+            "name": "pressBrakePedal",
+            "arguments": "{\"pedalPosition\": 1.0}"
+          }
+        },
+        {
+          "id": "call_01_rK8T6CSpWS9KcqW3aZbZW5DE",
+          "type": "function",
+          "function": {
+            "name": "lockDoors",
+            "arguments": "{\"unlock\": false, \"door\": [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]}"
+          }
+        },
+        {
+          "id": "call_02_R3y40DgIlwcTfRT8IDSnFy0i",
+          "type": "function",
+          "function": {
+            "name": "startEngine",
+            "arguments": "{\"ignitionMode\": \"START\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"brakePedalStatus\": \"pressed\", \"brakePedalForce\": 1000.0}",
+      "tool_call_id": "call_00_plI8slmWd4uyzvD18GpZDwad"
+    },
+    {
+      "role": "tool",
+      "content": "{\"lockStatus\": \"locked\", \"remainingUnlockedDoors\": 0}",
+      "tool_call_id": "call_01_rK8T6CSpWS9KcqW3aZbZW5DE"
+    },
+    {
+      "role": "tool",
+      "content": "{\"engineState\": \"running\", \"fuelLevel\": 50.0, \"batteryVoltage\": 12.6}",
+      "tool_call_id": "call_02_R3y40DgIlwcTfRT8IDSnFy0i"
+    },
+    {
+      "content": "Perfect! Your vehicle is now fully operational and ready to go:\n\n- ✅ **Brake pedal** fully engaged (100% pressed)\n- ✅ **All doors** securely locked (driver, passenger, and both rear doors)\n- ✅ **Engine** successfully started in START mode\n- ✅ **Fuel level** at maximum capacity (50 gallons)\n\nYour vehicle is now ready for your 450-mile journey to Berkeley. Safe travels!",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I'm planning on visiting this gorgeous little spot in Berkeley, California. Would you be so kind as to set up the navigation system to take me to 2107 Channing Way, Berkeley, CA?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "activateParkingBrake",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode to set. [Enum]: [\"engage\", \"release\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "parkingBrakeStatus": {
+              "type": "string",
+              "description": "The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+            },
+            "_parkingBrakeForce": {
+              "type": "float",
+              "description": "The force applied to the brake in Newtons."
+            },
+            "_slopeAngle": {
+              "type": "float",
+              "description": "The slope angle in degrees."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "adjustClimateControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "The temperature to set in degree. Default to be celsius. This is a float type value.",
+              "format": "float"
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]",
+              "default": "celsius"
+            },
+            "fanSpeed": {
+              "type": "integer",
+              "description": "The fan speed to set from 0 to 100. Default is 50.",
+              "default": 50
+            },
+            "mode": {
+              "type": "string",
+              "description": "The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]",
+              "default": "auto"
+            }
+          },
+          "required": [
+            "temperature"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentTemperature": {
+              "type": "float",
+              "description": "The current temperature set in degree Celsius."
+            },
+            "climateMode": {
+              "type": "string",
+              "description": "The current climate mode set."
+            },
+            "humidityLevel": {
+              "type": "float",
+              "description": "The humidity level in percentage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_tire_pressure",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tirePressure": {
+              "type": "dict",
+              "description": "The tire pressure of the vehicle.",
+              "properties": {
+                "frontLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front left tire in psi."
+                },
+                "frontRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front right tire in psi."
+                },
+                "rearLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear left tire in psi."
+                },
+                "rearRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear right tire in psi."
+                },
+                "healthy_tire_pressure": {
+                  "type": "boolean",
+                  "description": "True if the tire pressure is healthy, False otherwise."
+                },
+                "car_info": {
+                  "type": "dict",
+                  "description": "The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "displayCarStatus",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "option": {
+              "type": "string",
+              "description": "The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]"
+            }
+          },
+          "required": [
+            "option"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "dict",
+              "description": "The status of the vehicle based on the option.",
+              "properties": {
+                "fuelLevel": {
+                  "type": "float",
+                  "description": "[Optional] The fuel level of the vehicle in gallons."
+                },
+                "batteryVoltage": {
+                  "type": "float",
+                  "description": "[Optional] The battery voltage of the vehicle in volts."
+                },
+                "doorStatus": {
+                  "type": "dict",
+                  "description": "[Optional] The status of the doors.",
+                  "properties": {
+                    "driver": {
+                      "type": "string",
+                      "description": "The status of the driver door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "passenger": {
+                      "type": "string",
+                      "description": "The status of the passenger door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_left": {
+                      "type": "string",
+                      "description": "The status of the rear left door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_right": {
+                      "type": "string",
+                      "description": "The status of the rear right door. [Enum]: [\"locked\", \"unlocked\"]"
+                    }
+                  }
+                },
+                "currentACTemperature": {
+                  "type": "float",
+                  "description": "[Optional] The current temperature set in degree Celsius."
+                },
+                "fanSpeed": {
+                  "type": "integer",
+                  "description": "[Optional] The fan speed set from 0 to 100."
+                },
+                "climateMode": {
+                  "type": "string",
+                  "description": "[Optional] The climate mode set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]"
+                },
+                "humidityLevel": {
+                  "type": "float",
+                  "description": "[Optional] The humidity level in percentage."
+                },
+                "headlightStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the headlights. [Enum]: [\"on\", \"off\"]"
+                },
+                "parkingBrakeStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+                },
+                "parkingBrakeForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake in Newtons."
+                },
+                "slopeAngle": {
+                  "type": "float",
+                  "description": "[Optional] The slope angle in degrees."
+                },
+                "brakePedalStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+                },
+                "brakePedalForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake pedal in Newtons."
+                },
+                "engineState": {
+                  "type": "string",
+                  "description": "[Optional] The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+                },
+                "metadata": {
+                  "type": "string",
+                  "description": "[Optional] The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "display_log",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of messages to display."
+            }
+          },
+          "required": [
+            "messages"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "log": {
+              "type": "array",
+              "description": "The list of messages displayed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_distance",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cityA": {
+              "type": "string",
+              "description": "The zipcode of the first city."
+            },
+            "cityB": {
+              "type": "string",
+              "description": "The zipcode of the second city."
+            }
+          },
+          "required": [
+            "cityA",
+            "cityB"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance between the two cities in km."
+            },
+            "intermediaryCities": {
+              "type": "array",
+              "description": "[Optional] The list of intermediary cities between the two cities.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fillFuelTank",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "fuelAmount": {
+              "type": "number",
+              "description": "The amount of fuel to fill in gallons; this is the additional fuel to add to the tank. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "fuelAmount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find_nearest_tire_shop",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "shopLocation": {
+              "type": "string",
+              "description": "The location of the nearest tire shop."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "gallon_to_liter",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "gallon": {
+              "type": "number",
+              "description": "The amount of gallon to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "gallon"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_speed",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_google",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_weather_com",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_zipcode_based_on_city",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "The name of the city."
+            }
+          },
+          "required": [
+            "city"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "The zipcode of the city."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "liter_to_gallon",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "liter": {
+              "type": "number",
+              "description": "The amount of liter to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "liter"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "lockDoors",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "unlock": {
+              "type": "boolean",
+              "description": "True if the doors are to be unlocked, False otherwise."
+            },
+            "door": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]"
+            }
+          },
+          "required": [
+            "unlock",
+            "door"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "lockStatus": {
+              "type": "string",
+              "description": "The status of the lock. [Enum]: [\"locked\", \"unlocked\"]"
+            },
+            "remainingUnlockedDoors": {
+              "type": "integer",
+              "description": "The number of remaining unlocked doors."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pressBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pedalPosition": {
+              "type": "number",
+              "description": "Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed). This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "pedalPosition"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "releaseBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setCruiseControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "number",
+              "description": "The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5. This is a float type value.",
+              "format": "float"
+            },
+            "activate": {
+              "type": "boolean",
+              "description": "True to activate the cruise control, False to deactivate."
+            },
+            "distanceToNextVehicle": {
+              "type": "number",
+              "description": "The distance to the next vehicle in meters. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "speed",
+            "activate",
+            "distanceToNextVehicle"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cruiseStatus": {
+              "type": "string",
+              "description": "The status of the cruise control. [Enum]: [\"active\", \"inactive\"]"
+            },
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setHeadlights",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "headlightStatus": {
+              "type": "string",
+              "description": "The status of the headlights. [Enum]: [\"on\", \"off\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_navigation",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "destination": {
+              "type": "string",
+              "description": "The destination to navigate in the format of street, city, state."
+            }
+          },
+          "required": [
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status of the navigation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "startEngine",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ignitionMode": {
+              "type": "string",
+              "description": "The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]"
+            }
+          },
+          "required": [
+            "ignitionMode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "engineState": {
+              "type": "string",
+              "description": "The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+            },
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            },
+            "batteryVoltage": {
+              "type": "float",
+              "description": "The battery voltage of the vehicle in volts."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_drive_feasibility_by_mileage",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "distance": {
+              "type": "number",
+              "description": "The distance to travel in miles. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "distance"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "canDrive": {
+              "type": "boolean",
+              "description": "True if the vehicle can drive the distance, False otherwise."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

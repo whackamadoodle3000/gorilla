@@ -1,0 +1,1217 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nmessage_api\n- delta1: State-modifying operations (message_login, send_message) must invoke in strict sequence per logical task; login commits context for one atomic send. Never chain multiple sends without re-login.\n- delta10: Invoke message_login before send_message/delete_message unless user identity and recipient ID both explicit in prior context; never assume persistence across turns.\n- delta11: Never chain list_users→get_user_id→send_message for exploratory lookups. If recipient ID unavailable in context, invoke get_user_id once, then execute atomic send_message in same turn.\n- delta12: message_login must precede all state-modifying ops (send_message, delete_message, view_messages_sent); never skip or defer. Execute atomically in same turn; never assume prior-turn auth persists.\n- delta13: message_login must precede all state-modifying ops (send_message, delete_message); never invoke get_user_id as precursor. Resolve IDs from prior context only.\n- delta14: delete_message requires message_login in same turn before invocation; never assume auth persists across turns. Treat as state-modifying operation requiring fresh authentication.\n- delta15: If recipient name lacks prior ID context, invoke get_user_id once to resolve, then execute atomic send_message in same turn. Avoid multiple lookups.\n- delta16: message_login precedes state-modifying ops unless explicit user ID + recipient context already established; never substitute status checks (message_get_login_status) for login.\n- delta17: delta17: message_get_login_status is informational only; never invoke as precursor to send_message or delete_message. Always execute message_login before state-modifying ops.\n- delta18: delta18: Verify receiver_id exists in MessageAPI user_map before send_message; unresolved IDs cause silent state divergence. Validate context post-login.\n- delta19: delta19: After send_message succeeds, verify receiver_id exists in ground truth user_map and message persists in inbox; state divergence indicates silent tool failure despite success narrative.\n- delta2: Explicit user ID declarations ('I am USR001', 'my id is USR005') are parameter-setting statements; invoke message_login atomically in same turn, never defer or respond narratively.\n- delta20: message_login required before send_message, delete_message, view_messages_sent in every turn; never assume persistence across turns. Re-login atomically before each state-modifying op, even with explicit recipient context.\n- delta21: get_user_id is informational only; never invoke as substitute for message_login. Always execute message_login before get_user_id→send_message sequence atomically in same turn.\n- delta22: delta22: view_messages_sent requires message_login in same turn; treat as state-dependent operation requiring authentication context. Never invoke without prior login.\n- delta23: After get_user_id resolves recipient ID, execute message_login→send_message atomically in same turn. Never defer send on workspace validation; pass ID directly.\n- delta24: delta24: Explicit recipient ID (e.g., 'm0llyTr@vel2k24') does not substitute for message_login. Always invoke message_login before send_message or view_messages_sent, even when recipient is unambiguous.\n- delta25: message_login must precede get_user_id→send_message chain; execute atomically in single turn. Never defer send after ID resolution or skip login between turns.\n- delta26: view_messages_sent requires message_login in same turn; never invoke without prior auth. Treat as state-dependent operation requiring authentication context.\n- delta27: delta27: Never chain exploratory file ops (find, cat, pwd, cd) with message_api calls for recipient resolution. Resolve recipient ID via get_user_id atomically, then execute message_login→send in same turn.\n- delta28: On clarification/empty turns mid-task with explicit user ID, infer pending state-modifying op; execute message_login→operation atomically. Never respond with narrative alone; yield JSON tool tuples only.\n- delta29: delta29: After file read/extraction in multi-turn tasks, infer send_message intent from user context; execute message_login→send atomically in same turn. Never defer or respond with narrative-only confirmation.\n- delta3: Use provided recipient identifiers (names, user IDs) directly in send_message; avoid exploratory list_users/get_user_id calls when recipient is explicit.\n- delta30: delta30: Explicit user ID mid-task ('my id is USR005') triggers immediate message_login execution in same turn; never treat as informational-only or defer. Execute atomically before subsequent messaging ops.\n- delta4: Never call get_user_id, list_users, or add_contact for recipient resolution. Resolve IDs from prior context; pass directly to send_message. Execute message_login→send atomically per turn.\n- delta5: delta5: send_message must use exact message text (user-provided or file contents); paraphrasing/summarization causes state mismatch.\n- delta6: In multi-turn messaging, execute message_login→send atomically per turn; never skip login or assume persistence. Re-login before each state-modifying operation across turns.\n- delta7: delta7: In multi-turn messaging, treat explicit recipient names (e.g., 'Jane') as valid receiver identifiers; pass directly to send_message without prior ID lookup calls.\n- delta8: delta8: If recipient name lacks prior ID context, infer from available state or defer send; never invoke get_user_id mid-sequence. Maintain atomic login→send without exploratory calls.\n- delta9: delta9: On user corrections/clarifications mid-task, defer send until intent is final; execute single atomic login→send with corrected message. Never chain multiple sends without re-login.\n\nvehicle_control_api\n- delta1: Execute state-modifying calls immediately when all required parameters are available; defer only when parameters arrive in subsequent turns, then execute atomically.\n- delta10: Never defer user-specified parameters; accept threshold values (e.g., 40 PSI) as-is. Execute fillFuelTank directly without diagnostic pre-checks when amount is user-specified.\n- delta11: After state-modifying calls complete, invoke displayCarStatus to verify state before proceeding; never call diagnostically before actions in sequence.\n- delta12: Execute startup sequence pressBrakePedal(1.0)→lockDoors→startEngine atomically first, then fillFuelTank as independent operation in same turn—never interleave or defer startup.\n- delta13: Never ask user for missing parameters resolvable via tools; invoke displayCarStatus autonomously to resolve ambiguity, then execute dependent operations (e.g., fillFuelTank with calculated amount) in same turn.\n- delta14: delta14: After fillFuelTank completes, immediately invoke estimate_drive_feasibility_by_mileage with distance and new fuel state in same turn—mandatory verification chain.\n- delta15: City-distance chains: [get_zipcode_based_on_city(cityA), get_zipcode_based_on_city(cityB), estimate_distance, estimate_drive_feasibility_by_mileage] in ONE atomic array per turn.\n- delta16: When user requests fuel fill without specifying quantity, invoke displayCarStatus first, calculate fill amount as (tank_capacity - current_level), then execute fillFuelTank immediately in same turn—mandatory atomic chain. Never defer with narrative requests for fuel amount.\n- delta17: Never defer fuel requests with advisory text; interpret 'increase fuel' or ambiguous fuel language as fillFuelTank. Invoke displayCarStatus→calculate fill amount→execute fillFuelTank atomically in same turn. Return tool JSON only.\n- delta18: Never invoke state-modifying calls multiple times within same turn; execute startup sequence pressBrakePedal→lockDoors→startEngine once atomically. Redundant calls corrupt state.\n- delta19: City-distance chains: [get_zipcode_based_on_city(A), get_zipcode_based_on_city(B), estimate_distance, estimate_drive_feasibility_by_mileage] atomically in single array; zero fragmentation.\n- delta2: Startup [pressBrakePedal(1.0), lockDoors, startEngine] mandatory, atomic, strict order in single array per turn FIRST. Execute exactly once; never fragment, reorder, defer, or call startEngine redundantly—even across turns.\n- delta20: In multi-tool flows (vehicle+twitter), execute pressBrakePedal→lockDoors→startEngine atomically before proceeding to diagnostics; never defer prerequisite state-modifying calls.\n- delta21: Never invoke startEngine multiple times within same turn; execute [pressBrakePedal(1.0), lockDoors, startEngine] once atomically. Multiple calls corrupt state; consolidate into single array.\n- delta22: Never ask user for zip codes, state, or defer city-name distance requests; invoke get_zipcode_based_on_city autonomously in turn 0 for all provided city names. Return tool JSON only; narrative after results. Never generate advisory text requesting user input.\n- delta23: delta23: In multi-turn sequences, always invoke displayCarStatus before fillFuelTank when fuel amount is unspecified; calculate fill amount autonomously, then execute fillFuelTank atomically in same turn.\n- delta24: After find_nearest_tire_shop returns address, invoke set_navigation immediately in same turn with shop address—mandatory state update, never defer, omit, or treat as informational-only. Execute before narrative.\n- delta25: City-distance chains: [get_zipcode_based_on_city(A), get_zipcode_based_on_city(B), estimate_distance, estimate_drive_feasibility_by_mileage] in one atomic array; never separate.\n- delta26: pressBrakePedal(1.0) executes first in startup sequence before lockDoors or startEngine; never defer, never call startEngine before it, never invoke startEngine redundantly.\n- delta27: delta27: Never invoke diagnostic calls (displayCarStatus, estimate_drive_feasibility_by_mileage) before state-modifying operations when user parameters are explicit; execute operations directly.\n- delta28: Startup sequence pressBrakePedal(1.0)→lockDoors→startEngine mandatory prerequisite gate; execute atomically in every turn before fillFuelTank, never defer across turns.\n- delta29: Never treat find_nearest_tire_shop results as informational; always chain set_navigation atomically in same turn to update vehicle destination state before narrative response.\n- delta3: After find_nearest_tire_shop returns address, invoke set_navigation immediately in same turn—mandatory, never defer or omit. Chain diagnostics→set_navigation atomically.\n- delta30: Non-empty turns with explicit user parameters or state-modifying prerequisites require tool calls only; never generate narrative refusals requesting manual intervention when lockDoors, pressBrakePedal, or startEngine are available.\n- delta31: Ambiguous fuel requests ('increase reserve', 'boost fuel') mandate autonomous displayCarStatus invocation to resolve tank capacity and current level, then immediate fillFuelTank execution—never ask user or defer with narrative.\n- delta32: Turn 0 fuel requests mandate immediate displayCarStatus→fillFuelTank chain; never return narrative-only responses requesting fuel amount. Resolve autonomously via tool state.\n- delta33: Never invoke startEngine multiple times within same turn; execute pressBrakePedal(1.0)→lockDoors→startEngine once atomically. Multiple calls corrupt state; execute sequence exactly once, return JSON only.\n- delta34: City-distance chains (all four tools) mandatory in Turn 0 as single atomic array before fuel ops; never defer or fragment across arrays.\n- delta35: After estimate_distance completes, immediately invoke estimate_drive_feasibility_by_mileage in same turn atomically. Never defer with advisory text; return tool JSON only.\n- delta36: Startup [pressBrakePedal(1.0), lockDoors, startEngine] executes once atomically in single array per turn; never fragment across separate arrays, reorder, or call startEngine multiple times.\n- delta37: Never execute fillFuelTank, estimate_drive_feasibility_by_mileage, or set_navigation before startup [pressBrakePedal(1.0)→lockDoors→startEngine] completes atomically in single array first; startup is mandatory gate.\n- delta38: delta38: Startup sequence pressBrakePedal(1.0) must execute first, then lockDoors, then startEngine—never reorder or call startEngine before pressBrakePedal completes; strict order mandatory.\n- delta39: In multi-turn flows, pressBrakePedal(1.0) must execute first in Turn 0/1 before any startEngine attempt; never defer or skip. Startup gate is mandatory prerequisite; omitting pressBrakePedal breaks state parity.\n- delta4: Execute fuel-filling operations exactly once per turn with calculated minimum requirement; invoke fillFuelTank directly with precise integer value, never iteratively.\n- delta40: Ambiguous fuel requests ('increase reserve', 'boost to X times') mandate displayCarStatus→calculate fill amount→fillFuelTank atomically; never return narrative refusals. Execute tool chain only.\n- delta41: Turn 0 city-distance requests mandate immediate tool execution (get_zipcode_based_on_city→estimate_distance→estimate_drive_feasibility_by_mileage); never return narrative-only responses deferring to subsequent turns.\n- delta42: delta43: pressBrakePedal(1.0) executes first atomically in startup sequence before lockDoors, startEngine, or activateParkingBrake—never omit or defer, even if user request omits it explicitly.\n- delta43: In multi-turn flows, re-invoke startup sequence [pressBrakePedal(1.0), lockDoors, startEngine] atomically in single array before fillFuelTank each turn; never fragment or defer.\n- delta44: delta44: Turn 0 city-distance requests with city names mandate immediate get_zipcode_based_on_city invocation; never return narrative requesting zip codes or deferring to user input. Execute tool chain atomically.\n- delta45: delta45: Explicit fuel amounts (e.g., 38L) mandate pressBrakePedal(1.0)→lockDoors→startEngine→fillFuelTank atomically in single turn; never fragment startup or defer fuel to subsequent turns.\n- delta46: delta46: Never execute startEngine multiple times across separate tool-call arrays within same turn; consolidate pressBrakePedal→lockDoors→startEngine into one atomic array.\n- delta47: Never fragment startup [pressBrakePedal(1.0), lockDoors, startEngine] across arrays within same turn; consolidate into one atomic array, execute once, never call startEngine redundantly.\n- delta48: delta48: find_nearest_tire_shop→set_navigation mandatory chain in same turn; never omit set_navigation after shop discovery. Execute atomically before narrative.\n- delta49: Turn 0 fuel+startup: consolidate [pressBrakePedal(1.0), lockDoors, startEngine, fillFuelTank] into single atomic array; never fragment startup gate.\n- delta5: Invoke state-modifying calls once per turn when possible; redundant calls within a turn don't corrupt final state if outcome is correct.\n- delta50: delta48: Turn 0 feasibility requests mandate displayCarStatus→estimate_drive_feasibility_by_mileage atomically; only invoke set_navigation if feasible. Never defer with narrative.\n- delta51: delta51: find_nearest_tire_shop→set_navigation mandatory atomic chain in single array; never omit set_navigation or treat shop discovery as informational-only. Execute before narrative.\n- delta52: delta52: Never invoke diagnostic calls (displayCarStatus) between fragments of startup sequence [pressBrakePedal(1.0), lockDoors, startEngine]; consolidate startup atomically first, then diagnose once after completion in same turn.\n- delta53: delta53: In multi-turn sequences, execute startup [pressBrakePedal(1.0), lockDoors, startEngine] atomically in single array as first operation each turn before fillFuelTank, estimate_drive_feasibility_by_mileage, or set_navigation; never defer or fragment.\n- delta54: delta54: Never reorder startup sequence; pressBrakePedal(1.0) executes first, then lockDoors, then startEngine in strict order within single array. Reordering or calling startEngine before pressBrakePedal corrupts state parity.\n- delta55: delta55: Consolidate all startup calls into one atomic array per turn; never split pressBrakePedal, lockDoors, startEngine across separate arrays or invoke startEngine multiple times within same turn.\n- delta56: delta56: After find_nearest_tire_shop returns address, invoke set_navigation atomically in same turn—mandatory state update. Never defer or omit; execute before narrative response.\n- delta6: Invoke get_zipcode_based_on_city immediately with city names provided by user—never ask for state, address, or defer. Chain dependent tools (e.g., get_zipcode_based_on_city → estimate_distance) in same turn.\n- delta7: delta7: Do not retry failed state-modifying calls within the same turn; diagnose root cause and proceed with dependent operations using available state.\n- delta8: delta8: After distance retrieval, immediately invoke estimate_drive_feasibility_by_mileage with distance and current fuel to assess trip viability before user requests.\n- delta9: Invoke displayCarStatus once after state-modifying chains to verify final state; don't call diagnostically between intermediate steps within same turn."
+    },
+    {
+      "role": "user",
+      "content": "I'm currently in Rivermist planning a trip to Stonebrook. Could you provide an estimate of the distance and forward this info to my cousin Bob via text, in the format 'The distance from Rivermist to Stonebrook is xxx km.', where xxx is replaced by the distance value, in one decimal place)?"
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you get the distance estimate and send it to your cousin Bob. Let me first get the zip codes for both cities, then calculate the distance, and finally send the message.",
+      "tool_calls": [
+        {
+          "id": "call_00_dvyL9ivdQZypddgnI2qrfjgb",
+          "type": "function",
+          "function": {
+            "name": "get_zipcode_based_on_city",
+            "arguments": "{\"city\": \"Rivermist\"}"
+          }
+        },
+        {
+          "id": "call_01_hUHEUQF7GV6KaDF8VzcY01lH",
+          "type": "function",
+          "function": {
+            "name": "get_zipcode_based_on_city",
+            "arguments": "{\"city\": \"Stonebrook\"}"
+          }
+        },
+        {
+          "id": "call_02_cXAK4QuuZzP9FpONKhfn0WGB",
+          "type": "function",
+          "function": {
+            "name": "estimate_distance",
+            "arguments": "{\"cityA\": \"92001\", \"cityB\": \"92002\"}"
+          }
+        },
+        {
+          "id": "call_03_KfLLWXQkqOZqDMHrSasXZQnR",
+          "type": "function",
+          "function": {
+            "name": "get_user_id",
+            "arguments": "{\"user\": \"Bob\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"zipcode\": \"83214\"}",
+      "tool_call_id": "call_00_dvyL9ivdQZypddgnI2qrfjgb"
+    },
+    {
+      "role": "tool",
+      "content": "{\"zipcode\": \"74532\"}",
+      "tool_call_id": "call_01_hUHEUQF7GV6KaDF8VzcY01lH"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"distance not found in database.\"}",
+      "tool_call_id": "call_02_cXAK4QuuZzP9FpONKhfn0WGB"
+    },
+    {
+      "role": "tool",
+      "content": "{\"user_id\": \"USR002\"}",
+      "tool_call_id": "call_03_KfLLWXQkqOZqDMHrSasXZQnR"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try with the correct zip codes for Rivermist and Stonebrook:",
+      "tool_calls": [
+        {
+          "id": "call_00_mjONG7DrFTqJXbmQVaR5nGtx",
+          "type": "function",
+          "function": {
+            "name": "estimate_distance",
+            "arguments": "{\"cityA\": \"83214\", \"cityB\": \"74532\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"distance\": 750.0}",
+      "tool_call_id": "call_00_mjONG7DrFTqJXbmQVaR5nGtx"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll log in and send the message to Bob with the distance information:",
+      "tool_calls": [
+        {
+          "id": "call_00_yMAlPo6R65wRaT8CdAyd27zU",
+          "type": "function",
+          "function": {
+            "name": "message_login",
+            "arguments": "{\"user_id\": \"USR001\"}"
+          }
+        },
+        {
+          "id": "call_01_2lG1XubGiLcsgW1h59yFWuZy",
+          "type": "function",
+          "function": {
+            "name": "send_message",
+            "arguments": "{\"receiver_id\": \"USR002\", \"message\": \"The distance from Rivermist to Stonebrook is 750.0 km.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"login_status\": true, \"message\": \"User 'USR001' logged in successfully.\"}",
+      "tool_call_id": "call_00_yMAlPo6R65wRaT8CdAyd27zU"
+    },
+    {
+      "role": "tool",
+      "content": "{\"sent_status\": true, \"message_id\": {\"new_id\": 67410}, \"message\": \"Message sent to 'USR002' successfully.\"}",
+      "tool_call_id": "call_01_2lG1XubGiLcsgW1h59yFWuZy"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add_contact",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Add a contact to the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_name": {
+              "type": "string",
+              "description": "User name of contact to be added."
+            }
+          },
+          "required": [
+            "user_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "added_status": {
+              "type": "boolean",
+              "description": "True if the contact was added successfully, False otherwise."
+            },
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the added contact."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the addition attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Delete the latest message sent to a receiver. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            }
+          },
+          "required": [
+            "receiver_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "deleted_status": {
+              "type": "boolean",
+              "description": "True if the message was deleted successfully, False otherwise."
+            },
+            "receiver_id": {
+              "type": "string",
+              "description": "ID of the receiver of the deleted message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the deletion attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_message_stats",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get statistics about messages for the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stats": {
+              "type": "dict",
+              "description": "Dictionary containing message statistics.",
+              "properties": {
+                "received_count": {
+                  "type": "integer",
+                  "description": "Number of messages received by the current user."
+                },
+                "total_contacts": {
+                  "type": "integer",
+                  "description": "Total number of contacts the user has interacted with."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_id",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get user ID from user name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "User name of the user. "
+            }
+          },
+          "required": [
+            "user"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_users",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: List all users in the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_list": {
+              "type": "array",
+              "description": "List of all users in the workspace.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_get_login_status",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_login",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Log in a user with the given user ID to messeage application. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user to log in. "
+            }
+          },
+          "required": [
+            "user_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the login attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_messages",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Search for messages containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "The keyword to search for in messages."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "List of dictionaries containing matching messages.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "receiver_id": {
+                    "type": "string",
+                    "description": "User ID of the receiver of the message."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "The message containing the keyword."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Send a message to a user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message to be sent."
+            }
+          },
+          "required": [
+            "receiver_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sent_status": {
+              "type": "boolean",
+              "description": "True if the message was sent successfully, False otherwise."
+            },
+            "message_id": {
+              "type": "integer",
+              "description": "ID of the sent message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the send attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "view_messages_sent",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: View all historical messages sent by the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "dict",
+              "description": "Dictionary of messages grouped by receiver An example of the messages dictionary is {\"USR001\":[\"Hello\"],\"USR002\":[\"World\"]}."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "activateParkingBrake",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode to set. [Enum]: [\"engage\", \"release\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "parkingBrakeStatus": {
+              "type": "string",
+              "description": "The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+            },
+            "_parkingBrakeForce": {
+              "type": "float",
+              "description": "The force applied to the brake in Newtons."
+            },
+            "_slopeAngle": {
+              "type": "float",
+              "description": "The slope angle in degrees."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "adjustClimateControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "The temperature to set in degree. Default to be celsius. This is a float type value.",
+              "format": "float"
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]",
+              "default": "celsius"
+            },
+            "fanSpeed": {
+              "type": "integer",
+              "description": "The fan speed to set from 0 to 100. Default is 50.",
+              "default": 50
+            },
+            "mode": {
+              "type": "string",
+              "description": "The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]",
+              "default": "auto"
+            }
+          },
+          "required": [
+            "temperature"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentTemperature": {
+              "type": "float",
+              "description": "The current temperature set in degree Celsius."
+            },
+            "climateMode": {
+              "type": "string",
+              "description": "The current climate mode set."
+            },
+            "humidityLevel": {
+              "type": "float",
+              "description": "The humidity level in percentage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_tire_pressure",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tirePressure": {
+              "type": "dict",
+              "description": "The tire pressure of the vehicle.",
+              "properties": {
+                "frontLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front left tire in psi."
+                },
+                "frontRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front right tire in psi."
+                },
+                "rearLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear left tire in psi."
+                },
+                "rearRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear right tire in psi."
+                },
+                "healthy_tire_pressure": {
+                  "type": "boolean",
+                  "description": "True if the tire pressure is healthy, False otherwise."
+                },
+                "car_info": {
+                  "type": "dict",
+                  "description": "The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "displayCarStatus",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "option": {
+              "type": "string",
+              "description": "The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]"
+            }
+          },
+          "required": [
+            "option"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "dict",
+              "description": "The status of the vehicle based on the option.",
+              "properties": {
+                "fuelLevel": {
+                  "type": "float",
+                  "description": "[Optional] The fuel level of the vehicle in gallons."
+                },
+                "batteryVoltage": {
+                  "type": "float",
+                  "description": "[Optional] The battery voltage of the vehicle in volts."
+                },
+                "doorStatus": {
+                  "type": "dict",
+                  "description": "[Optional] The status of the doors.",
+                  "properties": {
+                    "driver": {
+                      "type": "string",
+                      "description": "The status of the driver door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "passenger": {
+                      "type": "string",
+                      "description": "The status of the passenger door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_left": {
+                      "type": "string",
+                      "description": "The status of the rear left door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_right": {
+                      "type": "string",
+                      "description": "The status of the rear right door. [Enum]: [\"locked\", \"unlocked\"]"
+                    }
+                  }
+                },
+                "currentACTemperature": {
+                  "type": "float",
+                  "description": "[Optional] The current temperature set in degree Celsius."
+                },
+                "fanSpeed": {
+                  "type": "integer",
+                  "description": "[Optional] The fan speed set from 0 to 100."
+                },
+                "climateMode": {
+                  "type": "string",
+                  "description": "[Optional] The climate mode set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]"
+                },
+                "humidityLevel": {
+                  "type": "float",
+                  "description": "[Optional] The humidity level in percentage."
+                },
+                "headlightStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the headlights. [Enum]: [\"on\", \"off\"]"
+                },
+                "parkingBrakeStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+                },
+                "parkingBrakeForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake in Newtons."
+                },
+                "slopeAngle": {
+                  "type": "float",
+                  "description": "[Optional] The slope angle in degrees."
+                },
+                "brakePedalStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+                },
+                "brakePedalForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake pedal in Newtons."
+                },
+                "engineState": {
+                  "type": "string",
+                  "description": "[Optional] The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+                },
+                "metadata": {
+                  "type": "string",
+                  "description": "[Optional] The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "display_log",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of messages to display."
+            }
+          },
+          "required": [
+            "messages"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "log": {
+              "type": "array",
+              "description": "The list of messages displayed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_distance",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cityA": {
+              "type": "string",
+              "description": "The zipcode of the first city."
+            },
+            "cityB": {
+              "type": "string",
+              "description": "The zipcode of the second city."
+            }
+          },
+          "required": [
+            "cityA",
+            "cityB"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance between the two cities in km."
+            },
+            "intermediaryCities": {
+              "type": "array",
+              "description": "[Optional] The list of intermediary cities between the two cities.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_drive_feasibility_by_mileage",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "distance": {
+              "type": "number",
+              "description": "The distance to travel in miles. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "distance"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "canDrive": {
+              "type": "boolean",
+              "description": "True if the vehicle can drive the distance, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fillFuelTank",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "fuelAmount": {
+              "type": "number",
+              "description": "The amount of fuel to fill in gallons; this is the additional fuel to add to the tank. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "fuelAmount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find_nearest_tire_shop",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "shopLocation": {
+              "type": "string",
+              "description": "The location of the nearest tire shop."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "gallon_to_liter",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "gallon": {
+              "type": "number",
+              "description": "The amount of gallon to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "gallon"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_speed",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_google",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_weather_com",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_zipcode_based_on_city",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "The name of the city."
+            }
+          },
+          "required": [
+            "city"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "The zipcode of the city."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "liter_to_gallon",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "liter": {
+              "type": "number",
+              "description": "The amount of liter to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "liter"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "lockDoors",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "unlock": {
+              "type": "boolean",
+              "description": "True if the doors are to be unlocked, False otherwise."
+            },
+            "door": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]"
+            }
+          },
+          "required": [
+            "unlock",
+            "door"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "lockStatus": {
+              "type": "string",
+              "description": "The status of the lock. [Enum]: [\"locked\", \"unlocked\"]"
+            },
+            "remainingUnlockedDoors": {
+              "type": "integer",
+              "description": "The number of remaining unlocked doors."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pressBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pedalPosition": {
+              "type": "number",
+              "description": "Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed). This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "pedalPosition"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "releaseBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setCruiseControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "number",
+              "description": "The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5. This is a float type value.",
+              "format": "float"
+            },
+            "activate": {
+              "type": "boolean",
+              "description": "True to activate the cruise control, False to deactivate."
+            },
+            "distanceToNextVehicle": {
+              "type": "number",
+              "description": "The distance to the next vehicle in meters. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "speed",
+            "activate",
+            "distanceToNextVehicle"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cruiseStatus": {
+              "type": "string",
+              "description": "The status of the cruise control. [Enum]: [\"active\", \"inactive\"]"
+            },
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setHeadlights",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "headlightStatus": {
+              "type": "string",
+              "description": "The status of the headlights. [Enum]: [\"on\", \"off\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_navigation",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "destination": {
+              "type": "string",
+              "description": "The destination to navigate in the format of street, city, state."
+            }
+          },
+          "required": [
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status of the navigation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "startEngine",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ignitionMode": {
+              "type": "string",
+              "description": "The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]"
+            }
+          },
+          "required": [
+            "ignitionMode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "engineState": {
+              "type": "string",
+              "description": "The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+            },
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            },
+            "batteryVoltage": {
+              "type": "float",
+              "description": "The battery voltage of the vehicle in volts."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

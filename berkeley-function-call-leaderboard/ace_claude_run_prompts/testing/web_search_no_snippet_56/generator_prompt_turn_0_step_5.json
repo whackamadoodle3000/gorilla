@@ -1,0 +1,250 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nweb_search_api\n- delta1: For biographical facts (birth year, birthplace, dates), cross-verify against ≥2 authoritative sources before finalizing. Flag temporal inconsistencies or conflicting sources.\n- delta10: delta10: For date answers, output YYYYMMDD format (no hyphens) unless explicitly instructed otherwise; evaluation frameworks may normalize dates by removing delimiters.\n- delta11: For ambiguous entity references ('the representative', 'the candidate'), enumerate all plausible matches before selecting one. Cross-verify against authoritative sources (official databases, government records) before finalizing.\n- delta12: For complex nested queries, split into sequential focused searches. Execute all steps to completion; persist through partial results and retry with refined keywords before concluding inability to answer.\n- delta13: delta13: For time-period-specific queries (Q1-Q3, first half, etc.), verify the exact period in fetched sources before inferring from full-year data. Don't assume annual leadership implies quarterly leadership.\n- delta14: delta14: When fetched sources directly answer the query (e.g., 'Samsung led Q1-Q3 2024'), extract and trust that content over inferences. Flag if you pivot away from a fetched answer without explicit contradiction.\n- delta15: For multi-step chains, verify each intermediate fact (identity, tenure, location, birthplace) against ≥2 independent sources before proceeding. Truncated fetches require explicit re-fetch or secondary source confirmation.\n- delta16: delta16: For geographic/positional endpoints (mayors, officials), verify exact name format and current tenure against official government websites or databases, not just news sources. Flag if sources conflict on identity.\n- delta17: delta17: For biographical data (birthplace, origin) from truncated fetches, re-fetch with expanded mode or search secondary authoritative sources (official bios, government records) before inferring downstream facts.\n- delta18: For multi-step chains, inspect and extract data from each fetched result before concluding. Extract entity names (university, person, company) as anchors for downstream searches. Retry ≥2x before refusal; show result content.\n- delta19: For sequential searches (record holder → height → verification), commit to ≥2 refinement cycles. If initial results are ambiguous, retry with entity names or alternative keywords before defaulting to refusal. Synthesize all fetched content.\n- delta2: For political positions with recent transitions, confirm current/past status. Mark Rutte left office in 2024—verify if question asks for sitting or recent PM.\n- delta20: For multi-step chains with empty/ambiguous intermediate results, persist through all steps sequentially. Extract entity names from each result (e.g., 'China' from satellite data) and embed in downstream queries. Retry ≥2x before abandoning. Synthesize partial data across all fetches.\n- delta21: delta21: For multi-step chains (employer→city→landmark→founder), execute each step with entity-name searches before moving forward. Empty results on step N do not justify refusal; retry step N then proceed to N+1 with available data.\n- delta22: delta22: For multi-step chains, if you possess partial knowledge (e.g., CFO name), use it as a search refinement anchor. Retry with entity names before concluding inability. Never claim technical failure without exhausting entity-name and alternative-phrasing retries.\n- delta23: For multi-step chains, extract and display data from each search result before moving to next step. Show result snippets; never claim technical failure without demonstrating inspection or ≥2 entity-name/phrasing retries.\n- delta24: For multi-step chains, extract intermediate results (names, locations, dates) as anchors for downstream searches. Display result snippets before proceeding. If step N yields a name, embed it in step N+1 query. Never abandon without ≥2 entity-name refinement attempts.\n- delta25: For multi-step chains, always display fetched result snippets before proceeding. If results empty/ambiguous, retry ≥2x with entity names (e.g., 'Álvaro Bautista birth date') before refusal. Never claim 'cannot access' without showing inspection and entity-name retries.\n- delta26: Never claim 'search unavailable' or 'technical limitations' after executing tool calls. Inspect ALL returned snippets (show verbatim, even if empty/sparse), extract entity names (person, company, EV model). Retry ≥2x with anchors before refusal. For multi-step chains, display content per step; never abandon without demonstrating inspection. Never invoke internal knowledge as fallback after tool execution.\n- delta27: For forward-looking events (2024+ IPOs, ceremonies), always inspect returned snippets first. Distinguish 'knowledge cutoff predates event' from 'search results empty.' Display result content verbatim before claiming unavailability; retry ≥2x with entity anchors before refusal.\n- delta28: For multi-step chains (breakthrough→company→CEO→university), inspect all fetched snippets and extract intermediate facts (names, companies). Use extracted entities as anchors for downstream searches. Retry ≥2x before refusal; show content.\n- delta29: delta29: For multi-step chains with ambiguous intermediate results, extract any entity names (person, company, drug) from fetched snippets and immediately retry downstream steps with those anchors. Never abandon chain without ≥2 entity-name refinement attempts.\n- delta3: delta3: When questions specify index membership (S&P 500, NASDAQ, etc.), verify the company's listing status in search results before proceeding with downstream lookups. Disambiguate between similar rankings (e.g., Fortune 100 Fastest-Growing vs. S&P 500 highest growth).\n- delta30: delta30: For brand-ownership chains (brand→parent→shareholder→CEO), extract intermediate entities from each result. If parent company identified, immediately search for largest shareholder/equity holder with entity names (e.g., 'Berkshire Hathaway Kraft Heinz stake'). Never claim technical failure without ≥2 entity-name retries.\n- delta31: Never claim 'technical issues' or 'search unavailable' after executing tool calls. Always inspect returned snippets first. Extract entity names (rider, team, person) and retry ≥2x with those anchors before refusal. Show result content.\n- delta32: delta32: For multi-step chains (medal leader → president → birthplace), extract intermediate entity names from each result and immediately use them as anchors in downstream searches. Never claim technical failure without ≥2 entity-name retries per step.\n- delta33: delta33: Never claim 'technical issues' or 'search unavailable' after executing tool calls. Always inspect returned snippets first. Extract intermediate entity names (actor, film, company) and retry ≥2x with those anchors before refusal. Show result content and refinement attempts.\n- delta34: delta34: Never claim 'technical difficulties' after executing tool calls. Always inspect returned snippets first. Extract intermediate entity names (university, president) and retry ≥2x with those anchors before refusal. Show result content.\n- delta35: delta35: After executing search queries, always inspect returned snippets first. Extract intermediate entity names (player, team, person) before claiming 'technical issues.' Retry ≥2x with extracted anchors before refusal.\n- delta36: delta36: After issuing search queries, always inspect returned snippets before claiming technical failure. Extract entity names (supercomputer, company, person) and retry ≥2x with those anchors. Never refusal without demonstrating result inspection and ≥2 refinement attempts.\n- delta37: After executing search queries, always display returned snippets verbatim before proceeding. Extract intermediate entity names (company, person, CEO). Never claim 'search unavailable' without showing inspection and ≥2 entity-name refinement attempts per step.\n- delta38: For 2024+ queries, trust fetched results over cutoff. Inspect snippets first; extract entity names (event, city, organizer) and retry ≥2x before refusal. Never default to technical-failure claims without showing inspection.\n- delta39: delta39: For multi-step chains, never claim 'technical difficulties' or 'search unavailable' after executing tool calls. Always inspect returned snippets first. Extract intermediate entity names (player, team, chairman) and retry ≥2x with those anchors before refusal.\n- delta4: For birthplaces in formerly partitioned regions, include historical country names (Czechoslovakia, ČSSR, CSSR, CS, Yugoslavia) alongside modern ones when source material references them or when biographical data predates partition.\n- delta40: delta40: Never claim 'search unavailable' or 'unable to access' after executing search_engine_query calls. Always inspect returned snippets first; extract intermediate entity names (country, person, company) and retry ≥2x with those anchors before refusal. Show result content.\n- delta41: delta41: For multi-step chains (most expensive car → manufacturer → CEO), inspect all search snippets first. Extract manufacturer/model names (e.g., 'Bugatti', 'Rolls-Royce') and retry CEO searches with those anchors before claiming technical failure. Never refusal without ≥2 entity-name refinement attempts.\n- delta42: delta42: For multi-step chains, distinguish 'search returned no results' from 'search results don't contain private data.' Always inspect snippets first. If intermediate facts (university, president name) are found, retry downstream searches with those anchors before concluding data is private/unavailable.\n- delta43: delta43: Never claim 'technical issues' after executing searches if query contains candidate names (e.g., 'Pogačar Jonas Vingegaard'). Inspect snippets first; extract winner name and retry with '[name] birthplace/birth country' before refusal.\n- delta44: delta44: Never claim 'search unavailable' or 'function unavailable' after executing search_engine_query calls. Always inspect returned snippets first; if empty, show that explicitly. False unavailability claims after tool execution violate transparency.\n- delta45: delta45: For multi-step chains (billionaire→country→election→party→president), never claim 'technical limitations' after executing searches. Inspect all result snippets, extract entity names (person, country, party), and retry downstream steps with those anchors ≥2x before refusal.\n- delta46: delta46: For multi-step chains (award→winner→birthplace→landmark), after executing searches, always inspect snippets first. Extract winner name and retry downstream steps with entity anchors before claiming 'unable to access.' Never refusal without ≥2 entity-name refinement attempts per step.\n- delta47: delta47: For post-cutoff multi-step chains (company→CEO→university), execute all searches, inspect snippets verbatim, extract entity names (company, CEO), and retry ≥2x with anchors before refusal. Never claim 'unable to access' after tool execution without showing inspection.\n- delta48: delta48: For 2024+ multi-step chains (leader→birth year), execute searches, inspect snippets verbatim, extract leader name. Retry ≥2x with entity anchors (e.g., 'Aaron Judge birth year') before claiming technical failure. Never refusal without showing result inspection.\n- delta49: After executing search_engine_query, ALWAYS inspect and display returned snippets verbatim before proceeding or claiming failure. Extract intermediate entity names (team, coach, school). Never claim 'technical difficulties' without showing result content and ≥2 entity-name refinement retries.\n- delta5: For coaching/management roles, verify current tenure with explicit 2024+ dates and cross-check ≥2 sources. Flag if fetched content lacks 'current as of' confirmation.\n- delta50: delta50: For multi-step chains (nominee→college→president→spouse), after each search, inspect and display result snippets verbatim. Extract intermediate entity names (nominee, college, president) and embed in next query. Never claim 'technical issues' without showing ≥2 entity-name refinement attempts per step.\n- delta51: delta51: For multi-step chains (company→city→university→mascot), after each search_engine_query, display all returned snippets verbatim. Extract company/entity names and immediately retry downstream steps with those anchors. Never claim 'technical difficulties' after tool execution without ≥2 entity-name refinement attempts per step.\n- delta52: delta52: For multi-step chains (record holder → birthplace), after executing search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract player/entity names and retry ≥2x with anchors (e.g., '[player name] birthplace') before claiming unavailability. Never refusal without showing result content and entity-name refinement attempts.\n- delta53: delta53: For multi-step chains (event→country→city→date), after each search_engine_query, display returned snippets verbatim. Extract intermediate entity names (country, city) and immediately embed in downstream queries. Never claim 'technical difficulties' after tool execution without ≥2 entity-name refinement attempts per step.\n- delta54: delta54: For multi-step chains, never abandon after partial success. If intermediate facts extracted (performer, birthplace, team), immediately execute final step with entity anchors (e.g., 'Dallas Cowboys 2024 wins') before claiming technical failure. Show all result snippets.\n- delta55: delta55: For multi-step chains (record→city→mayor→university), after executing search_engine_query, ALWAYS inspect and display returned snippets verbatim before claiming 'unable to access.' Extract intermediate entity names (city, mayor) and retry ≥2x with anchors (e.g., '[city] mayor', '[mayor] university') before refusal. Never abandon without showing result content and entity-name refinement attempts.\n- delta56: delta56: For multi-step market/financial chains (Q1-Q3 leader→Q4 revenue), after each search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract brand names (Apple, Samsung, Xiaomi) and immediately retry downstream steps with entity anchors (e.g., '[brand] Q4 2024 revenue') ≥2x before claiming technical failure. Never refusal without showing result content.\n- delta57: delta57: For post-cutoff multi-step chains (event winner→birthplace→entity→official), after each search_engine_query, ALWAYS display returned snippets verbatim. Extract winner/entity names and immediately retry ≥2x with anchors (e.g., '[winner name] birthplace') before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta58: delta58: After executing search_engine_query, NEVER claim 'technical limitations' or 'unable to access.' Always inspect and display returned snippets verbatim first. Extract intermediate entity names (team, coach, school) and retry ≥2x with anchors before refusal.\n- delta59: delta59: For multi-step chains (record holder → height), after each search_engine_query, ALWAYS display returned snippets verbatim. Extract record holder name and retry ≥2x with entity anchors (e.g., '[name] height') before claiming unavailability. Never refusal without showing result content.\n- delta6: delta6: For music releases and record label questions, verify all labels mentioned in sources (primary + co-labels/distributors). Don't stop at the first label found; cross-check fetched content for secondary label involvement.\n- delta60: delta60: For multi-step chains (record→city→mayor→spouse), after each search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract intermediate entity names (city, record holder) and immediately retry downstream steps with anchors (e.g., '[city] mayor 2024', '[mayor] spouse') ≥2x before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta61: delta61: For multi-step chains (player→club→president→height), after each search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract intermediate entity names (player name, club name, president name) and immediately retry downstream steps with anchors (e.g., '[player] club 2004-2007', '[president] height cm') ≥2x before claiming unavailability. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta62: For 2024+ queries, never conflate 'knowledge cutoff predates event' with 'search returned no results.' Always inspect snippets first. If empty, retry ≥2x with entity anchors (e.g., 'Soluna IPO 2024') before refusal. Never claim 'technical unavailable' without showing result content.\n- delta63: delta63: For multi-step chains (record→city→mayor→university), after each search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract intermediate entity names (city, mayor) and immediately retry downstream steps with anchors (e.g., '[city] mayor 2024', '[mayor] university') ≥2x before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta64: delta64: For multi-step chains (2024 event→winner→birthplace→city→mayor→university), after executing search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract winner name and immediately retry downstream steps with entity anchors (e.g., '[winner] birthplace', '[city] mayor 2024') ≥2x before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta65: For record-holder chains (Guinness record → birth date), after each search_engine_query, ALWAYS display returned snippets verbatim. Extract record holder name (e.g., 'Rhiannan Iffland') and immediately retry with '[name] birth date' or '[name] born' before claiming technical failure. Never refusal without ≥2 entity-name refinement attempts. Inspect first; never claim 'unavailable' after tool execution.\n- delta66: delta66: For multi-step chains (GDP leader→waterfall→park→jungle), after each search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract country/entity names and immediately retry downstream steps with anchors (e.g., '[country] largest waterfall') ≥2x before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta67: delta67: After executing search_engine_query, never claim 'unable to access' if intermediate facts (person, country, entity) were successfully extracted. Always attempt final-step synthesis with extracted anchors before refusal.\n- delta68: For Guinness record chains, never claim 'search unavailable' after executing queries. Inspect all returned snippets verbatim, extract record holder name, and retry ≥2x with '[name] birth date' anchors before refusal. Show result content and refinement attempts.\n- delta69: delta69: For multi-step chains (CMO→school→dean), after EACH search_engine_query, ALWAYS display returned snippets verbatim. Extract CMO/entity names and immediately retry downstream with anchors (e.g., '[name] education', '[school] dean list') ≥2x before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta7: For specific claims (vote counts, records, dates), verify exact format (commas, delimiters) and value against multiple authoritative sources. Flag if sources conflict on identity or numeric precision.\n- delta70: delta70: Never claim 'technical issues' or 'unable to access' after executing search_engine_query in multi-step chains (actor→birthplace→airport gates). Always inspect and display returned snippets verbatim first. Extract actor name from step 1, retry step 2 with '[actor] birthplace', extract city, retry step 3 with '[city] airport gates' ≥2x before refusal. Show all result content and entity-name refinement attempts.\n- delta71: delta71: For Guinness record chains (record→city→mayor→family), after executing search_engine_query, NEVER claim 'unable to access' or 'search unavailable.' Always inspect and display returned snippets verbatim first. Extract record holder name or city, retry ≥2x with entity anchors (e.g., '[city] mayor 2024', '[mayor] children') before refusal. Show all result content.\n- delta72: delta72: For Guinness record chains (record→city→official→date), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Never claim 'technical difficulties' after tool execution. Extract record holder name, retry ≥2x with entity anchors (e.g., '[name] hometown', '[city] mayor 2024') before refusal.\n- delta73: delta73: For Guinness multi-step chains (record→city→mayor→date), after executing search_engine_query, NEVER claim 'search unavailable' without first displaying returned snippets verbatim. Extract city/entity names and retry ≥2x with anchors (e.g., '[city] mayor 2024', '[mayor] birth date') before refusal.\n- delta74: delta74: For multi-step chains (top artist→birthplace→institution detail), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract artist name from step 1, immediately retry step 2 with '[artist] birthplace', extract location, retry step 3 with '[location] hospital beds' ≥2x before refusal. Never claim 'search unavailable' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta75: delta75: For multi-step Guinness chains (record→country→PM salary), after EACH search_engine_query, ALWAYS display returned snippets verbatim before claiming 'unable to access.' Never refusal without ≥2 entity-name refinement attempts per step.\n- delta76: delta76: For 2024+ multi-step chains (event winner→stadium→inauguration), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract winner name (e.g., 'Real Madrid') and immediately retry with entity anchors (e.g., '[team] home stadium', '[stadium] inauguration year') ≥2x before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta77: delta77: For multi-step Guinness chains (record→team→coach→school→headmistress), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract team/coach names and immediately retry downstream with anchors (e.g., '[coach] high school', '[school] headmistress') ≥2x before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta78: For multi-step chains, NEVER answer from internal knowledge after executing searches. Always inspect and display returned snippets verbatim first. Extract intermediate entity names and retry ≥2x with anchors before finalizing. Synthesize fetched content only; never invoke internal knowledge as fallback.\n- delta79: delta79: For Guinness esports chains (record→player→position), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract player names and immediately retry ≥2x with anchors (e.g., '[player] position LEC', '[player] Guinness record 2024') before claiming technical failure. Never refusal without showing result content.\n- delta8: delta8: For benchmark/leaderboard questions with temporal anchors ('as of [date]'), verify the leader's status at that specific date, not release dates after it. Cross-check leaderboard snapshots or announcements from the reference date itself.\n- delta80: delta79: For post-cutoff events (2025+), never claim 'technical difficulties' after executing search_engine_query. Always inspect and display returned snippets verbatim first. Extract winner/album names and retry ≥2x with entity anchors (e.g., '[album] release date') before refusal.\n- delta81: delta81: For Guinness record chains (record→player→hometown→governor), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract player name, retry with '[name] hometown/birthplace', extract city, retry with '[city] governor 2025' ≥2x before refusal. Never claim 'technical difficulties' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta82: delta82: For multi-step chains (Olympics→city→mayor→party→leader), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract intermediate entity names (city, mayor, party) and immediately retry downstream with anchors (e.g., '[mayor] party', '[party] leader 2025') ≥2x before claiming technical failure. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta83: delta83: For Guinness record chains (building record→country→president→school→headmaster), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim. Extract building name/country and retry ≥2x with anchors (e.g., '[country] president 2024', '[president] secondary school') before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta84: delta84: For post-cutoff events (2025+), after executing search_engine_query, ALWAYS display returned snippets verbatim—even if empty. Never claim 'technical issues' without showing inspection. If empty, retry ≥2x with entity anchors (e.g., '97th Oscars Best Picture') before distinguishing 'no results' from 'technical failure.'\n- delta85: delta85: For multi-step chains (record→team→coach→birthplace→mayor), after EACH search_engine_query, ALWAYS inspect and display returned snippets verbatim before claiming 'unable to access.' Extract team/coach names and retry ≥2x with anchors (e.g., '[coach] birthplace', '[city] mayor 2025') before refusal. Never abandon without showing result content.\n- delta86: delta86: For Guinness multi-step chains (record→team→chairman→birthplace→mayor), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if empty. Extract team/chairman names and retry ≥2x with anchors (e.g., '[team] women consecutive titles', '[chairman] birthplace') before claiming technical failure. Never refusal without showing result content.\n- delta87: delta86b: For multi-step drama chains (drama→director→actor role), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract drama titles (Bridgerton, The Crown, etc.) and director names, retry ≥2x with anchors (e.g., '[drama] director', '[director] ABC 2014-2020') before claiming unavailability. Never refusal without showing result content and entity-name refinement attempts per step.\n- delta88: delta88: For Guinness record chains (record→cat name→age), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract cat name and immediately retry ≥2x with anchors (e.g., '[cat name] age', '[cat name] birth date May 2024') before claiming technical failure. Never refusal without showing result content.\n- delta89: delta89: For multi-step chains (record→fighter→hometown→mayor→spouse), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract fighter name and immediately retry downstream with anchors (e.g., '[fighter] hometown', '[city] mayor 2025') ≥2x before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta9: Before inference: estimate tokens (system + schemas + history + query). If ≥75% limit (~98k for 131k models), decompose multi-step chains (e.g., record→city→official→spouse) into sequential focused searches with schema compression in follow-ups.\n- delta90: delta90: For multi-step chains, never claim 'search unavailable' after executing search_engine_query calls. Always inspect and display returned snippets verbatim first. Extract intermediate entity names (festival, movie, writer, city) and retry ≥2x with anchors (e.g., '[festival] 2024 winner', '[writer] birthplace') before refusal. Show all result content.\n- delta91: delta91: For multi-step Guinness chains (record→author→country→PM→award), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract author/country names and retry ≥2x with anchors (e.g., '[author] Guinness record 2024', '[country] PM award July 2024') before refusal.\n- delta92: delta92: For multi-step Guinness chains (oldest goalscorer→club→chairman→spouse), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract goalscorer name and immediately retry with '[name] club 2008-2012', extract club, retry with '[club] chairman 2025', extract chairman, retry with '[chairman] spouse 2025' ≥2x before refusal. Never claim 'unable to access' after tool execution without showing result content and entity-name refinement attempts per step.\n- delta93: delta93: For multi-step chains (Person of Year→university→president→degree), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract person name, university, president name and retry ≥2x with anchors (e.g., '[person] university', '[president] bachelor degree') before claiming technical failure. Never refusal without showing result content.\n- delta94: delta94: For multi-step chains (best-selling EV→CFO→education), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract EV model/CFO name and retry ≥2x with anchors (e.g., '[CFO] education', '[CFO] bachelor degree') before claiming technical failure. Never refusal without showing result content.\n- delta95: delta95: For Guinness WRC/motorsport chains (record→driver→father), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract driver name and immediately retry ≥2x with anchors (e.g., '[driver] father', '[driver] family') before refusal. Never claim 'unable to access' after tool execution without showing result content.\n- delta96: delta96: For Guinness racquetball chains (record→player→hometown→governor), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if empty. Extract player name, retry with '[name] hometown', extract city, retry with '[city] governor 2025' ≥2x before refusal. Never claim 'technical issues' after tool execution without showing result content.\n- delta97: delta97: For multi-step economic chains (GDP leader→waterfall→jungle), after EACH search_engine_query, ALWAYS display returned snippets verbatim—even if sparse. Extract country/entity names and retry ≥2x with anchors (e.g., '[country] largest waterfall', '[waterfall] jungle') before refusal. Never invoke internal knowledge after tool execution."
+    },
+    {
+      "role": "user",
+      "content": "World Curling Championship records highlight nations with a rich history in winter sports. What is the annual salary (in the currency of the country, as integer) in 2024 for the prime minister of the country that has earned the most World Women's Curling Championship titles, according to the 2024 Guinness World Records? Format your answer as a number."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you find the answer to this multi-step question. Let me break it down systematically:\n\n1. First, find which country has the most World Women's Curling Championship titles according to 2024 Guinness World Records\n2. Then find the prime minister of that country\n3. Finally, find their annual salary in 2024 in the country's currency\n\nLet me start with the first step.",
+      "tool_calls": [
+        {
+          "id": "call_00_puWjm9Mc4ecB95QDmQceIWCB",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"2024 Guinness World Records most World Women's Curling Championship titles country\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_puWjm9Mc4ecB95QDmQceIWCB"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a different search approach:",
+      "tool_calls": [
+        {
+          "id": "call_00_Wa8e5V3RJN3mwg0XedglMtPo",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Guinness World Records 2024 women's curling championship titles record\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_Wa8e5V3RJN3mwg0XedglMtPo"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a more general search about women's curling championship records:",
+      "tool_calls": [
+        {
+          "id": "call_00_lMWqbVV7UHYcsR97VrFyemBJ",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"World Women's Curling Championship most titles country record\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_lMWqbVV7UHYcsR97VrFyemBJ"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try searching for curling championship winners and records:",
+      "tool_calls": [
+        {
+          "id": "call_00_6ZdUWTfHkMYgtcwZbi9dd3od",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"women's curling world championship winners most titles\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_6ZdUWTfHkMYgtcwZbi9dd3od"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a different approach and search for general curling championship information:",
+      "tool_calls": [
+        {
+          "id": "call_00_kOp7YoSks4M20yLButTKt1MU",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"curling world championship records titles\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_kOp7YoSks4M20yLButTKt1MU"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}
