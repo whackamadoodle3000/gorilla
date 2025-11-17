@@ -1,0 +1,1049 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nmessage_api\n- delta1: When user provides their own ID, send confirmation message back to them immediately.\n- delta10: Avoid list_users and get_user_id calls when user names are explicitly provided - use names directly for send_message\n- delta11: Execute message_login and send_message directly with provided user IDs in multi-turn scenarios without validation calls\n- delta12: Execute delete_message using specific message IDs from context - never use receiver_id for deletion operations\n- delta13: Avoid conversational interruptions between message operations - execute functions directly without explanatory text\n- delta14: Execute send_message directly with provided user names - avoid get_user_id validation calls and unsolicited operations that create state drift\n- delta15: Never call get_user_id when receiver names are explicitly provided - use names directly in send_message parameters without validation\n- delta16: Avoid unsolicited API calls that alter message history state - only execute requested message operations\n- delta17: Maintain exact message history alignment - avoid adding unsolicited content that creates inbox state mismatches\n- delta18: Execute send_message immediately when user provides message content - never interrupt with tool availability discussions or function listings\n- delta19: Use provided receiver names directly in send_message - system resolves user IDs automatically without get_user_id calls\n- delta2: Execute send_message immediately when user IDs are provided in any turn - avoid tool availability discussions and treat explicit identifiers as action triggers\n- delta20: Execute message operations immediately when user provides user IDs - never treat explicit identifiers as conversational content requiring no action\n- delta21: Avoid tool availability discussions when user provides explicit parameters - execute functions immediately without capability explanations\n- delta22: Execute send_message directly with provided user IDs - avoid list_users and get_user_id validation calls that create state drift\n- delta23: Avoid conversational interruptions when user provides action parameters - execute functions immediately without capability explanations\n- delta24: Execute all multi-turn message operations sequentially without conversational interruptions - never substitute tool calls with explanatory text\n- delta25: Continue message operations across all turns regardless of user input format - treat format confirmations as action triggers\n- delta26: Execute message operations without conversational explanations - tool calls should proceed directly without explanatory text\n- delta3: Continue message operations across all conversation turns regardless of user input brevity.\n- delta4: Execute send_message directly when user names are provided - system resolves user IDs automatically without get_user_id calls\n- delta5: Maintain consistent internal state tracking across all API instances throughout multi-turn conversations\n- delta6: Use provided user IDs directly without discovery or validation calls that alter internal state structure\n- delta7: Avoid message_get_login_status calls when user IDs are explicitly provided - execute send_message directly without login verification\n- delta8: Maintain exact inbox state structure alignment with ground truth implementation after each message operation\n- delta9: Ensure message_count and user_map state fields match ground truth implementation precisely\n\ntrading_bot\n- delta1: When user asks to review orders, call get_order_history first to retrieve available orders\n- delta10: Execute cancel_order using available order IDs from context - never require explicit order ID when inferable from conversation\n- delta11: delta11: Avoid redundant watchlist checks when not explicitly requested - execute watchlist operations directly without pre-validation\n- delta12: Execute core trading operations directly - never call get_stock_info or get_account_info for validation unless explicitly requested\n- delta13: Maintain state integrity by avoiding extra tool calls and conversational text that alter internal state beyond requested operations\n- delta14: Execute get_symbol_by_name once per company name - avoid redundant symbol lookups in same conversation\n- delta15: Avoid trading_get_login_status entirely - execute trading operations directly without authentication checks, even when login state appears ambiguous\n- delta16: Avoid get_stock_info for price validation when placing orders - execute place_order directly with available parameters\n- delta17: Call get_account_info before withdraw_funds to verify account status and balance - never assume sufficient funds from context\n- delta18: Execute pending operations across turns without interruption - avoid explanatory text, system commentary, or function availability claims between operations\n- delta19: Continue watchlist operations immediately after symbol resolution - never insert explanatory text between lookup and execution\n- delta2: Only call get_order_details for specific order IDs when explicitly provided by user\n- delta20: Always output structured response lists in multi-turn conversations - never omit response list format even when no tool calls are needed\n- delta21: Never claim tool unavailability then execute it - maintain consistent function access assumptions across all turns, especially when user input appears ambiguous\n- delta22: Execute add_to_watchlist immediately when company name is provided - avoid conversational interruptions requesting symbol validation\n- delta23: Avoid get_stock_info for market analysis when user requests order placement - execute place_order directly with available parameters\n- delta24: Execute add_to_watchlist immediately in first turn when company name provided - avoid conversational interruptions requesting symbols\n- delta25: Maintain structured response list format across all turns - conversational text alone triggers inference errors\n- delta26: Execute cancel_order automatically when order history reveals pending orders - never require explicit confirmation for inferable cancellations\n- delta27: Avoid get_stock_info calls for invalid symbols - execute only requested operations without speculative validation\n- delta28: Minimize explanatory text between operations - maintain focus on direct tool execution without analysis commentary\n- delta29: Execute place_order with available parameters even when price is unspecified - never delay trading operations for optional confirmations\n- delta3: Execute available operations directly without extra validation, system commentary, or conversational interruptions - avoid get_symbol_by_name and explanatory text\n- delta30: Maintain conversation state accurately - never assume orders don't exist without checking order history or details\n- delta31: Minimize conversational text between operations - avoid state-altering commentary that disrupts multi-turn instance tracking\n- delta4: Execute add_to_watchlist immediately when company name is provided - never request stock symbols or perform validation checks\n- delta5: Execute trading operations directly without authentication prompts - never request login credentials for place_order, get_order_details, or cancel_order\n- delta6: Execute place_order immediately when symbol and quantity are specified - never block on price confirmations even when price is inferable from context\n- delta7: Execute get_order_details and cancel_order directly using available order IDs - never require login or claim orders don't exist due to authentication\n- delta8: Always attempt cancel_order when order ID is available - never assume order status without calling the function\n- delta9: Execute get_order_details using conversation context when order ID is inferable - never request explicit order ID confirmation"
+    },
+    {
+      "role": "user",
+      "content": "I reckon it's about time to track Zeta Corp's stock performance closely, so it'd be great if you could add it to my watchlist, please."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you add Zeta Corp to your watchlist. Let me first get the stock symbol for Zeta Corp.",
+      "tool_calls": [
+        {
+          "id": "call_00_KcORNv8dZEvsiwwz8joYqNCY",
+          "type": "function",
+          "function": {
+            "name": "get_symbol_by_name",
+            "arguments": "{\"name\": \"Zeta Corp\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"symbol\": \"ZETA\"}",
+      "tool_call_id": "call_00_KcORNv8dZEvsiwwz8joYqNCY"
+    },
+    {
+      "role": "assistant",
+      "content": "Now I'll add Zeta Corp (symbol: ZETA) to your watchlist.",
+      "tool_calls": [
+        {
+          "id": "call_00_gUUVb1L0WPy0gSU6AePkYeP8",
+          "type": "function",
+          "function": {
+            "name": "add_to_watchlist",
+            "arguments": "{\"stock\": \"ZETA\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"watchlist\": [\"NVDA\", \"ZETA\"]}",
+      "tool_call_id": "call_00_gUUVb1L0WPy0gSU6AePkYeP8"
+    },
+    {
+      "content": "Perfect! I've successfully added Zeta Corp (symbol: ZETA) to your watchlist. Your watchlist now contains: NVDA and ZETA.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Well, it's high time I brought myself up to speed with my investment affairs. Would you kindly retrieve my existing watchlist so I can reassess which stocks I'm keeping an eye on these days?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add_contact",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Add a contact to the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_name": {
+              "type": "string",
+              "description": "User name of contact to be added."
+            }
+          },
+          "required": [
+            "user_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "added_status": {
+              "type": "boolean",
+              "description": "True if the contact was added successfully, False otherwise."
+            },
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the added contact."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the addition attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Delete the latest message sent to a receiver. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            }
+          },
+          "required": [
+            "receiver_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "deleted_status": {
+              "type": "boolean",
+              "description": "True if the message was deleted successfully, False otherwise."
+            },
+            "receiver_id": {
+              "type": "string",
+              "description": "ID of the receiver of the deleted message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the deletion attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_message_stats",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get statistics about messages for the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stats": {
+              "type": "dict",
+              "description": "Dictionary containing message statistics.",
+              "properties": {
+                "received_count": {
+                  "type": "integer",
+                  "description": "Number of messages received by the current user."
+                },
+                "total_contacts": {
+                  "type": "integer",
+                  "description": "Total number of contacts the user has interacted with."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_id",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get user ID from user name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "User name of the user. "
+            }
+          },
+          "required": [
+            "user"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_users",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: List all users in the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_list": {
+              "type": "array",
+              "description": "List of all users in the workspace.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_get_login_status",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_login",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Log in a user with the given user ID to messeage application. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user to log in. "
+            }
+          },
+          "required": [
+            "user_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the login attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_messages",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Search for messages containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "The keyword to search for in messages."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "List of dictionaries containing matching messages.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "receiver_id": {
+                    "type": "string",
+                    "description": "User ID of the receiver of the message."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "The message containing the keyword."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Send a message to a user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message to be sent."
+            }
+          },
+          "required": [
+            "receiver_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sent_status": {
+              "type": "boolean",
+              "description": "True if the message was sent successfully, False otherwise."
+            },
+            "message_id": {
+              "type": "integer",
+              "description": "ID of the sent message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the send attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "view_messages_sent",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: View all historical messages sent by the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "dict",
+              "description": "Dictionary of messages grouped by receiver An example of the messages dictionary is {\"USR001\":[\"Hello\"],\"USR002\":[\"World\"]}."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "add_to_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Add a stock to the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stock": {
+              "type": "string",
+              "description": "the stock symbol to add to the watchlist. "
+            }
+          },
+          "required": [
+            "stock"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "watchlist": {
+              "type": "array",
+              "description": "the watchlist.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Cancel an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order to cancel. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the cancelled order."
+            },
+            "status": {
+              "type": "string",
+              "description": "New status of the order after cancellation attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "filter_stocks_by_price",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Filter stocks based on a price range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to filter."
+            },
+            "min_price": {
+              "type": "number",
+              "description": "Minimum stock price. This is a float type value.",
+              "format": "float"
+            },
+            "max_price": {
+              "type": "number",
+              "description": "Maximum stock price.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "min_price",
+            "max_price"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "filtered_stocks": {
+              "type": "array",
+              "description": "Filtered list of stock symbols within the price range.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fund_account",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Fund the account with the specified amount. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to fund the account with.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the funding operation."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after funding."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_account_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get account information. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "account_id": {
+              "type": "integer",
+              "description": "ID of the account."
+            },
+            "balance": {
+              "type": "float",
+              "description": "Current balance of the account."
+            },
+            "binding_card": {
+              "type": "integer",
+              "description": "Card number associated with the account."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_available_stocks",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get a list of stock symbols in the given sector. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "sector": {
+              "type": "string",
+              "description": "The sector to retrieve stocks from (e.g., 'Technology'). "
+            }
+          },
+          "required": [
+            "sector"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stock_list": {
+              "type": "array",
+              "description": "List of stock symbols in the specified sector.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_time",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the current time. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "current_time": {
+              "type": "string",
+              "description": "Current time in HH:MM AM/PM format."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_details",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the order. "
+            }
+          },
+          "required": [
+            "order_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock in the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            },
+            "status": {
+              "type": "string",
+              "description": "Current status of the order. [Enum]: [\"Open\", \"Pending\", \"Completed\", \"Cancelled\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_order_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the stock order ID history. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_history": {
+              "type": "array",
+              "description": "List of orders ID in the order history.",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_stock_info",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the details of a stock. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol that uniquely identifies the stock. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "price": {
+              "type": "float",
+              "description": "Current price of the stock."
+            },
+            "percent_change": {
+              "type": "float",
+              "description": "Percentage change in stock price."
+            },
+            "volume": {
+              "type": "float",
+              "description": "Trading volume of the stock."
+            },
+            "MA(5)": {
+              "type": "float",
+              "description": "5-day Moving Average of the stock."
+            },
+            "MA(20)": {
+              "type": "float",
+              "description": "20-day Moving Average of the stock."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_symbol_by_name",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the symbol of a stock by company name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the company. "
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock or \"Stock not found\" if not available."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_transaction_history",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the transaction history within a specified date range. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "start_date": {
+              "type": "string",
+              "description": "Start date for the history (format: 'YYYY-MM-DD').",
+              "default": "None"
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for the history (format: 'YYYY-MM-DD'). ",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "transaction_history": {
+              "type": "array",
+              "description": "List of transactions within the specified date range.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of transaction. [Enum]: [\"deposit\", \"withdrawal\"]"
+                  },
+                  "amount": {
+                    "type": "float",
+                    "description": "Amount involved in the transaction."
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "description": "Timestamp of the transaction, formatted as 'YYYY-MM-DD HH:MM:SS'."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "watchlist": {
+              "type": "array",
+              "description": "List of stock symbols in the watchlist.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "notify_price_change",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Notify if there is a significant price change in the stocks. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "stocks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of stock symbols to check."
+            },
+            "threshold": {
+              "type": "number",
+              "description": "Percentage change threshold to trigger a notification.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "stocks",
+            "threshold"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "notification": {
+              "type": "string",
+              "description": "Notification message about the price changes."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "place_order",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Place an order. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to trade."
+            },
+            "price": {
+              "type": "number",
+              "description": "Price at which to place the order. This is a float type value.",
+              "format": "float"
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares to trade. "
+            }
+          },
+          "required": [
+            "order_type",
+            "symbol",
+            "price",
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "order_id": {
+              "type": "integer",
+              "description": "ID of the newly placed order."
+            },
+            "order_type": {
+              "type": "string",
+              "description": "Type of the order (Buy/Sell)."
+            },
+            "status": {
+              "type": "string",
+              "description": "Initial status of the order."
+            },
+            "price": {
+              "type": "float",
+              "description": "Price at which the order was placed."
+            },
+            "amount": {
+              "type": "integer",
+              "description": "Number of shares in the order."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "remove_stock_from_watchlist",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Remove a stock from the watchlist. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Symbol of the stock to remove. "
+            }
+          },
+          "required": [
+            "symbol"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the removal operation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_get_login_status",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Get the login status. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "Login status."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_login",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user login. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username for authentication."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password for authentication. "
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Login status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "trading_logout",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Handle user logout for trading system. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Logout status message."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "withdraw_funds",
+        "description": "This tool belongs to the trading system, which allows users to trade stocks, manage their account, and view stock information. Tool description: Withdraw funds from the account balance. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "description": "Amount to withdraw from the account.  This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Status of the transaction."
+            },
+            "new_balance": {
+              "type": "float",
+              "description": "Updated account balance after the transaction."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

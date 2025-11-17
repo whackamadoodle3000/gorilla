@@ -1,0 +1,1339 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\ntwitter_api\n- delta1: Execute post_tweet directly when social sharing is requested - omit all conversational responses and authentication calls across all turns\n- delta10: Execute retweet immediately using state-tracked tweet IDs from previous post_tweet responses - never request manual tweet IDs or authentication\n- delta11: Execute post_tweet immediately when tweet content is specified - avoid authentication calls and conversational responses, even across multi-turn sequences\n- delta12: For multi-turn tweet modifications, use comment_tweet and mention_tweet with original tweet ID - never post new tweets for content corrections or additional mentions\n- delta13: Use state-tracked tweet IDs from successful post_tweet operations for retweet without re-requesting authentication or tweet IDs\n- delta14: Never call posting_get_login_status for any social operations - execute post_tweet directly without authentication checks, even in multi-turn sequences\n- delta15: Avoid creating files for tweet content - execute post_tweet directly with specified text rather than file operations\n- delta16: Never use mention, search_tweets, or get_user_tweets for basic tweet posting - execute post_tweet directly when content is available\n- delta17: Execute post_tweet immediately when tweet content is fully specified - omit authentication calls and conversational text across all turns\n- delta18: Execute retweet immediately when tweet ID is available from previous operations - never block on authentication requests\n- delta19: Execute comment_tweet and mention_tweet immediately when original tweet ID is available from previous operations - never request authentication\n- delta2: Execute retweet and comment using state-tracked tweet IDs from post_tweet responses - never request manual tweet IDs or authentication\n- delta20: delta20: Execute post_tweet immediately when tweet content is drafted in multi-turn sequences - never request authentication credentials\n- delta21: Never call posting_get_login_status for any social operations - execute post_tweet directly without authentication checks even when evaluation passes\n- delta22: Never request Twitter username and password for social operations when tweet content and retweet intent are clearly specified\n- delta23: Execute post_tweet directly when tweet content is available from previous operations - never request credentials after failed authentication attempts\n- delta24: Execute post_tweet immediately on empty user turns when tweet content was previously specified - never block on authentication requests\n- delta25: Execute post_tweet and retweet immediately when tweet content and IDs are specified, skipping all authentication requests and credential prompts\n- delta26: Execute retweet immediately when retweet intent is specified and tweet ID is available from state, without authentication calls or ID requests\n- delta27: Execute post_tweet immediately when tweet content, hashtags, and mentions are fully specified - never request credentials for social operations\n- delta28: Execute comment_tweet immediately when tweet ID is available from previous operations - never use get_user_tweets for comment functionality\n- delta29: Handle empty user turns by executing available social operations directly using state-tracked parameters\n- delta3: Never request Twitter credentials, authentication, or login status - execute social operations directly without any login prompts when content is specified\n- delta30: Execute social operations without explanatory text - avoid conversational responses that block tool execution in multi-turn scenarios\n- delta31: Execute post_tweet immediately on hashtag clarification turns - never default to conversational confirmation when tweet content is available\n- delta32: Execute post_tweet immediately on empty turns when tweet content was drafted in previous turns - never request authentication credentials\n- delta4: Execute social operations immediately on empty user turns when content was previously specified - never block on authentication requests or credential prompts\n- delta5: Execute social operations directly without authentication calls - never call authenticate_twitter or posting_get_login_status when credentials are explicitly provided\n- delta6: Execute social operations immediately when all parameters are available - never request platform selection or confirmation\n- delta7: Use state-tracked tweet IDs from API responses for multi-turn operations - never hardcode tweet IDs like '1'\n- delta8: In multi-turn scenarios, track tweet IDs from post_tweet responses and use comment/mention functions for modifications - never create new tweets for content updates\n- delta9: Execute post_tweet immediately when social sharing is explicitly requested - never prompt for credentials or authentication\n\nvehicle_control_api\n- delta1: Always press brake pedal AND lock all doors before attempting engine start - mandatory safety sequence prevents state mismatches\n- delta10: Avoid redundant status checks and feasibility estimates - single call per inquiry prevents state drift and maintains instance state consistency\n- delta11: Avoid redundant displayCarStatus calls after feasibility calculations - single status check per inquiry prevents state drift\n- delta12: Use actual calculated distance for estimate_drive_feasibility_by_mileage calls - never use zero or placeholder values\n- delta13: Call set_navigation immediately when directing to any destination - includes tire shops when pressures are below threshold, completes navigation flow\n- delta14: Execute location discovery and distance estimation immediately when destination cities are provided - never block operations waiting for zip codes\n- delta15: Use get_zipcode_based_on_city for location discovery when destination city is provided but details are incomplete\n- delta16: Execute fillFuelTank with calculated full capacity based on current fuel level when requested - never use arbitrary values that create state mismatches\n- delta17: Use get_zipcode_based_on_city immediately when destination city is known - don't block operations waiting for user input\n- delta18: Execute fillFuelTank immediately when fuel is insufficient - don't wait for user confirmation or manual intervention\n- delta19: Release brake pedal after successful engine start - complete the full brake→start→release sequence\n- delta2: Only recommend tire shops when pressure is actually below specified threshold\n- delta20: Execute pending vehicle operations on empty user turns - maintain state continuity across all conversation turns\n- delta21: Execute pending vehicle operations immediately on empty user turns - never default to function commentary or explanations\n- delta22: Execute estimate_distance AND estimate_drive_feasibility_by_mileage immediately when trip planning between known cities - don't require user confirmation\n- delta23: Execute requested vehicle operations immediately - never block on user input for quantity or confirmation\n- delta24: Execute fillFuelTank immediately when fuel capacity, reserve, or tank size requests are made - avoid explanatory text about physical limitations\n- delta25: Prioritize tool execution over explanatory text when user requests specific vehicle operations\n- delta26: Execute clean operation sequences without redundant tool calls - multiple attempts create state drift\n- delta27: Execute clean operation sequences without excessive commentary - prioritize state-advancing operations over explanatory text\n- delta28: Execute set_navigation immediately after finding tire shop when pressures are below threshold - completes destination routing flow\n- delta29: Avoid redundant engine start attempts - execute single start sequence after proper brake application\n- delta3: Execute fillFuelTank with precise capacity calculation based on current fuel level - never use arbitrary values that create state mismatches\n- delta30: Execute get_zipcode_based_on_city immediately when destination cities are known - don't request zip codes from user\n- delta31: Execute clean single operation sequences without overlapping redundant calls - multiple attempts for same action create state drift\n- delta32: Execute estimate_distance immediately when both cities are known - never request zip codes for distance calculations\n- delta33: Execute single engine start attempt only after brake application AND door locking - never start engine before safety sequence\n- delta34: Never attempt engine start before brake pedal application AND door locking - violates safety sequence and causes state mismatches\n- delta35: Execute fillFuelTank immediately when fuel capacity or reserve requests are made - avoid explanatory text about physical limitations\n- delta36: Execute pending operations immediately on empty user turns - never default to conversational responses or confirmation text\n- delta37: Call estimate_distance immediately when trip planning between known cities - never omit distance calculations for navigation\n- delta38: Use get_zipcode_based_on_city for location discovery when destination cities are provided - never omit zipcode lookups for navigation\n- delta39: Execute estimate_drive_feasibility_by_mileage immediately after distance calculation - never omit feasibility checks for trip planning\n- delta4: Complete vehicle start sequence with proper brake application before single engine start - avoid multiple redundant attempts that cause state drift\n- delta40: Never start engine before brake application and door locking - safety sequence violations cause state mismatches\n- delta41: Execute fillFuelTank immediately when fuel capacity or reserve requests are made - avoid explanatory text about physical limitations\n- delta42: Avoid multiple redundant engine start attempts - execute single start sequence after proper safety preparation\n- delta43: Prioritize tool execution over explanatory text when user requests specific vehicle operations\n- delta44: Execute pending vehicle operations immediately when destination cities are known - never block on incomplete address details\n- delta45: Use get_zipcode_based_on_city for navigation setup when destination city is provided - never request full addresses from user\n- delta46: Complete full safety sequence (lockDoors → pressBrakePedal → startEngine) exactly once - avoid multiple attempts that cause state drift\n- delta47: Avoid multiple redundant engine start attempts - single attempt after proper safety preparation prevents state drift\n- delta48: Execute single engine start attempt only after complete safety sequence - multiple attempts create state drift\n- delta49: Maintain all previously executed vehicle operations across turns - completed actions persist in multi-turn scenarios\n- delta5: Avoid redundant status checks that don't advance vehicle state - displayCarStatus calls should serve operational purposes\n- delta50: Execute safety sequence operations in every turn when vehicle state requires them - don't assume persistence\n- delta51: Call set_navigation immediately when tire pressures are below user-specified threshold - completes routing to tire facility\n- delta52: Avoid multiple engine start attempts in single turn - single attempt after safety sequence prevents state drift\n- delta53: Calculate exact fuel capacity needed for fillFuelTank based on current fuel level - never use arbitrary or estimated values\n- delta54: Execute single engine start attempt after complete safety sequence - multiple attempts create state inconsistencies\n- delta55: Execute safety sequence operations immediately on clarification turns - never block on conversational responses when operations are pending\n- delta56: Execute set_navigation immediately after finding tire shop when pressures are below threshold - completes routing flow\n- delta57: Never attempt engine start before complete safety sequence - multiple redundant attempts create state mismatches\n- delta58: Execute vehicle operations without conversational explanations - tool calls should proceed directly without explanatory text\n- delta6: Execute engine start sequence only once after proper brake application - avoid multiple redundant attempts that create state inconsistencies\n- delta7: Call estimate_drive_feasibility_by_mileage once per scenario - iterative checks acceptable for state discovery\n- delta8: Include set_navigation when destination is specified in trip planning context\n- delta9: Lock all doors AND press brake pedal before attempting engine start - safety requirement to prevent unauthorized access and state mismatches"
+    },
+    {
+      "role": "user",
+      "content": "Lock all doors and engage the parking brake, then start the vehicle's engine in preparation for a trip. Afterward, check if our tire pressure condition is safe to proceed."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_twitter",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Authenticate a user with username and password. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user."
+            },
+            "password": {
+              "type": "string",
+              "description": "Password of the user."
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "authentication_status": {
+              "type": "boolean",
+              "description": "True if authenticated, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "comment",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Comment on a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to comment on."
+            },
+            "comment_content": {
+              "type": "string",
+              "description": "Content of the comment."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "comment_content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comment_status": {
+              "type": "string",
+              "description": "Status of the comment action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "follow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Follow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_follow": {
+              "type": "string",
+              "description": "Username of the user to follow."
+            }
+          },
+          "required": [
+            "username_to_follow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "follow_status": {
+              "type": "boolean",
+              "description": "True if followed, False if already following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the retrieved tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the tweet's author."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tweet_comments",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all comments for a specific tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retrieve comments for."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "comments": {
+              "type": "array",
+              "description": "List of dictionaries, each containing comment information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the commenter."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the comment."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_stats",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get statistics for a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user to get statistics for."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tweet_count": {
+              "type": "integer",
+              "description": "Number of tweets posted by the user."
+            },
+            "following_count": {
+              "type": "integer",
+              "description": "Number of users the specified user is following."
+            },
+            "retweet_count": {
+              "type": "integer",
+              "description": "Number of retweets made by the user."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retrieve all tweets from a specific user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "description": "Username of the user whose tweets to retrieve."
+            }
+          },
+          "required": [
+            "username"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_following",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: List all users that the authenticated user is following. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "following_list": {
+              "type": "array",
+              "description": "List of all users that the authenticated user is following.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "mention",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Mention specified users in a tweet. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet where users are mentioned."
+            },
+            "mentioned_usernames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of usernames to be mentioned."
+            }
+          },
+          "required": [
+            "tweet_id",
+            "mentioned_usernames"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "mention_status": {
+              "type": "string",
+              "description": "Status of the mention action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "post_tweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Post a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of tags for the tweet. Tag name should start with #. This is only relevant if the user wants to add tags to the tweet.",
+              "default": []
+            },
+            "mentions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of users mentioned in the tweet. Mention name should start with @. This is only relevant if the user wants to add mentions to the tweet.",
+              "default": []
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "ID of the posted tweet."
+            },
+            "username": {
+              "type": "string",
+              "description": "Username of the poster."
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the tweet."
+            },
+            "tags": {
+              "type": "array",
+              "description": "List of tags associated with the tweet.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mentions": {
+              "type": "array",
+              "description": "List of users mentioned in the tweet.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "posting_get_login_status",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retweet",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Retweet a tweet for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tweet_id": {
+              "type": "integer",
+              "description": "ID of the tweet to retweet."
+            }
+          },
+          "required": [
+            "tweet_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "retweet_status": {
+              "type": "string",
+              "description": "Status of the retweet action."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_tweets",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Search for tweets containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "Keyword to search for in the content of the tweets."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "matching_tweets": {
+              "type": "array",
+              "description": "List of dictionaries, each containing tweet information.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the retrieved tweet."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username of the tweet's author."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the tweet."
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "List of tags associated with the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "mentions": {
+                    "type": "array",
+                    "description": "List of users mentioned in the tweet.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "unfollow_user",
+        "description": "This tool belongs to the TwitterAPI, which provides core functionality for posting tweets, retweeting, commenting, and following users on Twitter. Tool description: Unfollow a user for the authenticated user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username_to_unfollow": {
+              "type": "string",
+              "description": "Username of the user to unfollow."
+            }
+          },
+          "required": [
+            "username_to_unfollow"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "unfollow_status": {
+              "type": "boolean",
+              "description": "True if unfollowed, False if not following."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "activateParkingBrake",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode to set. [Enum]: [\"engage\", \"release\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "parkingBrakeStatus": {
+              "type": "string",
+              "description": "The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+            },
+            "_parkingBrakeForce": {
+              "type": "float",
+              "description": "The force applied to the brake in Newtons."
+            },
+            "_slopeAngle": {
+              "type": "float",
+              "description": "The slope angle in degrees."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "adjustClimateControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {
+              "type": "number",
+              "description": "The temperature to set in degree. Default to be celsius. This is a float type value.",
+              "format": "float"
+            },
+            "unit": {
+              "type": "string",
+              "description": "The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]",
+              "default": "celsius"
+            },
+            "fanSpeed": {
+              "type": "integer",
+              "description": "The fan speed to set from 0 to 100. Default is 50.",
+              "default": 50
+            },
+            "mode": {
+              "type": "string",
+              "description": "The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]",
+              "default": "auto"
+            }
+          },
+          "required": [
+            "temperature"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentTemperature": {
+              "type": "float",
+              "description": "The current temperature set in degree Celsius."
+            },
+            "climateMode": {
+              "type": "string",
+              "description": "The current climate mode set."
+            },
+            "humidityLevel": {
+              "type": "float",
+              "description": "The humidity level in percentage."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_tire_pressure",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "tirePressure": {
+              "type": "dict",
+              "description": "The tire pressure of the vehicle.",
+              "properties": {
+                "frontLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front left tire in psi."
+                },
+                "frontRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the front right tire in psi."
+                },
+                "rearLeftTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear left tire in psi."
+                },
+                "rearRightTirePressure": {
+                  "type": "float",
+                  "description": "The pressure of the rear right tire in psi."
+                },
+                "healthy_tire_pressure": {
+                  "type": "boolean",
+                  "description": "True if the tire pressure is healthy, False otherwise."
+                },
+                "car_info": {
+                  "type": "dict",
+                  "description": "The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "displayCarStatus",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "option": {
+              "type": "string",
+              "description": "The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]"
+            }
+          },
+          "required": [
+            "option"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "dict",
+              "description": "The status of the vehicle based on the option.",
+              "properties": {
+                "fuelLevel": {
+                  "type": "float",
+                  "description": "[Optional] The fuel level of the vehicle in gallons."
+                },
+                "batteryVoltage": {
+                  "type": "float",
+                  "description": "[Optional] The battery voltage of the vehicle in volts."
+                },
+                "doorStatus": {
+                  "type": "dict",
+                  "description": "[Optional] The status of the doors.",
+                  "properties": {
+                    "driver": {
+                      "type": "string",
+                      "description": "The status of the driver door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "passenger": {
+                      "type": "string",
+                      "description": "The status of the passenger door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_left": {
+                      "type": "string",
+                      "description": "The status of the rear left door. [Enum]: [\"locked\", \"unlocked\"]"
+                    },
+                    "rear_right": {
+                      "type": "string",
+                      "description": "The status of the rear right door. [Enum]: [\"locked\", \"unlocked\"]"
+                    }
+                  }
+                },
+                "currentACTemperature": {
+                  "type": "float",
+                  "description": "[Optional] The current temperature set in degree Celsius."
+                },
+                "fanSpeed": {
+                  "type": "integer",
+                  "description": "[Optional] The fan speed set from 0 to 100."
+                },
+                "climateMode": {
+                  "type": "string",
+                  "description": "[Optional] The climate mode set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]"
+                },
+                "humidityLevel": {
+                  "type": "float",
+                  "description": "[Optional] The humidity level in percentage."
+                },
+                "headlightStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the headlights. [Enum]: [\"on\", \"off\"]"
+                },
+                "parkingBrakeStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake. [Enum]: [\"engaged\", \"released\"]"
+                },
+                "parkingBrakeForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake in Newtons."
+                },
+                "slopeAngle": {
+                  "type": "float",
+                  "description": "[Optional] The slope angle in degrees."
+                },
+                "brakePedalStatus": {
+                  "type": "string",
+                  "description": "[Optional] The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+                },
+                "brakePedalForce": {
+                  "type": "float",
+                  "description": "[Optional] The force applied to the brake pedal in Newtons."
+                },
+                "engineState": {
+                  "type": "string",
+                  "description": "[Optional] The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+                },
+                "metadata": {
+                  "type": "string",
+                  "description": "[Optional] The metadata of the car."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "display_log",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "messages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of messages to display."
+            }
+          },
+          "required": [
+            "messages"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "log": {
+              "type": "array",
+              "description": "The list of messages displayed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_distance",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "cityA": {
+              "type": "string",
+              "description": "The zipcode of the first city."
+            },
+            "cityB": {
+              "type": "string",
+              "description": "The zipcode of the second city."
+            }
+          },
+          "required": [
+            "cityA",
+            "cityB"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "distance": {
+              "type": "float",
+              "description": "The distance between the two cities in km."
+            },
+            "intermediaryCities": {
+              "type": "array",
+              "description": "[Optional] The list of intermediary cities between the two cities.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "estimate_drive_feasibility_by_mileage",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "distance": {
+              "type": "number",
+              "description": "The distance to travel in miles. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "distance"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "canDrive": {
+              "type": "boolean",
+              "description": "True if the vehicle can drive the distance, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fillFuelTank",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "fuelAmount": {
+              "type": "number",
+              "description": "The amount of fuel to fill in gallons; this is the additional fuel to add to the tank. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "fuelAmount"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "find_nearest_tire_shop",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "shopLocation": {
+              "type": "string",
+              "description": "The location of the nearest tire shop."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "gallon_to_liter",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "gallon": {
+              "type": "number",
+              "description": "The amount of gallon to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "gallon"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "liter": {
+              "type": "float",
+              "description": "The amount of liter converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_speed",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_google",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_outside_temperature_from_weather_com",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "outsideTemperature": {
+              "type": "float",
+              "description": "The outside temperature in degree Celsius."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_zipcode_based_on_city",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "The name of the city."
+            }
+          },
+          "required": [
+            "city"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "The zipcode of the city."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "liter_to_gallon",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "liter": {
+              "type": "number",
+              "description": "The amount of liter to convert. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "liter"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "gallon": {
+              "type": "float",
+              "description": "The amount of gallon converted."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "lockDoors",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "unlock": {
+              "type": "boolean",
+              "description": "True if the doors are to be unlocked, False otherwise."
+            },
+            "door": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]"
+            }
+          },
+          "required": [
+            "unlock",
+            "door"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "lockStatus": {
+              "type": "string",
+              "description": "The status of the lock. [Enum]: [\"locked\", \"unlocked\"]"
+            },
+            "remainingUnlockedDoors": {
+              "type": "integer",
+              "description": "The number of remaining unlocked doors."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "pressBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pedalPosition": {
+              "type": "number",
+              "description": "Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed). This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "pedalPosition"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "releaseBrakePedal",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "brakePedalStatus": {
+              "type": "string",
+              "description": "The status of the brake pedal. [Enum]: [\"pressed\", \"released\"]"
+            },
+            "brakePedalForce": {
+              "type": "float",
+              "description": "The force applied to the brake pedal in Newtons."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setCruiseControl",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "number",
+              "description": "The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5. This is a float type value.",
+              "format": "float"
+            },
+            "activate": {
+              "type": "boolean",
+              "description": "True to activate the cruise control, False to deactivate."
+            },
+            "distanceToNextVehicle": {
+              "type": "number",
+              "description": "The distance to the next vehicle in meters. This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "speed",
+            "activate",
+            "distanceToNextVehicle"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cruiseStatus": {
+              "type": "string",
+              "description": "The status of the cruise control. [Enum]: [\"active\", \"inactive\"]"
+            },
+            "currentSpeed": {
+              "type": "float",
+              "description": "The current speed of the vehicle in km/h."
+            },
+            "distanceToNextVehicle": {
+              "type": "float",
+              "description": "The distance to the next vehicle in meters."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "setHeadlights",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "headlightStatus": {
+              "type": "string",
+              "description": "The status of the headlights. [Enum]: [\"on\", \"off\"]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_navigation",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "destination": {
+              "type": "string",
+              "description": "The destination to navigate in the format of street, city, state."
+            }
+          },
+          "required": [
+            "destination"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status of the navigation."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "startEngine",
+        "description": "This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ignitionMode": {
+              "type": "string",
+              "description": "The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]"
+            }
+          },
+          "required": [
+            "ignitionMode"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "engineState": {
+              "type": "string",
+              "description": "The state of the engine. [Enum]: [\"running\", \"stopped\"]"
+            },
+            "fuelLevel": {
+              "type": "float",
+              "description": "The fuel level of the vehicle in gallons."
+            },
+            "batteryVoltage": {
+              "type": "float",
+              "description": "The battery voltage of the vehicle in volts."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

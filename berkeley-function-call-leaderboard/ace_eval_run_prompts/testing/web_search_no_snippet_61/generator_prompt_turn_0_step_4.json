@@ -1,0 +1,231 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "For your final answer to the user, you must respond in this format: {'answer': A short and precise answer to the question, 'context': A brief explanation of how you arrived at this answer or why it is correct}. If you do not know the answer, respond with {'answer': 'I do not know', 'context': 'I do not know'}. If you think the question cannot be properly answered, response with {'answer': 'I cannot answer this question', 'context': A short reason explaining why this question cannot be answered}.\n"
+    },
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nweb_search_api\n- delta1: Execute all planned search queries; use available knowledge with verification caveats rather than refusing to answer when technical concerns exist\n- delta10: For local government questions, verify exact jurisdictional structures and leadership titles to avoid conflating cities with counties\n- delta11: Verify final answers against multiple authoritative sources and ensure answer format matches evaluation standardization requirements before concluding\n- delta12: For multi-year timeframes, verify all teams managed throughout the entire period rather than selecting a single representative team\n- delta13: Execute all planned search queries before assessing answerability; never refuse based on anticipated technical limitations or hypothetical difficulties without completed tool execution\n- delta14: For multi-step historical questions, exhaust all search variations including historical country names before concluding inability to answer\n- delta2: Include both current facts and relevant historical context in final answers, especially for birthplace/time-sensitive questions\n- delta3: When searching for record-breaking achievements, verify the specific record holder before identifying associated details like labels\n- delta4: For benchmark performance dates, distinguish between announcement, release, and achievement dates to match expected answer format\n- delta5: Monitor context length and prioritize essential search queries when approaching token limits\n- delta6: For time-sensitive scenarios, verify whether answers require current/future dates versus historical facts to match evaluation framing\n- delta7: Proactively truncate or summarize context when approaching token limits to prevent inference failures before tool execution can begin\n- delta8: For multi-attribute searches, prioritize targeted queries that combine specific criteria like 'author' or 'written by' rather than broad candidate searches\n- delta9: For author identification in restricted content, use targeted queries combining subject name with 'author' or 'written by' rather than general article searches"
+    },
+    {
+      "role": "user",
+      "content": "Snooker has a rich history of legendary players setting remarkable records in ranking titles. How many world championships has the player who holds the most snooker ranking titles according to the Guinness World Records in 2024 won, up to April 2025? Format your answer as a number."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll search for information about the snooker player who holds the most ranking titles according to Guinness World Records in 2024, and then find out how many world championships they've won up to April 2025.",
+      "tool_calls": [
+        {
+          "id": "call_00_3FQl4zU0QskjB83uXgRpwMLz",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Guinness World Records 2024 most snooker ranking titles player\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "[{'title': 'List of snooker players by number of ranking titles - Wikipedia', 'href': 'https://en.wikipedia.org/wiki/List_of_snooker_players_by_number_of_ranking_titles'}, {'title': 'Most career ranking titles won in snooker - Guinness World Records', 'href': 'https://www.guinnessworldrecords.com/world-records/108338-most-career-ranking-titles-won-in-snooker'}, {'title': 'World Records - Snooker.org', 'href': 'https://www.snooker.org/Plr/records.shtml'}, {'title': 'Ranking Event Winners - WPBSA', 'href': 'https://wpbsa.com/about-us/history/ranking-event-winners/'}, {'title': 'Snooker Royalty: The Top 5 Players by All-Time Ranking Titles Won', 'href': 'https://www.sportsboom.com/snooker/most-ranking-titles-in-snooker-history/'}, {'title': 'CueTracker - Titles Won - All-time - Professional - Snooker Results ...', 'href': 'https://cuetracker.net/statistics/tournaments/won/all-time'}, {'title': 'List of Snooker Players By Number of Ranking Titles - LiquiSearch', 'href': 'https://www.liquisearch.com/list_of_snooker_players_by_number_of_ranking_titles'}, {'title': 'Top Ten: List of Snooker Players by Number of Ranking Titles', 'href': 'https://snooker-rules.com/top-ten-list-snooker-players-number-ranking-titles/'}, {'title': 'List of snooker players by number of ranking titles - Wikiwand', 'href': 'https://www.wikiwand.com/simple/articles/List_of_snooker_players_by_number_of_ranking_titles'}, {'title': 'Ranking Records - WPBSA', 'href': 'https://wpbsa.com/rankings/ranking-records/'}]",
+      "tool_call_id": "call_00_3FQl4zU0QskjB83uXgRpwMLz"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me check the Guinness World Records page specifically to get the official record holder.",
+      "tool_calls": [
+        {
+          "id": "call_00_eSvRb8aoa2rem9a2i0e2AF3W",
+          "type": "function",
+          "function": {
+            "name": "fetch_url_content",
+            "arguments": "{\"url\": \"https://www.guinnessworldrecords.com/world-records/108338-most-career-ranking-titles-won-in-snooker\", \"mode\": \"truncate\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"content\": \"\\ufffdcDjR\\u000f\\ufffdF\\ufffd\\ufffd9o\\ufffdK[\\ufffd\\r\\u0011m\\ufffd/4\\ufffd\\ufffdG\\ufffd\\ufffd*\\u0004\\ufffdq\\ufffd\\ufffd\\u0005\\ufffd\\ufffdM\\ufffd\\ufffdD\\ufffd ej\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdk\\ufffd\\ufffd\\ufffd\\ufffdc\\ufffd:\\u05ba\\ufffd\\u007f\\ufffd\\ufffd\\ufffdJ\\b\\ufffd\\ufffd\\ufffd\\ufffd@\\u000b\\ufffd\\ufffdB\\ufffd9\\ufffd\\ufffdu\\ufffd\\ufffd=\\ufffd\\u0001{\\u0016\\bn\\ufffd{\\ufffd\\ufffd\\ufffdY\\ufffd\\ufffdY`V\\u0001\\ufffda\\u001fe\\ufffd\\ufffd\\ufffd\\ufffd(\\ufffd\\u0016\\ufffd\\ufffd\\ufffdpu\\ufffdL\\ufffd\\u001a\\u0002\\ufffd\\ufffdX\\ufffd=\\ufffd\\ufffd\\ufffd\\u001e\\u00040\\ufffd\\b\\ufffd\\ufffdf2\\ufffd\\ufffd\\ufffd\\ufffd\\u0016I\\ufffd\\\"\\ufffd\\ufffd\\u001ew8{\\ufffd\\ufffd\\ufffd\\ufffdq\\ufffd^|\\ufffd\\ufffd\\ufffdl\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\u001c\\ufffd\\ufffdz\\u00035\\u0004\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\u0002fs|\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd-\\ufffd*\\ufffdC\\ufffdjE\\ufffd\\ufffd\\ufffdjd\\u0007\\ufffdV\\u0003\\ufffd\\ufffd\\u0003\\ufffd=\\ufffd\\ufffd\\ufffdZP\\ufffd\\ufffd\\ufffd\\u0010]\\ufffd\\ufffd\\u0080\\ufffd\\ufffd\\u001aDF*\\ufffd\\u0006{i\\ufffd\\u000f+\\u0015x\\ufffd\\ufffd\\ufffd6\\ufffdr\\ufffd9\\u0019>4l\\ufffd\\ufffd\\ufffdD\\ufffd@\\ufffd%\\ufffd\\ufffd'B\\ufffd\\ufffd\\u000b\\ufffd\\ufffd~i\\ufffd_\\u0004\\ufffd\\ufffd\\ufffd}*\\ufffd\\ufffd\\ufffd\\ufffdI\\ufffd\\ufffdl\\ufffds\\ufffd\\ufffd\\ufffdw(\\u0003\\ufffd\\ufffdZn\\ufffd\\ufffd\\ufffdF\\u0000\\ufffd\\u007f\\ufffd7\\ufffd\\ufffd\\ufffd\\ufffdy\\ufffd\\ufffd\\ufffdh\\ufffd\\ufffdF\\u007f6\\ufffdM{\\ufffd\\ufffd\\u05f8\\ufffd\\u0007\\ufffdn\\u0007\\ufffds\\ufffd\\ufffdH\\u001c\\ufffd\\ufffd\\ufffd\\ufffd\\u05fb\\ufffd|=\\ufffd3\\ufffd\\ufffd\\u36efu\\ufffd\\ufffd6\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd@\\ufffd\\ufffd!\\ufffd\\ufffdP\\ufffd\\ufffd2\\ufffd\\ufffd\\ufffda\\ufffd\\ufffdj\\ufffd;W\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdb\\ufffd\\u001dk\\ufffdV7\\ufffd[\\u076b^\\ufffd\\ufffdh\\ufffd^S1\\ufffd2t\\ufffd\\uad5a\\ufffd\\ufffd\\ufffd\\ufffd0\\u0000\\ufffd\\ufffd\\rY\\ufffd\\u001e\\ufffd\\ufffd#\\u000f\\ufffdf?*\\ufffd\\ufffd\\u0019\\u0012\\n\\ufffd\\ufffdSn\\ufffd:J/\\u001a\\ufffd>n\\u000e\\ufffd\\ufffd\\ufffd\\u0002ZV\\ufffd\\u0018\\ufffd\\ufffd5J\\ufffd\\b:\\ufffd\\ufffd\\ufffd\\ufffd\\u0010a\\ufffd\\ufffdL\\ufffd\\u00134\\ufffd\\u0006\\ufffd\\u0011X\\ufffd\\ufffd\\u0010\\ufffd\\u0012sb\\ufffd\\ufffd\\u07de\\u0007-\\ufffdE?{\\u0004W\\u0001\\ufffd\\ufffd\\ufffd\\u0552U.>\\u04ab\\ufffd\\u00068\\ufffdF\\ufffd\\ufffdB\\u0019\\ufffd\\ufffd)\\u0001X#ljK'z\\ufffds\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd9\\u0013\\ufffd\\ufffd\\u000bY\\ufffd\\ufffd\\ufffdX\\ufffd\\ufffd\\u0017\\ufffd`\\ufffd\\ufffd\\ufffd\\ufffd/!\\ufffd\\ufffdL\\ufffd\\ufffdN\\ufffd\\ufffd\\u000b\\f.JBH\\u0018\\ufffd\\u0509k\\ufffd\\ufffd\\ufffd\\u0013Rrs\\ufffdnE&G\\r\\u00aam\\ufffd\\ufffd\\ufffdW\\ufffdUz\\ufffd-\\ufffd:Hw\\ufffd\\ufffd`\\ufffd\\ufffdt\\ufffd4?Z[D\\u0018\\ufffd\\ufffd\\u0694J4\\ufffd#\\ufffd\\ufffd\\ufffd\\u0002\\u000b[z\\ufffd\\ufffd~\\ufffd\\ufffdZ}\\u0295\\ufffdD\\ufffd\\ufffd\\ufffdt\\u0002\\u001dO\\ufffd#\\ufffdP\\u001d\\u001fM\\ufffd\\ufffd\\ufffdJ%e\\u000ey1\\ufffd\\ufffd\\ufffdp\\ufffdNH\\u00194\\ufffdwA'N\\ufffd\\ufffd\\n\\\"\\u000e\\ufffdYrT\\ufffd\\ufffd\\u0001E\\ufffd\\ufffd\\ufffd\\u0016\\u0011\\ufffd\\ufffd\\ufffd\\u0004Q\\t_\\ufffd\\ufffd\\ufffd~\\u0016\\u001f\\ufffd\\bt\\ufffd=D\\u0000>z\\ufffd\\u05d9\\ufffd\\u0728\\ufffdN7\\u001b,\\ufffd\\u00190\\ufffdBX\\ufffd*?s\\ufffd\\ufffd\\ufffd0j\\ufffd\\ufffdU\\ufffd\\u0010\\b\\ufffd_\\ufffdk\\ufffd\\u000bw\\ufffd\\ufffdQX\\u001c\\u0000qI\\ufffd\\ufffd\\ufffd~\\ufffd\\ufffd\\ufffd\\u0005\\ufffd\\u001e\\ufffd\\ufffdm\\u0006D\\ufffd\\ufffdU\\u0011\\t\\ufffdaE\\ufffd\\ufffdT\\u0006\\u000f>\\u0005\\ufffd\\u0001q\\ufffd\\u0002\\ufffd\\ufffdM\\u0019!(\\ufffd\\ufffdm\\ufffd\\ufffd\\u0012c\\ufffd\\f^\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\u00f9t\\ufffdp\\t\\u00024\\ufffdc9r\\ufffd\\r\\t\\ufffdM\\u0012\\u0005\\ufffd\\u0004\\ufffda\\ufffd\\\\\\ufffd\\ufffd\\ufffdw,\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdd5\\\\*\\ufffd90\\ufffd\\r\\ufffd>\\u0016\\ufffd\\u01d2@\\ufffd\\ufffd\\ufffd!\\ufffdl=<\\u0004(\\ufffd\\ufffd`h\\u0135\\ufffdF\\ufffd\\u0011Q\\ufffd\\ufffd\\ufffd\\u0011\\ufffd\\ufffd\\u0018\\ufffd\\ufffdD\\ufffd\\f\\ufffd0\\ufffd9\\ufffd\\ufffd\\ufffdOOw\\ufffd\\u001cY\\u000fb\\ufffd@\\u0005\\ufffd\\u0013\\ufffd}\\ufffdt\\ufffd31\\ufffd/\\ufffd\\ufffd\\ufffd\\ufffdE_\\ufffdi4\\ufffd\\u0015)|\\ufffdf\\ufffd\\ufffd\\ufffd\\u04d8\\ufffdA}Go\\ufffd\\u000f\\ufffd\\ufffd\\ufffd\\u0731\\ufffd0\\ufffdm\\ufffd)\\u0016\\ufffd\\ufffd\\ufffd\\ufffdy\\ufffd\\ufffd\\ufffd\\u05b2+\\ufffdCt\\ufffd\\ufffd\\ufffd}7\\ufffd?\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd]\\ufffd\\ufffd\\ufffd;\\ufffd\\ufffd6\\ufffdF\\ufffd\\u01d7-^\\ufffdB\\ufffd\\ufffd\\ufffd\\u00c4hB\\u0013\\ufffd\\t\\u0368\\ufffd!\\ufffdXZ\\ue7b1x|\\ufffd\\ufffde\\ufffd~\\ufffdoXP\\ufffd\\u06acP\\ufffd\\ufffde\\ufffd\\ufffdJfZ\\ufffdKv&gb\\u0304:\\ufffd \\r\\ufffd\\u000bM\\ufffdz\\ufffd'Q\\ufffd+\\ufffd\\ufffd\\u0019e\\u0002l\\ufffd\\u0018\\ufffd\\u0003\\u001ev\\u001e\\u0010\\r\\ufffd\\u04cb\\ufffd\\ufffd\\u0154\\ufffd\\ufffd\\\"\\u0015H\\u001c\\ufffd\\ufffd\\ufffdh$\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdi\\ufffd\\\"\\ufffd\\b\\u038d7\\ufffd\\ufffdy\\ufffd\\ufffdaJ\\u0017\\ufffd1{\\ufffd\\ufffd\\ufffd%\\ufffdEQ\\ufffd\\ufffd\\u0005\\ufffd0\\ufffdf\\ufffd_\\ufffd\\ufffdX\\u0014~\\r\\ufffdhhZ\\ufffd\\ufffd~d\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdV\\u0017J\\ufffdE\\ufffd\\ufffd\\u0019k\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdxF\\u0001\\\\\\ufffd\\ufffdD\\ufffd\\ufffd\\u4453#[\\ufffd\\ufffd\\u0000hn\\ufffd\\ufffd\\\\h\\u079e\\ufffd\\ufffdi\\ufffdO\\ufffdc\\u0011SE\\ufffd\\ufffd>h\\ufffdH\\u0018[z\\t`X\\ufffdO\\u07a5\\ufffd\\u0002!\\ufffd\\u000e\\ufffd\\ufffdb\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdO\\ufffdVd\\ufffd<9\\ufffd\\ufffd\\b\\ufffd\\ufffd\\ufffd\\ufffdX(\\n/:o%\\ufffd\\u0010%\\ufffd\\b\\u0004\\ufffd\\ufffd~\\ufffdZp\\ufffd\\ufffd\\ufffd\\u00f8\\ufffdT\\ufffd\\u01e2\\ufffd>\\ufffd\\ufffd\\ufffd\\u0017\\ufffd\\ufffd\\u0004\\u013b\\u0007\\ufffd7\\ufffdYi\\u0730\\ufffd\\ufffd$\\ufffd\\u017c\\ufffd\\ufffd?pJn@\\ufffd\\ufffd\\u0445Z\\u007f\\ufffd\\ufffd\\ufffd\\ufffd\\u007fl\\ufffdC\\ufffd\\ufffdz\\ufffd\\ufffd\\ufffd\\ufffd\\u001c\\ufffd\\u0014\\ufffd\\ufffd?\\ufffdy7\\ufffd\\ufffd_^\\b\\u0019\\ufffd\\ufffdI\\ufffd\\ufffd\\ufffd)\\ufffd!\\t\\ufffd&\\ufffdwJ\\ufffd\\u000f\\ufffd\\ufffd$\\ufffdD\\ufffd\\ufffd\\u000e\\ufffd\\ufffd$\\u0014\\u0019\\ufffd.87\\ufffdA4KD\\ufffd\\tc%a\\ufffdu'U\\ufffd\\u0018E/\\ufffd\\ufffd0sL_K\\ufffd-s\\u007f\\ufffdX\\ufffd\\ufffd\\u001d\\ufffd/\\ufffd\\u0011mv\\n0\\u00fcx\\u0017\\ufffd~\\ufffd\\n\\u03f7y-6\\\"\\ufffdxtO\\ufffd\\ufffdd\\ufffdu\\u00be\\ufffd?\\ufffd\\u001f\\ufffdK\\u00015\\ufffd\\ufffd\\u001b\\ufffd7\\u0000(\\ufffd\\ufffdw\\ufffd\\u000bm\\ufffd\\u001fx\\ufffd\\u001e\\ufffd\\u0001t\\ufffd\\u0007\\u0016\\ufffd\\u0001\\u0014i\\ufffd~M\\ufffdds\\ufffd\\ufffd\\ufffd3d\\ufffdl\\u001b\\ufffdo\\ufffd\\ufffd\\ufffdjJP\\ufffd\\u047a\\u001aW:`\\ufffdd\\ufffd\\ufffd\\ufffd\\ufffd.\\ufffdz=\\ufffd\\ufffd!?,\\ufffd\\u0012\\ufffd\\ufffd\\ufffd\\u01d6a\\ufffd\\ufffd;)\\ufffd\\ufffdP\\ufffd\\u001b/\\ufffd\\ufffd\\u06cd\\ufffd\\ufffd_\\ufffd\\ufffd|v\\ufffdU\\ufffd\\u00f8\\ufffdq\\t\\ufffd\\u000e@I\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd0\\ufffd\\n\\ufffdZ:\\ufffd\\ufffdT\\u001f%\\ufffd\\u0010\\ufffd\\ufffd[\\ufffd`*\\ufffd \\ufffd\\ufffd*s\\ufffd\\ufffd\\u000f'\\ufffd\\ufffd\\u0003V\\u001f\\u000bR\\u000e\\ufffd)\\u0005\\ufffd\\u0001-AY\\u0004\\ufffdqu/G\\ufffd\\ufffd\\ufffdl\\ufffd\\t\\ufffd\\ufffdpKJ\\ufffdr\\ufffd*\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd}+uI\\u0005\\ufffd\\u061eit\\ufffd\\ufffdM\\u00e83\\u0005\\ufffd:\\ufffd\\u0015\\ufffd\\\"/:\\ufffd\\ufffdN7\\ufffd[\\ufffdq\\ufffd\\u0018\\r\\ufffdEJ\\u0006\\ufffd\\u07d4\\ufffd\\ufffd\\ufffd\\u007f\\ufffd\\ufffd\\ufffd,\\ufffd1~\\ufffd\\ufffd-\\ufffd\\ufffd\\ufffd9\\ufffd\\ufffd^\\ufffd\\u0010d\\u0014]n!d\\u0002&\\u0003\\ufffd\\ufffd\\ufffd\\ufffdC6\\ufffd\\ufffd\\ufffd~\\ufffd\\u00186%\\t\\ufffd\\ufffd:\\ufffd\\ufffd\\ufffd\\ufffd0\\ufffd\\u0018}\\ufffdd\\ufffdJ\\ufffd\\ufffdc\\u0015\\u6a60\\ufffd\\ufffd\\ufffd\\u06f8x1\\u001dS\\u0014r%\\ufffd\\u001d\\u0018\\ufffdy\\ufffd2CJ\\u007f\\ufffd\\ufffd )\\ufffd\\ufffd\\ufffd\\u0107\\u0723\\u03d8\\ufffdR\\ufffd\\u0018M\\ufffdU\\ufffdXU\\ufffdW\\ufffd\\ufffd\\u03f8\\ufffd:>2\\ufffd\\b\\ufffd=\\ufffd*\\u0001\\ufffdqcO#\\ufffd\\ufffdj\\ufffdD\\ufffd\\ufffd&7\\u03b0\\ufffd|\\u0005\\u07ea\\ufffd\\r\\ufffd\\ufffd\\ufffd5\\ufffd\\u0016\\ufffdj-\\ufffd\\ufffdK5\\ufffd\\uc9dd\\ufffd8lj\\ufffd[\\u000e\\ufffd\\u0019@\\u0011\\u0017\\u0018/\\u001a+\\u0014\\u014e@\\ufffd!\\u000ea\\u00046\\u0011\\u0402W&\\ufffd\\u0002\\ufffd'\\ufffd\\u0002\\ufffdA\\u000bjxg1M\\ufffdy\\u0005\\ufffd\\ufffdi@u2\\n\\ufffd}\\ufffdb\\ufffd6\\ufffd\\ufffd6e\\ufffdS\\ufffd\\ufffdjP\\ufffd%\\ufffd,\\u001259\\u001b,\\ufffd\\u0004\\ufffdJ\\u1d4d\\\\IR]\\ufffd\\ufffd)\\ufffd]\\ufffd\\ufffd\\ufffd\\u0215\\u0015\\ufffd\\u0000\\u0014P:]\\ufffd\\u0013=~\\u001f\\ufffd\\ufffd<\\u0470.H\\ufffd|\\u001a\\ufffdE\\ufffd\\u0013_\\ufffd0?u\\ufffd\\f\\ufffd4\\ufffd\\u0003\\ufffd#\\ufffd\\u0554\\\"\\ufffdhJT\\ufffd\\u07eb8\\ufffd\\u0005z\\ufffdR'@\\ufffd\\ufffd*\\ufffd\\ufffd)k\\ufffdi\\u012f\\ufffdH\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd?U\\\\\\ufffdVC\\ufffd\\u001e\\ufffd%\\ufffd\\ufffd\\u0010\\ufffd\\ufffd\\ufffd\\ufffd}b(\\u0003*\\u001c\\ufffd\\ufffd_r\\u0016\\ufffd>j\\u0017l\\ufffd\\ufffdS\\ufffd\\ufffd\\ufffd\\ufffdCIbcO\\ufffd\\ufffd\\u001cX\\ufffd\\ufffd\\ufffd\\fr\\ufffd\\ufffd\\ufffd,\\ufffdv\\ufffd\\ufffd\\ufffd\\u0011\\u0119\\ufffd\\u0017\\ufffdX\\ufffduX\\ufffdD\\ufffd\\u0001_\\\"\\ufffd\\ufffdPAy\\ufffd\\ufffd\\ufffd)3l\\ufffd\\ufffd'$\\u0003\\ufffdZHH\\ufffdS\\ufffdF\\ufffdOq\\ufffd\\ufffdF\\ufffd\\ufffd\\ufffd\\u001e\\ufffd\\u0014\\ufffd\\ufffdo\\ufffd\\ufffd\\u07d9\\ufffd\\ufffds\\ufffd\\u0017/\\u000f\\ufffd\\u0623\\u072eg\\u001bF\\ufffd\\u0010\\ufffdu\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdV\\ufffdn8\\u06ab\\ufffdK\\ufffds,\\ufffd\\u0002\\u02a4\\ufffdh\\ufffd\\ufffd\\ufffd3\\ufffd\\ufffd\\u03b5\\u00074\\u0004M\\ufffd\\ufffdh\\u000e\\ufffd\\ufffdLK\\ufffd1\\ufffd\\ufffd\\ufffd+|\\ufffd\\ufffd/\\ufffd\\ufffd|\\ufffd\\u001c\\ufffd\\u0014\\ufffdk\\u001f\\ufffd\\ufffdZ.^F\\ufffd9\\ufffd\\u000b\\ufffd\\u07e7\\ufffd\\ufffd\\ufffd\\ufffd%\\ufffd\\u05f3\\u001dfV\\ufffdq\\\"\\ufffd\\r\\ufffd4U\\ufffd\\u039ao\\u02ad\\ufffd\\u00026\\u01e6\\n\\ufffd\\u001a\\ufffd\\ufffd\\ufffd\\ufffd\\u0002\\ufffd\\ufffd\\ufffdL\\ufffd\\u04bd\\ufffd\\u058d\\ufffd\\ufffd\\ufffd@\\ufffd8\\ufffd\\u0011\\ufffd\\u007f\\ufffd\\ufffdw;_\\ufffd/\\ufffd\\ufffd]\\ufffd/\\ufffdT\\u001a\\u000e\\u0003TnH\\ufffdY$\\ufffd\\ufffdxr\\ufffd.\\u0013%\\ufffd>Hu\\ufffd\\ufffd\\ufffdL\\u00a5\\u0005\\ufffdx\\ufffd\\ufffd\\ufffdZ\\u0006J\\ufffdI\\ufffdQxt\\ufffd(\\ufffd\\nC\\u007fw\\ufffd\\u000f$\\u05a8\\ufffd!e3Dta\\u0019o\\ufffdu\\ufffd\\u0019\\u001b\\ufffd\\u0013&M1%\\u000e\\u0016I\\u0013\\ufffd\\u001d\\ufffd\\u0016N\\u045d\\ufffd\\ufffdKU!c\\ufffd\\ufffd(\\ufffdZ\\ufffd|\\ufffd\\ufffd\\u000f\\\"\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\u0013l]?\\u0237\\\"\\ufffd\\u0003\\ufffdE\\u001b\\ufffd\\ufffd\\u0731\\ufffdV$\\u001d\\ufffdM)<\\ufffdZa\\u000f=\\ufffd\\ufffd\\ufffd\\ufffd'>\\ufffd(z+\\u000b\\ufffd]\\ufffd;\\ufffd\\ufffd\\ufffd\\ufffd\\u001a\\u044f\\ufffd\\u001e\\ufffd5\\ufffd\\ufffdCl\\ufffd\\ufffdu\\ufffd\\ufffd\\u000f3\\f\\ufffd\\u0016u\\ufffd\\u03a5\\ufffdV\\ufffd!\\ufffd4\\ufffd[\\ufffd,\\ufffd!WDj\\ufffd\\ufffd\\u0011\\u0019\\ufffd\\ufffd!\\ufffdY&\\ufffdtg\\ufffd\\ufffd`\\ufffd!\\u001a\\ufffdq\\ufffdUp\\ufffdDn\\u000b\\ufffd\\ufffd\\ufffd\\u001e\\ufffd\\ufffd\\ufffdGeM*\\ufffd?m[!$\\ufffdR6\\ufffd8#a\\ufffd\\u0001@\\ufffd\\u0006{\\ufffd\\ufffd\\\",X\\u0005\\ufffd\\ufffd\\ufffdR\\u001b \\ufffdi8\\ufffdl\\ufffd\\ufffd\\ufffd.Z\\n\\u0120zq\\ufffd\\ufffd\\ufffd\\u0002\\ufffd!\\ufffd2QQ\\ufffd\\ufffd]/\\ufffd\\u001cC\\ufffd0y\\ufffd\\ufffdx\\u001b\\ufffd\\u001e\\u0018a\\u000e2\\ufffd%\\ufffd>)\\ufffd\\u0000\\u000e\\u0000\\u0514'.F?y\\u0005W\\ufffd\\ufffd\\ufffdd\\ufffd3UV*@x\\ufffd\\ufffdE\\ufffd\\u0016R V2Fh(,\\ufffds'k9\\u0006H\\ufffd\\ufffdI-\\ufffd\\ufffd\\ufffd\\u0015,\\ufffd\\ufffdX6a-\\ufffd&\\ufffd\\u0128JJC`\\ufffd\\ufffd{\\nm\\ufffd\\u0011\\ufffd\\ufffdz\\ufffd\\ufffd\\u048a\\f\\ufffd}`+.\\ufffd\\u0001\\u0004\\ufffd\\ufffd\\ufffd\\ufffd\\u0006\\ufffd[R(\\u0001\\u0019\\ufffd\\ufffdo\\ufffd\\u06c6\\ufffd'Ft2\\ufffd\\u007f\\ufffd\\ufffd\\ufffd1\\u0010\\u0007-\\ufffd\\ufffdld\\ufffd\\ufffdU\\ufffd#\\ufffdZ\\ufffd\\\"\\ufffd\\u1977\\u000em\\ufffdDL\\ufffd\\u0017\\ufffdt\\ufffd\\ufffd\\ufffd\\u04e7c\\ufffd9\\u074a\\ufffd\\ufffdX6\\u001d\\u0015OU\\u0019\\ufffdQ\\ufffd\\u0014\\r\\u0003\\ufffd\\ufffd\\ufffdp\\ufffd\\u0001\\u0001\\u0754Hv\\u0007\\ufffd\\ufffd\\ufffdWC\\ufffd>\\u0017\\ufffd\\ufffd\\ufffd?\\ufffd=\\ufffd>\\ufffdG\\ufffd-\\ufffd,\\ufffd\\r\\ufffd1O\\ufffd\\ufffdN\\u0011=\\ufffdr\\ufffd\\u0002t\\twB\\ufffd\\u0013\\ufffd%\\ufffd\\ufffd\\ufffd\\u0007|\\ufffd\\tI\\ufffd8Dt\\ufffdR\\t\\u0007|\\ufffd\\ufffd\\ufffd\\u041c\\ufffdP%\\ufffd\\ufffdP\\ufffdN\\t\\ufffdNC\\ufffd\\ufffd\\ufffd\\ufffd\\u0016\\ufffdx=\\ufffd\\ufffd\\u00178f,\\tJE,\\u000e\\ufffd0I\\u0017\\ufffd\\bN~\\ufffd)>X#\\ufffd\\u0012\\ufffd\\ufffd38\\ufffd\\ufffdC[@V*\\ufffd^\\u0004\\u0002\\ufffd\\ufffdN\\n\\ufffdDn_\\ufffd\\ufffd&\\u0015\\ufffd@v\\ufffd\\u0007*\\ufffdJn/\\ufffdQ~\\r\\ufffd9\\ufffd\\ufffd\\ufffd\\ufffd*\\ufffd\\ufffdq!o\\u0016\\ufffd\\ufffd\\ufffd\\u0016\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdn\\ufffd/Da\\ufffd\\ufffd\\u000fY|\\ufffdx-\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd$k\\ufffd\\u0293b/ \\ufffd{\\ufffd\\ufffd\\ufffd?Q\\ufffd_\\fu\\ufffd\\u0002j4\\ufffd[\\u0002\\ufffdO\\ufffd\\ufffd\\ufffd\\u0443{@\\u0015H\\ufffd\\ufffdh\\u0114\\ufffd\\ufffdzNW\\ufffd\\ufffd\\ufffd\\u0005%\\u0561\\ufffdN\\ufffd\\ufffd\\u007f\\ufffd\\ufffd\\u0010j\\ufffd\\u0317d\\ufffd\\ufffd\\ufffd\\u001f\\ufffd\\u7207\\ufffd\\ufffd$~\\ufffd\\ufffd\\ufffd\\ufffdB\\ufffd-\\ufffde\\u007f\\ufffd\\ufffd\\ufffd\\ufffd\\u01fd\\ufffdw\\ufffd;2kXQ\\ufffd\\ufffd^\\ufffd\\ufffd`\\ufffd\\ufffd\\ufffd`)\\ufffd\\ufffd\\ufffd\\u0013\\ufffd\\ufffdop\\ufffd\\ufffd_\\ufffd\\u079d\\u074b\\uabab\\u0006\\u0747\\ufffd\\u0002\\u000e\\ufffdS\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdR\\u000f\\ufffd\\n8\\u001cH\\ufffd\\ufffdnN\\ufffd\\ufffd\\ufffd'\\\\>\\ufffd3O\\u0012\\u0011\\ufffd\\ufffd>rEb\\ufffd\\ufffd\\u0012\\ufffd\\n\\u001e2k\\ufffd\\ufffd`\\ufffd~$\\u0003\\ufffd\\u007f\\ufffd+T\\u0263\\ufffd\\ufffd\\u0004\\u0012\\ufffd\\ufffd\\ufffd(\\ufffdc>\\ufffd6\\ufffd)4\\u007f\\ufffdIs\\ufffdI\\ufffd\\ufffd\\ufffd\\u0014C\\u000b\\u0004\\ufffdi\\u000e\\ufffd\\u0004}\\ufffd\\u0013\\ufffdV\\\\\\ufffd$\\u0016\\u01c4\\\\\\u0121\\u0017\\ufffd\\u0017\\u0599\\ufffd\\ufffd1\\ufffd7\\u0135Z\\ufffd~*6'\\ufffd\\n\\ufffd\\ufffd\\u9db7\\\\\\ufffd,%B}\\u06ad7\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd(k\\u0005\\ufffdg\\ufffd\\u000b2*\\ufffdV\\ufffd\\u0003\\ufffd\\u0001\\u0015\\u02f6\\ufffd\\u007f\\ufffd\\ufffd[\\ufffdH\\ufffdE\\ufffd\\ufffd\\ufffd\\ufffd\\u0011Z+\\ufffd\\u001c\\ufffd\\ufffd7\\ufffd\\ufffd\\u001b;\\ufffd\\u001dU\\ufffd'\\ufffd\\ufffd\\u007f_2|VR\\n\\ufffd\\ufffd\\u000f\\u007f\\ufffd\\ufffdqY&\\ufffdL\\ufffd~\\ufffd\\u0018\\ufffd\\u0118\\ufffd\\ufffd6\\u0014\\ufffdN\\ufffd\\u0558\\ufffd\\u0011\\ufffd\\ufffd\\ufffd\\ufffdW\\ufffd\\u0001z\\ufffdf\\ufffd[\\ufffdnnl\\ufffd1\\ufffdx-\\ufffd\\u00a7\\u0002Jv\\t|~\\ufffdE\\ufffd\\u0737\\ufffd\\ufffd\\ufffd~m\\u019d\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\\"\\ufffd\\u000e7\\u0003`\\ufffd\\ufffdS\\ufffd\\u06764\\ufffd\\ufffd<\\r\\ufffd\\\\\\ufffd\\ufffd\\ufffd\\\"@\\u001e\\ufffd\\ufffdN\\u0351,\\b\\ufffd\\n\\ufffd:a\\\\+2\\ufffd\\u0006:\\ufffdbA\\u0005\\u0013\\ufffdZ\\u0002\\ufffd\\u0011x6\\ufffd\\ufffd\\ufffd\\t\\u000b\\ufffd\\ufffd\\u0016\\u0017\\b\\ufffd}No\\u00075\\ufffd\\u0006\\ufffdU\\ufffd$\\u0000!.\\ufffd\\ufffd\\ufffd\\u07e5\\ufffd\\ufffd\\ufffd\\u0005\\u0000NR\\ufffd\\ufffd\\ufffd\\ufffdxN\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdT\\ufffdb\\ufffd\\u0016P\\u0000\\ufffd`\\ufffd'\\ufffdM\\ufffd\\u0689\\ufffd\\ufffd\\u0016\\ufffd\\ufffd3\\u0004z\\ufffd\\u0007\\ufffd\\ufffd6\\ufffd\\ufffd\\ufffd\\u0018\\ufffd\\t\\ufffd675$\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdo\\ufffdqI\\ufffd\\ufffdvy\\ufffd\\ufffd\\ufffd\\ufffd\\u007f\\ufffd\\u0018\\u0005\\ufffd\\ufffd9\\b\\u0272\\u001d1\\ufffd\\ufffd\\ufffd\\u001a\\ufffd\\ufffdX\\u070b\\u0004\\ufffd\\uf4a6\\ufffd\\ufffd\\ufffd:H>\\u0010\\u0016C\\ufffd\\ufffd\\ufffd}\\u0006\\u0017\\ufffdd\\ufffd\\ufffd[\\ufffdm\\u0011\\ufffd\\ufffd\\ufffdA\\ufffd\\u054cHz\\ufffd\\ufffd\\u0012\\ufffd\\ufffd-\\ufffd\\u0005J\\ufffdF\\ufffd7\\ufffd\\ufffdr\\u0006\\ufffd\\ufffd9\\ufffd=C2d\\u0010^\\ufffd-p\\ufffd\\u0002\\ufffd-\\u0010`\\ufffd\\ufffd\\\\\\ufffdp\\u0017\\u001f-\\ufffd\\ufffd\\ufffdij\\u0001\\fq\\ufffd+X\\ufffdg\\ufffdt\\ufffd$ozD@ +^R\\u0000\\ufffd\\ufffd\\r1j\\ufffdy\\ufffd%tZ\\u0003,\\ufffd\\ufffd\\u0010\\ufffd\\ufffd/1\\ufffd\\ufffd:}\\ufffd%65k\\ufffd\\ufffd\\b\\ufffd\\ufffd9?s\\u001d\\ufffd\\ufffd5Q0\\ufffd\\ufffd\\u0015\\ufffdq\\ufffd`&\\ufffd\\u0018\\u001b\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdD\\ufffd\\u001f\\ufffd\\ufffd;\\ufffd\\ufffdou\\u0013,\\f;\\u0002\\ufffdX\\ufffdZ\\u0000\\ufffd#\\ufffd<\\u00152=5\\ufffd$\\ufffd\\ufffd\\u0016\\ufffd\\u0002E\\u0014\\u0015\\ufffd\\ufffd\\ufffd#7.<\\\"\\b\\ufffdz/\\ufffd\\ufffdKN\\u0001\\ufffd\\ufffdR+\\ufffd\\u001f\\ufffd\\ufffd\\\"\\u001e.\\ufffd\\ufffd\\u0014\\ufffd\\ufffd\\ufffd\\ufffd\\u0010y\\ufffd\\u0019?\\u04d4\\ufffd\\ufffd\\u0019\\u0003\\u001e'$\\ufffd0\\u065aaS\\ufffdC\\ufffd\\ufffdsO\\ufffd<+\\ufffd\\ufffd~H\\ufffd\\u0403v\\ufffd:\\u0016J\\ufffd\\u00015\\ufffd\\\\d\\ufffd\\ufffd\\nn\\ufffdY\\ufffd%\\ufffd\\ufffd\\ufffd\\ufffdG\\ufffdj\\ufffd}z?\\u0006\\ufffdW\\ufffd\\ufffd\\ufffd/\\u00170\\ufffd\\ufffd0t\\u0013b\\u001d\\u000b\\\\\\ufffd}\\ufffd\\ufffd\\ufffd\\ufffdc\\ufffd\\u0015\\ufffd\\ufffd|\\ufffd\\ufffd\\ufffd\\ufffdi \\ufffd\\u0013n\\ufffd\\ufffd\\ufffd\\u0003j_\\ufffd!\\ufffd\\u0004\\ufffd\\ufffd(\\ufffd\\ufffd\\ufffdKn}.\\ufffd\\u02c9o\\ufffdS\\ufffd'\\ufffd\\ufffd\\ufffd!\\u02b3A\\ufffd\\ufffd\\u0002~\\ufffdZ\\ufffdWo|\\u028ab\\ufffd\\f\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd7:\\ufffdf\\ufffd\\ufffdo\\ufffd\\u06df2g\\u055dJ\\ufffdE\\ufffd\\ufffd\\u007fM3\\b\\nh\\u0698P\\u000f\\ufffd\\ufffd)\\n\\u0016h\\u0012(\\u007f\\ufffdsd\\fc\\u041d\\ufffd\\ufffd\\u0015\\u046c\\ufffdQK\\ufffd\\u001dh\\n\\ufffdf%\\ufffd\\ufffd\\ufffdb\\ufffd'3\\ufffddI\\ufffd5\\b\\ufffdX\\u04c2\\ufffd\\ufffdXv\\ufffd\\ufffd\\ufffd\\u0018\\ufffd|\\ufffd\\u001d\\b\\u0004\\ufffd\\ufffd*U\\ufffd\\ufffdu\\ufffd\\ufffd\\ufffd\\ufffdv<\\ufffdc6\\ufffd\\ufffd\\u0143E\\ufffd\\ufffdg\\u042d\\u0005\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd`\\ufffdz\\ufffd\\fdL+\\ufffd\\u02d4\\u001e\\u0417\\ufffd\\ufffd\\ufffd\\ufffdz\\u000f\\u0013\\u001d\\ufffdz=te\\ufffd$\\ufffd\\ufffd@g!\\ufffd/\\\"IOJ\\\"\\r+\\ufffdd\\ufffd\\ufffdXM\\f\\ufffd[m\\ufffdfU\\ufffd\\ufffd\\ufffd\\ufffd!\\ufffd{\\ufffd\\ufffdL|\\ufffd%=\\ufffdxu\\ufffdri5\\ufffd0\\ufffd\\ufffdW(\\ufffd\\u000b\\ufffdM\\ufffd\\ufffd\\ufffd\\ufffd\\u0715\\ufffd\\ufffdl\\ufffd\\ufffd\\ufffd\\ufffdy\\ufffd\\ufffdh\\u0636\\u0019\\ufffd|k\\ufffdEuC(\\u001d\\ufffd\\u01b1\\ufffd56t\\ufffd\\ufffd\\ufffddu\\ufffd\\u0004f\\u0795L1\\ufffd\\u0007BQ\\ufffd`\\ufffd\\u0003\\ufffd\\ufffd\\u001e\\ufffd{8\\ufffd5\\b\\ufffd\\ufffd\\u0010\\ufffd=\\ufffd\\ufffd@H\\u001a\\u0000\\ufffd\\ufffdP\\ufffdc$\\ufffd\\ufffd\\u00104\\u001c\\ufffd\\ufffd\\ufffd<v\\ufffd\\u001d\\u0783\\ufffd\\u0012\\ufffd\\ufffd\\ufffd\\ufffd$}\\ufffd\\ufffd\\ufffd\\ufffd\\\"D\\r\\ufffd\\ufffd}\\u0010t\\nKu\\ufffd\\ufffd\\u007f\\ufffd\\ufffdy\\ufffd\\ufffdN\\ufffdl\\ufffd\\ufffd\\ufffdDB \\ufffd?\\u0535\\ufffd\\\"\\ufffdDP\\ufffd9\\ufffd+DeO\\ufffd\\u0015\\u001e\\ufffd\\ufffdM@\\ufffd\\ufffd\\ufffd}\\u0012\\ufffd\\u0001\\ufffd\\u0007 w\\ufffd7<\\ufffdkt\\ufffdA\\ufffd#\\ufffdQ\\ufffd\\u000evDn\\ufffdk,Q\\ufffd/\\ufffdE\\ufffd\\ufffd\\ufffdI\\ufffd4\\u03dd\\ufffd?\\ufffd\\ufffd\\ufffd\\ufffdY\\ufffd\\ufffd\\ufffdF\\ufffd\\ufffd\\u0001[\\ufffd\\ufffd\\ufffd\\u007fH\\r\\ufffdi0F0\\ufffd\\ufffd \\ufffd\\ufffd\\ufffdl\\ufffdn\\ufffdL\\u000fj\\ufffda4O\\u0014\\ufffd'\\ufffde\\ufffd\\ufffd.V\\bF\\ufffd\\u000f\\u0001\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdv\\ufffdn\\ufffdj\\u0571*\\ufffd\\ufffd9ih\\ufffd\\ufffd\\u0015\\ufffdJu\\ufffd4Z\\ufffd'x$aa\\ufffdFI\\u001c\\ufffd;w.\\u0013,\\u007f\\ufffd\\u0116\\ufffd\\ufffd\\ufffd\\ufffd\\ufffdM6_\\f\\ufffd\\u1e7cW\\u001d\\ufffdCF\\ufffd\\ufffdWm\\u0015B\\ufffdY\\ufffd\\ufffd\\u0018]\\ufffd\\ufffd\\ufffd\\t\\u001a \\ufffd\\ufffd\\ufffdf<f\\u001bP\\ufffd\\u0006rxt?\\r\\ufffdpKC\"}",
+      "tool_call_id": "call_00_eSvRb8aoa2rem9a2i0e2AF3W"
+    },
+    {
+      "role": "assistant",
+      "content": "The content appears to be corrupted. Let me search for more specific information about the record holder and their world championship wins.",
+      "tool_calls": [
+        {
+          "id": "call_00_8R1aTumvZGEnTCFRUMs24dA4",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Ronnie O'Sullivan most ranking titles Guinness World Records 2024 world championships\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_8R1aTumvZGEnTCFRUMs24dA4"
+    },
+    {
+      "role": "assistant",
+      "content": "Let me try a different search approach.",
+      "tool_calls": [
+        {
+          "id": "call_00_8nJTpWUXAyUE4ckmE3Goolci",
+          "type": "function",
+          "function": {
+            "name": "search_engine_query",
+            "arguments": "{\"keywords\": \"Ronnie O'Sullivan ranking titles record world championships won\", \"max_results\": 10}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\": \"Failed to retrieve the search results from server. Please try again later.\"}",
+      "tool_call_id": "call_00_8nJTpWUXAyUE4ckmE3Goolci"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_engine_query",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function queries the search engine for the provided keywords and region. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keywords": {
+              "type": "string",
+              "description": "The keywords to search for."
+            },
+            "max_results": {
+              "type": "integer",
+              "description": "The maximum number of search results to return.",
+              "default": 10
+            },
+            "region": {
+              "type": "string",
+              "description": "The region to search in. Defaults to 'wt-wt' (No region).",
+              "default": "wt-wt",
+              "enum": [
+                "xa-ar",
+                "xa-en",
+                "ar-es",
+                "au-en",
+                "at-de",
+                "be-fr",
+                "be-nl",
+                "br-pt",
+                "bg-bg",
+                "ca-en",
+                "ca-fr",
+                "ct-ca",
+                "cl-es",
+                "cn-zh",
+                "co-es",
+                "hr-hr",
+                "cz-cs",
+                "dk-da",
+                "ee-et",
+                "fi-fi",
+                "fr-fr",
+                "de-de",
+                "gr-el",
+                "hk-tz",
+                "hu-hu",
+                "in-en",
+                "id-id",
+                "id-en",
+                "ie-en",
+                "il-he",
+                "it-it",
+                "jp-jp",
+                "kr-kr",
+                "lv-lv",
+                "lt-lt",
+                "xl-es",
+                "my-ms",
+                "my-en",
+                "mx-es",
+                "nl-nl",
+                "nz-en",
+                "no-no",
+                "pe-es",
+                "ph-en",
+                "ph-tl",
+                "pl-pl",
+                "pt-pt",
+                "ro-ro",
+                "ru-ru",
+                "sg-en",
+                "sk-sk",
+                "sl-sl",
+                "za-en",
+                "es-es",
+                "se-sv",
+                "ch-de",
+                "ch-fr",
+                "ch-it",
+                "tw-tz",
+                "th-th",
+                "tr-tr",
+                "ua-uk",
+                "uk-en",
+                "us-en",
+                "ue-es",
+                "ve-es",
+                "vn-vi",
+                "wt-wt"
+              ]
+            }
+          },
+          "required": [
+            "keywords"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fetch_url_content",
+        "description": "This tool belongs to the Web Search API category. It provides functions to search the web and browse search results. Tool description: This function retrieves content from the provided URL and processes it based on the selected mode. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to fetch content from. Must start with 'http://' or 'https://'."
+            },
+            "mode": {
+              "type": "string",
+              "description": "The mode to process the fetched content. `raw` returns the raw HTML content; `markdown` converts raw HTML content to Markdown format for better readability, using html2text; `truncate` extracts and cleans text by removing scripts, styles, and extraneous whitespace.",
+              "default": "raw",
+              "enum": [
+                "raw",
+                "markdown",
+                "truncate"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The processed web content as a string."
+            }
+          }
+        }
+      }
+    }
+  ]
+}

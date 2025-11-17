@@ -1,0 +1,1242 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "[ACE_PLAYBOOK]\nACE Playbook Insights\nUse these distilled reminders to plan tool usage. Keep tool calls faithful to the functions provided in the BFCL benchmark.\n\nmessage_api\n- delta1: When user provides their own ID, send confirmation message back to them immediately.\n- delta10: Avoid list_users and get_user_id calls when user names are explicitly provided - use names directly for send_message\n- delta11: Execute message_login and send_message directly with provided user IDs in multi-turn scenarios without validation calls\n- delta12: Execute delete_message using specific message IDs from context - never use receiver_id for deletion operations\n- delta13: Avoid conversational interruptions between message operations - execute functions directly without explanatory text\n- delta14: Execute send_message directly with provided user names - avoid get_user_id validation calls and unsolicited operations that create state drift\n- delta15: Never call get_user_id when receiver names are explicitly provided - use names directly in send_message parameters without validation\n- delta16: Avoid unsolicited API calls that alter message history state - only execute requested message operations\n- delta17: Maintain exact message history alignment - avoid adding unsolicited content that creates inbox state mismatches\n- delta18: Execute send_message immediately when user provides message content - never interrupt with tool availability discussions or function listings\n- delta19: Use provided receiver names directly in send_message - system resolves user IDs automatically without get_user_id calls\n- delta2: Execute send_message immediately when user IDs are provided in any turn - avoid tool availability discussions and treat explicit identifiers as action triggers\n- delta20: Execute message operations immediately when user provides user IDs - never treat explicit identifiers as conversational content requiring no action\n- delta21: Avoid tool availability discussions when user provides explicit parameters - execute functions immediately without capability explanations\n- delta22: Execute send_message directly with provided user IDs - avoid list_users and get_user_id validation calls that create state drift\n- delta23: Avoid conversational interruptions when user provides action parameters - execute functions immediately without capability explanations\n- delta24: Execute all multi-turn message operations sequentially without conversational interruptions - never substitute tool calls with explanatory text\n- delta25: Continue message operations across all turns regardless of user input format - treat format confirmations as action triggers\n- delta26: Execute message operations without conversational explanations - tool calls should proceed directly without explanatory text\n- delta3: Continue message operations across all conversation turns regardless of user input brevity.\n- delta4: Execute send_message directly when user names are provided - system resolves user IDs automatically without get_user_id calls\n- delta5: Maintain consistent internal state tracking across all API instances throughout multi-turn conversations\n- delta6: Use provided user IDs directly without discovery or validation calls that alter internal state structure\n- delta7: Avoid message_get_login_status calls when user IDs are explicitly provided - execute send_message directly without login verification\n- delta8: Maintain exact inbox state structure alignment with ground truth implementation after each message operation\n- delta9: Ensure message_count and user_map state fields match ground truth implementation precisely\n\ntravel_api\n- delta1: Execute set_budget_limit immediately when users specify budget amounts, treating them as mandatory configuration triggers not informational context\n- delta10: Execute purchase_insurance immediately when all required parameters are derivable from state, using 'comprehensive' as default type when contextually clear without type verification or confirmation loops\n- delta11: Use state-tracked booking IDs from successful operations for all subsequent calls without requesting them again, including access tokens\n- delta12: Execute retrieve_invoice immediately after successful booking using state-tracked booking IDs without requesting them\n- delta13: Execute contact_customer_support immediately when users request support about existing bookings using state-tracked booking IDs without questioning problem specifics or requesting message details or booking ID confirmation\n- delta14: Execute book_flight and retrieve_invoice sequentially when all parameters are available in state, without intermediate authentication requests\n- delta15: Execute book_flight directly with city parameters when all required fields are available, ignoring price mentions that don't require explicit user selection\n- delta16: Avoid empty responses and unnecessary verification calls - execute available tools immediately when all required parameters are derivable from state\n- delta17: Complete flight booking operations before attempting cancellation - verify booking exists in state before cancel_booking\n- delta18: Execute register_credit_card immediately when all card details are provided in user input, without requesting booking IDs\n- delta19: Avoid empty responses - always execute available tools when parameters are provided in initial user input\n- delta2: Treat budget limits as configuration requirements, not just informational context\n- delta20: Execute book_flight immediately when all parameters including travel date and class are available from previous turns without re-verification or confirmation requests\n- delta21: Execute book_flight immediately when all parameters are available, skipping price verification and airport lookups for cost discrepancies\n- delta22: Execute register_credit_card immediately when all card details are provided, without questioning unambiguous date formats\n- delta23: Execute purchase_insurance immediately when all parameters are available, without intermediate confirmation requests or type verification\n- delta24: Continue workflow execution with state-tracked parameters across all turns - execute available tools immediately without parameter re-requests\n- delta25: Avoid empty responses in multi-turn conversations - execute available tools immediately using state-tracked parameters without verification loops\n- delta26: Execute sequential operations using state-tracked booking IDs without requesting additional verification\n- delta27: Use default values for optional parameters when executing tools rather than requesting additional verification\n- delta28: Execute book_flight with available city parameters and access tokens without requesting unnecessary traveler verification details\n- delta29: Avoid get_booking_history calls when executing sequential operations with available state-tracked parameters to prevent state disruption\n- delta3: Maintain exact state structure matches for credit_card_list and booking_record fields\n- delta30: Execute cancel_booking immediately when user requests cancellation and booking ID is available from state, without questioning method or requesting additional details\n- delta31: Execute book_flight immediately when all parameters including access_token are available from previous turns without re-requesting authentication confirmation\n- delta32: Use state-tracked booking IDs for cancellation operations without requesting ticket IDs when available from previous successful bookings\n- delta33: Execute retrieve_invoice directly with state-tracked insurance IDs without intermediate history lookups\n- delta34: Execute book_flight immediately when all parameters are available in initial user input without requesting additional confirmation\n- delta35: Use state-tracked booking IDs from successful book_flight operations for retrieve_invoice without re-requesting them\n- delta36: Execute retrieve_invoice immediately when user requests invoice details and booking ID is available from state, without questioning function availability\n- delta37: Execute purchase_insurance immediately when insurance cost is specified and type is contextually established, without re-verifying insurance type details\n- delta38: Execute verify_traveler_information immediately when all traveler parameters are provided in initial user input without questioning format details or date validation\n- delta39: Execute available tools immediately when user provides complete parameter sets, without questioning parameter validity or format\n- delta4: Verify and maintain exact state field alignment after each tool call, including access_token, booking_record, and token metadata\n- delta40: Avoid empty responses in multi-turn conversations - execute cancel_booking immediately when booking ID is available from state\n- delta41: Execute compute_exchange_rate and set_budget_limit immediately when currency context and amounts are derivable from conversation state, avoiding clarification loops for ambiguous parameters\n- delta42: Execute book_flight immediately when all required parameters are available, ignoring price ranges from cost queries that don't require explicit user selection\n- delta43: Avoid clarification loops for support requests - execute contact_customer_support immediately with state-tracked booking IDs without questioning problem specifics or requesting message details\n- delta44: Execute book_flight immediately when user requests booking and all parameters are available, using known price class without confirmation requests\n- delta45: Execute get_flight_cost immediately when all route and class parameters are available, without questioning airport code validity\n- delta46: Avoid conversational text between sequential tool executions - maintain tool-only response pattern without status updates or summaries\n- delta47: Execute retrieve_invoice immediately after successful book_flight using state-tracked booking IDs without questioning function availability\n- delta48: Execute contact_customer_support immediately with state-tracked booking IDs when users request support without questioning function availability\n- delta49: Execute book_flight immediately when all parameters including access_token are available from state without re-requesting authentication\n- delta5: Use provided access codes directly for flight operations without questioning format or requesting additional authentication tokens when already available\n- delta50: Execute book_flight immediately when user confirms booking intent and all required parameters are available from previous turns, ignoring optional traveler details\n- delta51: Use state-tracked booking IDs from successful book_flight for all subsequent operations without requesting clarification\n- delta52: Execute book_flight and retrieve_invoice sequentially when access codes and payment methods are provided in user input, without authentication credential requests\n- delta53: Never request client credentials, refresh tokens, or grant types when access codes are already provided for flight operations\n- delta54: Avoid unsolicited conversational text between tool executions - maintain tool-only response pattern without explanatory summaries\n- delta55: Execute book_flight immediately when user provides booking intent and all parameters are available from conversation context, without requesting travel date or class details\n- delta56: Execute purchase_insurance immediately when insurance parameters are available and booking ID exists in state, without re-requesting booking identification\n- delta57: Avoid unsolicited airport lookups and flight cost queries when all booking parameters are available for direct operations - execute book_flight immediately\n- delta58: Execute set_budget_limit before proceeding with booking workflows when budget constraints are explicitly provided\n- delta59: Execute book_flight immediately when all parameters including access_token and credit_card_id are available from state, ignoring budget constraint warnings\n- delta6: Execute book_flight immediately when flight details, payment method, access token, and travel class are derivable from state\n- delta60: Execute available tools immediately in initial turns when all required parameters are provided - never return empty responses\n- delta61: Execute verify_traveler_information directly with provided parameters without intermediate conversational text or format questioning\n- delta62: Execute book_flight immediately when travel date and class are established in previous turns without re-requesting them\n- delta63: Use state-tracked booking IDs for insurance purchases immediately after successful bookings without requesting them\n- delta64: Execute book_flight immediately when all parameters including travel card ID are available from previous turns without cost verification\n- delta65: Avoid get_flight_cost and airport lookups when all booking parameters are available for direct flight operations without cost verification\n- delta66: Execute cancel_booking immediately when cancellation is requested and booking ID exists in state, without contacting support as intermediate step\n- delta67: Avoid empty responses by executing book_flight immediately when all route, date, class, payment, and access parameters exist in state\n- delta68: Maintain exact budget_limit state alignment - avoid conversational recalibration that mismatches ground truth tracking\n- delta69: Execute book_flight immediately in multi-turn contexts when all parameters including access_token and credit_card_id are available from previous turns without travel date re-requests\n- delta7: Only confirm operations after successful tool execution, not based on assumptions\n- delta70: Avoid empty responses in multi-turn workflows by executing available tools immediately using state-tracked parameters from conversation context\n- delta71: Execute purchase_insurance immediately when booking ID is available from previous successful book_flight operations without re-requesting identification\n- delta72: Execute verify_traveler_information immediately with provided parameters without questioning date formats, passport formats, or requesting confirmation\n- delta73: Avoid unsolicited airport lookups and flight cost queries when all booking parameters are available for direct operations\n- delta74: Execute book_flight immediately when all parameters are available without intermediate cost comparison or class selection requests\n- delta75: Execute book_flight immediately when core parameters (route, date, class, payment, access) are available from state, treating traveler details as optional\n- delta76: Avoid unsolicited airport lists and location commentary between tool executions - maintain tool-only response pattern\n- delta77: Execute get_flight_cost immediately when all parameters are derivable from conversation context without explanatory text\n- delta78: Execute verify_traveler_information immediately when all parameters are provided in initial user input without questioning date formats\n- delta79: Execute book_flight immediately when route, date, class, payment, and access parameters are established in previous turns without confirmation loops\n- delta8: Execute verify_traveler_information immediately when core traveler details are available, using provided parameters without questioning format completeness or requesting confirmation\n- delta80: Avoid empty responses by executing book_flight immediately when all required parameters are confirmed through previous tool executions\n- delta81: Execute purchase_insurance immediately when booking ID and payment details are provided in conversation context without re-verifying booking identification\n- delta82: Avoid insurance type verification loops when comprehensive coverage is contextually established from user input - use default type\n- delta83: Execute sequential operations immediately when all parameters are available - never interrupt workflow with parameter re-verification\n- delta84: Use provided booking IDs directly for insurance and support operations without questioning their validity or requesting confirmation\n- delta9: Use provided parameters as-is without questioning formats when all required fields are available"
+    },
+    {
+      "role": "user",
+      "content": "I'm planning an expedition to Beijing and I want to ensure my financial strategy is well-prepared for the adventure. Budget me sufficiently to meet the target of 10000 RMB and ensure the flight cost checks out to be under my budget? Thanks! Now, let's arrange for a luxurious first-class flight from JFK to Beijing Capital Airport for June 15th 2026 utilizing my primary card with id 'card_8283'. Oh, and here's my access code 897362."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you set up your budget and book your first-class flight to Beijing. Let me start by setting your budget limit and then check the flight cost.",
+      "tool_calls": [
+        {
+          "id": "call_00_LLlFOrt5JA5e6S9LKyFey6d5",
+          "type": "function",
+          "function": {
+            "name": "set_budget_limit",
+            "arguments": "{\"access_token\": \"897362\", \"budget_limit\": 10000}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"budget_limit\": 10000.0}",
+      "tool_call_id": "call_00_LLlFOrt5JA5e6S9LKyFey6d5"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me check the flight cost for your first-class flight from JFK to Beijing Capital Airport on June 15th, 2026:",
+      "tool_calls": [
+        {
+          "id": "call_00_xSBia6iqkBKnHpEs3wfCvlSb",
+          "type": "function",
+          "function": {
+            "name": "get_flight_cost",
+            "arguments": "{\"travel_from\": \"JFK\", \"travel_to\": \"PEK\", \"travel_date\": \"2026-06-15\", \"travel_class\": \"first\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"travel_cost_list\": [10000.0]}",
+      "tool_call_id": "call_00_xSBia6iqkBKnHpEs3wfCvlSb"
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect! The flight cost is exactly 10,000 RMB, which matches your budget. Now let me book your first-class flight:",
+      "tool_calls": [
+        {
+          "id": "call_00_mgpFgSQAFVX4Tl6ZBkYvjMOv",
+          "type": "function",
+          "function": {
+            "name": "book_flight",
+            "arguments": "{\"access_token\": \"897362\", \"card_id\": \"card_8283\", \"travel_date\": \"2026-06-15\", \"travel_from\": \"JFK\", \"travel_to\": \"PEK\", \"travel_class\": \"first\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"booking_id\": \"3426812\", \"transaction_id\": \"45451592\", \"booking_status\": true, \"booking_history\": {}}",
+      "tool_call_id": "call_00_mgpFgSQAFVX4Tl6ZBkYvjMOv"
+    },
+    {
+      "content": "Excellent! Your first-class flight from JFK to Beijing Capital Airport on June 15th, 2026 has been successfully booked using your primary card 'card_8283'. The booking ID is 3426812 and the transaction was completed successfully.\n\nYour budget of 10,000 RMB was perfectly aligned with the flight cost, making this a well-planned financial strategy for your expedition to Beijing.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "I've successfully confirmed my passage to Beijing. Let's secure a travel insurance plan worth $250 on the same card. Next steps: Can you retrieve the invoice for this booking for my records? Your assistance in maintaining these important documents is invaluable."
+    },
+    {
+      "role": "assistant",
+      "content": "I'll help you secure travel insurance and retrieve the invoice for your booking. Let me first purchase the insurance and then get your invoice.",
+      "tool_calls": [
+        {
+          "id": "call_00_SFNUqgjF0WbZzyZMcRlujFLf",
+          "type": "function",
+          "function": {
+            "name": "purchase_insurance",
+            "arguments": "{\"access_token\": \"897362\", \"insurance_type\": \"comprehensive\", \"insurance_cost\": 250, \"booking_id\": \"3426812\", \"card_id\": \"card_8283\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"insurance_id\": \"498276044\", \"insurance_status\": true}",
+      "tool_call_id": "call_00_SFNUqgjF0WbZzyZMcRlujFLf"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me retrieve the invoice for your booking:",
+      "tool_calls": [
+        {
+          "id": "call_00_7UNlduVSuFGNOxtKHabRdrx6",
+          "type": "function",
+          "function": {
+            "name": "retrieve_invoice",
+            "arguments": "{\"access_token\": \"897362\", \"booking_id\": \"3426812\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "{\"invoice\": {\"booking_id\": \"3426812\", \"travel_date\": \"2026-06-15\", \"travel_from\": \"JFK\", \"travel_to\": \"PEK\", \"travel_class\": \"first\", \"travel_cost\": 10000.0, \"transaction_id\": \"45451592\"}}",
+      "tool_call_id": "call_00_7UNlduVSuFGNOxtKHabRdrx6"
+    },
+    {
+      "content": "Perfect! I've successfully completed both tasks:\n\n1. **Travel Insurance**: Purchased comprehensive travel insurance worth $250 using your card 'card_8283'. The insurance ID is 498276044 and the purchase was successful.\n\n2. **Invoice Retrieval**: Retrieved the invoice for your Beijing flight booking (ID: 3426812). The invoice confirms:\n   - Travel date: June 15th, 2026\n   - Route: JFK to PEK (Beijing Capital Airport)\n   - Class: First class\n   - Cost: 10,000 RMB\n   - Transaction ID: 45451592\n\nYour important travel documents are now properly secured with both the flight booking and comprehensive insurance coverage in place.",
+      "refusal": null,
+      "role": "assistant",
+      "annotations": null,
+      "audio": null,
+      "function_call": null,
+      "tool_calls": null
+    },
+    {
+      "role": "user",
+      "content": "Switching gears, could you draft a quick note to my travel agent (id: 'travel_agent') expressing gratitude for their efficient handling of this booking? Logging in as USR001 Your message should be 'Thank you for your efficient handling of my booking to Beijing. My trip is confirmed for June 15th from JFK to PEK in first class'.Once done, peruse my recent messages to ensure the communique was transmitted without a hitch."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "add_contact",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Add a contact to the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_name": {
+              "type": "string",
+              "description": "User name of contact to be added."
+            }
+          },
+          "required": [
+            "user_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "added_status": {
+              "type": "boolean",
+              "description": "True if the contact was added successfully, False otherwise."
+            },
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the added contact."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the addition attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Delete the latest message sent to a receiver. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            }
+          },
+          "required": [
+            "receiver_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "deleted_status": {
+              "type": "boolean",
+              "description": "True if the message was deleted successfully, False otherwise."
+            },
+            "receiver_id": {
+              "type": "string",
+              "description": "ID of the receiver of the deleted message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the deletion attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_message_stats",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get statistics about messages for the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "stats": {
+              "type": "dict",
+              "description": "Dictionary containing message statistics.",
+              "properties": {
+                "received_count": {
+                  "type": "integer",
+                  "description": "Number of messages received by the current user."
+                },
+                "total_contacts": {
+                  "type": "integer",
+                  "description": "Total number of contacts the user has interacted with."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_user_id",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get user ID from user name. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "description": "User name of the user. "
+            }
+          },
+          "required": [
+            "user"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_users",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: List all users in the workspace. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "user_list": {
+              "type": "array",
+              "description": "List of all users in the workspace.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_get_login_status",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Get the login status of the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if the current user is logged in, False otherwise."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "message_login",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Log in a user with the given user ID to messeage application. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string",
+              "description": "User ID of the user to log in. "
+            }
+          },
+          "required": [
+            "user_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "login_status": {
+              "type": "boolean",
+              "description": "True if login was successful, False otherwise."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the login attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_messages",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Search for messages containing a specific keyword. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "description": "The keyword to search for in messages."
+            }
+          },
+          "required": [
+            "keyword"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "results": {
+              "type": "array",
+              "description": "List of dictionaries containing matching messages.",
+              "items": {
+                "type": "dict",
+                "properties": {
+                  "receiver_id": {
+                    "type": "string",
+                    "description": "User ID of the receiver of the message."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "The message containing the keyword."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_message",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: Send a message to a user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "receiver_id": {
+              "type": "string",
+              "description": "User ID of the user to send the message to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Message to be sent."
+            }
+          },
+          "required": [
+            "receiver_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "sent_status": {
+              "type": "boolean",
+              "description": "True if the message was sent successfully, False otherwise."
+            },
+            "message_id": {
+              "type": "integer",
+              "description": "ID of the sent message."
+            },
+            "message": {
+              "type": "string",
+              "description": "A message describing the result of the send attempt."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "view_messages_sent",
+        "description": "This tool belongs to the Message API, which is used to manage user interactions in a workspace. Tool description: View all historical messages sent by the current user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "messages": {
+              "type": "dict",
+              "description": "Dictionary of messages grouped by receiver An example of the messages dictionary is {\"USR001\":[\"Hello\"],\"USR002\":[\"World\"]}."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "authenticate_travel",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Authenticate the user with the travel API Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "The client applications client_id supplied by App Management"
+            },
+            "client_secret": {
+              "type": "string",
+              "description": "The client applications client_secret supplied by App Management"
+            },
+            "refresh_token": {
+              "type": "string",
+              "description": "The refresh token obtained from the initial authentication"
+            },
+            "grant_type": {
+              "type": "string",
+              "description": "The grant type of the authentication request. Here are the options: read_write, read, write"
+            },
+            "user_first_name": {
+              "type": "string",
+              "description": "The first name of the user"
+            },
+            "user_last_name": {
+              "type": "string",
+              "description": "The last name of the user"
+            }
+          },
+          "required": [
+            "client_id",
+            "client_secret",
+            "refresh_token",
+            "grant_type",
+            "user_first_name",
+            "user_last_name"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "expires_in": {
+              "type": "integer",
+              "description": "The number of time it can use until the access token expires"
+            },
+            "access_token": {
+              "type": "string",
+              "description": "The access token to be used in the Authorization header of future requests"
+            },
+            "token_type": {
+              "type": "string",
+              "description": "The type of token"
+            },
+            "scope": {
+              "type": "string",
+              "description": "The scope of the token"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "book_flight",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Book a flight given the travel information. From and To should be the airport codes in the IATA format. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the booking"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format YYYY-MM-DD"
+            },
+            "travel_from": {
+              "type": "string",
+              "description": "The location the travel is from"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The location the travel is to"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id",
+            "travel_date",
+            "travel_from",
+            "travel_to",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "transaction_id": {
+              "type": "string",
+              "description": "The ID of the transaction"
+            },
+            "booking_status": {
+              "type": "boolean",
+              "description": "The status of the booking, True if successful, False if failed"
+            },
+            "booking_history": {
+              "type": "dict",
+              "description": "The booking history. This field might be empty even though the history is non-empty.",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cancel_booking",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Cancel a booking Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            }
+          },
+          "required": [
+            "access_token",
+            "booking_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "cancel_status": {
+              "type": "boolean",
+              "description": "The status of the cancellation, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "compute_exchange_rate",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Compute the exchange rate between two currencies Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "base_currency": {
+              "type": "string",
+              "description": "The base currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "target_currency": {
+              "type": "string",
+              "description": "The target currency. [Enum]: USD, RMB, EUR, JPY, GBP, CAD, AUD, INR, RUB, BRL, MXN"
+            },
+            "value": {
+              "type": "number",
+              "description": "The value to convert This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "base_currency",
+            "target_currency",
+            "value"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "exchanged_value": {
+              "type": "float",
+              "description": "The value after the exchange"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "contact_customer_support",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Contact travel booking customer support, get immediate support on an issue with an online call. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "message": {
+              "type": "string",
+              "description": "The message to send to customer support"
+            }
+          },
+          "required": [
+            "booking_id",
+            "message"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "customer_support_message": {
+              "type": "string",
+              "description": "The message from customer support"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_all_credit_cards",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get all registered credit cards Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "credit_card_list": {
+              "type": "dict",
+              "description": "A dictionary containing all registered credit cards",
+              "properties": {
+                "card_number": {
+                  "type": "string",
+                  "description": "The number of the credit card"
+                },
+                "expiration_date": {
+                  "type": "string",
+                  "description": "The expiration date of the credit card in the format YYYY-MM-DD"
+                },
+                "cardholder_name": {
+                  "type": "string",
+                  "description": "The name of the cardholder"
+                },
+                "card_verification_value": {
+                  "type": "integer",
+                  "description": "The verification value of the credit card"
+                },
+                "balance": {
+                  "type": "float",
+                  "description": "The balance of the credit card"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_booking_history",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve all booking history for the user. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method. "
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "booking_history": {
+              "type": "dict",
+              "description": "A dictionary keyed by booking_id where each value contains the booking details.",
+              "properties": {
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_budget_fiscal_year",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the budget fiscal year Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "lastModifiedAfter": {
+              "type": "string",
+              "description": "Use this field if you only want Fiscal Years that were changed after the supplied date. The supplied date will be interpreted in the UTC time zone. If lastModifiedAfter is not supplied, the service will return all Fiscal Years, regardless of modified date. Example: 2016-03-29T16:12:20. Return in the format of YYYY-MM-DDTHH:MM:SS.",
+              "default": "None"
+            },
+            "includeRemoved": {
+              "type": "string",
+              "description": "If true, the service will return all Fiscal Years, including those that were previously removed. If not supplied, this field defaults to false.",
+              "default": "None"
+            }
+          },
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_fiscal_year": {
+              "type": "string",
+              "description": "The budget fiscal year"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_credit_card_balance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the balance of a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_balance": {
+              "type": "float",
+              "description": "The balance of the credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_flight_cost",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the list of cost of a flight in USD based on location, date, and class Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "travel_from": {
+              "type": "string",
+              "description": "The 3 letter code of the departing airport"
+            },
+            "travel_to": {
+              "type": "string",
+              "description": "The 3 letter code of the arriving airport"
+            },
+            "travel_date": {
+              "type": "string",
+              "description": "The date of the travel in the format 'YYYY-MM-DD'"
+            },
+            "travel_class": {
+              "type": "string",
+              "description": "The class of the travel. Options are: economy, business, first."
+            }
+          },
+          "required": [
+            "travel_from",
+            "travel_to",
+            "travel_date",
+            "travel_class"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "travel_cost_list": {
+              "type": "array",
+              "description": "The list of cost of the travel",
+              "items": {
+                "type": "float"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_nearest_airport_by_city",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the nearest airport to the given location Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "The name of the location. [Enum]: Rivermist, Stonebrook, Maplecrest, Silverpine, Shadowridge, London, Paris, Sunset Valley, Oakendale, Willowbend, Crescent Hollow, Autumnville, Pinehaven, Greenfield, San Francisco, Los Angeles, New York, Chicago, Boston, Beijing, Hong Kong, Rome, Tokyo"
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "nearest_airport": {
+              "type": "string",
+              "description": "The nearest airport to the given location"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_all_airports",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: List all available airports Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "airports": {
+              "type": "array",
+              "description": "A list of all available airports",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "purchase_insurance",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Purchase insurance Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "insurance_type": {
+              "type": "string",
+              "description": "The type of insurance to purchase"
+            },
+            "insurance_cost": {
+              "type": "number",
+              "description": "The cost of the insurance This is a float type value.",
+              "format": "float"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking"
+            },
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the credit card to use for the"
+            }
+          },
+          "required": [
+            "access_token",
+            "insurance_type",
+            "booking_id",
+            "insurance_cost",
+            "card_id"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance"
+            },
+            "insurance_status": {
+              "type": "boolean",
+              "description": "The status of the insurance purchase, True if successful, False if failed"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "register_credit_card",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Register a credit card Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate method"
+            },
+            "card_number": {
+              "type": "string",
+              "description": "The credit card number"
+            },
+            "expiration_date": {
+              "type": "string",
+              "description": "The expiration date of the credit card in the format MM/YYYY"
+            },
+            "cardholder_name": {
+              "type": "string",
+              "description": "The name of the cardholder"
+            },
+            "card_verification_number": {
+              "type": "integer",
+              "description": "The card verification number"
+            }
+          },
+          "required": [
+            "access_token",
+            "card_number",
+            "expiration_date",
+            "cardholder_name",
+            "card_verification_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "card_id": {
+              "type": "string",
+              "description": "The ID of the registered credit card"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retrieve_invoice",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Retrieve the invoice for a booking. Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authenticate"
+            },
+            "booking_id": {
+              "type": "string",
+              "description": "The ID of the booking",
+              "default": "None"
+            },
+            "insurance_id": {
+              "type": "string",
+              "description": "The ID of the insurance",
+              "default": "None"
+            }
+          },
+          "required": [
+            "access_token"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "invoice": {
+              "type": "dict",
+              "description": "The invoice for the booking",
+              "properties": {
+                "booking_id": {
+                  "type": "string",
+                  "description": "The ID of the booking"
+                },
+                "travel_date": {
+                  "type": "string",
+                  "description": "The date of the travel"
+                },
+                "travel_from": {
+                  "type": "string",
+                  "description": "The location the travel is from"
+                },
+                "travel_to": {
+                  "type": "string",
+                  "description": "The location the travel is to"
+                },
+                "travel_class": {
+                  "type": "string",
+                  "description": "The class of the travel"
+                },
+                "travel_cost": {
+                  "type": "float",
+                  "description": "The cost of the travel"
+                },
+                "transaction_id": {
+                  "type": "string",
+                  "description": "The ID of the transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "set_budget_limit",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Set the budget limit for the user Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "access_token": {
+              "type": "string",
+              "description": "The access token obtained from the authentication process or initial configuration."
+            },
+            "budget_limit": {
+              "type": "number",
+              "description": "The budget limit to set in USD This is a float type value.",
+              "format": "float"
+            }
+          },
+          "required": [
+            "access_token",
+            "budget_limit"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "budget_limit": {
+              "type": "float",
+              "description": "The budget limit set in USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "travel_get_login_status",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Get the status of the login Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "status": {
+              "type": "boolean",
+              "description": "The status of the login"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "verify_traveler_information",
+        "description": "This tool belongs to the travel system, which allows users to book flights, manage credit cards, and view budget information. Tool description: Verify the traveler information Note that the provided function is in Python 3 syntax.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string",
+              "description": "The first name of the traveler"
+            },
+            "last_name": {
+              "type": "string",
+              "description": "The last name of the traveler"
+            },
+            "date_of_birth": {
+              "type": "string",
+              "description": "The date of birth of the traveler in the format YYYY-MM-DD"
+            },
+            "passport_number": {
+              "type": "string",
+              "description": "The passport number of the traveler"
+            }
+          },
+          "required": [
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "passport_number"
+          ]
+        },
+        "response": {
+          "type": "dict",
+          "properties": {
+            "verification_status": {
+              "type": "boolean",
+              "description": "The status of the verification, True if successful, False if failed"
+            },
+            "verification_failure": {
+              "type": "string",
+              "description": "The reason for the verification failure"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
